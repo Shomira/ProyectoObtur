@@ -14,7 +14,7 @@ return [
     | you may use many connections at once using the Database library.
     |
     */
-
+    // por defecto usa mysql
     'default' => env('DB_CONNECTION', 'mysql'),
 
     /*
@@ -42,7 +42,7 @@ return [
             'prefix' => '',
             'foreign_key_constraints' => env('DB_FOREIGN_KEYS', true),
         ],
-
+        // Motor Mysql
         'mysql' => [
             'driver' => 'mysql',
             'url' => env('DATABASE_URL'),
