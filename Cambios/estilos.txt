@@ -1,0 +1,114 @@
+
+body {
+    font-family: "Segoe UI", monospace;
+  
+    background-color: #ebe5e59d;
+}
+
+
+/*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<Home Page>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
+section.containerSlider{
+    width: 100%;
+    margin: 0 auto;
+    padding-top: 0;
+}
+section.sitiosLoja{
+    width: 95%;
+    margin: 0 auto;
+    padding: 0em 0em 2em 2em;
+}
+.sitiosLoja h2, .serviciosL h2, .map h2, .datosEstab h2{
+margin-top:2em;
+font-family: Poppins;
+font-style: normal;
+font-weight: normal;
+font-size: 30px;
+line-height: 43px;
+text-align: center;
+color: #000000;
+text-shadow: 0px 8px 8px rgba(0, 0, 0, 0.25);    
+        
+}
+.sitiosLoja article.sitios{
+    width: 45%; 
+    display:inline-block;
+    background: white;   
+    margin: 0 auto;
+    margin-top: 2.5em ;
+    border-bottom: 2px solid black ;
+    margin-left: 3em;
+    border-radius: 2%;
+  
+}
+section.sitiosLoja article.sitios img{
+    width: 100%; 
+    padding: 0em 0em 0.5em 0em;
+    border-radius: 2%;
+}
+
+section.sitiosLoja article.sitios img:hover{  
+    filter: saturate(200%);
+   
+}
+.sitiosLoja article.sitios h4{
+   text-align:center;
+}
+.sitiosLoja .sitios, .servicios{
+    box-shadow: -15px 15px 10px rgb(0,0,0,0.3);
+ }
+/*Servicos Home PAGE */
+section.sericiosL, section.datosEstab{
+    width: 95%;
+    margin: 0 auto;
+    padding: 0em 0em 2em 2em;
+    text-align: center;
+ 
+}
+
+.serviciosL article.servicios, section.datosEstab article.datEs {
+    width: 30%;  
+    display:inline-block;
+    background: rgb(214, 206, 179);
+    margin: 0 auto;
+    margin-top: 2em ;
+    margin-left: 2em;
+}
+section.datosEstab article.datEs {
+    background-color:white ;
+    box-shadow: 0px 8px 8px rgba(0, 0, 0, 0.25); 
+  
+}
+.serviciosL article.servicios img, section.datosEstab article.datEs img{
+    width: 40%; 
+    display: block;
+    margin: auto;
+    padding: 1em;
+    
+}
+.serviciosL article.servicios h4, section.datosEstab article.datEs h4{
+    font-size: 1.7em;
+    padding: 1em 0 0 0;
+    color: rgb(26, 124, 17);
+
+    padding-bottom: 0.5em;
+    border-bottom: 2px solid rgb(0, 0, 0) ;
+    text-shadow: 4px 7px 8px rgba(0, 0, 0, 0.25);
+    text-align: center;
+    
+}
+section.datosEstab article.datEs h4{
+    border-bottom: 0px ;
+    color: rgb(196, 36, 36);
+      
+}
+
+.serviciosL article.servicios p{
+    text-align: justify;
+    padding: 1.2em 1.2em;
+    font-size: 0.9em;
+    color: black;
+}
+.serviciosL h2{
+    background:
+    rgba(255, 239, 8, 0.466);
+}
