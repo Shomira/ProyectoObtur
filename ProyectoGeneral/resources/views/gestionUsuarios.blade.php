@@ -1,11 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
+
 <section class="fondo">
     <nav class="navAdmin">
+        <a href="{{url('home/visualizarArchivos')}}"><img src="{{ asset('imgs/vision.png')}}">Visualizar Archivos</a>
         <a href="{{url('home/archivos')}}"><img src="{{ asset('imgs/subir.png')}}">Cargar Datos</a>
         <a href="{{url('home/metricas')}}"><img src="{{ asset('imgs/metrica.png')}}">Métricas</a>
-        <a style="background: linear-gradient(rgba(161, 161, 159, 0.432), rgba(172, 171, 166, 0.664)); color: #fffb00;font-weight: 800;" href="{{url('home/gestionUsuarios')}}"><img src="{{ asset('imgs/usuario.png')}}">Gestionar Usuarios</a>
+        <a style="background-color:#ece1cd; color: #000000 ;font-weight: 800;" href="{{url('home/gestionUsuarios')}}"><img src="{{ asset('imgs/usuario.png')}}">Gestionar Usuarios</a>
     </nav>
     
 
@@ -37,7 +39,7 @@
         </section>
 
         <!-- Button trigger modal para crear un usuario -->
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalAgregar">
+        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modalAgregar">
         Crear Usuario
         </button>
 
@@ -120,7 +122,7 @@
     <!-- Tabla de usuarios-->
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-8">
+            
                 <div class="card">
                     <div class="card-header"> {{__('Lista de Usuarios')}}</div>
                     <div class="card-body">
@@ -146,7 +148,7 @@
                                             <td>{{$usuario->email}}</td>
                                             <td>
                                                 <button class="btn btn-danger btnEliminar" data-id="{{ $usuario->id }}" data-toggle="modal" data-target="#modalEliminar">Eliminar</button>
-                                                <button class="btn btn-round btnEditar" 
+                                                <button class="btn btn-primary btnEditar" 
                                                     data-id="{{ $usuario->id }}" 
                                                     data-name="{{ $usuario->name }}" 
                                                     data-email="{{ $usuario->email }}" 
@@ -167,7 +169,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            
         </div>
     </div>
     

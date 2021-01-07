@@ -1,17 +1,28 @@
+
 * {
 
     padding: 0;
     margin: 0;
 }
+
 body {
-    font-family: "Segoe UI", monospace;
-    background-color: #ebe5e59d;
+   /* font-family: "Segoe UI", monospace;*/
+   font-family: 'Quantico';
+   /*background-color: wheat;*/
+ 
+    letter-spacing: 0.04em;
+    
 }
+p{
+    font-family: 'Roboto', sans-serif;
+}
+/*
 .section.sitios1  img, section.sitios2 section img, section.sitios3 section img{
-    /*No pixelar la imgen*/
+    No pixelar la imgen
     object-fit: cover;
     
 }
+*/
 /*Cabecera*/
 div.container section.logo img.logo{
     width: 70%;
@@ -28,34 +39,23 @@ section.containerSlider{
     margin: 0 auto;
     padding-top: 0;
 }
-
-
-
 /*Login*/
 section.espacioLogin{
     padding: 4em 0em;
 }
 
 
-
 /*Home Administrador*/
 section.fondo{
-    background-image:linear-gradient(
-        rgba(250, 86, 10, 0),
-        rgba(0, 0, 0, 0.0)), url("../imgs/fondo2.png");
+    width: 95%;
+    background-color:#dfd8cb;
     background-size: cover;
-
-    padding: 2em 0em;
+    margin:0 auto;
 }
-.fondo:before {
-	position: absolute;
- 
-    background-color: rgba(0,0,0,0.95);
 
-}
 nav.navAdmin {
-    width: 80%;
-    margin: 0 auto;
+    margin-left: -2.5em;
+    width: 108%;
     padding: 2em;
     text-align: center;
     background: #00274ef6;
@@ -63,10 +63,16 @@ nav.navAdmin {
         
 }
 nav.navAdmin  a{
-    color: #ffffff;
-    padding: 2em 7em;
+    background: linear-gradient(rgba(161, 161, 159, 0.432), rgba(172, 171, 166, 0.664));
+    color: #000000;
+    padding: 2.31em 2.5em;
     text-decoration: none;
     font-size: 15px;
+    border-radius: 10px 10px 0px 0px ;
+    margin: 1em;
+    padding-top: 1em; 
+    text-align: center;
+   
 }
 .navAdmin img{
     margin-right: 1em;
@@ -98,9 +104,9 @@ section.sitiosLoja{
     margin: 0 auto;
     padding: 0em 0em 2em 2em;
 }
-.sitiosLoja h2, .serviciosL h2, .map h2, .datosEstab h2{
+.sitiosLoja h2, .serviciosL h2, .serviciosL2 h2, .map h2, .datosEstab h2{
 margin-top:2em;
-font-family: Poppins;
+
 font-style: normal;
 font-weight: normal;
 font-size: 30px;
@@ -111,13 +117,13 @@ text-shadow: 0px 8px 8px rgba(0, 0, 0, 0.25);
         
 }
 .sitiosLoja article.sitios{
-    width: 45%; 
+    width: 35%; 
     display:inline-block;
     background: white;   
     margin: 0 auto;
     margin-top: 2.5em ;
     border-bottom: 2px solid black ;
-    margin-left: 3em;
+    margin-left: 8em;
     border-radius: 2%;
   
 }
@@ -129,72 +135,103 @@ section.sitiosLoja article.sitios img{
 
 section.sitiosLoja article.sitios img:hover{  
     filter: saturate(200%);
+    
    
+}
+section.sitiosLoja article.sitios:hover{  
+    transform: scale(1.1);
+    
 }
 .sitiosLoja article.sitios h4{
    text-align:center;
 }
+
+/*Cambio*/
 .sitiosLoja .sitios, .servicios{
-    box-shadow: -15px 15px 10px rgb(0,0,0,0.3);
+    box-shadow: -8px 8px 7px rgb(0,0,0,0.2);
+   
+     
  }
-/*Servicos Home PAGE */
+/*Servicos Home PAGE----------------------------- */
 section.sericiosL, section.datosEstab{
     width: 95%;
     margin: 0 auto;
     padding: 0em 0em 2em 2em;
     text-align: center;
+    
  
 }
-
-.serviciosL article.servicios, section.datosEstab article.datEs {
-    width: 30%;  
+/*cambio*/
+.serviciosL article.servicios,.serviciosL2 article.servicios, section.datosEstab article.datEs {
+    width: 27%;  
     display:inline-block;
     background: rgb(214, 206, 179);
     margin: 0 auto;
     margin-top: 2em ;
-    margin-left: 2em;
+    margin-right: 2.5em;
+    border-radius: 8px;
 }
+
 section.datosEstab article.datEs {
     background-color:white ;
     box-shadow: 0px 8px 8px rgba(0, 0, 0, 0.25); 
   
 }
-.serviciosL article.servicios img, section.datosEstab article.datEs img{
+.serviciosL article.servicios img,.serviciosL2 article.servicios img, section.datosEstab article.datEs img{
     width: 40%; 
     display: block;
     margin: auto;
     padding: 1em;
     
 }
-.serviciosL article.servicios h4, section.datosEstab article.datEs h4{
+
+/**/
+.serviciosL article.servicios h4, .serviciosL2 article.servicios h4,section.datosEstab article.datEs h4{
     font-size: 1.7em;
     padding: 1em 0 0 0;
     color: rgb(26, 124, 17);
-
     padding-bottom: 0.5em;
     border-bottom: 2px solid rgb(0, 0, 0) ;
     text-shadow: 4px 7px 8px rgba(0, 0, 0, 0.25);
     text-align: center;
-    
+   
 }
+
+
 section.datosEstab article.datEs h4{
     border-bottom: 0px ;
     color: rgb(196, 36, 36);
-      
+ 
 }
 
-.serviciosL article.servicios p{
+.serviciosL article.servicios p, .serviciosL2 article.servicios p{
     text-align: justify;
     padding: 1.2em 1.2em;
     font-size: 0.9em;
     color: black;
+    border-top:2px solid rgb(255, 94, 0) ;
+  
 }
-section.serviciosL article.servicios{
-    margin-left: 2.2em;
+
+/*Cambio*/
+section.serviciosL article.servicios, section.serviciosL2 article.servicios{
+    margin-left: 3.1em;
 }
 
+section.serviciosL article.servicios:hover{
+    box-shadow: -8px 8px 6px rgba(255, 166, 0, 0.932);
+    transform:translateY(-15px) ;
 
+}
+section.serviciosL2 article.servicios:hover{
+    box-shadow: -8px 8px 6px rgba(15, 6, 90, 0.932);
+    transform:translateY(-15px) ;
+    
 
+}
+.serviciosL2 article.servicios p{
+    border-top:2px solid rgb(26, 124, 17) ;
+}
 
 /*Datos Estadisticos*/
 h2.tituloDatos{
@@ -306,3 +343,45 @@ footer article.final article.contactos h3{
 }
 
 
+/*Visualizar Archivos>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
+
+section.espacioVisualizarA  h3{
+    margin: 1em 0em 1em 4em;
+    color: #1e8a15f6;
+    text-shadow: 0px 8px 8px rgba(0, 0, 0, 0.25); 
+    font-weight: 600;
+    
+}
+section.espacioVisualizarA  p{
+    margin: 1em 0em 2em 8em;
+    font-weight: 600;
+}
+section.espacioVisualizarA  input{
+    margin: 0em 0em 1em 8em;
+}
+section.espacioVisualizarA  button{
+    margin: 0em 0em 1em 10em;
+}
+section.espacioVisualizarA input[type=date], section.espacioVisualizarA  select {
+    width: 40%;
+    padding: 12px 20px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+
+  }
+
+  section.espacioVisualizarA form {
+    border-radius: 5px;
+    width:  56.5%;
+    background-color: #ffffff;
+    padding: 2px 0px 0px 0px;
+    margin: 0.2em 1em 2em 20em;
+  }
+
+  section.espacioVisualizarA thead {
+    background-image:linear-gradient(
+        rgba(145, 168, 40, 0.616),
+        rgba(226, 212, 15, 0.356))
+  }

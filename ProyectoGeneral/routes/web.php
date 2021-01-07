@@ -46,6 +46,8 @@ Route::group(['prefix'=>'home', 'as'=>'home'], function(){
     Route::get('/', 'App\Http\Controllers\HomeController@index')->name('home');
     Route::get('/gestionUsuarios', 'App\Http\Controllers\UsersController@index');
     Route::resource('/gestionUsuarios', 'App\Http\Controllers\UsersController');
+    Route::get('/visualizarArchivos', 'App\Http\Controllers\VisualizarArchivosController@index');
+    Route::post('/visualizarArchivos', 'App\Http\Controllers\VisualizarArchivosController@mostrar');
     Route::post('/gestionUsuarios/edit', 'App\Http\Controllers\UsersController@editarUsuario');
     Route::get('/archivos', function () {return view('archivos');});
     Route::get('/metricas', function () {return view('metricas');});

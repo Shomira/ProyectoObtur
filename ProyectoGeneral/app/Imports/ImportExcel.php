@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Imports;
-use DB;
+use Illuminate\Support\Facades\DB;
 
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\ToCollection;
@@ -24,7 +24,7 @@ class ImportExcel implements ToCollection
                 ->where('nombre','=', $value[0] )
                 ->get();
                 
-                if( isset($idE) && empty($idE[0]->id) ){
+                if(empty($idE[0]->id) ){
                     $clave=0;
                 }else{
                     $clave = $idE[0]->id;
@@ -44,11 +44,8 @@ class ImportExcel implements ToCollection
                                 ->select('id')
                                 ->where('nombre','=', $value[0] )
                                 ->get();
-
                     $clave = $aux[0]->id;           
                 }
-                
-                
                 
             }
             if($key>0)
@@ -60,7 +57,7 @@ class ImportExcel implements ToCollection
                 'tipo_tarifa'=>$value[13],'tarifa_promedio'=>$value[14],'TAR_PER'=>round(($value[16]/$value[8]),2), 'ventas_netas'=>$value[15], 
                 'porcentaje_ocupacion'=>$value[17],'revpar'=>$value[18],'empleados_temporales'=>$value[19],
                 'estado'=>$value[20], 'opciones'=>$value[21],'idEstablecimiento'=> $clave]);
-                
+            
             }
 
        }
