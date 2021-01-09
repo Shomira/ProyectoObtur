@@ -27,9 +27,8 @@ Route::get('/welcome', function () {
     return view('welcome');
 });
 
-Route::get('/datosEstadisticos', function () {
-    return view('datosEstadisticos');
-});
+Route::get('/datosEstadisticos', 'App\Http\Controllers\DatosEstadisticosController@index');
+Route::post('/datosEstadisticos', 'App\Http\Controllers\DatosEstadisticosController@mostrar');
 
 Route::get('/informacionTuristica', function () {
     return view('informacionTuristica');
