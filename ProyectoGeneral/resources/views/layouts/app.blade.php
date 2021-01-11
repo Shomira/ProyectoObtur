@@ -12,6 +12,8 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="jquery-3.2.1.min.js"></script>
+	<script src="../bootstrap/js/bootstrap.js"></script>
 
     <!-- Fonts     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">-->
@@ -64,12 +66,13 @@
                                     <a class="nav-link" href="{{ route('login') }}">{{ __('INGRESAR') }}</a>
                                 </li>
                             @endif
-                            
+                            <!--
                             @if (Route::has('register'))
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                                 </li>
                             @endif
+                            -->
                         @else
                             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                                 <div class="navbar-nav">

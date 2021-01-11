@@ -1,9 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-    <section class="fondo">
+<section class="fondo">
+    <section class="fondo2">
         <nav class="navAdmin">
-        <a style="background-color:#ece1cd; color: #000000;font-weight: 800;" href="{{url('home/visualizarArchivos')}}">
+        <a style="background: white; color: #000000;font-weight: 800;" href="{{url('home/visualizarArchivos')}}">
             <img src="{{ asset('imgs/vision.png')}}">Visualizar Archivos</a>
             <a href="{{url('home/archivos')}}"><img src="{{ asset('imgs/subir.png')}}">Cargar Datos</a>      
             <a href="{{url('home/metricas')}}"><img src="{{ asset('imgs/metrica.png')}}">Métricas</a>
@@ -52,32 +53,45 @@
 
             <br>
             <h3>Registros</h3>
-
-            <form action="{{url('home/visualizarArchivos')}}" method="POST">
-            @csrf
+        <!--                -->
+        <form action="{{url('home/visualizarArchivos')}}" method="POST" class="visualizarArchivo">
+            <div class="form-row">
+                @csrf
                 <p>Elige un Establecimiento: 
                 <select name="nombre">
-                    <option value="" disabled selected >--Elija un establecimiento--</option>
+                    <option  value="" disabled selected >--Elija un establecimiento--</option>
                     @foreach($establecimientos as $establecimiento)
                         <option value="{{$establecimiento->nombre}}">{{$establecimiento->nombre}}</option>
                     @endforeach
+                    <option value="Todos">TODOS</option>
                 </select>
-                </p>
-                
-                <p>Ver registros desde:</p>
-                <input type="date" name="inicio" value="23/12/2020" >
-                <p>Ver registros hasta:</p>
-                <input type="date" name="fin" value="{{ old('fin') }}">
-                <p></p>
+                </p> 
+                <div class="col-md-5 mb-2">
+    
+                    <p>Ver registros desde:</p>
+                    <div class="input-group"> 
+                    <input type="date" name="inicio" value="23/12/2020"  class="form-control" id="validationDefaultUsername"  aria-describedby="inputGroupPrepend2" required>
+                    </div>
+                </div>
+                <div class="col-md-5 mb-2">
+                    <p>Ver registros hasta:</p>
+                    <div class="input-group">  
+                        <input type="date" name="fin" value="{{ old('fin') }}" class="form-control" id="validationDefaultUsername" aria-describedby="inputGroupPrepend2" required>
+                    </div>
+                </div>
                 <button type="submit" class="btn btn-primary">Consultar</button>
-            </form>
+            </div>
+            
+        </form>
+        <!--                -->
 
             <!-- Tabla de Registros-->
             <div class="container overflow-auto">
+
                 <div class="row justify-content-center overflow-auto">
                     <!---->
                     <div class="card overflow-auto">
-                        <div class="card-header overflow-auto"> {{__('Lista de Registros')}}</div>
+                        <div class="card-header overflow-auto"> {{$mensaje}}</div>
                         <div class="card-body overflow-auto">
                             <div class="table-responsive table-striped overflow-auto">
                                 <table class="table col-12 table-responsive overflow-auto">
@@ -123,6 +137,7 @@
         </section>
 
     </section>
+</section>
 
 @endsection
 
