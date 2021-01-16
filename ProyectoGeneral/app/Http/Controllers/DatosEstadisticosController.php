@@ -81,8 +81,14 @@ class DatosEstadisticosController extends Controller
         
         //Cálculo de las tarifas por habitación
         $tarifaH = round( ($datos[0]->ventasNetas / $datos[0]->hab_ocupadas), 2) ;
-        $tarifaHAnterior = round( ($datosAnterior[0]->ventasNetas / $datosAnterior[0]->hab_ocupadas) , 2) ;
-        $tarifaHVariacion = $tarifaH - $tarifaHAnterior;
+        
+        if(isset($datosAnterior[0]->hab_ocupadas)){
+            $tarifaHAnterior = round( ($datosAnterior[0]->ventasNetas / $datosAnterior[0]->hab_ocupadas) , 2) ;
+            $tarifaHVariacion = $tarifaH - $tarifaHAnterior;
+        }else{
+            $tarifaHVariacion = null;
+        }
+        
         
         if($tarifaHVariacion < 0){
             $tarifaHVariacion = $tarifaHVariacion*(-1);
@@ -90,11 +96,17 @@ class DatosEstadisticosController extends Controller
         }else{
             $arrTarifaH = [$tarifaH, $tarifaHVariacion, true];
         }
-
+        
         //Cálculo de las tarifas por Persona
         $tarifaP = round( ($datos[0]->ventasNetas / $datos[0]->pernoctaciones), 2) ;
-        $tarifaPAnterior = round( ($datosAnterior[0]->ventasNetas / $datosAnterior[0]->pernoctaciones) , 2) ;
-        $tarifaPVariacion = $tarifaP - $tarifaPAnterior;
+
+        if(isset($datosAnterior[0]->pernoctaciones)){
+            $tarifaPAnterior = round( ($datosAnterior[0]->ventasNetas / $datosAnterior[0]->pernoctaciones) , 2) ;
+            $tarifaPVariacion = $tarifaP - $tarifaPAnterior;
+        }else{
+            $tarifaPVariacion = null;
+        }
+
         
         if($tarifaPVariacion < 0){
             $tarifaPVariacion = $tarifaPVariacion*(-1);
@@ -105,9 +117,14 @@ class DatosEstadisticosController extends Controller
 
         //Cálculo de la ocupación
         $ocupacion = round( ($datos[0]->hab_ocupadas / $datos[0]->hab_disponibles)*100 , 2) ;
-        $ocupacionAnterior = round( ($datosAnterior[0]->hab_ocupadas / $datosAnterior[0]->hab_disponibles)*100 , 2) ;
-        $ocupacionVariacion = $ocupacion - $ocupacionAnterior;
-        
+
+        if(isset($datosAnterior[0]->hab_disponibles)){
+            $ocupacionAnterior = round( ($datosAnterior[0]->hab_ocupadas / $datosAnterior[0]->hab_disponibles)*100 , 2) ;
+            $ocupacionVariacion = $ocupacion - $ocupacionAnterior;
+        }else{
+            $ocupacionVariacion = null;
+        }
+
         if($ocupacionVariacion < 0){
             $ocupacionVariacion = $ocupacionVariacion*(-1);
             $arrOcupacion = [$ocupacion,  $ocupacionVariacion, false];
@@ -117,8 +134,13 @@ class DatosEstadisticosController extends Controller
         
         //Cálculo del revpar
         $revpar = round($datos[0]->ventasNetas / $datos[0]->hab_disponibles , 2) ;
-        $revparAnterior = round( $datosAnterior[0]->ventasNetas / $datosAnterior[0]->hab_disponibles , 2) ;
-        $revparVariacion = $revpar - $revparAnterior;
+
+        if(isset($datosAnterior[0]->hab_disponibles)){
+            $revparAnterior = round( $datosAnterior[0]->ventasNetas / $datosAnterior[0]->hab_disponibles , 2) ;
+            $revparVariacion = $revpar - $revparAnterior;
+        }else{
+            $revparVariacion = null;
+        }
         
         if($revparVariacion < 0){
             $revparVariacion = $revparVariacion*(-1);
@@ -129,8 +151,13 @@ class DatosEstadisticosController extends Controller
 
         //Cáñculo de la estadía promedio
         $estadiaP = round($datos[0]->pernoctaciones / $datos[0]->checkins, 2) ;
-        $estadiaPAnterior = round( $datosAnterior[0]->pernoctaciones / $datosAnterior[0]->checkins , 2) ;
-        $estadiaPVariacion = $estadiaP - $estadiaPAnterior;
+
+        if(isset($datosAnterior[0]->checkins)){
+            $estadiaPAnterior = round( $datosAnterior[0]->pernoctaciones / $datosAnterior[0]->checkins , 2) ;
+            $estadiaPVariacion = $estadiaP - $estadiaPAnterior;
+        }else{
+            $estadiaPVariacion = null;
+        }
         
         if($estadiaPVariacion < 0){
             $estadiaPVariacion = $estadiaPVariacion*(-1);
@@ -190,7 +217,7 @@ class DatosEstadisticosController extends Controller
                 $nombreMes = "Diciembre";
                 break;
         }
-
+        
         //consulta para los datos del mes a mostrar
         $consulta = "SELECT SUM(ventas_netas) as ventasNetas, 
                             SUM(pernotaciones) as pernoctaciones, 
@@ -217,8 +244,13 @@ class DatosEstadisticosController extends Controller
         
         //Cálculo de las tarifas por habitación
         $tarifaH = round( ($datos[0]->ventasNetas / $datos[0]->hab_ocupadas), 2) ;
-        $tarifaHAnterior = round( ($datosAnterior[0]->ventasNetas / $datosAnterior[0]->hab_ocupadas) , 2) ;
-        $tarifaHVariacion = $tarifaH - $tarifaHAnterior;
+
+        if(isset($datosAnterior[0]->hab_ocupadas)){
+            $tarifaHAnterior = round( ($datosAnterior[0]->ventasNetas / $datosAnterior[0]->hab_ocupadas) , 2) ;
+            $tarifaHVariacion = $tarifaH - $tarifaHAnterior;
+        }else{
+            $tarifaHVariacion = null;
+        }
         
         if($tarifaHVariacion < 0){
             $tarifaHVariacion = $tarifaHVariacion*(-1);
@@ -229,8 +261,13 @@ class DatosEstadisticosController extends Controller
 
         //Cálculo de las tarifas por Persona
         $tarifaP = round( ($datos[0]->ventasNetas / $datos[0]->pernoctaciones), 2) ;
-        $tarifaPAnterior = round( ($datosAnterior[0]->ventasNetas / $datosAnterior[0]->pernoctaciones) , 2) ;
-        $tarifaPVariacion = $tarifaP - $tarifaPAnterior;
+
+        if(isset($datosAnterior[0]->pernoctaciones)){
+            $tarifaPAnterior = round( ($datosAnterior[0]->ventasNetas / $datosAnterior[0]->pernoctaciones) , 2) ;
+            $tarifaPVariacion = $tarifaP - $tarifaPAnterior;
+        }else{
+            $tarifaPVariacion = null;
+        }
         
         if($tarifaPVariacion < 0){
             $tarifaPVariacion = $tarifaPVariacion*(-1);
@@ -241,8 +278,13 @@ class DatosEstadisticosController extends Controller
         
         //Cálculo de la ocupación
         $ocupacion = round( ($datos[0]->hab_ocupadas / $datos[0]->hab_disponibles)*100 , 2) ;
-        $ocupacionAnterior = round( ($datosAnterior[0]->hab_ocupadas / $datosAnterior[0]->hab_disponibles)*100 , 2) ;
-        $ocupacionVariacion = $ocupacion - $ocupacionAnterior;
+
+        if(isset($datosAnterior[0]->hab_disponibles)){
+            $ocupacionAnterior = round( ($datosAnterior[0]->hab_ocupadas / $datosAnterior[0]->hab_disponibles)*100 , 2) ;
+            $ocupacionVariacion = $ocupacion - $ocupacionAnterior;
+        }else{
+            $ocupacionVariacion = null;
+        }
         
         if($ocupacionVariacion < 0){
             $ocupacionVariacion = $ocupacionVariacion*(-1);
@@ -253,8 +295,13 @@ class DatosEstadisticosController extends Controller
         
         //Cálculo del revpar
         $revpar = round($datos[0]->ventasNetas / $datos[0]->hab_disponibles , 2) ;
-        $revparAnterior = round( $datosAnterior[0]->ventasNetas / $datosAnterior[0]->hab_disponibles , 2) ;
-        $revparVariacion = $revpar - $revparAnterior;
+
+        if(isset($datosAnterior[0]->hab_disponibles)){
+            $revparAnterior = round( $datosAnterior[0]->ventasNetas / $datosAnterior[0]->hab_disponibles , 2) ;
+            $revparVariacion = $revpar - $revparAnterior;
+        }else{
+            $revparVariacion = null;
+        }
         
         if($revparVariacion < 0){
             $revparVariacion = $revparVariacion*(-1);
@@ -265,8 +312,13 @@ class DatosEstadisticosController extends Controller
 
         //Cáñculo de la estadía promedio
         $estadiaP = round($datos[0]->pernoctaciones / $datos[0]->checkins, 2) ;
-        $estadiaPAnterior = round( $datosAnterior[0]->pernoctaciones / $datosAnterior[0]->checkins , 2) ;
-        $estadiaPVariacion = $estadiaP - $estadiaPAnterior;
+
+        if(isset($datosAnterior[0]->checkins)){
+            $estadiaPAnterior = round( $datosAnterior[0]->pernoctaciones / $datosAnterior[0]->checkins , 2) ;
+            $estadiaPVariacion = $estadiaP - $estadiaPAnterior;
+        }else{
+            $estadiaPVariacion = null;
+        }
         
         if($estadiaPVariacion < 0){
             $estadiaPVariacion = $estadiaPVariacion*(-1);
@@ -288,21 +340,16 @@ class DatosEstadisticosController extends Controller
 
     public function all(Request $request)
     {
-        
         $consulta = "SELECT fecha, 
-        SUM(habitaciones_ocupadas) as hab_ocupadas, 
-        SUM(habitaciones_disponibles) as  hab_disponibles 
-        FROM registros 
-        GROUP BY fecha 
-        HAVING MONTH(fecha) = ".$request->id;
+                            SUM(habitaciones_ocupadas) as hab_ocupadas, 
+                            SUM(habitaciones_disponibles) as  hab_disponibles 
+                            FROM registros 
+                            GROUP BY fecha 
+                            HAVING MONTH(fecha) = ".$request->id;
 
-    $datos = \DB::select($consulta);
+        $datos = \DB::select($consulta);
 
         return response(json_encode($datos), 200)->header('Content-type', 'text/plain');
-
-
-
-
     }
 
 }

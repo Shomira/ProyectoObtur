@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Validator;
 use App\Models\User;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Auth;
+use Auth;
 
 class UsersController extends Controller
 {
@@ -18,6 +18,7 @@ class UsersController extends Controller
 
     public function index()
     {
+        
         $usuarios = \DB::table('users')
                     ->select('users.*')
                     ->orderBy('id','DESC')
@@ -39,7 +40,7 @@ class UsersController extends Controller
             'in' => 'El rol solo puede ser: Admin o Normal',
             'min' => 'El tamaño mínimo de la contraseña debe ser de 8 caracteres ',
         ]);
-
+        
         if($validator -> fails()){
             return back()
                 ->withInput()
@@ -52,7 +53,7 @@ class UsersController extends Controller
                 'password' => Hash::make($request['password']),
                 'rol' => $request->rol
             ]);
-            return back()->with('Listo', 'Usuario insertado correctamente');
+            return back()->with('Listo', 'Usuario Creado Correctamente');
         }
 
     }

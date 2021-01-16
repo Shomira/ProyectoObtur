@@ -21,9 +21,7 @@ class Establecimientos extends Migration
         $table->integer('habitaciones');
         $table->integer('plazas');
         $table->unsignedBigInteger('idUsuario')->nullable;
-        $table->foreign('idUsuario')->references('id')->on('Users');
-
-      
+        $table->foreign('idUsuario')->references('id')->on('Users')->onDelete('cascade');
 
     });
     }

@@ -32,9 +32,10 @@ class Registros extends Migration
             $table->integer('empleados_temporales');
             $table->string('estado');
             $table->string('opciones');
+            $table->string('fechaCadena');
 
             $table->unsignedBigInteger('idEstablecimiento')->nullable;
-            $table->foreign('idEstablecimiento')->references('id')->on('Establecimientos');
+            $table->foreign('idEstablecimiento')->references('id')->on('Establecimientos')->onDelete('cascade');
         
 
         });

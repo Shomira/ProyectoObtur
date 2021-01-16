@@ -24,4 +24,10 @@
         </p>
     </article>
 </section>
+
+
+@endsection
+
+@section('pieDePagina')
+    @include('layouts.footer')
 @endsection

@@ -21,23 +21,32 @@ class VisualizarArchivosController extends Controller
         $auxDia = $ultimaCaga[0]->dia;
         $auxMes = $ultimaCaga[0]->mes;
         $auxAnio = $ultimaCaga[0]->anio;
-        $cadena = "SELECT * FROM registros WHERE MONTH(fecha) = ".$auxMes;
+
+        if($auxMes == null){
+            $cadena = "SELECT * FROM registros";
+            $alerta = "No existen registros";
+        }else{
+            $cadena = "SELECT * FROM registros WHERE MONTH(fecha) = ".$auxMes;
+            $alerta = null;
+        }
 
         $registros = \DB::select($cadena);
-        $mensaje = "Establecimiento: Todos.  Desde: 1-".$auxMes."-".$auxAnio." Hasta: ".$auxDia."-".$auxMes."-".$auxAnio;
+        
+        $mensaje = "Establecimiento: Todos.  Desde: ".$auxAnio."-".$auxMes."-01 Hasta: ".$auxAnio."-".$auxMes."-".$auxDia;
 
         if(Auth::user()->rol != 'Admin'){return redirect('home');}
         return view('visualizarArchivos')->with('establecimientos', $establecimientos)
                                         ->with('registros', $registros)
-                                        ->with('mensaje', $mensaje);
+                                        ->with('mensaje', $mensaje)
+                                        ->with('alerta', $alerta);
     }
 
     public function mostrar(Request $request){
 
         $establecimientos = \DB::table('establecimientos')
-                        ->select('establecimientos.*')
-                        ->orderBy('id','DESC')
-                        ->get();
+        ->select('establecimientos.*')
+        ->orderBy('id','DESC')
+        ->get();
 
         if($request->nombre == "Todos"){
 
@@ -62,10 +71,15 @@ class VisualizarArchivosController extends Controller
                         ->where('fecha','<=', $request->fin)
                         ->get();
         }
-        $mensaje = "Establecimiento: ".$request->nombre.".  Desde: 1-".$request->inicio." Hasta: ".$request->fin;
+        $mensaje = "Establecimiento: ".$request->nombre.".  Desde: ".$request->inicio." Hasta: ".$request->fin;
 
         return view('visualizarArchivos')->with('establecimientos', $establecimientos)
-                                        ->with('registros', $registros)
-                                        ->with('mensaje', $mensaje);
+                                    ->with('registros', $registros)
+                                    ->with('mensaje', $mensaje);
+
+
+        
+
+        
     }
 }

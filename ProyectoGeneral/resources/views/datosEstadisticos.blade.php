@@ -107,7 +107,7 @@
                         <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 150 165">
                             <polygon fill="yellow" points="129,150 85,119 41,150 57,104 15,66,68,66 85,15 102,65 156,66 113,98" />
                         </svg>
-                        5 ESTRELLAS<br><h5>{{$arrTarifaH[0]}}</h5>
+                        5 ESTRELLAS<br><h5>${{$arrTarifaH[0]}}</h5>
                     </h5>
                     @if( $arrTarifaH[2] === false)
                         <p> <img style="padding: 0.1em;" src="{{ asset('imgs/decrec.png')}}"> Decrecimiento de:{{$arrTarifaH[1]}}% </p>
@@ -161,7 +161,7 @@
                     </svg>
                     5 ESTRELLAS
                 </h5>
-                <h5>{{$arrTarifaP[0]}}</h5>
+                <h5>${{$arrTarifaP[0]}}</h5>
                 @if( $arrTarifaP[2] === false)
                     <p><img style="padding: 0.1em;" src="{{ asset('imgs/decrec.png')}}"> Decrecimiento de: {{$arrTarifaP[1]}}%</p>
                 @else
@@ -274,7 +274,7 @@
                     </svg>
                     5 ESTRELLAS
                 </h5>
-                <h5>{{$arrRevpar[0]}}</h5>
+                <h5>${{$arrRevpar[0]}}</h5>
                 @if( $arrOcupacion[2] === false)
                     <p><img style="padding: 0.1em;" src="{{ asset('imgs/decrec.png')}}"> Decrecimiento de: {{$arrRevpar[1]}}</p>
                 @else
@@ -368,8 +368,12 @@
 
     </section>
 
+    
 @endsection
 
+@section('pieDePagina')
+    @include('layouts.footer')
+@endsection
 
 @section('scripts')
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
@@ -393,8 +397,9 @@
             var arreglo = JSON.parse(res);
             
             for(var i=0;i<arreglo.length;i++){
+                    var aux = (( arreglo[i].hab_ocupadas/ arreglo[i].hab_disponibles)*100).toFixed(2);
                     fecha.push(arreglo[i].fecha);
-                    ocupacion.push( arreglo[i].hab_ocupadas/ arreglo[i].hab_disponibles);
+                    ocupacion.push(aux);
                 }
             graficaPastel();
             graficaLinea();
@@ -461,3 +466,5 @@
 </script>
 
 @endsection
+
+

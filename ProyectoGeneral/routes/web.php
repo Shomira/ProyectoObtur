@@ -36,7 +36,7 @@ Route::get('/informacionTuristica', function () {
 });
 
 
-//Route::get('import-excel', 'App\Http\Controllers\ImportExcel\ImportExcelController@index');
+
 Route::post('import-excel', 'App\Http\Controllers\ImportExcel\ImportExcelController@import');
 
 
@@ -49,6 +49,8 @@ Route::group(['prefix'=>'home', 'as'=>'home'], function(){
     Route::get('/visualizarArchivos', 'App\Http\Controllers\VisualizarArchivosController@index');
     Route::post('/visualizarArchivos', 'App\Http\Controllers\VisualizarArchivosController@mostrar');
     Route::post('/gestionUsuarios/edit', 'App\Http\Controllers\UsersController@editarUsuario');
-    Route::get('/archivos', function () {return view('archivos');});
+    Route::get('/archivos', 'App\Http\Controllers\ImportExcel\ImportExcelController@index');
+    Route::delete('/archivos/{file}', 'App\Http\Controllers\ImportExcel\ImportExcelController@destroy');
+
     Route::get('/metricas', function () {return view('metricas');});
 });

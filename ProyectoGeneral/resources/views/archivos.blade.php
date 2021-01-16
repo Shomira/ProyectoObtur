@@ -12,7 +12,7 @@
         </nav>
         
         <section class="espacioCA">
-        <h2><img style="padding-right: 1em;"  src="{{ asset('imgs/carga.png')}}">CARGA DE ARCHIVOS A LA BASE DE DATOS</h2>
+            <h2><img style="padding-right: 1em;"  src="{{ asset('imgs/carga.png')}}">CARGA DE ARCHIVOS A LA BASE DE DATOS</h2>
             <div class="card mt-4">
                 <div class="card-header">
                     Importación de archivos a la base de datos
@@ -36,7 +36,7 @@
                 <div class="card-body">
                     <form action="{{ url('import-excel') }}" method="POST" name="importform" enctype="multipart/form-data">
                         @csrf
-                        <input type="file" name="import_file" class="form-control">
+                        <input type="file" name="import_file[]" class="form-control" multiple>
                         <br>
                         <button class="btn btn-success">Importar archivo</button>
                     </form>
@@ -44,8 +44,63 @@
             </div>
 
         </section>
+        
+        <section class="col-6">
+            @if($message = Session::get('eliminado'))
+                <div class="alert alert-success alert-block">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    <strong>{{ $message }}</strong>
+                </div>
+            @endif
+        </section>
 
-       
+       <!-- Tabla de usuarios-->
+       <div class="container">
+            <div class="row justify-content-center">
+                    <div class="card">
+                        <div class="card-header"> {{__('Lista de Archivos')}}</div>
+                        <div class="card-body">
+                            <div class="table-responsive table-striped ">
+                                <table class="table col-12 table-responsive">
+                                    <thead>
+                                        <tr>
+                                            <td>Id</td>
+                                            <td>Nombre</td>
+                                            <td>idUsuario</td>
+                                            <td>&nbsp;</td>
+                                            <td>&nbsp;</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach($files as $file)
+                                            <tr>
+                                            
+                                                <td> {{$file->id}} </td>
+                                                <td>{{$file->name}}</td>
+                                                <td>{{$file->idUsuario}}</td>
+                                                <td>
+                                                    <a href="../storage/{{$file->name}}" class="btn btn-sm btn-outline-secondary">Ver</a>
+                                                </td>
+                                                <td>
+                                                    <form action="{{ url('home/archivos', $file->id ) }}" method="POST">
+                                                        @method('DELETE')
+                                                        @csrf
+                                                        <button type="submit" class="btn btn-sm btn-outline-danger">Eliminar</button>
+                                                    
+                                                    </form>
+                                                    
+                                                </td>
+                                            
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                
+            </div>
+        </div>
         
     </section>
 </section>

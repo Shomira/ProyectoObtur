@@ -12,6 +12,13 @@
         </nav>
 
         <section class="espacioVisualizarA">
+
+            @isset ($alerta)
+                <div class="alert alert-danger   ">
+                    <h6>{{$alerta}} </h6>
+                </div>
+            @endisset
+
             <h3>Establecimientos Existentes</h3>
             <!-- Tabla de Establecimientos-->
             <div class="container">
@@ -54,16 +61,19 @@
             <br>
             <h3>Registros</h3>
         <!--                -->
+        
         <form action="{{url('home/visualizarArchivos')}}" method="POST" class="visualizarArchivo">
+            
             <div class="form-row">
                 @csrf
                 <p>Elige un Establecimiento: 
-                <select name="nombre">
+                <select name="nombre" required>
                     <option  value="" disabled selected >--Elija un establecimiento--</option>
                     @foreach($establecimientos as $establecimiento)
                         <option value="{{$establecimiento->nombre}}">{{$establecimiento->nombre}}</option>
                     @endforeach
                     <option value="Todos">TODOS</option>
+
                 </select>
                 </p> 
                 <div class="col-md-5 mb-2">

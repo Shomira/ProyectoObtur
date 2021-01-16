@@ -15,5 +15,10 @@
         <img style="width: 600px; height: 326px; object-fit: cover;" src="{{ asset('imgs/Itimg10.jpg')}}"  alt="">
        
     </section>
+
+    
 @endsection
     
+@section('pieDePagina')
+    @include('layouts.footer')
+@endsection

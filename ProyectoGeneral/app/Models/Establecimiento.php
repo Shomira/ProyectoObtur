@@ -17,7 +17,7 @@ class Establecimiento extends Authenticatable
 
     }
     */
-  protected $fillable =[
+    protected $fillable =[
         'nombre','clasificacion',
         'categoria','habitaciones','plazas'
         

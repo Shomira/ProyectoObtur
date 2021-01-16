@@ -16,7 +16,7 @@
             <!-- Mensajes de cambios éxito/error-->
             <section class="mensajes">
 
-                <!-- Aviso de Errores en falla de crear un usuario-->
+                <!-- Aviso de Errores en falla de crear un usuario
                 @if($message = Session::get('ErrorInsert'))
                     <div class="col-12 alert alert-danger alert-dismissable fade show" role="alert">
                         <h5>Errores: </h5>
@@ -27,7 +27,7 @@
                         </ul>
                     </div>
 
-                @endif
+                @endif-->
                 <!-- Aviso de Éxito en crear/eliminar un usuario-->
                 @if($message = Session::get('Listo'))
                     <div class="col-12 alert alert-success alert-dismissable fade show" role="alert">
