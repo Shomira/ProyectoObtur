@@ -4,10 +4,10 @@
 <section class="fondo">
     <section class="fondo2">
         <nav class="navAdmin">
-            <a href="{{url('home/visualizarArchivos')}}"><img src="{{ asset('imgs/vision.png')}}">Visualizar Archivos</a>
-            <a href="{{url('home/archivos')}}"><img src="{{ asset('imgs/subir.png')}}">Cargar Datos</a>
-            <a href="{{url('home/metricas')}}"><img src="{{ asset('imgs/metrica.png')}}">Métricas</a>
-            <a style="background: white; color: #000000 ;font-weight: 800;" href="{{url('home/gestionUsuarios')}}"><img src="{{ asset('imgs/usuario.png')}}">Gestionar Usuarios</a>
+            <a href="{{url('home/visualizarArchivos')}}"><img src="{{ asset('imgs/vision1.png')}}">Visualizar Archivos</a>
+            <a href="{{url('home/archivos')}}"><img src="{{ asset('imgs/sub2.png')}}">Cargar Datos</a>
+            <a href="{{url('home/metricas')}}"><img src="{{ asset('imgs/metrica1.png')}}">Métricas</a>
+            <a style="background: white; color: #000000 ;font-weight: 800;" href="{{url('home/gestionUsuarios')}}"><img src="{{ asset('imgs/group.png')}}">Gestionar Usuarios</a>
         </nav>
         
 
@@ -38,12 +38,6 @@
                 @endif
             </section>
 
-            <!-- Button trigger modal para crear un usuario -->
-            <section class="buttonCrearU">
-                <button  type="button" class="btn btn-success" data-toggle="modal" data-target="#modalAgregar">
-                <img src="{{ asset('imgs/aus1.png')}}">Crear Usuario
-                </button>
-            </section>
             <!-- Modal Crear Usuario-->
             <div class="modal fade" id="modalAgregar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
@@ -124,7 +118,13 @@
         <div class="container">
             <div class="row justify-content-center">
                     <div class="card">
-                        <div class="card-header"> {{__('Lista de Usuarios')}}</div>
+                                 <!-- Button trigger modal para crear un usuario -->
+                        <div class="card-header"> {{__('Lista de Usuarios')}}
+                            <button  type="button" class="btn btn-success crearUs" data-toggle="modal" data-target="#modalAgregar">
+                            <img src="{{ asset('imgs/aus1.png')}}">Crear Usuario
+                            </button>
+                        </div>
+                  
                         <div class="card-body">
                             <div class="table-responsive table-striped ">
                                 <table class="table col-12 table-responsive">
