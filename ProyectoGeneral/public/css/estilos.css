@@ -8,22 +8,12 @@
 body {
    /* font-family: "Segoe UI", monospace;*/
    font-family: 'Quantico';
-   /*background-color: wheat;*/
- 
     letter-spacing: 0.04em;
     
 }
 p{
     font-family: 'Roboto', sans-serif;
 }
-/*
-.section.sitios1  img, section.sitios2 section img, section.sitios3 section img{
-    No pixelar la imgen
-    object-fit: cover;
-    
-}
-*/
-
 
 /*Cabecera*/
 div.container section.logo img.logo{
@@ -38,13 +28,6 @@ nav.publico{
         
 }
 
-nav.administrador{
-    background: linear-gradient(
-
-        rgb(104, 77, 177), 
-        rgba(255, 255, 255, 0.678));
-        
-}
 
 section.containerSlider{
     width: 90%;
@@ -55,98 +38,6 @@ section.containerSlider{
 section.espacioLogin{
     padding: 4em 0em;
 }
-
-
-/*Home Administrador */
-section.fondo, nav.navAdmin{
-    background: #00274e;
-
-}
-
-section.fondo2{
-    width: 95%;
-    background-color: white;
-    background-size: cover;
-    margin:0 auto;
-    padding-bottom: 5em;
-}
-
-nav.navAdmin {
-    margin: 0 auto ;
-    width: 100%;
-    padding: 2em;
-    text-align: center;
-    
-  
-        
-}
-nav.navAdmin  a{
-    background: linear-gradient(rgba(156, 155, 154, 0.733), rgb(218, 218, 215));
-    color: #000000;
-    padding: 2.31em 2.5em;
-    text-decoration: none;
-    font-size: 15px;
-    border-radius: 10px 10px 0px 0px ;
-    margin: 1em;
-    padding-top: 1em; 
-    text-align: center;
-   
-}
-.navAdmin img{
-    margin-right: 1em;
-} 
-nav.navAdmin  a:hover{
-    background: linear-gradient(
-    rgba(161, 161, 159, 0.432), rgba(172, 171, 166, 0.664));
-    color: #fffb00;
-    font-weight: 600;
-}
-section.espacioCA{
-    padding: 10em 15em;
-}
-section.espacio{
-    padding: 20em;
-}
-section.espacioAdmin{
-    padding: 5em 10em 20em 10em;
-}
-section.espacioAdmin h2{
-    color: #fc0e0e;
-    font-weight: 12px;
-    align: 0 auto;
-}
-section.espacioAdmin article{
-    width: 60%; 
-}
-section.espacioAdmin article:hover{
-    border-radius: 8px;
-    background-image:linear-gradient(
-        rgb(115, 121, 196),
-        rgba(107, 156, 248, 0.356));
-    text-shadow: 0px 8px 8px rgba(0, 0, 0, 0.25);    
-
-}
-section.espacioAdmin h4{
-    color: #491b41;
-}
-section.espacioUsuarios{
-    padding: 5em 20em;
-}
-section.buttonCrearU button {
-    border-radius: 0px ;
-    margin: 0em;
-    width: 25%;
-    height: 25%;
-}
-section.buttonCrearU img{
-   
-    padding-right: 0.3em;
-   
-}
-
-
-/**/
-
 
 /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<Home Page>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
 section.containerSlider{
@@ -159,9 +50,8 @@ section.sitiosLoja{
     margin: 0 auto;
     padding: 0em 0em 2em 2em;
 }
-.sitiosLoja h2, .serviciosL h2, .serviciosL2 h2, .map h2, .datosEstab h2{
+.sitiosLoja h2, .serviciosL h2, .serviciosL2 h2, .map h2, .datosEstab h2, .datosAd h2{
 margin-top:2em;
-
 font-style: normal;
 font-weight: normal;
 font-size: 30px;
@@ -216,8 +106,9 @@ section.sericiosL, section.datosEstab{
     
  
 }
-/*cambio*/
-.serviciosL article.servicios,.serviciosL2 article.servicios, section.datosEstab article.datEs {
+
+.serviciosL article.servicios,.serviciosL2 article.servicios,
+ section.datosEstab article.datEs, section.datosAd article.datAd {
     width: 27%;  
     display:inline-block;
     background: rgb(214, 206, 179);
@@ -232,6 +123,7 @@ section.datosEstab article.datEs {
     box-shadow: 0px 8px 8px rgba(0, 0, 0, 0.25); 
   
 }
+
 .serviciosL article.servicios img,.serviciosL2 article.servicios img, section.datosEstab article.datEs img{
     width: 40%; 
     display: block;
@@ -241,7 +133,7 @@ section.datosEstab article.datEs {
 }
 
 /**/
-.serviciosL article.servicios h4, .serviciosL2 article.servicios h4,section.datosEstab article.datEs h4{
+.serviciosL article.servicios h4, .serviciosL2 article.servicios h4,section.datosEstab article.datEs h4,  section.datosAd article.datAd h4{
     font-size: 1.7em;
     padding: 1em 0 0 0;
     color: rgb(26, 124, 17);
@@ -268,7 +160,6 @@ section.datosEstab article.datEs h4{
   
 }
 
-/*Cambio*/
 section.serviciosL article.servicios, section.serviciosL2 article.servicios{
     margin-left: 3.1em;
 }
@@ -287,6 +178,140 @@ section.serviciosL2 article.servicios:hover{
 .serviciosL2 article.servicios p{
     border-top:2px solid rgb(26, 124, 17) ;
 }
+
+
+/*Home Administrador */
+
+section.fondo, nav.navAdmin{
+  
+    background: linear-gradient(rgb(253, 234, 197), 
+    rgb(253, 234, 197));
+
+}
+nav.administrador{
+    background: linear-gradient(
+        rgb(239,128,1),rgb(239,128,1));
+
+}
+
+section.fondo2{
+    width: 95%;
+    background-color: white;
+    background-size: cover;
+    margin:0 auto;
+    padding-bottom: 6em;
+}
+
+nav.navAdmin {
+    width: 100%;
+    padding: 2.2em 2.2em 1.7em 0em;
+}
+nav.navAdmin  a{
+    background: linear-gradient(rgb(245, 245, 245), rgb(245, 245, 245) );
+    color: #000000;
+    padding: 2.3em 2.5em;
+    text-decoration: none;
+    font-size: 15px;
+    border-radius: 10px 10px 0px 0px ;
+    padding-top: 1.5em; 
+    text-align: center;
+   
+}
+.navAdmin img{
+    margin-right: 0.2em;
+} 
+nav.navAdmin  a:hover{
+    background: linear-gradient(
+        rgba(255, 122, 40, 0.753),   rgba(255, 122, 40, 0.753));
+    color: #0c0d44;
+    font-weight: 600;
+}
+section.espacioCA{
+    padding: 10em 15em;
+}
+section.espacio{
+    padding: 20em;
+}
+section.espacioAdmin{
+    padding: 3em 6em 7em 6em;
+}
+section.espacioAdmin h2{
+ 
+    text-shadow: 0px 8px 8px rgba(0, 0, 0, 0.25);    
+    align: 0 auto;
+}
+section.espacioAdmin article{
+    width: 60%; 
+}
+section.espacioAdmin article:hover{
+    border-radius: 8px;
+    background-image:linear-gradient(
+        rgb(100, 101, 116),
+        rgba(250, 250, 250, 0.356));
+    text-shadow: 0px 8px 8px rgba(0, 0, 0, 0.25);    
+
+}
+section.espacioAdmin h4{
+    color: #491b41;
+}
+section.espacioUsuarios{
+    padding: 5em 20em;
+}
+section.buttonCrearU button {
+    border-radius: 0px ;
+    margin: 0em;
+    width: 25%;
+    height: 25%;
+}
+section.buttonCrearU img{
+   
+    padding-right: 0.3em;
+   
+}
+button.crearUs{
+    margin-left: 28em;
+}
+/* -----------------------------------------------------------------------*/
+
+ section.datosAd{
+    width: 82%;
+    margin: 0 auto;
+    padding: 0em 0em 2em 2em;
+    text-align: center;
+    
+}
+
+section.datosAd article.datAd {
+    border-radius: 0px;
+    margin-right: 3em;
+    margin-bottom : 1.5em;
+    width: 40%;  
+    background-color:white ;
+    box-shadow: 0px 8px 8px rgba(0, 0, 0, 0.25); 
+  
+}
+section.datosAd article.datAd img{
+    width: 15%; 
+    margin: auto;
+    padding: 0.3em;
+    
+}
+
+section.datosAd article.datAd h5{
+    color: white;
+ 
+}
+.datAd section.partsup{
+    padding: 1em;
+    margin-bottom: 0.2em;
+    background: rgb(231,165,73) ;
+    text-align: left;
+
+}
+
+/*-------------------------------------------------------------------------*/
+
+
 
 /*Datos Estadisticos*/
 h2.tituloDatos{
@@ -419,8 +444,8 @@ footer article.final article.contactos h3{
 
 section.espacioVisualizarA  h3{
     margin: 1.5em 1em 1em 3em;
-    color: #1e8a15f6;
-    text-shadow: 0px 8px 8px rgba(0, 0, 0, 0.25); 
+    color: #ffee00f6;
+    /*text-shadow: 0px 8px 8px rgba(0, 0, 0, 0.25); */
     font-weight: 600;
     
 }

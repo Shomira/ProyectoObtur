@@ -3,40 +3,69 @@
 @section('content')
 
     @if(Auth::user()->rol == 'Admin')
-        <section class="fondo">
-            <section class="fondo2">
-                <nav class="navAdmin">
-                    <a href="{{url('home/visualizarArchivos')}}"><img src="{{ asset('imgs/vision.png')}}">Visualizar Archivos</a>
-                    <a href="{{url('home/archivos')}}"><img src="{{ asset('imgs/subir.png')}}">Cargar Datos</a>
-                    <a href="{{url('home/metricas')}}"><img src="{{ asset('imgs/metrica.png')}}">Métricas</a>
-                    <a href="{{url('home/gestionUsuarios')}}"><img src="{{ asset('imgs/usuario.png')}}">Gestionar Usuarios</a>
-                </nav>
-            
-                <section class="espacioAdmin">
-                    <h2><img style="margin-right: 0.5em;" src="{{ asset('imgs/adminv.png')}}">Bienvenid@ {{ Auth::user()->name }}</h2>
-                    <br>
-                        <h5>En este apartado podra encontrar las caracteristicas de cada seccion de la barra de navegacion de administrador</h5>
-                        <article>
-                            <p><h4>Visualizar Archivos:</h4> Permite acceder a los registros y filtrarlos por fecha</p>
-                        </article>
-                        <article>
-                            <p><h4>Cargar Datos:</h4> Cumple la funcion de cargar los registros mediante la carga de archivos.csv</p>
-                        </article>
-                        <article>
-                            <p><h4>Métricas:</h4> Crea gráficas estadisticas mediante el uso de filtros.</p>
-                        </article>
-                        <article>
-                            <p><h4>Gestionar Usuarios:</h4> Muestra una lista de usuarios con las opciones: editar, eliminar y crear.</p>
-                        </article>
-                </section>
-            
+    <section class="fondo">
+        <section class="fondo2">
+            <nav class="navAdmin">
+                <a href="{{url('home/visualizarArchivos')}}"><img src="{{ asset('imgs/vision1.png')}}">Visualizar Archivos</a>
+                <a href="{{url('home/archivos')}}"><img src="{{ asset('imgs/sub2.png')}}"> Cargar Datos</a>
+                <a href="{{url('home/metricas')}}"><img src="{{ asset('imgs/metrica1.png')}}">Métricas</a>
+                <a href="{{url('home/gestionUsuarios')}}"><img src="{{ asset('imgs/group.png')}}">Gestionar Usuarios</a>
+                
+            </nav>
+        
+            <section class="espacioAdmin">
+                <h2><img style="margin-right: 0.5em;" src="{{ asset('imgs/adminv.png')}}">Bienvenid@ {{ Auth::user()->name }}</h2>
+                  
+                <section class="datosAd">
+                    <article class="datAd">
+                        <section class="partsup"  ><h5>Visualizar Archivos</h5></section>   
+                        <p> <img src="{{ asset('imgs/verArchivos.png')}}"> Permite acceder a los registros y filtrarlos por fecha</p>
+                    </article >     
+                    <article class="datAd">
+                            <section class="partsup" style="background: rgb(255,114,74)" ><h5>Cargar Datos:</h5></section>  
+                                <p> <img src="{{ asset('imgs/cargarDatos.png')}}">Cumple la funcion de cargar los registros mediante la carga de archivos.csv</p>
+                    </article >
+                    <article class="datAd">
+                            <section class="partsup" style="background: rgb(255,114,74)"><h5>Métricas</h5></section>  
+                            <p><img src="{{ asset('imgs/metricas.png')}}"> Crea gráficas estadisticas mediante el uso de filtros.</p>
+                    </article>
+                    <article class="datAd">
+                            <section class="partsup" ><h5>Gestionar Usuarios</h5></section>    
+                            <p><img src="{{ asset('imgs/gestionarUsuarios.png')}}">Muestra una lista de usuarios con las opciones: editar, eliminar y crear.</p>
+                </article>
+            </section>                
             </section>
-        </section>
-    @else
-        <section>
-            <h3>Bienvenido a la sesión personal del usuario</h3>
-        </section>
-        <section class="espacio"></section>
-    @endif
 
+        </section>
+    </section>
+
+    <!--Parte del Usuario del Establecimiento-->
+    @else
+    <section class="fondo">
+        <section class="fondo2">
+            <nav class="navAdmin">
+                <a href="{{url('')}}"><img src="{{ asset('imgs/vision1.png')}}">Visualizar Archivos</a>
+                <a href="{{url('')}}"><img src="{{ asset('imgs/sub2.png')}}"> Ver Estadísticas</a>                
+            </nav>
+        
+            <section class="espacioAdmin">
+                <h2><img style="margin-right: 0.5em;" src="{{ asset('imgs/adminv.png')}}">Bienvenid@ {{ Auth::user()->name }}</h2>
+                  
+                <section class="datosAd">
+                    <article class="datAd">
+                        <section class="partsup"  ><h5>Visualizar Archivos</h5></section>   
+                        <p> <img src="{{ asset('imgs/verArchivos.png')}}"></p>
+                    </article >     
+                    <article class="datAd">
+                            <section class="partsup" style="background: rgb(255,114,74)" ><h5>Ver Estadísticas</h5></section>  
+                                <p> <img src="{{ asset('imgs/cargarDatos.png')}}"></p>
+                    </article >
+                    
+            </section>                
+        </section>
+
+    </section>
+ 
+
+    @endif
 @endsection
