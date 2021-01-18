@@ -12,7 +12,6 @@
                 <a href="{{url('home/gestionUsuarios')}}"><img src="{{ asset('imgs/group.png')}}">Gestionar Usuarios</a>
                 
             </nav>
-        
             <section class="espacioAdmin">
                 <h2><img style="margin-right: 0.5em;" src="{{ asset('imgs/adminv.png')}}">Bienvenid@ {{ Auth::user()->name }}</h2>
                   
@@ -32,20 +31,21 @@
                     <article class="datAd">
                             <section class="partsup" ><h5>Gestionar Usuarios</h5></section>    
                             <p><img src="{{ asset('imgs/gestionarUsuarios.png')}}">Muestra una lista de usuarios con las opciones: editar, eliminar y crear.</p>
-                </article>
-            </section>                
+                    </article>
+                </section>                
             </section>
 
         </section>
     </section>
 
     <!--Parte del Usuario del Establecimiento-->
-    @else
+    @endif
+    @if(Auth::user()->rol == 'Normal')
     <section class="fondo">
         <section class="fondo2">
             <nav class="navAdmin">
-                <a href="{{url('')}}"><img src="{{ asset('imgs/vision1.png')}}">Visualizar Archivos</a>
-                <a href="{{url('')}}"><img src="{{ asset('imgs/sub2.png')}}"> Ver Estadísticas</a>                
+                <a  href="{{url('home/visualizarGraficas')}}"><img src="{{ asset('imgs/metrica1.png')}}">Visualizar Gráficas</a>
+                <a href="{{url('home/visualizarRegistros')}}"><img src="{{ asset('imgs/vision1.png')}}"> Visualizar Registros</a>                
             </nav>
         
             <section class="espacioAdmin">
@@ -65,7 +65,7 @@
         </section>
 
     </section>
- 
 
     @endif
+
 @endsection

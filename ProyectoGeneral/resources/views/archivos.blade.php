@@ -1,5 +1,11 @@
 @extends('layouts.app')
 
+@section('css')
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.23/css/dataTables.bootstrap4.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.6/css/responsive.bootstrap4.min.css">
+@endsection
+
+
 @section('content')
 <section class="fondo">
     <section class="fondo2">
@@ -23,15 +29,22 @@
                         <ul>
                             @foreach ($errors->all() as $error)
                                 <li>{{ $error }}</li>
+                                <script>
+                                    swal({
+                                        title: "{!! $error !!}}",
+                                        icon: "error",
+                                        button: "OK",
+                                        });
+                                </script> 
                             @endforeach
                         </ul>
                     </div>
+
+                    
+                   
                 @endif
                 @if($message = Session::get('success'))
-                    <div class="alert alert-success alert-block">
-                        <button type="button" class="close" data-dismiss="alert">×</button>
-                        <strong>{{ $message }}</strong>
-                    </div>
+                    <script>swal("{!! Session::get('success')!!}",'success')</script>
                 @endif
                 <div class="card-body">
                     <form action="{{ url('import-excel') }}" method="POST" name="importform" enctype="multipart/form-data">
@@ -47,10 +60,7 @@
         
         <section class="col-6">
             @if($message = Session::get('eliminado'))
-                <div class="alert alert-success alert-block">
-                    <button type="button" class="close" data-dismiss="alert">×</button>
-                    <strong>{{ $message }}</strong>
-                </div>
+                <script>swal("{!! $message !!}",'success')</script>
             @endif
         </section>
 
@@ -61,7 +71,7 @@
                         <div class="card-header"> {{__('Lista de Archivos')}}</div>
                         <div class="card-body">
                             <div class="table-responsive table-striped ">
-                                <table class="table col-12 table-responsive">
+                                <table class="table col-12 table-responsive" id='t_archivos'>
                                     <thead>
                                         <tr>
                                             <td>Id</td>
@@ -108,7 +118,11 @@
 @endsection
 
 @section('scripts')
-
+    <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.23/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.6/js/dataTables.responsive.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.6/js/responsive.bootstrap4.min.js"></script>
+    <script>$('#t_archivos').DataTable({responsive:true,autowidth:false});</script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.2/min/dropzone.min.js"></script>
     <script>
         Dropzone.options.myAwesomeDropzone = {

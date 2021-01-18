@@ -11,7 +11,7 @@ class Registro extends Model
 
     protected $fillable =[
         'fecha','checkins',
-        'checkouts','pernotaciones','nacionales',
+        'checkouts','pernoctaciones','nacionales',
         'extranjeros', 'habitaciones_ocupadas', 'habitaciones_disponibles',
         'tipo_tarifa', 'tarifa_promedio', 'TAR_PER', 'ventas_netas',
         'porcentaje_ocupacion', 'revpar', 'empleados_temporales',

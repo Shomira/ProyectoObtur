@@ -1,5 +1,10 @@
 @extends('layouts.app')
 
+@section('css')
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.23/css/dataTables.bootstrap4.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.6/css/responsive.bootstrap4.min.css">
+@endsection
+
 @section('content')
 <section class="fondo">
     <section class="fondo2">
@@ -14,9 +19,7 @@
         <section class="espacioVisualizarA">
 
             @isset ($alerta)
-                <div class="alert alert-danger   ">
-                    <h6>{{$alerta}} </h6>
-                </div>
+                <script>swal('No existen registros!','Aún no has subido archivos','warning')</script>
             @endisset
 
             <h3>Establecimientos Existentes</h3>
@@ -27,7 +30,7 @@
                         <div class="card-header"> {{__('Lista de Establecimientos')}}</div>
                         <div class="card-body">
                             <div class="table-responsive table-striped ">
-                                <table class="table col-12 table-responsive">
+                                <table class="table col-12 table-responsive" id='t_establecimientos'>
                                     <thead>
                                         <tr>
                                             <th>Id</th>
@@ -104,14 +107,14 @@
                         <div class="card-header overflow-auto"> {{$mensaje}}</div>
                         <div class="card-body overflow-auto">
                             <div class="table-responsive table-striped overflow-auto">
-                                <table class="table col-12 table-responsive overflow-auto">
+                                <table class="table col-12 table-responsive overflow-auto" id='t_registros'>
                                     <thead>
                                         <tr>
                                             <th>Id</th>
                                             <th>Fecha</th>
                                             <th>Checkins</th>
                                             <th>Checkouts</th>
-                                            <th>Pernotaciones</th>
+                                            <th>Pernoctaciones</th>
                                             <th>Nacionales</th>
                                             <th>Extranjeros</th>
                                             <th>Hab. Ocupadas</th>
@@ -127,7 +130,7 @@
                                                 <td>{{$registro->fecha}}</td>
                                                 <td>{{$registro->checkins}}</td>
                                                 <td>{{$registro->checkouts}}</td>
-                                                <td>{{$registro->pernotaciones}}</td>
+                                                <td>{{$registro->pernoctaciones}}</td>
                                                 <td>{{$registro->nacionales}}</td>
                                                 <td>{{$registro->extranjeros}}</td>
                                                 <td>{{$registro->habitaciones_ocupadas}}</td>
@@ -152,3 +155,13 @@
 @endsection
 
 
+@section('scripts')
+    <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.23/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.6/js/dataTables.responsive.min.js"></script>
+    <script>
+        $('#t_establecimientos').DataTable({responsive:true,autowidth:false});
+        $('#t_registros').DataTable({responsive:true,autowidth:false});
+    
+    </script>
+@endsection	

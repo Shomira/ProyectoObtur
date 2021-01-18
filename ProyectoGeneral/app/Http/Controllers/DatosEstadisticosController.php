@@ -55,7 +55,7 @@ class DatosEstadisticosController extends Controller
 
         //consulta para los datos del mes a mostrar
         $consulta = "SELECT SUM(ventas_netas) as ventasNetas, 
-                            SUM(pernotaciones) as pernoctaciones, 
+                            SUM(pernoctaciones) as pernoctaciones, 
                             SUM(checkins) as checkins,
                             Sum(nacionales) as 'nacionales', 
                             Sum(habitaciones_ocupadas) as 'hab_ocupadas' ,
@@ -65,7 +65,7 @@ class DatosEstadisticosController extends Controller
         $datos = \DB::select($consulta);
         //consulta para los datos del mes anterior a mostrar
         $consultaAnterior = "SELECT SUM(ventas_netas) as ventasNetas, 
-                            SUM(pernotaciones) as pernoctaciones, 
+                            SUM(pernoctaciones) as pernoctaciones, 
                             SUM(checkins) as checkins,
                             Sum(nacionales) as 'nacionales', 
                             Sum(habitaciones_ocupadas) as 'hab_ocupadas' ,
@@ -220,7 +220,7 @@ class DatosEstadisticosController extends Controller
         
         //consulta para los datos del mes a mostrar
         $consulta = "SELECT SUM(ventas_netas) as ventasNetas, 
-                            SUM(pernotaciones) as pernoctaciones, 
+                            SUM(pernoctaciones) as pernoctaciones, 
                             SUM(checkins) as checkins,
                             Sum(nacionales) as 'nacionales', 
                             Sum(habitaciones_ocupadas) as 'hab_ocupadas' ,
@@ -230,7 +230,7 @@ class DatosEstadisticosController extends Controller
         $datos = \DB::select($consulta);
         //consulta para los datos del mes anterior a mostrar
         $consultaAnterior = "SELECT SUM(ventas_netas) as ventasNetas, 
-                            SUM(pernotaciones) as pernoctaciones, 
+                            SUM(pernoctaciones) as pernoctaciones, 
                             SUM(checkins) as checkins,
                             Sum(nacionales) as 'nacionales', 
                             Sum(habitaciones_ocupadas) as 'hab_ocupadas' ,
@@ -343,8 +343,8 @@ class DatosEstadisticosController extends Controller
         $consulta = "SELECT fecha, 
                             SUM(habitaciones_ocupadas) as hab_ocupadas, 
                             SUM(habitaciones_disponibles) as  hab_disponibles 
-                            FROM registros 
-                            GROUP BY fecha 
+                            FROM registros
+                            GROUP BY fecha
                             HAVING MONTH(fecha) = ".$request->id;
 
         $datos = \DB::select($consulta);

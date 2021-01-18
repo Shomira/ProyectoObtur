@@ -24,11 +24,11 @@ class ImportExcel implements ToCollection
             {
                 //determinar copias de registros y eliminarlas
                 $copia=DB::table('registros')
-                    ->select('id', 'fecha', 'checkins','checkouts', 'pernotaciones', 'nacionales')
+                    ->select('id', 'fecha', 'checkins','checkouts', 'pernoctaciones', 'nacionales')
                     ->where('fechaCadena','=', $value[5] )
                     ->where('checkins','=', $value[6] )
                     ->where('checkouts','=', $value[7] )
-                    ->where('pernotaciones','=', $value[8] )
+                    ->where('pernoctaciones','=', $value[8] )
                     ->where('nacionales','=', $value[9] )
                     ->where('extranjeros','=', $value[10] )
                     ->where('habitaciones_ocupadas','=', $value[11] )
@@ -93,16 +93,31 @@ class ImportExcel implements ToCollection
                 // cargamos los registros ubicandole la clave foranea de el establecimiento que le corresponde
                 $fechaux = explode('/', $value[5]);
                 $fecha = $fechaux[2]."-".$fechaux[1]."-".$fechaux[0];
+                //calculo del TAR PER
                 if($value[8] != 0){
                     $tarPer = round(($value[16]/$value[8]),2);
                 }else{
                     $tarPer = 0;
                 }
+                //calculo de la tarifa promedio
+                if($value[11] != 0){
+                    $tarifaProm = round(($value[16]/$value[11]),2);
+                }else{
+                    $tarifaProm = 0;
+                }
+                //calculo del porcentaje ocupacion y revpar
+                if($value[12] != 0){
+                    $procentajeOcupacion = round(($value[11]/$value[12]),2);
+                    $revpar =  round(($value[16]/$value[12]),2);
+                }else{
+                    $procentajeOcupacion = 0;
+                    $revpar = 0;
+                }
                 
-                DB::table('registros')->insert(['fecha'=> $fecha, 'checkins'=> $value[6],'checkouts'=>$value[7],'pernotaciones'=>$value[8],
+                DB::table('registros')->insert(['fecha'=> $fecha, 'checkins'=> $value[6],'checkouts'=>$value[7],'pernoctaciones'=>$value[8],
                 'nacionales'=>$value[9],'extranjeros'=>$value[10],'habitaciones_ocupadas'=>$value[11],'habitaciones_disponibles'=>$value[12],
-                'tipo_tarifa'=>$value[13],'tarifa_promedio'=>$value[14],'TAR_PER'=>$tarPer, 'ventas_netas'=>$value[16], 
-                'porcentaje_ocupacion'=>$value[17],'revpar'=>$value[18],'empleados_temporales'=>$value[19],
+                'tipo_tarifa'=>$value[13],'tarifa_promedio'=>$tarifaProm,'TAR_PER'=>$tarPer, 'ventas_netas'=>$value[16], 
+                'porcentaje_ocupacion'=>$procentajeOcupacion,'revpar'=>$revpar,'empleados_temporales'=>$value[19],
                 'estado'=>$value[20], 'opciones'=>$value[21],'idEstablecimiento'=> $clave, 'fechaCadena'=> $value[5] ]);
             
             }

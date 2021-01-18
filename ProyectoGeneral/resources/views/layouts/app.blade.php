@@ -10,6 +10,15 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
+    <!-- Sweet Alert -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+    
+    <!-- Scripts datatables-->
+    <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.23/js/dataTables.bootstrap4.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.23/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
+
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="jquery-3.2.1.min.js"></script>
@@ -68,11 +77,11 @@
                                     </li>
                                 @endif
                                 
-                                @if (Route::has('register'))
+                                <!-- @if (Route::has('register'))
                                     <li class="nav-item">
                                         <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                                     </li>
-                                @endif
+                                @endif-->
                                 
                             
                         </ul>
@@ -137,7 +146,9 @@
         @endguest
 
         <main class="publico">
+            @yield('css')
             @yield('content')
+            @include('sweetalert::alert', ['cdn' => "https://cdn.jsdelivr.net/npm/sweetalert2@9"])
         </main>
 
         @yield('pieDePagina')

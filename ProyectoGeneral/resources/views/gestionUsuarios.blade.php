@@ -1,5 +1,10 @@
 @extends('layouts.app')
 
+@section('css')
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.23/css/dataTables.bootstrap4.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.6/css/responsive.bootstrap4.min.css">
+@endsection
+
 @section('content')
 <section class="fondo">
     <section class="fondo2">
@@ -127,13 +132,14 @@
                   
                         <div class="card-body">
                             <div class="table-responsive table-striped ">
-                                <table class="table col-12 table-responsive">
+                                <table class="table col-12 table-responsive" id='t_usuarios'>
                                     <thead>
                                         <tr>
                                             <td>Id</td>
                                             <td>Nombre</td>
                                             <td>Rol</td>
                                             <td>Email</td>
+                                            <td>&nbsp;</td>
                                             <td>&nbsp;</td>
                                         </tr>
                                     </thead>
@@ -149,6 +155,9 @@
                                                 <td>
                                                     <button class="btn btn-danger btnEliminar" data-id="{{ $usuario->id }}" data-toggle="modal" data-target="#modalEliminar">
                                                     <img src="{{ asset('imgs/eliminar.png')}}"></button>
+                                                    
+                                                </td>
+                                                <td>
                                                     <button class="btn btn-primary btnEditar" 
                                                         data-id="{{ $usuario->id }}" 
                                                         data-name="{{ $usuario->name }}" 
@@ -265,7 +274,12 @@
 @endsection
 
 @section('scripts')
+    <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.23/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.6/js/dataTables.responsive.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.6/js/responsive.bootstrap4.min.js"></script>
     <script>
+        $('#t_usuarios').DataTable({responsive:true,autowidth:false});
         var idEliminar=0;
         $(document).ready(function(){
             @if($message = Session::get('ErrorInsert'))

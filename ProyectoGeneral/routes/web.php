@@ -43,11 +43,16 @@ Route::post('import-excel', 'App\Http\Controllers\ImportExcel\ImportExcelControl
 
 
 Route::group(['prefix'=>'home', 'as'=>'home'], function(){
+    Route::get('/visualizarGraficas', 'App\Http\Controllers\EstablecimientoController@index');
+    Route::post('/visualizarGraficas/all', 'App\Http\Controllers\EstablecimientoController@all');
+    Route::post('/visualizarGraficas', 'App\Http\Controllers\EstablecimientoController@mostrar');
     Route::get('/', 'App\Http\Controllers\HomeController@index')->name('home');
     Route::get('/gestionUsuarios', 'App\Http\Controllers\UsersController@index');
     Route::resource('/gestionUsuarios', 'App\Http\Controllers\UsersController');
     Route::get('/visualizarArchivos', 'App\Http\Controllers\VisualizarArchivosController@index');
     Route::post('/visualizarArchivos', 'App\Http\Controllers\VisualizarArchivosController@mostrar');
+    Route::get('/visualizarRegistros', 'App\Http\Controllers\VisualizarRegistrosController@index');
+    Route::post('/visualizarRegistros', 'App\Http\Controllers\VisualizarRegistrosController@mostrar');
     Route::post('/gestionUsuarios/edit', 'App\Http\Controllers\UsersController@editarUsuario');
     Route::get('/archivos', 'App\Http\Controllers\ImportExcel\ImportExcelController@index');
     Route::delete('/archivos/{file}', 'App\Http\Controllers\ImportExcel\ImportExcelController@destroy');

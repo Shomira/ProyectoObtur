@@ -12,6 +12,8 @@ use Maatwebsite\Excel\Facades\Excel;
 use App\Models\File;
 use Auth;
 use Illuminate\Support\Facades\Storage;
+use RealRashid\SweetAlert\Facades\Alert;
+
 
 
 class ImportExcelController extends Controller
@@ -19,6 +21,7 @@ class ImportExcelController extends Controller
     public function index()
     {
         $files = File::latest()->get();
+        if(Auth::user()->rol != 'Admin'){return redirect('home');}
         return view('archivos', compact('files'));
     }
     public function import(Request $request)
@@ -33,7 +36,7 @@ class ImportExcelController extends Controller
             'mimes' => 'ERROR: El archivo no es de formato csv, xlsl o xls',
             'required' => 'Por favor elija un archivo'
         ]);
-
+        
 
         $files = request()->file('import_file') ;
         $idUduario = Auth::id();
@@ -52,8 +55,8 @@ class ImportExcelController extends Controller
             }
 
         }
-        
-        return back()->with('success', 'Hotels imported successfully.');
+        Alert::success('success', 'Hotels imported successfully.');
+        return back();
 
     }
 
@@ -64,8 +67,8 @@ class ImportExcelController extends Controller
         unlink(public_path('storage/'.$file->name));
 
         $file->delete();
-
-        return back()->with('eliminado', 'Archivo Eliminado Exitosamente'); 
+        Alert::success('eliminado', 'Archivo Eliminado Exitosamente');
+        return back(); 
     }
 
 }

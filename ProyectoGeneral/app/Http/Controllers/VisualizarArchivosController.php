@@ -3,21 +3,19 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Validation\Rule;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
 use Auth;
 
 class VisualizarArchivosController extends Controller
 {
     public function index()
     {
-        $establecimientos = \DB::table('establecimientos')
+        $establecimientos = DB::table('establecimientos')
                     ->select('establecimientos.*')
                     ->orderBy('id','DESC')
                     ->get();
 
-        $ultimaCaga = \DB::select('SELECT DAY(Max(fecha)) as "dia", MONTH(Max(fecha)) as "mes", YEAR(Max(fecha)) as "anio" FROM registros');
+        $ultimaCaga = DB::select('SELECT DAY(Max(fecha)) as "dia", MONTH(Max(fecha)) as "mes", YEAR(Max(fecha)) as "anio" FROM registros');
         $auxDia = $ultimaCaga[0]->dia;
         $auxMes = $ultimaCaga[0]->mes;
         $auxAnio = $ultimaCaga[0]->anio;
@@ -30,7 +28,7 @@ class VisualizarArchivosController extends Controller
             $alerta = null;
         }
 
-        $registros = \DB::select($cadena);
+        $registros = DB::select($cadena);
         
         $mensaje = "Establecimiento: Todos.  Desde: ".$auxAnio."-".$auxMes."-01 Hasta: ".$auxAnio."-".$auxMes."-".$auxDia;
 
@@ -43,14 +41,14 @@ class VisualizarArchivosController extends Controller
 
     public function mostrar(Request $request){
 
-        $establecimientos = \DB::table('establecimientos')
+        $establecimientos = DB::table('establecimientos')
         ->select('establecimientos.*')
         ->orderBy('id','DESC')
         ->get();
 
         if($request->nombre == "Todos"){
 
-            $registros = \DB::table('registros')
+            $registros = DB::table('registros')
                         ->select('registros.*')
                         ->where('fecha','>=', $request->inicio)
                         ->where('fecha','<=', $request->fin)
@@ -58,13 +56,13 @@ class VisualizarArchivosController extends Controller
 
         }else{
 
-            $idestablecimientos = \DB::table('establecimientos')
+            $idestablecimientos = DB::table('establecimientos')
                         ->select('establecimientos.id')
                         ->where('nombre','=', $request->nombre)
                         ->get();
 
 
-            $registros = \DB::table('registros')
+            $registros = DB::table('registros')
                         ->select('registros.*')
                         ->where('idEstablecimiento','=', $idestablecimientos[0]->id)
                         ->where('fecha','>=', $request->inicio)

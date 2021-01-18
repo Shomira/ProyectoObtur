@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Validator;
 use App\Models\User;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
+use RealRashid\SweetAlert\Facades\Alert;
 use Auth;
 
 class UsersController extends Controller
@@ -19,7 +21,7 @@ class UsersController extends Controller
     public function index()
     {
         
-        $usuarios = \DB::table('users')
+        $usuarios = DB::table('users')
                     ->select('users.*')
                     ->orderBy('id','DESC')
                     ->get();
@@ -42,6 +44,7 @@ class UsersController extends Controller
         ]);
         
         if($validator -> fails()){
+            
             return back()
                 ->withInput()
                 ->with('ErrorInsert', 'Favor de llenar correctamente todos los campos')
@@ -53,7 +56,8 @@ class UsersController extends Controller
                 'password' => Hash::make($request['password']),
                 'rol' => $request->rol
             ]);
-            return back()->with('Listo', 'Usuario Creado Correctamente');
+            Alert::success('Listo', 'Usuario Creado Correctamente');
+            return back();
         }
 
     }
@@ -62,7 +66,8 @@ class UsersController extends Controller
     {
         $user = User::find($id);
         $user->delete();
-        return back()->with('Listo', 'El registro se eliminó correctamente');
+        Alert::success('Listo', 'El registro se eliminó correctamente');
+        return back();
     }
     
     public function editarUsuario(Request $request)
@@ -90,7 +95,8 @@ class UsersController extends Controller
         
         
             $user->save();
-            return back()->with('Listo', 'Usuario actualizado correctamente');
+            Alert::success('Listo', 'Usuario actualizado correctamente');
+            return back();
         }
 
     }
