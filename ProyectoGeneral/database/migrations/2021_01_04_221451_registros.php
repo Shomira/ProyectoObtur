@@ -18,7 +18,7 @@ class Registros extends Migration
             $table->string('fecha');
             $table->integer('checkins');
             $table->integer('checkouts');
-            $table->integer('pernotaciones');
+            $table->integer('pernoctaciones');
             $table->integer('nacionales');
             $table->integer('extranjeros');
             $table->integer('habitaciones_ocupadas');
