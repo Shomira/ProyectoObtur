@@ -35,16 +35,13 @@ Route::get('/informacionTuristica', function () {
     return view('informacionTuristica');
 });
 
-
-
 Route::post('import-excel', 'App\Http\Controllers\ImportExcel\ImportExcelController@import');
-
-
 
 
 Route::group(['prefix'=>'home', 'as'=>'home'], function(){
     Route::get('/visualizarGraficas', 'App\Http\Controllers\EstablecimientoController@index');
     Route::post('/visualizarGraficas/all', 'App\Http\Controllers\EstablecimientoController@all');
+    Route::post('/visualizarGraficas/dias', 'App\Http\Controllers\EstablecimientoController@dias');
     Route::post('/visualizarGraficas', 'App\Http\Controllers\EstablecimientoController@mostrar');
     Route::get('/', 'App\Http\Controllers\HomeController@index')->name('home');
     Route::get('/gestionUsuarios', 'App\Http\Controllers\UsersController@index');

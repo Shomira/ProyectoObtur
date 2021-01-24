@@ -66,7 +66,8 @@ class UsersController extends Controller
     {
         $user = User::find($id);
         $user->delete();
-        Alert::success('Listo', 'El registro se eliminó correctamente');
+        Alert::success('Listo', 'El usuario se eliminó correctamente')->autoclose(2000);
+
         return back();
     }
     

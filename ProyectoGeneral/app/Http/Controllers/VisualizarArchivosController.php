@@ -15,6 +15,9 @@ class VisualizarArchivosController extends Controller
                     ->orderBy('id','DESC')
                     ->get();
 
+
+        $fechaMaxima = DB::select('SELECT Max(fecha) as fecha FROM registros');
+        
         $ultimaCaga = DB::select('SELECT DAY(Max(fecha)) as "dia", MONTH(Max(fecha)) as "mes", YEAR(Max(fecha)) as "anio" FROM registros');
         $auxDia = $ultimaCaga[0]->dia;
         $auxMes = $ultimaCaga[0]->mes;
@@ -24,19 +27,28 @@ class VisualizarArchivosController extends Controller
             $cadena = "SELECT * FROM registros";
             $alerta = "No existen registros";
         }else{
-            $cadena = "SELECT * FROM registros WHERE MONTH(fecha) = ".$auxMes;
+            $cadena = "SELECT r.*, e.nombre FROM registros r, establecimientos e WHERE e.id = r.idEstablecimiento AND MONTH(fecha) = $auxMes";
             $alerta = null;
         }
-
+        
         $registros = DB::select($cadena);
         
-        $mensaje = "Establecimiento: Todos.  Desde: ".$auxAnio."-".$auxMes."-01 Hasta: ".$auxAnio."-".$auxMes."-".$auxDia;
-
+        if($auxMes < 10){
+            $desde=$auxAnio."-0".$auxMes."-01";
+        }else{
+            $desde=$auxAnio."-".$auxMes."-01";
+        }
+        
+        $nombreEs='Todos';
+        
         if(Auth::user()->rol != 'Admin'){return redirect('home');}
         return view('visualizarArchivos')->with('establecimientos', $establecimientos)
                                         ->with('registros', $registros)
-                                        ->with('mensaje', $mensaje)
-                                        ->with('alerta', $alerta);
+                                        ->with('alerta', $alerta)
+                                        ->with('desde',$desde)
+                                        ->with('filtroEstabl',$nombreEs)
+                                        ->with('hasta',$fechaMaxima[0]->fecha);
+
     }
 
     public function mostrar(Request $request){
@@ -48,36 +60,31 @@ class VisualizarArchivosController extends Controller
 
         if($request->nombre == "Todos"){
 
-            $registros = DB::table('registros')
-                        ->select('registros.*')
-                        ->where('fecha','>=', $request->inicio)
-                        ->where('fecha','<=', $request->fin)
-                        ->get();
+            $cadena = "SELECT r.*, e.nombre 
+                        FROM registros r, establecimientos e 
+                        WHERE e.id = r.idEstablecimiento AND fecha >= '$request->inicio' AND fecha <= '$request->fin' ";
 
         }else{
 
-            $idestablecimientos = DB::table('establecimientos')
-                        ->select('establecimientos.id')
-                        ->where('nombre','=', $request->nombre)
-                        ->get();
+            $cadena = "SELECT r.*, e.nombre 
+                        FROM registros r, establecimientos e 
+                        WHERE e.id = r.idEstablecimiento AND fecha >= '$request->inicio' AND fecha <= '$request->fin' AND e.nombre = '$request->nombre'";
 
-
-            $registros = DB::table('registros')
-                        ->select('registros.*')
-                        ->where('idEstablecimiento','=', $idestablecimientos[0]->id)
-                        ->where('fecha','>=', $request->inicio)
-                        ->where('fecha','<=', $request->fin)
-                        ->get();
+            
         }
-        $mensaje = "Establecimiento: ".$request->nombre.".  Desde: ".$request->inicio." Hasta: ".$request->fin;
-
+        
+        $registros = DB::select($cadena);
+        
         return view('visualizarArchivos')->with('establecimientos', $establecimientos)
                                     ->with('registros', $registros)
-                                    ->with('mensaje', $mensaje);
-
-
-        
+                                    ->with('filtroEstabl',$request->nombre)
+                                    ->with('desde',$request->inicio)
+                                    ->with('hasta',$request->fin);
 
         
     }
+
+    
+
+
 }

@@ -22,42 +22,13 @@ class ImportExcel implements ToCollection
             
             if($key>0)
             {
-                //determinar copias de registros y eliminarlas
-                $copia=DB::table('registros')
-                    ->select('id', 'fecha', 'checkins','checkouts', 'pernoctaciones', 'nacionales')
-                    ->where('fechaCadena','=', $value[5] )
-                    ->where('checkins','=', $value[6] )
-                    ->where('checkouts','=', $value[7] )
-                    ->where('pernoctaciones','=', $value[8] )
-                    ->where('nacionales','=', $value[9] )
-                    ->where('extranjeros','=', $value[10] )
-                    ->where('habitaciones_ocupadas','=', $value[11] )
-                    ->where('habitaciones_disponibles','=', $value[12] )
-                    ->get();
-                
-                if(!empty($copia->toArray())){
-                    $registro = Registro::whereId($copia[0]->id)->firstOrFail();
-                    $registro->delete();
-                    
-                }else{
-                    $copia[0] = 1;
-                }
-                
-                Validator::make($copia->toArray(), [
-                    '0' => 'required'
-                ],$messages = [
-                    'required' => 'Existe al menos una fila repetida en el archivo(s) a cargar'
-                ])->validate();
-                
-                
                 // Validamos si existe un usuario que enlazar con el archivo cargado
                 Validator::make($value->toArray(), [
                     '0' => 'exists:App\Models\User,name'
                 ],$messages = [
-                    'exists' => 'No existe un usuario relacionado con el archivo que desea subir.'
+                    'exists' => 'No existe  un usuario relacionado al archivo que desea cargar'
                 ])->validate();
-                
-                
+
                 // buscamos un establecimiento que corresponda al del archivo cargado
                 $idE=DB::table('establecimientos')
                 ->select('id')
@@ -89,10 +60,9 @@ class ImportExcel implements ToCollection
                     $clave = $aux[0]->id;
                 }
 
+                //Obtenemos el id del Archivo cargado
+                $idArchivo = DB::select("SELECT Max(id) as 'id' FROM archivos ");
 
-                // cargamos los registros ubicandole la clave foranea de el establecimiento que le corresponde
-                $fechaux = explode('/', $value[5]);
-                $fecha = $fechaux[2]."-".$fechaux[1]."-".$fechaux[0];
                 //calculo del TAR PER
                 if($value[8] != 0){
                     $tarPer = round(($value[16]/$value[8]),2);
@@ -113,12 +83,41 @@ class ImportExcel implements ToCollection
                     $procentajeOcupacion = 0;
                     $revpar = 0;
                 }
+
+                // separamos los valores que nos vinieron en fecha para validarlos 
+                $fechaux = explode('/', $value[5]);
+
+                if(count($fechaux) == 3){
+                    //creamos nuestro valor de fecha amigable con la base de datos
+                    $fecha = $fechaux[2]."-".$fechaux[1]."-".$fechaux[0];
+
+                    //determinar copias de registros +
+                    $copia=DB::table('registros')
+                        ->select('id', 'fecha', 'checkins','checkouts', 'pernoctaciones', 'nacionales')
+                        ->where('fecha','=', $fecha)
+                        ->where('checkins','=', $value[6] )
+                        ->where('checkouts','=', $value[7] )
+                        ->where('pernoctaciones','=', $value[8] )
+                        ->where('nacionales','=', $value[9] )
+                        ->where('extranjeros','=', $value[10] )
+                        ->where('habitaciones_ocupadas','=', $value[11] )
+                        ->where('habitaciones_disponibles','=', $value[12] )
+                        ->get();
+                    //si la fila en ejecucion esta repetida se omitirá su carga
+                    if(empty($copia->toArray()) ){
+                        // cargamos los registros ubicandole la clave foranea de el establecimiento que le corresponde
+                        DB::table('registros')->insert(['fecha'=> $fecha, 'checkins'=> $value[6],'checkouts'=>$value[7],'pernoctaciones'=>$value[8],
+                            'nacionales'=>$value[9],'extranjeros'=>$value[10],'habitaciones_ocupadas'=>$value[11],'habitaciones_disponibles'=>$value[12],
+                            'tipo_tarifa'=>$value[13],'tarifa_promedio'=>$tarifaProm,'TAR_PER'=>$tarPer, 'ventas_netas'=>$value[16], 
+                            'porcentaje_ocupacion'=>$procentajeOcupacion,'revpar'=>$revpar,'empleados_temporales'=>$value[19],
+                            'estado'=>$value[20], 'opciones'=>$value[21],'idEstablecimiento'=> $clave, 'idArchivo'=> $idArchivo[0]->id  ]);
+                                
+                    }
+                }
+
+
                 
-                DB::table('registros')->insert(['fecha'=> $fecha, 'checkins'=> $value[6],'checkouts'=>$value[7],'pernoctaciones'=>$value[8],
-                'nacionales'=>$value[9],'extranjeros'=>$value[10],'habitaciones_ocupadas'=>$value[11],'habitaciones_disponibles'=>$value[12],
-                'tipo_tarifa'=>$value[13],'tarifa_promedio'=>$tarifaProm,'TAR_PER'=>$tarPer, 'ventas_netas'=>$value[16], 
-                'porcentaje_ocupacion'=>$procentajeOcupacion,'revpar'=>$revpar,'empleados_temporales'=>$value[19],
-                'estado'=>$value[20], 'opciones'=>$value[21],'idEstablecimiento'=> $clave, 'fechaCadena'=> $value[5] ]);
+                
             
             }
 

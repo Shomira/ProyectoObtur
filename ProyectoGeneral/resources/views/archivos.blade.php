@@ -1,8 +1,10 @@
 @extends('layouts.app')
 
 @section('css')
-<link rel="stylesheet" href="https://cdn.datatables.net/1.10.23/css/dataTables.bootstrap4.min.css">
-<link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.6/css/responsive.bootstrap4.min.css">
+
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.6/css/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
 @endsection
 
 
@@ -17,32 +19,25 @@
             <a href="{{url('home/gestionUsuarios')}}"><img src="{{ asset('imgs/group.png')}}">Gestionar Usuarios</a>
         </nav>
         
+
         <section class="espacioCA">
-            <h2><img style="padding-right: 1em;"  src="{{ asset('imgs/carga.png')}}">CARGA DE ARCHIVOS A LA BASE DE DATOS</h2>
+            <h3><img style="padding-right: 0.5em;"  src="{{ asset('imgs/carga.png')}}">CARGA DE ARCHIVOS A LA BASE DE DATOS</h3>
             <div class="card mt-4">
                 <div class="card-header">
                     Importación de archivos a la base de datos
                 </div>
                 @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
+                    @foreach ($errors->all() as $error)
                                 <script>
                                     swal({
-                                        title: "{!! $error !!}}",
+                                        title: "{!! $error !!}",
                                         icon: "error",
                                         button: "OK",
                                         });
                                 </script> 
                             @endforeach
-                        </ul>
-                    </div>
-
-                    
-                   
                 @endif
+
                 @if($message = Session::get('success'))
                     <script>swal("{!! Session::get('success')!!}",'success')</script>
                 @endif
@@ -51,9 +46,12 @@
                         @csrf
                         <input type="file" name="import_file[]" class="form-control" multiple>
                         <br>
-                        <button class="btn btn-success">Importar archivo</button>
+                        <button class="btn btn-success" name="opcion" value="1">Importar archivo</button>
+                        <button class="btn text-white" style="background:#1a135a" name="opcion" value="2">Probar archivo</button>
                     </form>
                 </div>
+                
+
             </div>
 
         </section>
@@ -63,80 +61,160 @@
                 <script>swal("{!! $message !!}",'success')</script>
             @endif
         </section>
+        
 
-       <!-- Tabla de usuarios-->
-       <div class="container">
-            <div class="row justify-content-center">
-                    <div class="card">
-                        <div class="card-header"> {{__('Lista de Archivos')}}</div>
-                        <div class="card-body">
-                            <div class="table-responsive table-striped ">
-                                <table class="table col-12 table-responsive" id='t_archivos'>
-                                    <thead>
-                                        <tr>
-                                            <td>Id</td>
-                                            <td>Nombre</td>
-                                            <td>idUsuario</td>
-                                            <td>&nbsp;</td>
-                                            <td>&nbsp;</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach($files as $file)
-                                            <tr>
-                                            
-                                                <td> {{$file->id}} </td>
-                                                <td>{{$file->name}}</td>
-                                                <td>{{$file->idUsuario}}</td>
-                                                <td>
-                                                    <a href="../storage/{{$file->name}}" class="btn btn-sm btn-outline-secondary">Ver</a>
-                                                </td>
-                                                <td>
-                                                    <form action="{{ url('home/archivos', $file->id ) }}" method="POST">
-                                                        @method('DELETE')
-                                                        @csrf
-                                                        <button type="submit" class="btn btn-sm btn-outline-danger">Eliminar</button>
-                                                    
-                                                    </form>
-                                                    
-                                                </td>
-                                            
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
+       <!-- Tabla de Archivos-->
+       <section class="section-archivos">
+                <h4><img style="padding-right: 1em;"  src="{{ asset('imgs/lista.png')}}">LISTA DE ARCHIVOS</h4>
+
+        </section>
+        <div class="row justify-content-left "> 
+            <div class="cardCargaAr justify-content-left" >
                 
+                <div class="card-body">
+                    <table class="table table-striped tablaAr" id='t_archivos' >
+                        <thead>
+                            <tr>
+                                <td>Id</td>
+                                <td>Nombre</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($files as $file)
+                                <tr>
+                                    <td> {{$file->id}} </td>
+                                    <td>{{$file->nombre}}</td>
+                                    <td><a href="../storage/{{$file->nombre}}" class="btn btn-sm btn-outline-secondary">Ver</a></td>
+                                    <td><button class="btn btn-sm btn-outline-danger btnEliminar" data-id="{{ $file->id }}" data-toggle="modal" data-target="#modalEliminar">
+                                        Eliminar</button>
+                                        <form action="{{ url('home/archivos', $file->id ) }}" method="POST" id="formEli_{{ $file->id }}">
+                                            @method('DELETE')
+                                            @csrf
+                                                <input type="hidden" name="id" value="{{ $file->id }}">
+                                                <input type="hidden" name="_method" value="delete">
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
+      
         
+                             
+        <!-- Modal Ofrecer Opción-->
+        <div class="modal fade" id="modalOpcion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Alerta</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
+
+                        <div class="modal-body">
+                            <h5>Desea cargar el archivode todas formas?</h5>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                            <button type="button" class="btn btn-danger btnModalEliminar">Eliminar</button>
+                        </div>
+                    
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Eliminar Archivos-->
+        <div class="modal fade" id="modalEliminar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Eliminar Archivo</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
+
+                        <div class="modal-body">
+                            <h5>Desea Eliminar el Archivo?</h5>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                            <button type="button" class="btn btn-danger btnModalEliminar">Eliminar</button>
+                        </div>
+                    
+                </div>
+            </div>
+        </div>
+
     </section>
 </section>
     
 @endsection
 
-@section('scripts')
+@section('scripts') 
+        <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.23/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.2.6/js/dataTables.responsive.min.js"></script>
-    <script src="https://cdn.datatables.net/responsive/2.2.6/js/responsive.bootstrap4.min.js"></script>
-    <script>$('#t_archivos').DataTable({responsive:true,autowidth:false});</script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.2/min/dropzone.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.6/js/responsive.bootstrap4.min.js"></script>    
     <script>
-        Dropzone.options.myAwesomeDropzone = {
+        $('#t_archivos').DataTable({
+            responsive:true,
+            autowidth:false,
+            dom: 'Blfrtip',
+            "lengthMenu": [ 5, 10, 20, 30, 50 ],
             
-            headers:{
-                'X-CSRF-TOKEN' : "{{csrf_token()}}"
-            },
-            dictDefaultMessage: "Arrastre un archivo al recuadro para subirlo",
-            acceptedFiles: ".csv",
-            maxFiles: 4,
-            init: function() {
-                this.on("success", function(file) { alert("Archivo/s subido/s exitosamente"); });
+            buttons: [
+                   
+                    ],
+            "language": {
+                    "lengthMenu": "Mostrar _MENU_ registros",
+                    "zeroRecords": "Nada encontrado - disculpa",
+                    "info": "Mostrando la página _PAGE_ de _PAGES_",
+                    "infoEmpty": "Usuario no encontrado",
+                    "infoFiltered": "(filtrado de _MAX_ usuarios totales)",
+                    "search": "Buscar:",
+                    "paginate": {    
+                        "previous" : "Anterior",
+                        "next": "Siguiente"   
+                                },
+                    "buttons":{"copy": "Copiar"}
             }
-        };
+        
+        });   
+        </script>                         
+
+    
+    <script>
+        var idEliminar=0;
+        $(document).ready(function(){
+
+            
+
+            @if($errors->any())
+                //var arreglo = JSON.parse($errors);
+                //alert("hollllll");
+            @endif
+
+            $(".btnEliminar").click(function(){
+                idEliminar = $(this).data('id');
+            });
+            $(".btnModalEliminar").click(function(){
+                $("#formEli_"+idEliminar).submit();
+            });
+        });
     </script>
+
+
 
 @endsection

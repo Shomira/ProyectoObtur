@@ -8,18 +8,12 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{config('app.name', 'OBTUR-UTPL') }}</title>
 
     <!-- Sweet Alert -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
     
-    <!-- Scripts datatables-->
-    <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.23/js/dataTables.bootstrap4.min.js"></script>
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.23/css/dataTables.bootstrap4.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
-
-    <!-- Scripts -->
+     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="jquery-3.2.1.min.js"></script>
 	<script src="../bootstrap/js/bootstrap.js"></script>
@@ -76,14 +70,14 @@
                                         <a class="nav-link" href="{{ route('login') }}">{{ __('INGRESAR') }}</a>
                                     </li>
                                 @endif
-                                
-                                <!-- @if (Route::has('register'))
+                                <!--
+                                 @if (Route::has('register'))
                                     <li class="nav-item">
                                         <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                                     </li>
-                                @endif-->
+                                @endif
                                 
-                            
+                            -->
                         </ul>
                     </div>
                 </div>
@@ -126,7 +120,7 @@
                                         <a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
                                                         document.getElementById('logout-form').submit();">
-                                            {{ __('Logout') }}
+                                            {{ __('salir') }}
                                         </a>
 
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">

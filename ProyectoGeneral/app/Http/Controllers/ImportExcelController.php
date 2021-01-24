@@ -58,7 +58,7 @@ class ImportExcelController extends Controller
                 }
 
             }
-            Alert::success('Éxito', 'Datos importados Exitosamente.');
+            Alert::success('success', 'Hotels imported successfully.');
 
         }else{
 

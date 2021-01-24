@@ -196,7 +196,8 @@ nav.administrador{
 
 section.fondo2{
     width: 95%;
-    background-color: white;
+   /* background-color: rgb(249,251,253);*/
+   background-color: white;
     background-size: cover;
     margin:0 auto;
     padding-bottom: 6em;
@@ -226,9 +227,7 @@ nav.navAdmin  a:hover{
     color: #0c0d44;
     font-weight: 600;
 }
-section.espacioCA{
-    padding: 10em 15em;
-}
+
 section.espacio{
     padding: 20em;
 }
@@ -259,23 +258,65 @@ section.espacioAdmin article:hover{
 section.espacioAdmin h4{
     color: #491b41;
 }
+/*Gestion usuarios--------------------------------------------------*/
+.card-headerUs{
+    margin-top: 1em;
+    background:  rgb(255, 255, 255);
+}
 section.espacioUsuarios{
     padding: 5em 20em;
 }
-section.buttonCrearU button {
-    border-radius: 0px ;
-    margin: 0em;
-    width: 25%;
-    height: 25%;
-}
-section.buttonCrearU img{
-   
-    padding-right: 0.3em;
-   
-}
+
 button.crearUs{
-    margin-left: 28em;
+        margin-bottom: 0.5em;
+        margin-left: 1.5em;
 }
+.card-section2{
+    margin-left: -75px;
+    margin-top: 1.6em;
+}
+/*Visualizar Archivos y Gestion usuarios*/
+.containerTab{
+    width: 90%;
+    margin: 0 auto;
+    margin-top: 1em;
+    
+}
+.card-section{
+    margin-left: -80px;
+}
+
+
+.tablaAr thead{
+    background:  rgb(214, 198, 176);
+}
+
+/*  Carga Archivos   -------------------------------------------*/
+
+
+section.espacioCA{
+    width: 78.5%;
+    padding: 3em 5em 2em 5em;
+    margin-left: 2.5em;
+}
+.cardCargaAr{
+    width: 100%;
+    margin-left: 6em;
+    width: 70%;
+  
+}
+.section-archivos{
+    margin: 1.2em; 
+    
+   
+}
+.section-archivos h4{
+    margin-left: 3.5em;
+    color: rgb(41, 41, 41);
+    text-shadow: 1px 7px 15px rgb(157, 149, 133);
+    border-radius: 8px;
+}
+
 /* -----------------------------------------------------------------------*/
 
  section.datosAd{
@@ -314,35 +355,39 @@ section.datosAd article.datAd h5{
 
 }
 
-/*-------------------------------------------------------------------------*/
-
-
-
+/*-------------------------------------------------------------------------------------------------*/
 /*Datos Estadisticos*/
 h2.tituloDatos{
     text-align: center;
     padding: 1em 0em;
+    margin:0.1em;
 }
 section.menu{
-    width: 90%;
-    padding: 2em 0em;
+    width: 95%;
+    padding: 1.5em 0em;
     margin: 0 auto;
+    /*background: none */
     
 }
 
-section.huespedes{
+section.huespedesDe{
     width: 90%;
-
-    margin: 0em 0em 5em 0em;
+    margin: 0em 0em 7em 0em;
 }
-section.indicadores{
-    width: 80%;
+section.indicadoresDe{
+    width: 85%;
     padding: 3em 0em;
     margin: 0 auto;
+    background-color: rgb(238,238,238);
 }
-section.indicadores h2{
-    padding: 0.2em;
-    
+section.indicadoresDe h2{
+    padding: 0.15em;
+
+}
+section.indicadoresDe h4{
+    font-weight: 15px;
+    color: #1a135a;
+    margin: 0 auto;
 }
 
 section.indOcupacion{
@@ -355,19 +400,138 @@ section.revpar{
     padding: 3em 0em;
     margin: 0 auto;
 }
+nav.navDatosEs{
+   
+    
+    background: rgb(20, 15, 45);
+    /*
+    background: #2f1c35;
+   */
+}
+nav.navDatosEs button{
+    padding-top: 0em;
+ 
+}
 nav.navDatosEs button:hover{
-    background-color:#e40046;
+    
+    color:#d0fb11;
+    text-decoration: underline;
+}
+.navDatosEs select{
+    background-color:#dfe0d9;
+    border-radius: 3px;
+}
+.formDe button{
+    color:white;
+    border:none;
 }
 
-form.formDatosEs button:hover{
-   color:#e40046;
+.fondoDatosEsta{
+    width: 100%;
+    height: 100%;
+    background-color: rgb(238,238,238);
+}
+
+/* estilos cards -----------------------------*/
+
+.principal{
+	margin-top:50px;
+}
+
+/*tarjeta 1*/
+.card-headerDe5, .card-headerDe4, .card-headerDe3{
+	margin-top:-30px;
+    height: 220px;
+    width: 350px;
+    margin-left: 1em ;
+	background: rgb(114, 193, 121); 
+	box-shadow:1px 5px 15px #a2a2a2;
+}
+.card-headerDe4{
+    background: rgb(252, 178, 74);
+}
+.card-headerDe3{
+    background: rgb(238, 90, 88);
+}
+.card-sectionDeh{
+    margin-top: 40px;
+    width: 380px;
+    height: 270px;
+    background: rgb(255, 255, 255);
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);
+}
+
+.card-sectionTp, .card-sectionPo{
+    width: 275px;
+    height: 105px;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    background: rgb(255, 255, 255);
+    text-align: center;
 
 }
-section.indicadores h4{
-    font-weight: 15px;
-    color: #1a135a;
-    margin: 0 auto;
+.card-sectionTp p, .card-sectionPo p{
+    border-top:2px solid rgb(140, 138, 113);
+    padding-top: 0.4em;
+    color: rgb(162, 154, 154);
+    margin-top: 0.2em;
+    margin-bottom: 1em;
+    font-size:12px;
+
 }
+.card-sectionTp img, .card-sectionPo img{
+    padding: 0.2em;
+}
+.card-headerTp5, .card-headerTp4, .card-headerTp3{
+    margin-top: -20px;
+    height: 50px;
+    width: 100px;
+	background: rgb(252, 178, 74); 
+    box-shadow:1px 5px 15px #a2a2a2;
+   
+}
+.card-headerTp4{
+    background: rgb(171, 63, 151);
+}
+.card-headerTp3{
+    background: rgb(238, 90, 88);
+}
+
+
+
+
+/*efecto shadows para todas las tarjetas*/
+.card-sectionTp, .card-sectionPo{
+	box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);
+}
+
+
+.card-headerPo5, .card-headerPo4, .card-headerPo3{
+    margin-top: -20px;
+    height: 50px;
+    width: 80px;
+	background: rgb(252, 178, 74); 
+    box-shadow:1px 5px 15px #a2a2a2;
+   
+}
+.card-headerPo4{
+    background: rgb(171, 63, 151);
+    
+}
+.card-headerPo3{
+    background: rgb(238, 90, 88);
+}
+
+.card-headerPo5 h2, .card-headerPo4 h2,.card-headerPo3 h2{
+    padding-left: 4em;
+    padding-bottom: 0.1em;
+    color: white;
+
+}
+
+/*   REVPAR*/
+
+/*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
 
 /*Informcion tusitica*/
 .portfolioInforTuris{
@@ -447,60 +611,76 @@ footer article.final article.contactos h3{
 
 /*Visualizar Archivos>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
 
-section.espacioVisualizarA  h3{
-    margin: 1.5em 1em 1em 3em;
-    /*text-shadow: 0px 8px 8px rgba(0, 0, 0, 0.25); */
-    font-weight: 600;
+.cardV{
+    margin: 0 auto;
+}
+
+.principalV{
+	margin-top:50px;
+	
+}
+/*tarjeta 1*/
+.card-header-s{
+    margin-top:-40px;
+  
+    height: 45px;
+    /*background:  rgb(214, 198, 176); */
+    background:  rgb(145, 78, 1);
+    box-shadow:1px 7px 15px #a2a2a2;
     
 }
-section.espacioVisualizarA  p{
-    margin: 1em 0em 2em 8em;
-    font-weight: 600;
+.card-header-s h5{
+    padding: 10px; 
 }
-section.espacioVisualizarA  input{
-    margin: 0em 0em 1em 8em;
-}
-section.espacioVisualizarA  button{
-    margin: 0em 0em 1em 10em;
-}
-section.espacioVisualizarA input[type=date], section.espacioVisualizarA  select {
-    width: 40%;
-    padding: 12px 20px;
-    display: inline-block;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-
-  }
-
-  section.espacioVisualizarA form {
-    border-radius: 5px;
-    width:  56%;
-    background-color: #ffffff;
-    padding: 2px 0px 0px 0px;
-    margin: 0.2em 1em 2.5em 20em;
-  }
-form.visualizarArchivo, section.espacioVisualizarA .card  {
-    box-shadow: 0px 8px 8px rgba(0, 0, 0, 0.25); 
-  }
-
-form.visualizarArchivo option{
-    width: 500px;
+.containerTab{
+    margin-top: 2em;
 }
 
- 
-section.espacioVisualizarA thead {
-    background-image:linear-gradient(
-        rgba(164, 165, 87, 0.726),
-        rgba(226, 212, 15, 0.356))
-  }
-  
-form.visualizarArchivo button{
-    margin-top: 1.5em;
-    margin-left: 22em ;
+.table{
+    width: 100%; 
+    margin: 0 auto;
+    border-top: 4px solid rgb(111, 59, 24);
 }
 
+.visualizarArchivo{
+    margin-left: 2em;
+    margin-bottom: 2em;   
+}
+.btn {
+    margin-top: 0.5em;
+}
+.section-filtro{
+    margin: 1.2em; 
+    border-bottom: 3px solid black;
 
-.btnEliminar img, .btnEditar img {
-    margin-right: 0.4em;
-} 
+}
+.section-registros{
+    margin: 1.2em; 
+    text-align: center;
+}
+.section-registros h4{
+    margin-top: 2em;
+    color: rgb(41, 41, 41);
+    text-shadow: 1px 7px 15px rgb(113, 86, 27);
+    border-radius: 8px;
+}
+.input-filtros{
+    border: 0;
+    font-size:large;
+    background: white;
+    color: black;
+}
+
+.input-filtros1{
+    width: 50%;
+    background: white;
+    border: 0;
+    font-size:large;
+}
+.linea{
+    border-top:4px solid rgba(255, 122, 40, 0.753)
+}
+.containerTab thead{
+    background:  rgb(214, 198, 176);
+       
+}

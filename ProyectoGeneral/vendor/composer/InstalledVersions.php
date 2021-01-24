@@ -904,6 +904,15 @@ private static $installed = array (
       ),
       'reference' => 'cd4032040a750077205918c86049aa0f43d22947',
     ),
+    'realrashid/sweet-alert' => 
+    array (
+      'pretty_version' => 'v3.2.1',
+      'version' => '3.2.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '5c07913e4679ddc75e26d9333ee6480f46018e94',
+    ),
     'rhumsaa/uuid' => 
     array (
       'replaced' => 

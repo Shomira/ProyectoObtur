@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class Registros extends Migration
+class CreateRegistrosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class Registros extends Migration
      */
     public function up()
     {
-        Schema::create('Registros', function (Blueprint $table) {
+        Schema::create('registros', function (Blueprint $table) {
             $table->id();
             $table->string('fecha');
             $table->integer('checkins');
@@ -32,12 +32,13 @@ class Registros extends Migration
             $table->integer('empleados_temporales');
             $table->string('estado');
             $table->string('opciones');
-            $table->string('fechaCadena');
 
-            $table->unsignedBigInteger('idEstablecimiento')->nullable;
+            $table->unsignedBigInteger('idEstablecimiento')->nullable($value = true);
             $table->foreign('idEstablecimiento')->references('id')->on('Establecimientos')->onDelete('cascade');
         
-
+            $table->unsignedBigInteger('idArchivo')->nullable($value = true);
+            $table->foreign('idArchivo')->references('id')->on('Archivos')->onDelete('cascade');
+            $table->timestamps();
         });
     }
 
@@ -48,6 +49,6 @@ class Registros extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('Registros');
+        Schema::dropIfExists('registros');
     }
 }
