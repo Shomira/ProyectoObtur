@@ -63,26 +63,34 @@ class ImportExcel implements ToCollection
                 //Obtenemos el id del Archivo cargado
                 $idArchivo = DB::select("SELECT Max(id) as 'id' FROM archivos ");
 
+                //calculo de Ventas Netas
+                if(!is_numeric($value[16])){
+                    $ventasNetas = round(($value[11] * $value[14]),2);
+                }else{
+                    $ventasNetas = $value[16];
+                }
+
                 //calculo del TAR PER
                 if($value[8] != 0){
-                    $tarPer = round(($value[16]/$value[8]),2);
+                    $tarPer = round(($ventasNetas/$value[8]),2);
                 }else{
                     $tarPer = 0;
                 }
                 //calculo de la tarifa promedio
                 if($value[11] != 0){
-                    $tarifaProm = round(($value[16]/$value[11]),2);
+                    $tarifaProm = round(($ventasNetas/$value[11]),2);
                 }else{
                     $tarifaProm = 0;
                 }
                 //calculo del porcentaje ocupacion y revpar
                 if($value[12] != 0){
                     $procentajeOcupacion = round(($value[11]/$value[12]),2);
-                    $revpar =  round(($value[16]/$value[12]),2);
+                    $revpar =  round(($ventasNetas/$value[12]),2);
                 }else{
                     $procentajeOcupacion = 0;
                     $revpar = 0;
                 }
+                
 
                 // separamos los valores que nos vinieron en fecha para validarlos 
                 $fechaux = explode('/', $value[5]);
@@ -108,7 +116,7 @@ class ImportExcel implements ToCollection
                         // cargamos los registros ubicandole la clave foranea de el establecimiento que le corresponde
                         DB::table('registros')->insert(['fecha'=> $fecha, 'checkins'=> $value[6],'checkouts'=>$value[7],'pernoctaciones'=>$value[8],
                             'nacionales'=>$value[9],'extranjeros'=>$value[10],'habitaciones_ocupadas'=>$value[11],'habitaciones_disponibles'=>$value[12],
-                            'tipo_tarifa'=>$value[13],'tarifa_promedio'=>$tarifaProm,'TAR_PER'=>$tarPer, 'ventas_netas'=>$value[16], 
+                            'tipo_tarifa'=>$value[13],'tarifa_promedio'=>$tarifaProm,'TAR_PER'=>$tarPer, 'ventas_netas'=>$ventasNetas, 
                             'porcentaje_ocupacion'=>$procentajeOcupacion,'revpar'=>$revpar,'empleados_temporales'=>$value[19],
                             'estado'=>$value[20], 'opciones'=>$value[21],'idEstablecimiento'=> $clave, 'idArchivo'=> $idArchivo[0]->id  ]);
                                 

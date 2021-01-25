@@ -65,8 +65,8 @@
                                 <div class="form-group row">
                                         <select  id="rol" type="text" class="form-control @error('rol') is-invalid @enderror" name="rol" placeholder="Rol" value="{{ old('rol') }}" >
                                         <option selected>Elegir rol...</option>
-                                        <option disable >Normal</option>
-                                        <option disable >Admin</option>
+                                        <option disable >Establecimiento</option>
+                                        <option disable >Administrador</option>
                                         @error('rol')
                                     
                                             <span class="invalid-feedback" role="alert">
@@ -227,8 +227,8 @@
                                 <div class="form-group row">
                                     <select id="rolEditar" type="text" class="form-control @error('rol') is-invalid @enderror" name="rol" placeholder="Rol" value="{{ old('rol') }}" required autocomplete="rol">
                                         <option selected>Elegir rol...</option>
-                                        <option disable >Normal</option>
-                                        <option disable >Admin</option>
+                                        <option disable >Establecimiento</option>
+                                        <option disable >Administrador</option>
                                         @error('rol')            
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>

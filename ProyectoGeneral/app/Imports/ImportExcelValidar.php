@@ -19,8 +19,9 @@ class ImportExcelValidar implements ToCollection
     */
     public function collection(Collection $collection)
     {
-        $texto = "";
+        
         $ultimaFinla = sizeof($collection->toArray() ) -1 ;
+        $bandera = false;
 
         Archivo::create([
             'nombre'=> 'prueba'
@@ -28,25 +29,46 @@ class ImportExcelValidar implements ToCollection
         
         //dd(sizeof($collection->toArray() ));
         foreach($collection as $key=>$value){
-            
+
+            if($key==1){
+                $fechaux = explode('/', $value[5]);
+                $nom = $value[0];
+                $mes = $fechaux[2]."-".$fechaux[1];
+                $texto = "Error en el archivo de $nom del $mes";
+            }
+
             if($key>0)
             {
                 //Obtenemos el id del Archivo cargado
                 $idArchivo = DB::select("SELECT Max(id) as 'id' FROM archivos ");
                 
                 // Validamos si existe un usuario que enlazar con el archivo cargado
-                Validator::make($value->toArray(), [
-                    '0' => 'exists:App\Models\User,name'
-                ],$messages = [
-                    'exists' => 'No existe  un usuario relacionado al archivo que desea cargar'
-                ])->validate();
+                $aux=$value[0];
+                $pruebaUsuario = DB::select("SELECT id FROM users WHERE name= '$aux' ");
+                
+                if(empty($pruebaUsuario)){
+
+                    $file = Archivo::whereId($idArchivo[0]->id)->firstOrFail();
+                    
+                    $file->delete();
+
+                    Validator::make($value->toArray(), [
+                        '0' => 'exists:App\Models\User,name'
+                    ],$messages = [
+                        'exists' => 'No existe  un usuario relacionado al archivo que desea cargar'
+                    ])->validate();
+
+                }
+                
 
                 // Validamos si la fecha cargada es correcta
                 $fechaux = explode('/', $value[5]);
 
                 if (count($fechaux) != 3) {
                     //escribimos en nuestra cadena el error pertinente a la fecha
-                    $texto = $texto."Error de fecha en linea $key ";
+                    $linea = $key+1;
+                    $texto = $texto."/Error de fecha en linea $linea ";
+                    $bandera = true;
 
                 }else{
                     
@@ -74,18 +96,20 @@ class ImportExcelValidar implements ToCollection
                             'estado'=>$value[20], 'opciones'=>$value[21],'idEstablecimiento'=> null, 'idArchivo'=> $idArchivo[0]->id ]);
                         
                     }else{
-                        $texto = $texto."Error, la linea $key está repetida ";
+                        $bandera = true;
+                        $linea = $key+1;
+                        $texto = $texto."/Error, la linea $linea está repetida";
                     }
 
                 }
                 
             }
 
+
             if( $key == $ultimaFinla )
             {
-                
 
-                if( $texto !=""){
+                if( $bandera){
                     
                     $file = Archivo::whereId($idArchivo[0]->id)->firstOrFail();
                     

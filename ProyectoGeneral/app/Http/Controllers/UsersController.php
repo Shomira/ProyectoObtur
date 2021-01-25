@@ -25,7 +25,7 @@ class UsersController extends Controller
                     ->select('users.*')
                     ->orderBy('id','DESC')
                     ->get();
-        if(Auth::user()->rol != 'Admin'){return redirect('home');}
+        if(Auth::user()->rol != 'Administrador'){return redirect('home');}
         return view('gestionUsuarios')->with('usuarios', $usuarios);
     }
 
@@ -34,12 +34,12 @@ class UsersController extends Controller
         $validator = Validator::make($request -> all(),[
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'rol' => ['required', Rule::in(['Admin', 'Normal']) ],
+            'rol' => ['required', Rule::in(['Administrador', 'Establecimiento']) ],
             'password' => ['required', 'string', 'min:8', 'required_with:password_confirmation','same:password_confirmation'],
             'password_confirmation' => ['required']
         ],$messages = [
             'same' => 'Las contraseñas no coinciden.',
-            'in' => 'El rol solo puede ser: Admin o Normal',
+            'in' => 'El rol solo puede ser: Administrador o Establecimiento',
             'min' => 'El tamaño mínimo de la contraseña debe ser de 8 caracteres ',
         ]);
         
@@ -77,10 +77,10 @@ class UsersController extends Controller
         $validator = Validator::make($request -> all(),[
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore($user)],
-            'rol' => ['required', Rule::in(['Admin', 'Normal']) ]
+            'rol' => ['required', Rule::in(['Administrador', 'Establecimiento']) ]
         ],$messages = [
             'same' => 'Las contraseñas no coinciden.',
-            'in' => 'El rol solo puede ser: Admin o Normal',
+            'in' => 'El rol solo puede ser: Administrador o Establecimiento',
             'min' => 'El tamaño mínimo de la contraseña debe ser de 8 caracteres ',
         ]);
 

@@ -2,7 +2,7 @@
 
 @section('content')
 
-    @if(Auth::user()->rol == 'Admin')
+    @if(Auth::user()->rol == 'Administrador')
     <section class="fondo">
         <section class="fondo2">
             <nav class="navAdmin">
@@ -40,7 +40,7 @@
 
     <!--Parte del Usuario del Establecimiento-->
     @endif
-    @if(Auth::user()->rol == 'Normal')
+    @if(Auth::user()->rol == 'Establecimiento')
     <section class="fondo">
         <section class="fondo2">
             <nav class="navAdmin">

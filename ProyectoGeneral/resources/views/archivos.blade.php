@@ -26,16 +26,27 @@
                 <div class="card-header">
                     Importación de archivos a la base de datos
                 </div>
-                @if ($errors->any())
+               @if ($errors->any())
+                    
                     @foreach ($errors->all() as $error)
-                                <script>
-                                    swal({
-                                        title: "{!! $error !!}",
-                                        icon: "error",
-                                        button: "OK",
-                                        });
-                                </script> 
-                            @endforeach
+                        <!-- <li>{{ $error }}</li>-->
+                        <script>
+                            var texto = "";
+                            var cadena = '{{$error}}'.split('/')
+                            for (let i = 1; i < cadena.length; i++) {
+
+                                texto += cadena[i]+"\n";
+                                
+                            }
+                            
+                            swal({
+                                title: cadena[0],
+                                text: texto,
+                                icon: "error",
+                                button: "OK",
+                                });
+                        </script> 
+                    @endforeach
                 @endif
 
                 @if($message = Session::get('success'))
@@ -75,8 +86,8 @@
                     <table class="table table-striped tablaAr" id='t_archivos' >
                         <thead>
                             <tr>
-                                <td>Id</td>
                                 <td>Nombre</td>
+                                <td>Fecha de carga</td>
                                 <td>&nbsp;</td>
                                 <td>&nbsp;</td>
                             </tr>
@@ -84,18 +95,26 @@
                         <tbody>
                             @foreach($files as $file)
                                 <tr>
-                                    <td> {{$file->id}} </td>
                                     <td>{{$file->nombre}}</td>
-                                    <td><a href="../storage/{{$file->nombre}}" class="btn btn-sm btn-outline-secondary">Ver</a></td>
-                                    <td><button class="btn btn-sm btn-outline-danger btnEliminar" data-id="{{ $file->id }}" data-toggle="modal" data-target="#modalEliminar">
-                                        Eliminar</button>
+                                    <td>{{$file->created_at}}</td>
+                                    <td>
+                                        <a href="../storage/{{$file->nombre}}" class="btn btn-sm btn-outline-secondary">Ver</a>
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-sm btn-outline-danger btnEliminar" data-id="{{ $file->id }}" data-toggle="modal" data-target="#modalEliminar">
+                                            Eliminar
+                                        </button>
+                                        
                                         <form action="{{ url('home/archivos', $file->id ) }}" method="POST" id="formEli_{{ $file->id }}">
                                             @method('DELETE')
                                             @csrf
-                                                <input type="hidden" name="id" value="{{ $file->id }}">
-                                                <input type="hidden" name="_method" value="delete">
+                                            <input type="hidden" name="id" value="{{ $file->id }}">
+                                            <input type="hidden" name="_method" value="delete">
+                                        
                                         </form>
+                                        
                                     </td>
+                                
                                 </tr>
                             @endforeach
                         </tbody>
@@ -103,32 +122,7 @@
                 </div>
             </div>
         </div>
-      
-        
-                             
-        <!-- Modal Ofrecer Opción-->
-        <div class="modal fade" id="modalOpcion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Alerta</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-
-
-                        <div class="modal-body">
-                            <h5>Desea cargar el archivode todas formas?</h5>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                            <button type="button" class="btn btn-danger btnModalEliminar">Eliminar</button>
-                        </div>
-                    
-                </div>
-            </div>
-        </div>
+    
 
         <!-- Modal Eliminar Archivos-->
         <div class="modal fade" id="modalEliminar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -143,7 +137,7 @@
 
 
                         <div class="modal-body">
-                            <h5>Desea Eliminar el Archivo?</h5>
+                            <h5>¿Desea Eliminar el Archivo?</h5>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
@@ -172,7 +166,7 @@
             responsive:true,
             autowidth:false,
             dom: 'Blfrtip',
-            "lengthMenu": [ 5, 10, 20, 30, 50 ],
+     
             
             buttons: [
                    
@@ -198,13 +192,6 @@
     <script>
         var idEliminar=0;
         $(document).ready(function(){
-
-            
-
-            @if($errors->any())
-                //var arreglo = JSON.parse($errors);
-                //alert("hollllll");
-            @endif
 
             $(".btnEliminar").click(function(){
                 idEliminar = $(this).data('id');

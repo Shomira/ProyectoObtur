@@ -8,86 +8,120 @@
                 <a href="{{url('home/visualizarRegistros')}}"><img src="{{ asset('imgs/vision1.png')}}"> Visualizar Registros </a>                
             </nav>
             <section class="espacioAdminEs">  
-                <h2>GRÁFICA POR MES</h2>
-                    <div class="form-row align-items-center">
-                        <div class="row col-13">
-                            <div class="form-group col-md-2">
-                                
-                                <label for="inputState">Mes Inicio</label>
-                                <select id="idmesInicio" name="mesInicio" class="form-control" onchange="cambioMesInicio(this)">
-                                    <option disable>Elegir mes Inicio ...</option>
-                                    @foreach($meses as $mes)
-                                        <option value="{{$mes[1]}}">{{$mes[0]}}</option>
-                                    @endforeach
-                                </select>
-                                <label for="inputState">Mes Final</label>
-                                <select id="inputState" name="mesFin" class="form-control" onchange="cambioMesFin(this)">
-                                    <option disable>Elegir mes Máximo ...</option>
-                                    @foreach($meses as $mes)
-                                        <option value="{{$mes[1]}}">{{$mes[0]}}</option>
-                                    @endforeach
-                                </select>
-                                <label for="inputState">Columna</label>
-                                <select id="idColumna" name="columna" class="form-control" data-valor="6" value="nose" onchange="cambioColumnaG1(this)">
-                                    <option disable selected>Elegir Columna ...</option>
-                                    <option value="checkins">Checkins</option>
-                                    <option value="checkouts">Checkouts</option>
-                                    <option value="pernoctaciones">Pernoctaciones</option>
-                                    <option value="nacionales">Nacionales</option>
-                                    <option value="extranjeros">Extranjeros</option>
-                                    <option value="habitaciones_ocupadas">Habitaciones Ocupadas</option>
-                                    <option value="habitaciones_disponibles">Habitaciones Disponibles</option>
-                                    <option value="tarifa_promedio">Tarifa Promedio Habitación</option>
-                                    <option value="TAR_PER">Tarifa Promedio Personas</option>
-                                    <option value="ventas_netas">Ventas Netas</option>
-                                    <option value="porcentaje_ocupacion">Porcentaje Ocupación</option>
-                                    <option value="revpar">Revpar</option>
-                                </select>
-                                
-                            </div>
-                            <div class="form-group col-md-10">
-                                <canvas id="graficaMeses" width="1400" height="500"></canvas>
+                
+
+                <div class="container principalV">
+                    <div class="row">
+                        <div class="col-lg-12 text-left">
+                            <div class="row">
+                                <!--tarjeta 1-->
+                                <div class="col-lg-30  col-md-8 mb-4">
+                                    <div class="card-section border rounded p-3">
+                                        <div class="card-header-s rounded pb-4">
+                                            <h5 class="card-header-title text-white pt-3">GRÁFICA POR MES</h5>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-
+                </div>
                 <br>
+                <div class="form-row align-items-center">
+                    <div class="row col-13">
+                        <div class="form-group col-md-2">
+                            <label for="inputState">Mes Inicio</label>
+                            <label for="inputState">Mes Inicio</label>
+                            <select id="idmesInicio" name="mesInicio" class="form-control" onchange="cambioMesInicio(this)">
+                                <option disable>Elegir mes Inicio ...</option>
+                                @foreach($meses as $mes)
+                                    <option value="{{$mes[1]}}">{{$mes[0]}}</option>
+                                @endforeach
+                            </select>
+                            <label for="inputState">Mes Final</label>
+                            <select id="inputState" name="mesFin" class="form-control" onchange="cambioMesFin(this)">
+                                <option disable>Elegir mes Máximo ...</option>
+                                @foreach($meses as $mes)
+                                    <option value="{{$mes[1]}}">{{$mes[0]}}</option>
+                                @endforeach
+                            </select>
+                            <label for="inputState">Columna</label>
+                            <select id="idColumna" name="columna" class="form-control" data-valor="6" value="nose" onchange="cambioColumnaG1(this)">
+                                <option disable selected>Elegir Columna ...</option>
+                                <option value="checkins">Checkins</option>
+                                <option value="checkouts">Checkouts</option>
+                                <option value="pernoctaciones">Pernoctaciones</option>
+                                <option value="nacionales">Nacionales</option>
+                                <option value="extranjeros">Extranjeros</option>
+                                <option value="habitaciones_ocupadas">Habitaciones Ocupadas</option>
+                                <option value="habitaciones_disponibles">Habitaciones Disponibles</option>
+                                <option value="tarifa_promedio">Tarifa Promedio Habitación</option>
+                                <option value="TAR_PER">Tarifa Promedio Personas</option>
+                                <option value="ventas_netas">Ventas Netas</option>
+                                <option value="porcentaje_ocupacion">Porcentaje Ocupación</option>
+                                <option value="revpar">Revpar</option>
+                            </select>
+                            
+                        </div>
+                        <div class="form-group col-md-10">
+                            <canvas id="graficaMeses" width="1400" height="500"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <section class="linea" ></section>
+                <section class="linea2" ></section>
                 <br>
-
-                <h2>GRÁFICA POR DÍAS</h2>
-                    <div class="form-row align-items-center">
-                        <div class="row col-13">
-                            <div class="form-group col-md-2">
-                                
-                                <label for="inputState">Fecha Inicio</label>
-                                <input type="date" name="inicio" class="form-control" id="cambioFechaInicio" value="{{$diaMin}}"> 
-                                
-                                <label for="inputState">Mes Final</label>
-                                <input type="date" name="inicio" class="form-control" id="cambioFechaFin" value="{{$diaMax}}">
-                                
-                                <label for="inputState">Columna</label>
-                                <select id="idColumna" name="columna" class="form-control" data-valor="6" value="nose" onchange="cambioColumnaG2(this)">
-                                    <option disable selected>Elegir Columna ...</option>
-                                    <option value="checkins">Checkins</option>
-                                    <option value="checkouts">Checkouts</option>
-                                    <option value="pernoctaciones">Pernoctaciones</option>
-                                    <option value="nacionales">Nacionales</option>
-                                    <option value="extranjeros">Extranjeros</option>
-                                    <option value="habitaciones_ocupadas">Habitaciones Ocupadas</option>
-                                    <option value="habitaciones_disponibles">Habitaciones Disponibles</option>
-                                    <option value="tarifa_promedio">Tarifa Promedio Habitación</option>
-                                    <option value="TAR_PER">Tarifa Promedio Personas</option>
-                                    <option value="ventas_netas">Ventas Netas</option>
-                                    <option value="porcentaje_ocupacion">Porcentaje Ocupación</option>
-                                    <option value="revpar">Revpar</option>
-                                </select>
-                                
-                            </div>
-                            <div class="form-group col-md-10">
-                                <canvas id="graficaDias" width="1400" height="500"></canvas>
+                <div class="container principalV">
+                    <div class="row">
+                        <div class="col-lg-12 text-left">
+                            <div class="row">
+                                <!--tarjeta 1-->
+                                <div class="col-lg-30  col-md-8 mb-4">
+                                    <div class="card-section border rounded p-3">
+                                        <div class="card-header-s rounded pb-4">
+                                            <h5 class="card-header-title text-white pt-3">GRÁFICA POR DÍAS</h5>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
+                </div>
+                <br>
+                <div class="form-row align-items-center">
+                    <div class="row col-13">
+                        <div class="form-group col-md-2">
+                            
+                            <label for="inputState">Fecha Inicio</label>
+                            <input type="date" name="inicio" class="form-control" id="cambioFechaInicio" value="{{$diaMin}}"> 
+                            
+                            <label for="inputState">Mes Final</label>
+                            <input type="date" name="inicio" class="form-control" id="cambioFechaFin" value="{{$diaMax}}">
+                            
+                            <label for="inputState">Columna</label>
+                            <select id="idColumna" name="columna" class="form-control" data-valor="6" value="nose" onchange="cambioColumnaG2(this)">
+                                <option disable selected>Elegir Columna ...</option>
+                                <option value="checkins">Checkins</option>
+                                <option value="checkouts">Checkouts</option>
+                                <option value="pernoctaciones">Pernoctaciones</option>
+                                <option value="nacionales">Nacionales</option>
+                                <option value="extranjeros">Extranjeros</option>
+                                <option value="habitaciones_ocupadas">Habitaciones Ocupadas</option>
+                                <option value="habitaciones_disponibles">Habitaciones Disponibles</option>
+                                <option value="tarifa_promedio">Tarifa Promedio Habitación</option>
+                                <option value="TAR_PER">Tarifa Promedio Personas</option>
+                                <option value="ventas_netas">Ventas Netas</option>
+                                <option value="porcentaje_ocupacion">Porcentaje Ocupación</option>
+                                <option value="revpar">Revpar</option>
+                            </select>
+                            
+                        </div>
+                        <div class="form-group col-md-10">
+                            <canvas id="graficaDias" width="1400" height="500"></canvas>
+                        </div>
+                    </div>
+                </div>    
+                <br>
 
             </section>   
         </section>
@@ -96,8 +130,11 @@
 
 @section('scripts')
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
-
 <script>
+    
+</script>
+<script>
+    
     var mesesGrafica1 = [];
     var columnaGrafica1 = [];
     var mesInicioGrafica1 = {{$mesInicio}};
@@ -109,30 +146,23 @@
     var fechaInicioGrafica2 = '{{$diaMin}}';
     var fechaFinGrafica2 = '{{$diaMax}}';
     var nomColumnaGrafica2 = '{{$columna}}';
+
     
     var ctx2 = document.getElementById('graficaMeses').getContext('2d');
     var graficaMeses = new Chart(ctx2, {
-        type: 'line',
+        type: "line",
         data: {
             labels: mesesGrafica1,
             datasets: [{
                 label: nomColumnaGrafica1,
                 data: columnaGrafica1,
-                backgroundColor: [
-                    'rgba(211, 214, 30, 0.74)'
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)'
-                ],
-                borderWidth: 1
+                backgroundColor: 'rgb(255,255,255,0.01)',
+                borderColor: 'rgba(211, 214, 30, 0.74)',
+                borderWidth: 3
             }]
         },
         options: {
+            capBezierPoints: true,
             scales: {
                 yAxes: [{
                     ticks: {
@@ -152,18 +182,9 @@
             datasets: [{
                 label: nomColumnaGrafica2,
                 data: datosGrafica2,
-                backgroundColor: [
-                    'rgba(211, 214, 30, 0.74)'
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)'
-                ],
-                borderWidth: 1
+                backgroundColor: 'rgb(255,255,255,0.01)',
+                borderColor: 'rgba(211, 214, 30, 0.74)',
+                borderWidth: 3,
             }]
         },
         options: {
@@ -173,6 +194,9 @@
                         beginAtZero: true
                     }
                 }]
+            },
+            tooltips:{
+                mode: 'x',
             }
         }
         

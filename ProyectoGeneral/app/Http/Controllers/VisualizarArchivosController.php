@@ -41,7 +41,7 @@ class VisualizarArchivosController extends Controller
         
         $nombreEs='Todos';
         
-        if(Auth::user()->rol != 'Admin'){return redirect('home');}
+        if(Auth::user()->rol != 'Administrador'){return redirect('home');}
         return view('visualizarArchivos')->with('establecimientos', $establecimientos)
                                         ->with('registros', $registros)
                                         ->with('alerta', $alerta)

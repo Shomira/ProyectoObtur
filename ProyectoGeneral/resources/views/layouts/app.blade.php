@@ -70,14 +70,14 @@
                                         <a class="nav-link" href="{{ route('login') }}">{{ __('INGRESAR') }}</a>
                                     </li>
                                 @endif
-                                <!--
+                              
                                  @if (Route::has('register'))
                                     <li class="nav-item">
                                         <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                                     </li>
                                 @endif
                                 
-                            -->
+                         
                         </ul>
                     </div>
                 </div>
@@ -108,7 +108,7 @@
         
                                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                                     <div class="navbar-nav">
-                                        <a class="nav-link active"  href="#">Administrador</a>
+                                        <a class="nav-link active"  href="#">{{ Auth::user()->rol}}</a>
                                     </div>
                                 </div>
                                 <li class="nav-item dropdown">
@@ -120,7 +120,7 @@
                                         <a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
                                                         document.getElementById('logout-form').submit();">
-                                            {{ __('salir') }}
+                                            {{ __('Salir') }}
                                         </a>
 
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
@@ -128,8 +128,6 @@
                                         </form>
                                     </div>
                                 </li>
-
-                            
                         </ul>
                     </div>
                 </div>

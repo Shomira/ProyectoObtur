@@ -30,7 +30,7 @@ class VisualizarRegistrosController extends Controller
         
         $mensaje = "Establecimiento: Todos.  Desde: ".$auxAnio."-".$auxMes."-01 Hasta: ".$auxAnio."-".$auxMes."-".$auxDia;
         
-        if(Auth::user()->rol != 'Normal'){return redirect('home');}
+        if(Auth::user()->rol != 'Establecimiento'){return redirect('home');}
 
         return view('visualizarRegistros')->with('registros', $registros)
                                         ->with('mensaje', $mensaje);

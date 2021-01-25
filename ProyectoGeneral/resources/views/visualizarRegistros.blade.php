@@ -21,37 +21,59 @@
                 <script>swal('No existen registros!','Aún no has subido archivos','warning')</script>
             @endisset
 
-            
-            <h3>Registros</h3>
-        <!--                -->
-        
-            <form action="{{url('home/visualizarRegistros')}}" method="POST" class="visualizarArchivo">
-                
-                <div class="form-row">
-                    @csrf
-                    
-                    <div class="col-md-5 mb-2">
-        
-                        <p>Ver registros desde:</p>
-                        <div class="input-group"> 
-                        <input type="date" name="inicio" value="23/12/2020"  class="form-control" id="validationDefaultUsername"  aria-describedby="inputGroupPrepend2" required>
+        <br>
+            <div class="container principalV">
+                <div class="row">
+                    <div class="col-lg-12 text-left">
+                        <div class="row">
+                            <!--tarjeta 1-->
+                            <div class="col-lg-30  col-md-8 mb-4">
+                                <div class="card-section3 border rounded p-3">
+                                    <div class="card-header-s rounded pb-4">
+                                        <h5 class="card-header-title text-white pt-3">Registros</h5>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-md-5 mb-2">
-                        <p>Ver registros hasta:</p>
-                        <div class="input-group">  
-                            <input type="date" name="fin" value="{{ old('fin') }}" class="form-control" id="validationDefaultUsername" aria-describedby="inputGroupPrepend2" required>
-                        </div>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Consultar</button>
                 </div>
-                
-            </form>
+            </div>
         <!--                -->
+        
+            <!-- Tabla de Registros-->
+            <div class="container overflow-auto">
+                
+                <div class="form-row ">
+                    <form action="{{url('home/visualizarRegistros')}}" method="POST" class="visualizarArchivo">
+                    
+                        <div class="form-row">
+                            @csrf
+                            <div class="col-md-5">
+                                <p>Ver registros desde:</p>
+                                <div class="input-group"> 
+                                <input type="date" name="inicio" value="23/12/2020"  class="form-control" id="validationDefaultUsername"  aria-describedby="inputGroupPrepend2" required>
+                                </div>
+                            </div>
+                            <div class="col-md-5 ">
+                                <p>Ver registros hasta:</p>
+                                <div class="input-group">  
+                                    <input type="date" name="fin" value="{{ old('fin') }}" class="form-control" id="validationDefaultUsername" aria-describedby="inputGroupPrepend2" required>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <br>
+                                <button type="submit" class="btn btn-warning mt-3">Consultar</button>
+                            </div>
+                            
+                        </div>
+                        
+                    </form>
+                </div>
 
             <!-- Tabla de Registros-->
             <div class="container overflow-auto">
-
+                
+                <section class="linea2" ></section>
                 <div class="row justify-content-center overflow-auto">
                     <!---->
                     <div class="card overflow-auto">

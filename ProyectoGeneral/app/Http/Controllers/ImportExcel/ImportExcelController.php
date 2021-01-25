@@ -23,7 +23,7 @@ class ImportExcelController extends Controller
     public function index()
     {
         $files = Archivo::latest()->get();
-        if(Auth::user()->rol != 'Admin'){return redirect('home');}
+        if(Auth::user()->rol != 'Administrador'){return redirect('home');}
         return view('archivos', compact('files'));
     }
     public function import(Request $request)
