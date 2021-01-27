@@ -31,14 +31,7 @@ class ImportExcelValidar implements ToCollection
         foreach($collection as $key=>$value){
 
             if($key==1){
-                $fechaux = explode('/', $value[5]);
-                $nom = $value[0];
-                $mes = $fechaux[2]."-".$fechaux[1];
-                $texto = "Error en el archivo de $nom del $mes";
-            }
-
-            if($key>0)
-            {
+                
                 //Obtenemos el id del Archivo cargado
                 $idArchivo = DB::select("SELECT Max(id) as 'id' FROM archivos ");
                 
@@ -55,11 +48,19 @@ class ImportExcelValidar implements ToCollection
                     Validator::make($value->toArray(), [
                         '0' => 'exists:App\Models\User,name'
                     ],$messages = [
-                        'exists' => 'No existe  un usuario relacionado al archivo que desea cargar'
+                        'exists' => 'No existe un usuario relacionado al archivo que desea cargar'
                     ])->validate();
 
                 }
-                
+
+                $fechaux = explode('/', $value[5]);
+                $nom = $value[0];
+                $mes = $fechaux[2]."-".$fechaux[1];
+                $texto = "Error en el archivo de $nom del $mes";
+            }
+
+            if($key>0)
+            {
 
                 // Validamos si la fecha cargada es correcta
                 $fechaux = explode('/', $value[5]);

@@ -22,12 +22,6 @@ class ImportExcel implements ToCollection
             
             if($key>0)
             {
-                // Validamos si existe un usuario que enlazar con el archivo cargado
-                Validator::make($value->toArray(), [
-                    '0' => 'exists:App\Models\User,name'
-                ],$messages = [
-                    'exists' => 'No existe  un usuario relacionado al archivo que desea cargar'
-                ])->validate();
 
                 // buscamos un establecimiento que corresponda al del archivo cargado
                 $idE=DB::table('establecimientos')

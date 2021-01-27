@@ -58,7 +58,7 @@
 
                                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                                     <div class="navbar-nav">
-                                        <a class="nav-link" aria-current="page" href="{{url('welcome')}}">INICIO</a>
+                                        <a class="nav-link" aria-current="page" href="{{url('/')}}">INICIO</a>
                                         <a class="nav-link" href="{{url('obtur')}}">OBTUR</a>
                                         <a class="nav-link" href="{{url('informacionTuristica')}}">INFORMACIÓN TURÍSTICA</a>
                                         <a class="nav-link" href="{{url('datosEstadisticos')}}"tabindex="-1" aria-disabled="true">DATOS ESTADÍSTICOS</a>

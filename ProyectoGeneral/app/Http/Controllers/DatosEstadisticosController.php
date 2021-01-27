@@ -137,8 +137,8 @@ class DatosEstadisticosController extends Controller
             
             if(isset($datos5EstAnterior->hab_ocupadas)){
                 $tarifaHAnterior5Est = round( ($datos5EstAnterior->ventasNetas / $datos5EstAnterior->hab_ocupadas) , 2) ;
-                $tarifaHVariacion5Est = $tarifaH5Est - $tarifaHAnterior5Est;
-
+                $tarifaHVariacion5Est = round(  $tarifaH5Est - $tarifaHAnterior5Est , 2);
+                
                 if($tarifaHVariacion5Est < 0){
                     $tarifaHVariacion5Est = $tarifaHVariacion5Est*(-1);
                     $arrTarifaH5Est = [$tarifaH5Est,  $tarifaHVariacion5Est, 1];

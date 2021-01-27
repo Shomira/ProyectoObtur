@@ -1,21 +1,22 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Support\Facades\DB;
+
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
-class EstablecimientoController extends Controller
+class WelcomeController extends Controller
 {
+    public function index(){
+        
+        $categorias = DB::select("SELECT distinct categoria
+                                    FROM establecimientos ");
 
-    public function index()
-    {
- 
-        $idU = Auth::user()->id;
+
         $datosActuales = DB::select("SELECT distinct MONTH(Max(fecha)) as 'mes', YEAR(Max(fecha)) as 'anio' 
                                     FROM registros r, establecimientos e
-                                    WHERE e.id = r.idEstablecimiento AND e.idUsuario = $idU");
+                                    WHERE e.id = r.idEstablecimiento ");
 
         $auxMes = $datosActuales[0]->mes;
         $auxAnio = $datosActuales[0]->anio;
@@ -23,8 +24,13 @@ class EstablecimientoController extends Controller
         //obtener todos los meses disponibles
         $mesesAnios = DB::select("SELECT distinct MONTH(fecha) as 'mes', YEAR(fecha) as 'anio' 
                                 FROM registros r, establecimientos e
-                                WHERE e.id = r.idEstablecimiento AND e.idUsuario = $idU
+                                WHERE e.id = r.idEstablecimiento 
                                 ORDER BY MONTH(fecha)");
+        
+        if(empty($mesesAnios)){
+            $meses[0] = array( 0 => "", 1 => 0) ;
+            
+        }
         
         foreach ($mesesAnios as $key => $value) {
             
@@ -65,22 +71,16 @@ class EstablecimientoController extends Controller
                 case 12:
                     $meses[$key] = array( 0 => "Diciembre", 1 => 12) ;
                     break;
+                
                 }
 
         }
         //obteniendo los años disponibles
         $anios = DB::select("SELECT distinct YEAR(fecha) as 'anio' 
                                 FROM registros r, establecimientos e
-                                WHERE e.id = r.idEstablecimiento AND e.idUsuario = $idU
+                                WHERE e.id = r.idEstablecimiento 
                                 ORDER BY YEAR(fecha) desc");
 
-
-        $registros = DB::select("SELECT Min(fecha) as 'diaMin', Max(fecha) as 'diaMax'
-                                FROM registros r, establecimientos e
-                                WHERE e.id = r.idEstablecimiento AND e.idUsuario = $idU AND MONTH(fecha) = $auxMes");
-
-        $diaMin = $registros[0]->diaMin;
-        $diaMax = $registros[0]->diaMax;
 
         //año y mes de inicio 
         if($auxMes < 3){
@@ -90,24 +90,23 @@ class EstablecimientoController extends Controller
             $mesInicio = $auxMes - 2;
             $anioInicio = $auxAnio - 1;
         }
-
-//AND YEAR(fecha) >= $anioInicio AND YEAR(fecha) <= $auxAnio
-        return view('visualizarGraficas')->with('mesInicio',$mesInicio)
+        
+        
+        return view('welcome')->with('mesInicio',$mesInicio)
+                                        ->with('categorias',$categorias)
                                         ->with('mesFin',$auxMes)
                                         ->with('anioInicio',$anioInicio)
                                         ->with('anioFin',$auxAnio)
                                         ->with('meses',$meses)
                                         ->with('anios',$anios)
-                                        ->with('diaMin',$diaMin)
-                                        ->with('diaMax',$diaMax)
                                         ->with('columna',"porcentaje_ocupacion");
-
+        
     }
-   
-    public function all(Request $request)
-    {
-        $idU = Auth::user()->id;
 
+    public function all(Request $request){
+
+        
+        
         if($request->mesFin < 10){
             $fechaFin = $request->anioFin."-0".$request->mesFin."-31";
         }else{
@@ -119,32 +118,57 @@ class EstablecimientoController extends Controller
         }else{
             $fechaInicio = $request->anioInicio."-".$request->mesInicio."-01";
         }
-        
-        $consulta = "SELECT  SUM($request->columna) as 'columna', MONTH(fecha) as 'mes', MAX(YEAR(fecha))
+
+        if($request->categoria == "Todas"){
+
+            $consulta = "SELECT  SUM(checkins) as 'checkins',
+                                    SUM(checkouts) as 'checkouts',
+                                    SUM(pernoctaciones) as 'pernoctaciones',
+                                    SUM(nacionales) as 'nacionales',
+                                    SUM(extranjeros) as 'extranjeros',
+                                    SUM(habitaciones_ocupadas) as 'habitaciones_ocupadas',
+                                    SUM(habitaciones_disponibles) as 'habitaciones_disponibles',
+                                    (SUM(ventas_netas) / SUM(habitaciones_ocupadas)) as 'tarifa_promedio',
+                                    (SUM(ventas_netas) / SUM(pernoctaciones)) as 'TAR_PER',
+                                    SUM(ventas_netas) as 'ventas_netas',
+                                    (SUM(habitaciones_ocupadas) / SUM(habitaciones_disponibles)) as 'porcentaje_ocupacion',
+                                    (SUM(ventas_netas) / SUM(habitaciones_disponibles)) as 'revpar',
+                                    MONTH(fecha) as 'mes', MAX(YEAR(fecha))
                     FROM registros r, establecimientos e
-                    WHERE e.id = r.idEstablecimiento AND e.idUsuario = $idU 
-                        AND fecha >= '$fechaInicio' AND fecha <= '$fechaFin'
+                    WHERE e.id = r.idEstablecimiento 
+                        AND fecha >= '$fechaInicio' AND fecha <= '$fechaFin' 
                     GROUP BY MONTH(fecha)
                     ORDER BY MAX(YEAR(fecha)), MONTH(fecha)";
 
+        }else{
+
+            $consulta = "SELECT  SUM(checkins) as 'checkins',
+                                    SUM(checkouts) as 'checkouts',
+                                    SUM(pernoctaciones) as 'pernoctaciones',
+                                    SUM(nacionales) as 'nacionales',
+                                    SUM(extranjeros) as 'extranjeros',
+                                    SUM(habitaciones_ocupadas) as 'habitaciones_ocupadas',
+                                    SUM(habitaciones_disponibles) as 'habitaciones_disponibles',
+                                    SUM(tarifa_promedio) as 'tarifa_promedio',
+                                    SUM(TAR_PER) as 'tar_per',
+                                    SUM(ventas_netas) as 'ventas_netas',
+                                    SUM(porcentaje_ocupacion) as 'porcentaje_ocupacion',
+                                    SUM(revpar) as 'revpar',
+                                    MONTH(fecha) as 'mes', MAX(YEAR(fecha))
+                    FROM registros r, establecimientos e
+                    WHERE e.id = r.idEstablecimiento 
+                        AND fecha >= '$fechaInicio' AND fecha <= '$fechaFin' AND categoria = '$request->categoria'
+                    GROUP BY MONTH(fecha)
+                    ORDER BY MAX(YEAR(fecha)), MONTH(fecha)";
+
+            
+        }
+        
+        
+
+        
         $datos= DB::select($consulta);
         
         return response(json_encode($datos), 200)->header('Content-type', 'text/plain');
     }
-
-    public function dias(Request $request)
-    {
-        $idU = Auth::user()->id;
-
-        $consulta = "SELECT $request->columna as 'columna', fecha 
-                            FROM registros r, establecimientos e
-                            WHERE e.id = r.idEstablecimiento AND e.idUsuario = $idU AND fecha >= '$request->inicio' AND fecha <= '$request->fin' ";
-        
-        $datos= DB::select($consulta);
-        
-        return response(json_encode($datos), 200)->header('Content-type', 'text/plain');
-    }
-
-    
-    
 }

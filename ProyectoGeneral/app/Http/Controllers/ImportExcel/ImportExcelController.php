@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Imports\HotelImport;
 use App\Imports\ImportExcel;
+use App\Imports\ImportExcelUser;
 use App\Imports\ImportExcelValidar;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Models\Archivo;
@@ -46,6 +47,8 @@ class ImportExcelController extends Controller
         if($request->opcion == 1){
 
             foreach ($files as $file) {
+
+                Excel::import(new ImportExcelUser, $file);
                 
                 if(Storage::putFileAs('/public', $file, $now->format('d-m-Y').'-'.$file->getClientOriginalName())){
                     

@@ -14,7 +14,33 @@ body {
 p{
     font-family: 'Roboto', sans-serif;
 }
+/* Estilos extraaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa*/
+section.graficaWelcome{
+    width: 90%;
+    margin: 0 auto;
+}
 
+.calloutDoble {
+    padding: 5px;
+    height: 140px;
+    width: 210px;
+    border: 1px solid #eee;
+    border-left-width: 5px;
+    border-left-color: rgb(252, 141, 15);
+    border-radius: 5px;
+    margin-bottom: 5px;
+    margin-right: 1em;
+ }
+ .callout {
+    padding: 5px;
+    height: 90px;
+    width: 210px;
+    border: 1px solid #eee;
+    border-left-width: 5px;
+    border-left-color: rgb(252, 141, 15);
+    border-radius: 5px;
+    margin-bottom: 5px;
+ }
 /*Cabecera*/
 div.container section.logo img.logo{
     width: 70%;

@@ -13,9 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+Route::get('/', 'App\Http\Controllers\WelcomeController@index');
+Route::post('/', 'App\Http\Controllers\WelcomeController@all');
 
 Auth::routes();
 
@@ -23,9 +23,7 @@ Auth::routes();
 Route::get('/obtur', function () {
     return view('obtur');
 });
-Route::get('/welcome', function () {
-    return view('welcome');
-});
+
 
 Route::get('/datosEstadisticos', 'App\Http\Controllers\DatosEstadisticosController@index');
 Route::post('/datosEstadisticos', 'App\Http\Controllers\DatosEstadisticosController@mostrar');
