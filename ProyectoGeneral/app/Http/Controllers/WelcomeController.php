@@ -133,11 +133,12 @@ class WelcomeController extends Controller
                                     SUM(ventas_netas) as 'ventas_netas',
                                     (SUM(habitaciones_ocupadas) / SUM(habitaciones_disponibles)) as 'porcentaje_ocupacion',
                                     (SUM(ventas_netas) / SUM(habitaciones_disponibles)) as 'revpar',
-                                    MONTH(fecha) as 'mes', MAX(YEAR(fecha))
+                                    MONTH(fecha) as 'mes',
+                                    YEAR(fecha) as 'anio'
                     FROM registros r, establecimientos e
                     WHERE e.id = r.idEstablecimiento 
                         AND fecha >= '$fechaInicio' AND fecha <= '$fechaFin' 
-                    GROUP BY MONTH(fecha)
+                    GROUP BY MONTH(fecha), YEAR(fecha)
                     ORDER BY MAX(YEAR(fecha)), MONTH(fecha)";
 
         }else{
@@ -154,11 +155,12 @@ class WelcomeController extends Controller
                                     SUM(ventas_netas) as 'ventas_netas',
                                     SUM(porcentaje_ocupacion) as 'porcentaje_ocupacion',
                                     SUM(revpar) as 'revpar',
-                                    MONTH(fecha) as 'mes', MAX(YEAR(fecha))
+                                    MONTH(fecha) as 'mes',
+                                    YEAR(fecha) as 'anio'
                     FROM registros r, establecimientos e
                     WHERE e.id = r.idEstablecimiento 
                         AND fecha >= '$fechaInicio' AND fecha <= '$fechaFin' AND categoria = '$request->categoria'
-                    GROUP BY MONTH(fecha)
+                    GROUP BY MONTH(fecha), YEAR(fecha)
                     ORDER BY MAX(YEAR(fecha)), MONTH(fecha)";
 
             

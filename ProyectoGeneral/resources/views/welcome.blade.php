@@ -99,45 +99,70 @@
         <form action="" method="POST">
             @csrf
         </form>
-
+        <section class="tituloGrafica" ><h3>LINEA DE TENDENCIA</h3></section>
         <section class="graficaWelcome">
                 <div class="form-row align-items-center">
-                    <div class="row col-13">
-                        <div class="form-group col-md-2">
-                            <label for="inputState">Inicio</label>
-                            <select id="idanioInicio" name="anioInicio" class="form-control" onchange="cambioAnioInicio(this)">
-                                <option disable>Elegir año Inicio ...</option>
-                                @foreach($anios as $anio)
-                                    <option value="{{$anio->anio}}">{{$anio->anio}}</option>
-                                @endforeach
-                            </select>
+                    <div class="row row-cols-3 col-lg-12 text-center">
+                        <label for="inputState"><strong> Inicio</strong></label>
+                        <label for="inputState" ><strong> Fin</strong></label>
+                        <label for="inputState" ><strong> Categoría</strong></label>
+                    </div>
+                    <div class="row row-cols-3 col-5 ml-1 p-5">
+                        
+                        <div class="row mr-2">
+                            <div class="calloutG">
+                                <select id="idanioInicio" name="anioInicio" class="form-control" onchange="cambioAnioInicio(this)">
+                                    <option disable>Elegir año Inicio ...</option>
+                                    @foreach($anios as $anio)
+                                        <option value="{{$anio->anio}}">{{$anio->anio}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="calloutG">   
                             <select id="idmesInicio" name="mesInicio" class="form-control" onchange="cambioMesInicio(this)">
                                 <option disable>Elegir mes Inicio ...</option>
                                 @foreach($meses as $mes)
                                     <option value="{{$mes[1]}}">{{$mes[0]}}</option>
                                 @endforeach
                             </select>
-                            <label for="inputState">Fin</label>
-                            <select id="idanioFin" name="anioFin" class="form-control" onchange="cambioAnioFin(this)">
-                                
-                                @foreach($anios as $anio)
-                                    <option value="{{$anio->anio}}">{{$anio->anio}}</option>
-                                @endforeach
-                            </select>
+                        </div>
+                    </div>
+                    <div class="row row-cols-2 col-3 mr-5  ml-2 fin">
+                        <div class="row mr-2">
+                            <div class="calloutG">
+                                <select id="idanioFin" name="anioFin" class="form-control" onchange="cambioAnioFin(this)">
+                                    @foreach($anios as $anio)
+                                        <option value="{{$anio->anio}}">{{$anio->anio}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="calloutG">
                             <select id="inputState" name="mesFin" class="form-control" onchange="cambioMesFin(this)">
-                                
                                 @foreach($meses as $mes)
                                     <option value="{{$mes[1]}}">{{$mes[0]}}</option>
                                 @endforeach
                             </select>
-                            <label for="inputState">Categoria</label>
-                            <select id="inputState" name="categoria" class="form-control" onchange="cambioCategoria(this)">
-                                <option value="Todas">Todas</option>
-                                @foreach($categorias as $categoria)
-                                    <option value="{{$categoria->categoria}}">{{$categoria->categoria}}</option>
-                                @endforeach
-                            </select>
-                            <label for="inputState">Columna</label><br>
+                        </div>
+                    </div>
+                    <div class="row col-2   col-lg-1   ml-2">
+                        <div class="row mr-2">
+                            <div class="calloutGcat">
+                                <select id="inputState" name="categoria" class="form-control" onchange="cambioCategoria(this)">
+                                    <option value="Todas">Todas</option>
+                                    @foreach($categorias as $categoria)
+                                        <option value="{{$categoria->categoria}}">{{$categoria->categoria}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                    <section class="espacioGrafica" ></section>
+                    <div class="row col-13">
+                        <div class="form-group col-md-2 graficaColums" >
+                            <label for="inputState"><strong> Columna </strong></label><br>
 
                             <input type="checkbox" name="checkins" id="checkins" value="checkins" onchange="seleccionarFilas(this)">
                             <label for="checkins"> Checkins</label><br>
@@ -165,8 +190,8 @@
                             <label for="revpar"> REVPAR</label><br>
                             
                         </div>
-                        <div class="form-group col-md-10">
-                            <canvas id="graficaMeses" width="1400" height="500"></canvas>
+                        <div class="form-group col-md-9">
+                            <canvas id="graficaMeses" width="1500" height="600"></canvas>
                         </div>
                     </div>
                 </div>
@@ -258,9 +283,6 @@
         </script>
 
     </section>
-
-
-    
 
    
 @endsection
@@ -365,29 +387,29 @@
             for(var i=0;i<arreglo.length;i++){
 
                 if (arreglo[i].mes == 1)
-                    nombreMes = "Enero";
+                    nombreMes = "Enero-"+arreglo[i].anio;
                 else if (arreglo[i].mes == 2)
-                    nombreMes = "Febrero";
+                    nombreMes = "Febrero-"+arreglo[i].anio;
                 else if (arreglo[i].mes == 3)
-                    nombreMes = "Marzo";
+                    nombreMes = "Marzo-"+arreglo[i].anio;
                 else if (arreglo[i].mes == 4)
-                    nombreMes = "Abril";
+                    nombreMes = "Abril-"+arreglo[i].anio;
                 else if (arreglo[i].mes == 5)
-                    nombreMes = "Mayo";
+                    nombreMes = "Mayo-"+arreglo[i].anio;
                 else if (arreglo[i].mes == 6)
-                    nombreMes = "Junio";
+                    nombreMes = "Junio-"+arreglo[i].anio;
                 else if (arreglo[i].mes == 7)
-                    nombreMes = "Julio";
+                    nombreMes = "Julio-"+arreglo[i].anio;
                 else if (arreglo[i].mes == 8)
-                    nombreMes = "Agosto";
+                    nombreMes = "Agosto-"+arreglo[i].anio;
                 else if (arreglo[i].mes == 9)
-                    nombreMes = "Septiembre";
+                    nombreMes = "Septiembre-"+arreglo[i].anio;
                 else if (arreglo[i].mes == 10)
-                    nombreMes = "Octubre";
+                    nombreMes = "Octubre-"+arreglo[i].anio;
                 else if (arreglo[i].mes == 11)
-                    nombreMes = "Noviembre";
+                    nombreMes = "Noviembre-"+arreglo[i].anio;
                 else 
-                    nombreMes = "Diciembre";
+                    nombreMes = "Diciembre-"+arreglo[i].anio;
                 
                 mesesGrafica1.push(nombreMes);
                 dataCheckins.push(arreglo[i].checkins);
@@ -654,17 +676,11 @@
 
             }
             
-            
-            
             graficaMeses.update();
             
         }
         
-        
-        
     }
-    
-
 
 </script>
 @endsection

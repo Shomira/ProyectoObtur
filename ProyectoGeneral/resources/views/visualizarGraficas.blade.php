@@ -281,29 +281,29 @@
             for(var i=0;i<arreglo.length;i++){
 
                 if (arreglo[i].mes == 1)
-                    nombreMes = "Enero";
+                    nombreMes = "Enero-"+arreglo[i].anio;
                 else if (arreglo[i].mes == 2)
-                    nombreMes = "Febrero";
+                    nombreMes = "Febrero-"+arreglo[i].anio;
                 else if (arreglo[i].mes == 3)
-                    nombreMes = "Marzo";
+                    nombreMes = "Marzo-"+arreglo[i].anio;
                 else if (arreglo[i].mes == 4)
-                    nombreMes = "Abril";
+                    nombreMes = "Abril-"+arreglo[i].anio;
                 else if (arreglo[i].mes == 5)
-                    nombreMes = "Mayo";
+                    nombreMes = "Mayo-"+arreglo[i].anio;
                 else if (arreglo[i].mes == 6)
-                    nombreMes = "Junio";
+                    nombreMes = "Junio-"+arreglo[i].anio;
                 else if (arreglo[i].mes == 7)
-                    nombreMes = "Julio";
+                    nombreMes = "Julio-"+arreglo[i].anio;
                 else if (arreglo[i].mes == 8)
-                    nombreMes = "Agosto";
+                    nombreMes = "Agosto-"+arreglo[i].anio;
                 else if (arreglo[i].mes == 9)
-                    nombreMes = "Septiembre";
+                    nombreMes = "Septiembre-"+arreglo[i].anio;
                 else if (arreglo[i].mes == 10)
-                    nombreMes = "Octubre";
+                    nombreMes = "Octubre-"+arreglo[i].anio;
                 else if (arreglo[i].mes == 11)
-                    nombreMes = "Noviembre";
+                    nombreMes = "Noviembre-"+arreglo[i].anio;
                 else 
-                    nombreMes = "Diciembre";
+                    nombreMes = "Diciembre-"+arreglo[i].anio;
                 
                 mesesGrafica1.push(nombreMes);
                 columnaGrafica1.push(arreglo[i].columna);

@@ -19,6 +19,34 @@ section.graficaWelcome{
     width: 90%;
     margin: 0 auto;
 }
+.tituloGrafica{
+    margin: 0 auto;
+    align-items: center;
+    text-align: center;
+}
+.tituloGrafica h3{
+    margin: 1.5em;
+    text-shadow: 0px 8px 8px rgba(0, 0, 0, 0.25);  
+}
+.calloutG, .calloutGcat {
+    padding: 5px;
+    height: 50px;
+    width: 200px;
+    border: 1px solid #eee;
+    border-left-width: 5px;
+    border-left-color: rgb(156, 49, 112);
+    border-radius: 5px;
+    margin-bottom: 5px;
+ }
+ .calloutGcat{
+     margin-left: 7em;
+ }
+ .graficaColums{
+     margin-left: 2em;
+ }
+/* FIN   Estilos extraaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa*/
+
+ 
 
 .calloutDoble {
     padding: 5px;

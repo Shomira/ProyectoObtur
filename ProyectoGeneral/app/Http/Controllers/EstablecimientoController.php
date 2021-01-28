@@ -77,7 +77,10 @@ class EstablecimientoController extends Controller
 
         $registros = DB::select("SELECT Min(fecha) as 'diaMin', Max(fecha) as 'diaMax'
                                 FROM registros r, establecimientos e
-                                WHERE e.id = r.idEstablecimiento AND e.idUsuario = $idU AND MONTH(fecha) = $auxMes");
+                                WHERE e.id = r.idEstablecimiento 
+                                    AND e.idUsuario = $idU 
+                                    AND YEAR(fecha) = $auxAnio 
+                                    AND MONTH(fecha) = $auxMes");
 
         $diaMin = $registros[0]->diaMin;
         $diaMax = $registros[0]->diaMax;
@@ -88,10 +91,10 @@ class EstablecimientoController extends Controller
             $anioInicio = $auxAnio - 1;
         }else{
             $mesInicio = $auxMes - 2;
-            $anioInicio = $auxAnio - 1;
+            $anioInicio = $auxAnio;
         }
 
-//AND YEAR(fecha) >= $anioInicio AND YEAR(fecha) <= $auxAnio
+        
         return view('visualizarGraficas')->with('mesInicio',$mesInicio)
                                         ->with('mesFin',$auxMes)
                                         ->with('anioInicio',$anioInicio)
@@ -120,11 +123,11 @@ class EstablecimientoController extends Controller
             $fechaInicio = $request->anioInicio."-".$request->mesInicio."-01";
         }
         
-        $consulta = "SELECT  SUM($request->columna) as 'columna', MONTH(fecha) as 'mes', MAX(YEAR(fecha))
+        $consulta = "SELECT  SUM($request->columna) as 'columna', MONTH(fecha) as 'mes', YEAR(fecha) as 'anio'
                     FROM registros r, establecimientos e
                     WHERE e.id = r.idEstablecimiento AND e.idUsuario = $idU 
                         AND fecha >= '$fechaInicio' AND fecha <= '$fechaFin'
-                    GROUP BY MONTH(fecha)
+                    GROUP BY MONTH(fecha), YEAR(fecha)
                     ORDER BY MAX(YEAR(fecha)), MONTH(fecha)";
 
         $datos= DB::select($consulta);
