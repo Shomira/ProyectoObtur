@@ -12,10 +12,10 @@
 <section class="fondo">
     <section class="fondo2">
         <nav class="navAdmin">
-            <a href="{{url('home/visualizarArchivos')}}"><img src="{{ asset('imgs/vision1.png')}}">Visualizar Archivos</a>
+            <a href="{{url('home/')}}"><img src="{{ asset('imgs/metrica1.png')}}">Inicio</a>
+            <a href="{{url('home/visualizarArchivos')}}"><img src="{{ asset('imgs/vision1.png')}}">Visualizar Registros</a>
             <a style="background: white; color: #000000;font-weight: 800;" href="{{url('home/archivos')}}">
-            <img src="{{ asset('imgs/sub2.png')}}">Cargar Datos</a>
-            <a href="{{url('home/metricas')}}"><img src="{{ asset('imgs/metrica1.png')}}">Métricas</a>
+            <img src="{{ asset('imgs/sub2.png')}}">Cargar Archivos</a>
             <a href="{{url('home/gestionUsuarios')}}"><img src="{{ asset('imgs/group.png')}}">Gestionar Usuarios</a>
         </nav>
         
@@ -57,7 +57,7 @@
                         @csrf
                         <input type="file" name="import_file[]" class="form-control" multiple>
                         <br>
-                        <button class="btn btn-success" name="opcion" value="1">Importar archivo</button>
+                        <button class="btn btn-success" name="opcion" value="1">Cargar archivo</button>
                         <button class="btn text-white" style="background:#1a135a" name="opcion" value="2">Probar archivo</button>
                     </form>
                 </div>
@@ -98,7 +98,7 @@
                                     <td>{{$file->nombre}}</td>
                                     <td>{{$file->created_at}}</td>
                                     <td>
-                                        <a href="../storage/{{$file->nombre}}" class="btn btn-sm btn-outline-secondary">Ver</a>
+                                        <a href="../storage/{{$file->nombre}}" class="btn btn-sm btn-outline-secondary">Descargar</a>
                                     </td>
                                     <td>
                                         <button class="btn btn-sm btn-outline-danger btnEliminar" data-id="{{ $file->id }}" data-toggle="modal" data-target="#modalEliminar">

@@ -13,9 +13,10 @@
 <section class="fondo">
     <section class="fondo2">
         <nav class="navAdmin">
+            <a href="{{url('home/')}}"><img src="{{ asset('imgs/metrica1.png')}}">Inicio</a>
             <a  style="background: white;" class="a-sub-menu" href="{{url('home/visualizarArchivos')}}">
-            <img src="{{ asset('imgs/vision1.png')}}">Visualizar Archivos</a>
-            <a href="{{url('home/archivos')}}"><img src="{{ asset('imgs/sub2.png')}}">Cargar Datos</a>      
+            <img src="{{ asset('imgs/vision1.png')}}">Visualizar Registros</a>
+            <a href="{{url('home/archivos')}}"><img src="{{ asset('imgs/sub2.png')}}">Cargar Archivos</a>      
             <a href="{{url('home/metricas')}}"><img src="{{ asset('imgs/metrica1.png')}}">Métricas</a>
             <a href="{{url('home/gestionUsuarios')}}"><img src="{{ asset('imgs/group.png')}}">Gestionar Usuarios</a>
         </nav>
@@ -207,16 +208,19 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
     <script src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.html5.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.2.6/js/dataTables.responsive.min.js"></script>
-    <script src="https://cdn.datatables.net/responsive/2.2.6/js/responsive.bootstrap4.min.js"></script>    
+    <script src="https://cdn.datatables.net/responsive/2.2.6/js/responsive.bootstrap4.min.js"></script>
+
     <script>
-        $('#t_establecimientos').DataTable({
+
+       
+        $('#t_establecimientos').DataTable( {
             responsive:true,
             autowidth:false,
             dom: 'Blfrtip',
             "lengthMenu": [ 5, 10, 20, 30, 50 ],
             
             buttons: [
-                      
+                    
                         'excelHtml5',
                         'csvHtml5',
                         'pdfHtml5'
@@ -236,6 +240,9 @@
             }
         
         });
+
+
+        
         $('#tabRegistros').DataTable({
             responsive:true,
             autowidth:false,
@@ -262,6 +269,7 @@
             }
         
         });
+
 
     </script>
 

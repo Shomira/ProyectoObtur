@@ -4,7 +4,6 @@
     padding: 0;
     margin: 0;
 }
-
 body {
    /* font-family: "Segoe UI", monospace;*/
    font-family: 'Quantico';
@@ -14,77 +13,23 @@ body {
 p{
     font-family: 'Roboto', sans-serif;
 }
-/* Estilos extraaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa*/
-section.graficaWelcome{
-    width: 90%;
-    margin: 0 auto;
-}
-.tituloGrafica{
-    margin: 0 auto;
-    align-items: center;
-    text-align: center;
-}
-.tituloGrafica h3{
-    margin: 1.5em;
-    text-shadow: 0px 8px 8px rgba(0, 0, 0, 0.25);  
-}
-.calloutG, .calloutGcat {
-    padding: 5px;
-    height: 50px;
-    width: 200px;
-    border: 1px solid #eee;
-    border-left-width: 5px;
-    border-left-color: rgb(156, 49, 112);
-    border-radius: 5px;
-    margin-bottom: 5px;
- }
- .calloutGcat{
-     margin-left: 7em;
- }
- .graficaColums{
-     margin-left: 2em;
- }
-/* FIN   Estilos extraaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa*/
 
- 
-
-.calloutDoble {
-    padding: 5px;
-    height: 140px;
-    width: 210px;
-    border: 1px solid #eee;
-    border-left-width: 5px;
-    border-left-color: rgb(252, 141, 15);
-    border-radius: 5px;
-    margin-bottom: 5px;
-    margin-right: 1em;
- }
- .callout {
-    padding: 5px;
-    height: 90px;
-    width: 210px;
-    border: 1px solid #eee;
-    border-left-width: 5px;
-    border-left-color: rgb(252, 141, 15);
-    border-radius: 5px;
-    margin-bottom: 5px;
- }
 /*Cabecera*/
 div.container section.logo img.logo{
     width: 70%;
 }
 
 nav.publico{
-    background: linear-gradient(
 
+    background: linear-gradient(
         rgb(251, 255, 9), 
-        rgb(251, 255, 9, 0.2));
-        
+        rgba(251, 255, 9, 0.384));        
 }
 
 
 section.containerSlider{
     width: 90%;
+   
     margin: 0 auto;
     padding-top: 0;
 }
@@ -94,6 +39,10 @@ section.espacioLogin{
 }
 
 /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<Home Page>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
+.fondoWelcome{
+
+    background-color: rgb(238,238,238);
+}
 section.containerSlider{
     width: 100%;
     margin: 0 auto;
@@ -118,7 +67,7 @@ text-shadow: 0px 8px 8px rgba(0, 0, 0, 0.25);
 .sitiosLoja article.sitios{
     width: 35%; 
     display:inline-block;
-    background: white;   
+   
     margin: 0 auto;
     margin-top: 2.5em ;
     border-bottom: 2px solid black ;
@@ -147,18 +96,96 @@ section.sitiosLoja article.sitios:hover{
 
 /*Cambio*/
 .sitiosLoja .sitios, .servicios{
-    box-shadow: -8px 8px 7px rgb(0,0,0,0.2);
-   
-     
+    box-shadow: -8px 8px 7px rgb(0,0,0,0.2);  
+    margin-bottom: -2em;
  }
+ /*Lineas*/
+/*Grafica Welcome*/
+    
+
+
+.titulosPanel h4{
+    color: rgb(8, 13, 90);
+}
+.graficaWelcome{
+    width: 90%;
+    margin: 0 auto;
+    border-radius: 8px;
+    background: linear-gradient(
+        rgb(238,238,238), 
+        rgb(255,255,255),rgb(238,238,238)); 
+    
+      
+}
+section.graficaWelcome .categoria{
+    margin-left: -13.5rem ;
+    width: 40px;
+
+}
+section.graficaWelcome .categoria select{
+    padding-right:  8rem;
+
+}
+section.graficaWelcome div.fin{
+    margin-left: -90px ;
+}
+.lineatituloGrafica{
+    margin-top: -1em;
+    border-top: 10px solid rgb(239, 255, 92);
+    margin-bottom: 1em;
+}
+
+.tituloGrafica{
+    margin: 0 auto;
+    align-items: center;
+    text-align: center;
+
+}
+.tituloGrafica h2{
+    margin: 1em;
+    padding: 1.5em 0.2em 0.5em 1em;
+    text-shadow: 0px 8px 8px rgba(0, 0, 0, 0.25);  
+    border-bottom: 10px solid rgb(49, 58, 66);
+}
+
+.calloutG, .calloutGcat,.calloutG2, .calloutGM{
+    padding: 5px;
+    height: 50px;
+    width: 200px;
+    border: 1px solid rgba(245, 241, 241, 0);
+    border-left-width: 5px;
+    border-left-color: rgb(87, 24, 61);
+    border-radius: 5px;
+    margin-bottom: 5px;
+ }
+
+ .calloutG2{
+    border-left-color: rgba(255, 255, 255, 0);
+
+ }
+
+ .calloutGcat{
+     margin-left: 6em;
+ }
+ .graficaColums{
+     margin-left: 2em;
+ }
+ .graficaColums label:hover{
+    color: rgb(0, 26, 255);
+    font-weight: 1000;
+}
+.calloutGM{
+    margin-left: -3rem;
+}
 /*Servicos Home PAGE----------------------------- */
 section.sericiosL, section.datosEstab{
     width: 95%;
     margin: 0 auto;
     padding: 0em 0em 2em 2em;
     text-align: center;
-    
- 
+}
+section.datosEstab{
+    width: 100%;
 }
 
 .serviciosL article.servicios,.serviciosL2 article.servicios,
@@ -168,12 +195,14 @@ section.sericiosL, section.datosEstab{
     background: rgb(214, 206, 179);
     margin: 0 auto;
     margin-top: 2em ;
-    margin-right: 2.5em;
+    margin-right: 1.2em;
     border-radius: 8px;
 }
-
+section.datosEstab article.datEs{
+    width: 22%;
+}
 section.datosEstab article.datEs {
-    background-color:white ;
+    background-color:rgb(253, 246, 221) ;
     box-shadow: 0px 8px 8px rgba(0, 0, 0, 0.25); 
   
 }
@@ -209,7 +238,7 @@ section.datosEstab article.datEs h4{
     text-align: justify;
     padding: 1.2em 1.2em;
     font-size: 0.9em;
-    color: black;
+    color: rgb(83, 82, 82);
     border-top:2px solid rgb(255, 94, 0) ;
   
 }
@@ -233,6 +262,49 @@ section.serviciosL2 article.servicios:hover{
     border-top:2px solid rgb(26, 124, 17) ;
 }
 
+
+/*?/////////////////////////////////////////////////////////////////////////////////////////////////////*/
+.container2 {
+    position: relative;
+    width: 20%;
+    display: inline;
+  }
+  
+  .image {
+    display: inline;
+    width: 30%;
+    height: auto;
+  }
+  
+  .overlay {
+    border-radius: 8px;
+    position: absolute;
+    top: -170px;
+    height: 970%;
+    width: 93%;
+    opacity: 0;
+    transition: .5s ease;
+    background-color: #8a8a8a;
+  }
+  
+  .container2:hover .overlay {
+    opacity: 0.9;
+  }
+  div.container2 article.datEs{
+      background-color: #ffffff;
+  }
+  .text {
+    color: white;
+    font-size: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
+/*///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
 
 /*Home Administrador */
 
@@ -345,7 +417,7 @@ button.crearUs{
     background:  rgb(214, 198, 176);
 }
 
-/*  Carga Archivos   -------------------------------------------*/
+/*  Carga Archivos   Administrador-------------------------------------------*/
 
 
 section.espacioCA{
@@ -411,6 +483,26 @@ section.datosAd article.datAd h5{
 
 /*-------------------------------------------------------------------------------------------------*/
 /*Datos Estadisticos*/
+
+/*Flecha para regresar a inicio*/
+.flechaInicio{
+    display:none;
+    background-repeat:no-repeat;
+    font-size:18px;
+    color:black;
+    
+    position:fixed;
+    bottom:50px;
+    right:50px;
+    z-index:2;
+
+  }
+.flechaInicio:hover {
+    
+    background-color: rgb(253, 111, 29);
+}
+
+
 h2.tituloDatos{
     text-align: center;
     padding: 1em 0em;
@@ -428,12 +520,14 @@ section.huespedesDe{
     width: 90%;
     margin: 0em 0em 7em 0em;
 }
-section.indicadoresDe{
+
+section.indicadoresDe, section.indicadoresDeHues{
     width: 85%;
     padding: 3em 0em;
     margin: 0 auto;
     background-color: rgb(238,238,238);
 }
+
 section.indicadoresDe h2{
     padding: 0.15em;
 
@@ -443,7 +537,44 @@ section.indicadoresDe h4{
     color: #1a135a;
     margin: 0 auto;
 }
+section.porPersona h3{
+    font-weight: 15px;
+    margin-top: -100px ;
+    color: #1a135a;
+}
+/* para 1 y 2 estrellas*/
+.centrado{
+    width: 85%;
+    padding: 3em 0em;
+    margin: 0 130px 0 150px ;
+}
+.centrado2{
 
+    margin-top: 42px;
+}
+section.fondoBlanco{
+    width: 100%;
+    background-color: #ffffff;
+
+}
+section.indicadoresDeHues{
+    background-color: #ffffff;
+    margin-bottom: -60px ;
+    padding-top: 10px;
+}
+section.porcentajeFondo{
+    background-color: #ffffff;
+}
+/*
+section.cardOEstrellas, section.cardOEstrellas2{
+    display: inline-block;
+    margin-top: 1em;
+    margin-left: 400px;
+}
+section.cardOEstrellas2{
+    margin-left: 100px;
+}
+*/
 section.indOcupacion{
     width: 80%;
     padding: 3em 0em;
@@ -455,9 +586,8 @@ section.revpar{
     margin: 0 auto;
 }
 nav.navDatosEs{
-   
-    
-    background: rgb(20, 15, 45);
+    background: rgb(63, 53, 112);
+    border-radius: 4px;
     /*
     background: #2f1c35;
    */
@@ -475,6 +605,13 @@ nav.navDatosEs button:hover{
     background-color:#dfe0d9;
     border-radius: 3px;
 }
+
+.formDe a{
+background-color: #000000;
+padding: 0.2em;
+border-radius: 5px;
+}
+
 .formDe button{
     color:white;
     border:none;
@@ -491,6 +628,12 @@ nav.navDatosEs button:hover{
 .principal{
 	margin-top:50px;
 }
+/**/
+.dosModulos{
+ 
+    margin-left: 200px;
+    padding-right: 8em ;
+}
 
 /*tarjeta 1*/
 .card-headerDe5, .card-headerDe4, .card-headerDe3{
@@ -498,14 +641,14 @@ nav.navDatosEs button:hover{
     height: 220px;
     width: 350px;
     margin-left: 1em ;
-	background: rgb(114, 193, 121); 
-	box-shadow:1px 5px 15px #a2a2a2;
-}
-.card-headerDe4{
     background: rgb(252, 178, 74);
 }
+.card-headerDe4{
+    background: rgb(114, 193, 121);
+}
 .card-headerDe3{
-    background: rgb(238, 90, 88);
+     
+    background: rgb(248, 195, 121);
 }
 .card-sectionDeh{
     margin-top: 40px;
@@ -516,15 +659,20 @@ nav.navDatosEs button:hover{
 }
 
 .card-sectionTp, .card-sectionPo{
-    width: 275px;
-    height: 105px;
+    width: 220px;
+    height: 115px;
     margin-top: 2rem;
     margin-bottom: 2rem;
     background: rgb(255, 255, 255);
     text-align: center;
 
 }
-.card-sectionTp p, .card-sectionPo p{
+.card-sectionPo{
+    width: 220px;
+
+    
+}
+.card-sectionPo p{
     border-top:2px solid rgb(140, 138, 113);
     padding-top: 0.4em;
     color: rgb(162, 154, 154);
@@ -533,29 +681,41 @@ nav.navDatosEs button:hover{
     font-size:12px;
 
 }
-.card-sectionTp img, .card-sectionPo img{
+.card-sectionPo img{
     padding: 0.2em;
 }
-.card-headerTp5, .card-headerTp4, .card-headerTp3{
+
+.card-headerTp5, .card-headerTp4, .card-headerTp3, .card-headerTp1, .card-headerTp2{
     margin-top: -20px;
     height: 50px;
-    width: 100px;
+    width: 80px;
 	background: rgb(252, 178, 74); 
     box-shadow:1px 5px 15px #a2a2a2;
+    
+   
+}
+.card-headerTp5 h2, .card-headerTp4 h2, .card-headerTp3 h2, .card-headerTp1 h2, .card-headerTp2 h2{
+   color: #ffffff;
+    
    
 }
 .card-headerTp4{
-    background: rgb(171, 63, 151);
+    background: rgb(202, 49, 133);
 }
 .card-headerTp3{
     background: rgb(238, 90, 88);
 }
+.card-headerTp1{
 
-
+    background: rgb(218, 84, 46);
+}
+.card-headerTp2{
+    background: rgb(45, 212, 134);
+}
 
 
 /*efecto shadows para todas las tarjetas*/
-.card-sectionTp, .card-sectionPo{
+.card-sectionPo{
 	box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);
 }
 
@@ -575,6 +735,7 @@ nav.navDatosEs button:hover{
 .card-headerPo3{
     background: rgb(238, 90, 88);
 }
+
 
 .card-headerPo5 h2, .card-headerPo4 h2,.card-headerPo3 h2{
     padding-left: 4em;
@@ -614,16 +775,22 @@ section.contObtur {
     padding: 0em 0em 2em 2em;
     align-items: center;
 }
-.contObtur article.quienesSomosO{
+section.contObtur h1{
+    padding:0.5em 1em;
+}
+.contObtur article.quienesSomosO, article.quienesSomosOp{
     width: 45%; 
     display:inline-block;
     margin-left: 2em;
 }
-.quienesSomosO img{
+.quienesSomosO img {
     width: 100%; 
-    padding-bottom: 22em;
+    padding-bottom: 25em;
 }
+article.quienesSomosOp p {
 
+   font-size:17px;
+}
 
 /*Pie de Pagina*/
 footer{
@@ -662,7 +829,7 @@ footer article.final article.contactos h3{
     padding: 1em 0em;
 }
 
-
+/* Estilos Establecimientos>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
 /*Visualizar Archivos>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
 
 .cardV{
@@ -735,4 +902,23 @@ footer article.final article.contactos h3{
 .containerTab thead{
     background:  rgb(214, 198, 176);
        
+}
+.panelGrafica{
+
+    margin-left: 20em;
+}
+.panelVisualizar, .panelVisualizar2{
+    margin-left: 15em ;
+}
+.panelVisualizar select{
+    margin-bottom: 0.4em;
+
+}
+
+.panelVisualizar2 label{
+    margin-left: 4em;
+}
+.panelVisualColums label:hover{
+    color: rgb(156, 71, 14);
+    font-weight: 1000;
 }

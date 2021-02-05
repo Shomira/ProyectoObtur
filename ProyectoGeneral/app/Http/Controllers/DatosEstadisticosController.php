@@ -82,6 +82,12 @@ class DatosEstadisticosController extends Controller
             if($v->categoria == "3 Estrellas"){
                 $datos3Est = $v;
             }
+            if($v->categoria == "2 Estrellas"){
+                $datos2Est = $v;
+            }
+            if($v->categoria == "1 Estrella"){
+                $datos1Est = $v;
+            }
         }
         
         //escogo las variables para el filtro del mes anterior 
@@ -118,6 +124,12 @@ class DatosEstadisticosController extends Controller
             }
             if($v->categoria == "3 Estrellas"){
                 $datos3EstAnterior = $v;
+            }
+            if($v->categoria == "2 Estrellas"){
+                $datos2EstAnterior = $v;
+            }
+            if($v->categoria == "1 Estrella"){
+                $datos2EstAnterior = $v;
             }
         }
         
@@ -461,6 +473,226 @@ class DatosEstadisticosController extends Controller
 
 
         
+        /*
+            Cálculo para 2 estrellas
+        */
+        if(isset($datos2Est)){
+
+            //Cálculo huespedes
+            $huespedes2Est = ($datos2Est->nacionales * 100)/ $datos2Est->checkins ;
+            $arrHuespedes2Est = [round($huespedes2Est, 2), round(100 - $huespedes2Est, 2)];
+            
+            //Cálculo de las tarifas por habitación
+            $tarifaH2Est = round( ($datos2Est->ventasNetas / $datos2Est->hab_ocupadas), 2) ;
+        
+            if(isset($datos2EstAnterior->hab_ocupadas)){
+                $tarifaHAnterior2Est = round( ($datos2EstAnterior->ventasNetas / $datos2EstAnterior->hab_ocupadas) , 2) ;
+                $tarifaHVariacion2Est = $tarifaH2Est - $tarifaHAnterior2Est;
+
+                if($tarifaHVariacion2Est < 0){
+                    $tarifaHVariacion2Est = $tarifaHVariacion2Est*(-1);
+                    $arrTarifaH2Est = [$tarifaH2Est,  $tarifaHVariacion2Est, 1];
+                }elseif($tarifaHVariacion2Est > 0){
+                    $arrTarifaH2Est = [$tarifaH2Est, $tarifaHVariacion2Est, 2];
+                }else{
+                    $arrTarifaH2Est = [$tarifaH2Est, 0, 3];
+                }
+            }else{
+                $arrTarifaH2Est = [$tarifaH2Est, 0, null];
+            }
+            
+            //Cálculo de las tarifas por Persona
+            $tarifaP2Est = round( ($datos2Est->ventasNetas / $datos2Est->pernoctaciones), 2) ;
+
+            if(isset($datos2EstAnterior->pernoctaciones)){
+                $tarifaPAnterior2Est = round( ($datos2EstAnterior->ventasNetas / $datos2EstAnterior->pernoctaciones) , 2) ;
+                $tarifaPVariacion2Est = $tarifaP2Est - $tarifaPAnterior2Est;
+                if($tarifaPVariacion2Est < 0){
+                    $tarifaPVariacion2Est = $tarifaPVariacion2Est*(-1);
+                    $arrTarifaP2Est = [$tarifaP2Est,  $tarifaPVariacion2Est, 1];
+                }elseif($tarifaPVariacion2Est > 0){
+                    $arrTarifaP2Est = [$tarifaP2Est, $tarifaPVariacion2Est, 2];
+                }else{
+                    $arrTarifaP2Est = [$tarifaP2Est, 0, 3];
+                }
+            }else{
+                $arrTarifaP2Est = [$tarifaP2Est, 0, null];
+            }
+            
+            //Cálculo de la ocupación
+            $ocupacion2Est = round( ($datos2Est->hab_ocupadas / $datos2Est->hab_disponibles)*100 , 2) ;
+
+            if(isset($datos2EstAnterior->hab_disponibles)){
+                $ocupacionAnterior2Est = round( ($datos2EstAnterior->hab_ocupadas / $datos2EstAnterior->hab_disponibles)*100 , 2) ;
+                $ocupacionVariacion2Est = $ocupacion2Est - $ocupacionAnterior2Est;
+                if($ocupacionVariacion2Est < 0){
+                    $ocupacionVariacion2Est = $ocupacionVariacion2Est*(-1);
+                    $arrOcupacion2Est = [$ocupacion2Est,  $ocupacionVariacion2Est, 1];
+                }elseif($ocupacionVariacion2Est > 0){
+                    $arrOcupacion2Est = [$ocupacion2Est, $ocupacionVariacion2Est, 2];
+                }else{
+                    $arrOcupacion2Est = [$ocupacion2Est, 0, 3];
+                }
+            }else{
+                $arrOcupacion2Est = [$ocupacion2Est, 0, null];
+            }
+            
+            //Cálculo del revpar
+            $revpar2Est = round($datos2Est->ventasNetas / $datos2Est->hab_disponibles , 2) ;
+
+            if(isset($datos2EstAnterior->hab_disponibles)){
+                $revparAnterior2Est = round( $datos2EstAnterior->ventasNetas / $datos2EstAnterior->hab_disponibles , 2) ;
+                $revparVariacion2Est = $revpar2Est - $revparAnterior2Est;
+                if($revparVariacion2Est < 0){
+                    $revparVariacion2Est = $revparVariacion2Est*(-1);
+                    $arrRevpar2Est = [$revpar2Est,  $revparVariacion2Est, 1];
+                }elseif($revparVariacion2Est > 0){
+                    $arrRevpar2Est = [$revpar2Est,  $revparVariacion2Est, 2];
+                }else{
+                    $arrRevpar2Est = [$revpar2Est,  0, 3];
+                }
+            }else{
+                $arrRevpar2Est = [$revpar2Est,  0, null];
+            }
+            
+            //Cáñculo de la estadía promedio
+            $estadiaP2Est = round($datos2Est->pernoctaciones / $datos2Est->checkins, 2) ;
+
+            if(isset($datos2EstAnterior->checkins)){
+                $estadiaPAnterior2Est = round( $datos2EstAnterior->pernoctaciones / $datos2EstAnterior->checkins , 2) ;
+                $estadiaPVariacion2Est = $estadiaP2Est - $estadiaPAnterior2Est;
+                if($estadiaPVariacion2Est < 0){
+                    $estadiaPVariacion2Est = $estadiaPVariacion2Est*(-1);
+                    $arrEstadiaP2Est = [$estadiaP2Est,  $estadiaPVariacion2Est, 1];
+                }elseif($estadiaPVariacion2Est > 0){
+                    $arrEstadiaP2Est = [$estadiaP2Est,  $estadiaPVariacion2Est, 2];
+                }else{
+                    $arrEstadiaP2Est = [$estadiaP2Est,  0, 3];
+                }
+            }else{
+                $arrEstadiaP2Est = [$estadiaP2Est,  0, null];
+            }
+            
+        }else{
+            $arrHuespedes2Est = [0, 0];
+            $arrTarifaH2Est = ['S/R', '', null];
+            $arrTarifaP2Est = ['S/R', '', null];
+            $arrOcupacion2Est = ['S/R', '', null];
+            $arrRevpar2Est = ['S/R', '', null];
+            $arrEstadiaP2Est = ['S/R', '', null];
+        }
+
+
+
+        /*
+            Cálculo para 1 estrellas
+        */
+        if(isset($datos1Est)){
+
+            //Cálculo huespedes
+            $huespedes1Est = ($datos1Est->nacionales * 100)/ $datos1Est->checkins ;
+            $arrHuespedes1Est = [round($huespedes1Est, 2), round(100 - $huespedes1Est, 2)];
+            
+            //Cálculo de las tarifas por habitación
+            $tarifaH1Est = round( ($datos1Est->ventasNetas / $datos1Est->hab_ocupadas), 2) ;
+        
+            if(isset($datos1EstAnterior->hab_ocupadas)){
+                $tarifaHAnterior1Est = round( ($datos1EstAnterior->ventasNetas / $datos1EstAnterior->hab_ocupadas) , 2) ;
+                $tarifaHVariacion1Est = $tarifaH1Est - $tarifaHAnterior1Est;
+
+                if($tarifaHVariacion1Est < 0){
+                    $tarifaHVariacion1Est = $tarifaHVariacion1Est*(-1);
+                    $arrTarifaH1Est = [$tarifaH1Est,  $tarifaHVariacion1Est, 1];
+                }elseif($tarifaHVariacion1Est > 0){
+                    $arrTarifaH1Est = [$tarifaH1Est, $tarifaHVariacion1Est, 2];
+                }else{
+                    $arrTarifaH1Est = [$tarifaH1Est, 0, 3];
+                }
+            }else{
+                $arrTarifaH1Est = [$tarifaH1Est, 0, null];
+            }
+            
+            //Cálculo de las tarifas por Persona
+            $tarifaP1Est = round( ($datos1Est->ventasNetas / $datos1Est->pernoctaciones), 2) ;
+
+            if(isset($datos1EstAnterior->pernoctaciones)){
+                $tarifaPAnterior1Est = round( ($datos1EstAnterior->ventasNetas / $datos1EstAnterior->pernoctaciones) , 2) ;
+                $tarifaPVariacion1Est = $tarifaP1Est - $tarifaPAnterior1Est;
+                if($tarifaPVariacion1Est < 0){
+                    $tarifaPVariacion1Est = $tarifaPVariacion1Est*(-1);
+                    $arrTarifaP1Est = [$tarifaP1Est,  $tarifaPVariacion1Est, 1];
+                }elseif($tarifaPVariacion1Est > 0){
+                    $arrTarifaP1Est = [$tarifaP1Est, $tarifaPVariacion1Est, 2];
+                }else{
+                    $arrTarifaP1Est = [$tarifaP1Est, 0, 3];
+                }
+            }else{
+                $arrTarifaP1Est = [$tarifaP1Est, 0, null];
+            }
+            
+            //Cálculo de la ocupación
+            $ocupacion1Est = round( ($datos1Est->hab_ocupadas / $datos1Est->hab_disponibles)*100 , 2) ;
+
+            if(isset($datos1EstAnterior->hab_disponibles)){
+                $ocupacionAnterior1Est = round( ($datos1EstAnterior->hab_ocupadas / $datos1EstAnterior->hab_disponibles)*100 , 2) ;
+                $ocupacionVariacion1Est = $ocupacion1Est - $ocupacionAnterior1Est;
+                if($ocupacionVariacion1Est < 0){
+                    $ocupacionVariacion1Est = $ocupacionVariacion1Est*(-1);
+                    $arrOcupacion1Est = [$ocupacion1Est,  $ocupacionVariacion1Est, 1];
+                }elseif($ocupacionVariacion1Est > 0){
+                    $arrOcupacion1Est = [$ocupacion1Est, $ocupacionVariacion1Est, 2];
+                }else{
+                    $arrOcupacion1Est = [$ocupacion1Est, 0, 3];
+                }
+            }else{
+                $arrOcupacion1Est = [$ocupacion1Est, 0, null];
+            }
+            
+            //Cálculo del revpar
+            $revpar1Est = round($datos1Est->ventasNetas / $datos1Est->hab_disponibles , 2) ;
+
+            if(isset($datos1EstAnterior->hab_disponibles)){
+                $revparAnterior1Est = round( $datos1EstAnterior->ventasNetas / $datos1EstAnterior->hab_disponibles , 2) ;
+                $revparVariacion1Est = $revpar1Est - $revparAnterior1Est;
+                if($revparVariacion1Est < 0){
+                    $revparVariacion1Est = $revparVariacion1Est*(-1);
+                    $arrRevpar1Est = [$revpar1Est,  $revparVariacion1Est, 1];
+                }elseif($revparVariacion1Est > 0){
+                    $arrRevpar1Est = [$revpar1Est,  $revparVariacion1Est, 2];
+                }else{
+                    $arrRevpar1Est = [$revpar1Est,  0, 3];
+                }
+            }else{
+                $arrRevpar1Est = [$revpar1Est,  0, null];
+            }
+            
+            //Cáñculo de la estadía promedio
+            $estadiaP1Est = round($datos1Est->pernoctaciones / $datos1Est->checkins, 2) ;
+
+            if(isset($datos1EstAnterior->checkins)){
+                $estadiaPAnterior1Est = round( $datos1EstAnterior->pernoctaciones / $datos1EstAnterior->checkins , 2) ;
+                $estadiaPVariacion1Est = $estadiaP1Est - $estadiaPAnterior1Est;
+                if($estadiaPVariacion1Est < 0){
+                    $estadiaPVariacion1Est = $estadiaPVariacion1Est*(-1);
+                    $arrEstadiaP1Est = [$estadiaP1Est,  $estadiaPVariacion1Est, 1];
+                }elseif($estadiaPVariacion1Est > 0){
+                    $arrEstadiaP1Est = [$estadiaP1Est,  $estadiaPVariacion1Est, 2];
+                }else{
+                    $arrEstadiaP1Est = [$estadiaP1Est,  0, 3];
+                }
+            }else{
+                $arrEstadiaP1Est = [$estadiaP1Est,  0, null];
+            }
+            
+        }else{
+            $arrHuespedes1Est = [0, 0];
+            $arrTarifaH1Est = ['S/R', '', null];
+            $arrTarifaP1Est = ['S/R', '', null];
+            $arrOcupacion1Est = ['S/R', '', null];
+            $arrRevpar1Est = ['S/R', '', null];
+            $arrEstadiaP1Est = ['S/R', '', null];
+        }
+
         
         
         return view('datosEstadisticos')->with('arrHuespedes5Est', $arrHuespedes5Est)
@@ -481,6 +713,18 @@ class DatosEstadisticosController extends Controller
                                         ->with('arrOcupacion3Est', $arrOcupacion3Est)
                                         ->with('arrRevpar3Est', $arrRevpar3Est)
                                         ->with('arrEstadiaP3Est', $arrEstadiaP3Est)
+                                        ->with('arrHuespedes2Est', $arrHuespedes2Est)
+                                        ->with('arrTarifaH2Est', $arrTarifaH2Est)
+                                        ->with('arrTarifaP2Est', $arrTarifaP2Est)
+                                        ->with('arrOcupacion2Est', $arrOcupacion2Est)
+                                        ->with('arrRevpar2Est', $arrRevpar2Est)
+                                        ->with('arrEstadiaP2Est', $arrEstadiaP2Est)
+                                        ->with('arrHuespedes1Est', $arrHuespedes1Est)
+                                        ->with('arrTarifaH1Est', $arrTarifaH1Est)
+                                        ->with('arrTarifaP1Est', $arrTarifaP1Est)
+                                        ->with('arrOcupacion1Est', $arrOcupacion1Est)
+                                        ->with('arrRevpar1Est', $arrRevpar1Est)
+                                        ->with('arrEstadiaP1Est', $arrEstadiaP1Est)
                                         ->with('mes', $auxMes)
                                         ->with('anio', $auxAnio)
                                         ->with('nombreMes', $nombreMes)
@@ -557,6 +801,12 @@ class DatosEstadisticosController extends Controller
             if($v->categoria == "3 Estrellas"){
                 $datos3Est = $v;
             }
+            if($v->categoria == "2 Estrellas"){
+                $datos2Est = $v;
+            }
+            if($v->categoria == "1 Estrella"){
+                $datos1Est = $v;
+            }
         }
         
         //escogo las variables para el filtro del mes anterior 
@@ -593,6 +843,12 @@ class DatosEstadisticosController extends Controller
             }
             if($v->categoria == "3 Estrellas"){
                 $datos3EstAnterior = $v;
+            }
+            if($v->categoria == "2 Estrellas"){
+                $datos2EstAnterior = $v;
+            }
+            if($v->categoria == "1 Estrella"){
+                $datos1EstAnterior = $v;
             }
         }
 
@@ -936,6 +1192,230 @@ class DatosEstadisticosController extends Controller
             $arrEstadiaP3Est = ['S/R', '', null];
         }
 
+
+
+
+        /*
+            Cálculo para 2 estrellas
+        */
+        if(isset($datos2Est)){
+
+            //Cálculo huespedes
+            $huespedes2Est = ($datos2Est->nacionales * 100)/ $datos2Est->checkins ;
+            $arrHuespedes2Est = [round($huespedes2Est, 2), round(100 - $huespedes2Est, 2)];
+            
+            //Cálculo de las tarifas por habitación
+            $tarifaH2Est = round( ($datos2Est->ventasNetas / $datos2Est->hab_ocupadas), 2) ;
+        
+            if(isset($datos2EstAnterior->hab_ocupadas)){
+                $tarifaHAnterior2Est = round( ($datos2EstAnterior->ventasNetas / $datos2EstAnterior->hab_ocupadas) , 2) ;
+                $tarifaHVariacion2Est = $tarifaH2Est - $tarifaHAnterior2Est;
+
+                if($tarifaHVariacion2Est < 0){
+                    $tarifaHVariacion2Est = $tarifaHVariacion2Est*(-1);
+                    $arrTarifaH2Est = [$tarifaH2Est,  $tarifaHVariacion2Est, 1];
+                }elseif($tarifaHVariacion2Est > 0){
+                    $arrTarifaH2Est = [$tarifaH2Est, $tarifaHVariacion2Est, 2];
+                }else{
+                    $arrTarifaH2Est = [$tarifaH2Est, 0, 3];
+                }
+            }else{
+                $arrTarifaH2Est = [$tarifaH2Est, 0, null];
+            }
+            
+            //Cálculo de las tarifas por Persona
+            $tarifaP2Est = round( ($datos2Est->ventasNetas / $datos2Est->pernoctaciones), 2) ;
+
+            if(isset($datos2EstAnterior->pernoctaciones)){
+                $tarifaPAnterior2Est = round( ($datos2EstAnterior->ventasNetas / $datos2EstAnterior->pernoctaciones) , 2) ;
+                $tarifaPVariacion2Est = $tarifaP2Est - $tarifaPAnterior2Est;
+                if($tarifaPVariacion2Est < 0){
+                    $tarifaPVariacion2Est = $tarifaPVariacion2Est*(-1);
+                    $arrTarifaP2Est = [$tarifaP2Est,  $tarifaPVariacion2Est, 1];
+                }elseif($tarifaPVariacion2Est > 0){
+                    $arrTarifaP2Est = [$tarifaP2Est, $tarifaPVariacion2Est, 2];
+                }else{
+                    $arrTarifaP2Est = [$tarifaP2Est, 0, 3];
+                }
+            }else{
+                $arrTarifaP2Est = [$tarifaP2Est, 0, null];
+            }
+            
+            //Cálculo de la ocupación
+            $ocupacion2Est = round( ($datos2Est->hab_ocupadas / $datos2Est->hab_disponibles)*100 , 2) ;
+
+            if(isset($datos2EstAnterior->hab_disponibles)){
+                $ocupacionAnterior2Est = round( ($datos2EstAnterior->hab_ocupadas / $datos2EstAnterior->hab_disponibles)*100 , 2) ;
+                $ocupacionVariacion2Est = $ocupacion2Est - $ocupacionAnterior2Est;
+                if($ocupacionVariacion2Est < 0){
+                    $ocupacionVariacion2Est = $ocupacionVariacion2Est*(-1);
+                    $arrOcupacion2Est = [$ocupacion2Est,  $ocupacionVariacion2Est, 1];
+                }elseif($ocupacionVariacion2Est > 0){
+                    $arrOcupacion2Est = [$ocupacion2Est, $ocupacionVariacion2Est, 2];
+                }else{
+                    $arrOcupacion2Est = [$ocupacion2Est, 0, 3];
+                }
+            }else{
+                $arrOcupacion2Est = [$ocupacion2Est, 0, null];
+            }
+            
+            //Cálculo del revpar
+            $revpar2Est = round($datos2Est->ventasNetas / $datos2Est->hab_disponibles , 2) ;
+
+            if(isset($datos2EstAnterior->hab_disponibles)){
+                $revparAnterior2Est = round( $datos2EstAnterior->ventasNetas / $datos2EstAnterior->hab_disponibles , 2) ;
+                $revparVariacion2Est = $revpar2Est - $revparAnterior2Est;
+                if($revparVariacion2Est < 0){
+                    $revparVariacion2Est = $revparVariacion2Est*(-1);
+                    $arrRevpar2Est = [$revpar2Est,  $revparVariacion2Est, 1];
+                }elseif($revparVariacion2Est > 0){
+                    $arrRevpar2Est = [$revpar2Est,  $revparVariacion2Est, 2];
+                }else{
+                    $arrRevpar2Est = [$revpar2Est,  0, 3];
+                }
+            }else{
+                $arrRevpar2Est = [$revpar2Est,  0, null];
+            }
+            
+            //Cáñculo de la estadía promedio
+            $estadiaP2Est = round($datos2Est->pernoctaciones / $datos2Est->checkins, 2) ;
+
+            if(isset($datos2EstAnterior->checkins)){
+                $estadiaPAnterior2Est = round( $datos2EstAnterior->pernoctaciones / $datos2EstAnterior->checkins , 2) ;
+                $estadiaPVariacion2Est = $estadiaP2Est - $estadiaPAnterior2Est;
+                if($estadiaPVariacion2Est < 0){
+                    $estadiaPVariacion2Est = $estadiaPVariacion2Est*(-1);
+                    $arrEstadiaP2Est = [$estadiaP2Est,  $estadiaPVariacion2Est, 1];
+                }elseif($estadiaPVariacion2Est > 0){
+                    $arrEstadiaP2Est = [$estadiaP2Est,  $estadiaPVariacion2Est, 2];
+                }else{
+                    $arrEstadiaP2Est = [$estadiaP2Est,  0, 3];
+                }
+            }else{
+                $arrEstadiaP2Est = [$estadiaP2Est,  0, null];
+            }
+            
+        }else{
+            $arrHuespedes2Est = [0, 0];
+            $arrTarifaH2Est = ['S/R', '', null];
+            $arrTarifaP2Est = ['S/R', '', null];
+            $arrOcupacion2Est = ['S/R', '', null];
+            $arrRevpar2Est = ['S/R', '', null];
+            $arrEstadiaP2Est = ['S/R', '', null];
+        }
+
+
+
+        /*
+            Cálculo para 1 estrellas
+        */
+        if(isset($datos1Est)){
+
+            //Cálculo huespedes
+            $huespedes1Est = ($datos1Est->nacionales * 100)/ $datos1Est->checkins ;
+            $arrHuespedes1Est = [round($huespedes1Est, 2), round(100 - $huespedes1Est, 2)];
+            
+            //Cálculo de las tarifas por habitación
+            $tarifaH1Est = round( ($datos1Est->ventasNetas / $datos1Est->hab_ocupadas), 2) ;
+        
+            if(isset($datos1EstAnterior->hab_ocupadas)){
+                $tarifaHAnterior1Est = round( ($datos1EstAnterior->ventasNetas / $datos1EstAnterior->hab_ocupadas) , 2) ;
+                $tarifaHVariacion1Est = $tarifaH1Est - $tarifaHAnterior1Est;
+
+                if($tarifaHVariacion1Est < 0){
+                    $tarifaHVariacion1Est = $tarifaHVariacion1Est*(-1);
+                    $arrTarifaH1Est = [$tarifaH1Est,  $tarifaHVariacion1Est, 1];
+                }elseif($tarifaHVariacion1Est > 0){
+                    $arrTarifaH1Est = [$tarifaH1Est, $tarifaHVariacion1Est, 2];
+                }else{
+                    $arrTarifaH1Est = [$tarifaH1Est, 0, 3];
+                }
+            }else{
+                $arrTarifaH1Est = [$tarifaH1Est, 0, null];
+            }
+            
+            //Cálculo de las tarifas por Persona
+            $tarifaP1Est = round( ($datos1Est->ventasNetas / $datos1Est->pernoctaciones), 2) ;
+
+            if(isset($datos1EstAnterior->pernoctaciones)){
+                $tarifaPAnterior1Est = round( ($datos1EstAnterior->ventasNetas / $datos1EstAnterior->pernoctaciones) , 2) ;
+                $tarifaPVariacion1Est = $tarifaP1Est - $tarifaPAnterior1Est;
+                if($tarifaPVariacion1Est < 0){
+                    $tarifaPVariacion1Est = $tarifaPVariacion1Est*(-1);
+                    $arrTarifaP1Est = [$tarifaP1Est,  $tarifaPVariacion1Est, 1];
+                }elseif($tarifaPVariacion1Est > 0){
+                    $arrTarifaP1Est = [$tarifaP1Est, $tarifaPVariacion1Est, 2];
+                }else{
+                    $arrTarifaP1Est = [$tarifaP1Est, 0, 3];
+                }
+            }else{
+                $arrTarifaP1Est = [$tarifaP1Est, 0, null];
+            }
+            
+            //Cálculo de la ocupación
+            $ocupacion1Est = round( ($datos1Est->hab_ocupadas / $datos1Est->hab_disponibles)*100 , 2) ;
+
+            if(isset($datos1EstAnterior->hab_disponibles)){
+                $ocupacionAnterior1Est = round( ($datos1EstAnterior->hab_ocupadas / $datos1EstAnterior->hab_disponibles)*100 , 2) ;
+                $ocupacionVariacion1Est = $ocupacion1Est - $ocupacionAnterior1Est;
+                if($ocupacionVariacion1Est < 0){
+                    $ocupacionVariacion1Est = $ocupacionVariacion1Est*(-1);
+                    $arrOcupacion1Est = [$ocupacion1Est,  $ocupacionVariacion1Est, 1];
+                }elseif($ocupacionVariacion1Est > 0){
+                    $arrOcupacion1Est = [$ocupacion1Est, $ocupacionVariacion1Est, 2];
+                }else{
+                    $arrOcupacion1Est = [$ocupacion1Est, 0, 3];
+                }
+            }else{
+                $arrOcupacion1Est = [$ocupacion1Est, 0, null];
+            }
+            
+            //Cálculo del revpar
+            $revpar1Est = round($datos1Est->ventasNetas / $datos1Est->hab_disponibles , 2) ;
+
+            if(isset($datos1EstAnterior->hab_disponibles)){
+                $revparAnterior1Est = round( $datos1EstAnterior->ventasNetas / $datos1EstAnterior->hab_disponibles , 2) ;
+                $revparVariacion1Est = $revpar1Est - $revparAnterior1Est;
+                if($revparVariacion1Est < 0){
+                    $revparVariacion1Est = $revparVariacion1Est*(-1);
+                    $arrRevpar1Est = [$revpar1Est,  $revparVariacion1Est, 1];
+                }elseif($revparVariacion1Est > 0){
+                    $arrRevpar1Est = [$revpar1Est,  $revparVariacion1Est, 2];
+                }else{
+                    $arrRevpar1Est = [$revpar1Est,  0, 3];
+                }
+            }else{
+                $arrRevpar1Est = [$revpar1Est,  0, null];
+            }
+            
+            //Cáñculo de la estadía promedio
+            $estadiaP1Est = round($datos1Est->pernoctaciones / $datos1Est->checkins, 2) ;
+
+            if(isset($datos1EstAnterior->checkins)){
+                $estadiaPAnterior1Est = round( $datos1EstAnterior->pernoctaciones / $datos1EstAnterior->checkins , 2) ;
+                $estadiaPVariacion1Est = $estadiaP1Est - $estadiaPAnterior1Est;
+                if($estadiaPVariacion1Est < 0){
+                    $estadiaPVariacion1Est = $estadiaPVariacion1Est*(-1);
+                    $arrEstadiaP1Est = [$estadiaP1Est,  $estadiaPVariacion1Est, 1];
+                }elseif($estadiaPVariacion1Est > 0){
+                    $arrEstadiaP1Est = [$estadiaP1Est,  $estadiaPVariacion1Est, 2];
+                }else{
+                    $arrEstadiaP1Est = [$estadiaP1Est,  0, 3];
+                }
+            }else{
+                $arrEstadiaP1Est = [$estadiaP1Est,  0, null];
+            }
+            
+        }else{
+            $arrHuespedes1Est = [0, 0];
+            $arrTarifaH1Est = ['S/R', '', null];
+            $arrTarifaP1Est = ['S/R', '', null];
+            $arrOcupacion1Est = ['S/R', '', null];
+            $arrRevpar1Est = ['S/R', '', null];
+            $arrEstadiaP1Est = ['S/R', '', null];
+        }
+
+
         
         return view('datosEstadisticos')->with('arrHuespedes5Est', $arrHuespedes5Est)
                                         ->with('arrTarifaH5Est', $arrTarifaH5Est)
@@ -955,6 +1435,18 @@ class DatosEstadisticosController extends Controller
                                         ->with('arrOcupacion3Est', $arrOcupacion3Est)
                                         ->with('arrRevpar3Est', $arrRevpar3Est)
                                         ->with('arrEstadiaP3Est', $arrEstadiaP3Est)
+                                        ->with('arrHuespedes2Est', $arrHuespedes2Est)
+                                        ->with('arrTarifaH2Est', $arrTarifaH2Est)
+                                        ->with('arrTarifaP2Est', $arrTarifaP2Est)
+                                        ->with('arrOcupacion2Est', $arrOcupacion2Est)
+                                        ->with('arrRevpar2Est', $arrRevpar2Est)
+                                        ->with('arrEstadiaP2Est', $arrEstadiaP2Est)
+                                        ->with('arrHuespedes1Est', $arrHuespedes1Est)
+                                        ->with('arrTarifaH1Est', $arrTarifaH1Est)
+                                        ->with('arrTarifaP1Est', $arrTarifaP1Est)
+                                        ->with('arrOcupacion1Est', $arrOcupacion1Est)
+                                        ->with('arrRevpar1Est', $arrRevpar1Est)
+                                        ->with('arrEstadiaP1Est', $arrEstadiaP1Est)
                                         ->with('mes', $request->mes)
                                         ->with('anio', $request->anio)
                                         ->with('nombreMes', $nombreMes)

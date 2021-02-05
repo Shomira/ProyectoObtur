@@ -2,13 +2,13 @@
 
 @section('content')
 <section class="contObtur">
-<h1 style="padding:0.2em 1em;">EQUIPO DE TRABAJO</h1>
+<h1>EQUIPO DE TRABAJO</h1>
     <article class="quienesSomosO">
         <img src="{{ asset('imgs/team.jpg')}}" alt="...">
-        <p></p>
+    
     </article>
-    <article class="quienesSomosO">
-        <p style="font-size:18px;">
+    <article class="quienesSomosOp">
+        <p >
         El Observatorio Turístico es una iniciativa que se crea con el objetivo principal de apoyar el desarrollo de la 
         industria turística que busca fomentar prácticas de turismo sostenible y elevar la competitividad del destino en base a
          información fiable y comprobada.A través de a construcción de una base de series estadísticas se pretende establecer 

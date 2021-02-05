@@ -1,14 +1,14 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Support\Facades\DB;
+
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
-class EstablecimientoController extends Controller
+class ComparativasController extends Controller
 {
-
     public function index()
     {
  
@@ -95,7 +95,7 @@ class EstablecimientoController extends Controller
         }
 
         
-        return view('visualizarGraficas')->with('mesInicio',$mesInicio)
+        return view('comparativas')->with('mesInicio',$mesInicio)
                                         ->with('mesFin',$auxMes)
                                         ->with('anioInicio',$anioInicio)
                                         ->with('anioFin',$auxAnio)
@@ -123,7 +123,20 @@ class EstablecimientoController extends Controller
             $fechaInicio = $request->anioInicio."-".$request->mesInicio."-01";
         }
         
-        $consulta = "SELECT  SUM($request->columna) as 'columna', MONTH(fecha) as 'mes', YEAR(fecha) as 'anio'
+        $consulta = "SELECT  SUM(checkins) as 'checkins',
+                            SUM(checkouts) as 'checkouts',
+                            SUM(pernoctaciones) as 'pernoctaciones',
+                            SUM(nacionales) as 'nacionales',
+                            SUM(extranjeros) as 'extranjeros',
+                            SUM(habitaciones_ocupadas) as 'habitaciones_ocupadas',
+                            SUM(habitaciones_disponibles) as 'habitaciones_disponibles',
+                            SUM(tarifa_promedio) as 'tarifa_promedio',
+                            SUM(TAR_PER) as 'tar_per',
+                            SUM(ventas_netas) as 'ventas_netas',
+                            SUM(porcentaje_ocupacion) as 'porcentaje_ocupacion',
+                            SUM(revpar) as 'revpar',
+                            MONTH(fecha) as 'mes',
+                            YEAR(fecha) as 'anio'
                     FROM registros r, establecimientos e
                     WHERE e.id = r.idEstablecimiento AND e.idUsuario = $idU 
                         AND fecha >= '$fechaInicio' AND fecha <= '$fechaFin'
@@ -139,7 +152,18 @@ class EstablecimientoController extends Controller
     {
         $idU = Auth::user()->id;
 
-        $consulta = "SELECT $request->columna as 'columna', fecha 
+        $consulta = "SELECT checkins,
+                            checkouts,
+                            pernoctaciones,
+                            nacionales,
+                            extranjeros,
+                            habitaciones_ocupadas,
+                            habitaciones_disponibles,
+                            tarifa_promedio,
+                            TAR_PER as 'tar_per',
+                            ventas_netas,
+                            porcentaje_ocupacion,
+                            revpar, fecha 
                             FROM registros r, establecimientos e
                             WHERE e.id = r.idEstablecimiento AND e.idUsuario = $idU AND fecha >= '$request->inicio' AND fecha <= '$request->fin' ";
         
@@ -147,7 +171,4 @@ class EstablecimientoController extends Controller
         
         return response(json_encode($datos), 200)->header('Content-type', 'text/plain');
     }
-
-    
-    
 }

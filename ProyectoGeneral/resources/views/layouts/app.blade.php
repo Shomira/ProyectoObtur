@@ -23,6 +23,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Quantico&display=swap" rel="stylesheet">
 
+    @yield('css')
+
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
@@ -71,11 +73,11 @@
                                     </li>
                                 @endif
                               
-                                 @if (Route::has('register'))
+                                <!--  @if (Route::has('register'))
                                     <li class="nav-item">
                                         <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                                     </li>
-                                @endif
+                                @endif-->
                                 
                          
                         </ul>
@@ -138,7 +140,6 @@
         @endguest
 
         <main class="publico">
-            @yield('css')
             @yield('content')
             @include('sweetalert::alert', ['cdn' => "https://cdn.jsdelivr.net/npm/sweetalert2@9"])
         </main>
