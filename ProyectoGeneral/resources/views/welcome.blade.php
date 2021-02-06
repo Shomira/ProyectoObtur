@@ -1,8 +1,16 @@
 @extends('layouts.app')
+@section('css')
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+@endsection
 
 @section('content')
     <section class="fondoWelcome">
         <section class="containerSlider">
+            <a class="flechaInicio"  javascript:void(0) title="Volver arriba">
+                <span class="fa-stack">
+                    <i class="fa fa-arrow-up fa-stack-2x fa-inverse"></i>
+                </span>
+            </a>
             <!--inicia el slider-->
             <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
                 <ol class="carousel-indicators">
@@ -112,7 +120,7 @@
             </div>
             <div class="container2">
                 <article class="datEs">    
-                        <img src="{{ asset('imgs/vendedor.png')}}"  alt="Avatar" class="image">
+                        <img src="{{ asset('imgs/cama.png')}}"  alt="Avatar" class="image">
                         <div class="overlay">
                             <div class="text">Es una aproximación al número de días que por término medio permanece un viajero en un establecimiento</div>
                         </div>
@@ -123,16 +131,16 @@
             </div>
         </section>
         <section class="graficaWelcome">
-            <section class="tituloGrafica" ><h2>Comparativas de Datos Hoteleros</h2></section>
+            <section class="tituloGrafica" ><h2>COMPARATIVAS DE DATOS HOTELEROS</h2></section>
             <section class="lineatituloGrafica" ></section>
                 <div class="form-row align-items-center"> 
                     <div class="row row-cols-4 col-lg-12 text-center titulosPanel">
-                        <label  for="inputState"> <h4>Fecha Inicio</h4></label>
-                        <label  for="inputState" > <h4>Fecha Fin</h4></label>
-                        <label   for="inputState" > <h4> Categoría</h4></label>
-                        <label   for="inputState" > <h4> ¿Dias o Meses?</h4></label>
+                        <label> <h5>Fecha Inicio</h5></label>
+                        <label> <h5>Fecha Fin</h5></label>
+                        <label style="margin-left: -4rem;" class="mensajeDoM1"> <h5> Categoría</h5></label>
+                        <label class="mensajeDoM"><h5> ¿Dias o Meses?</h5></label>
                     </div>
-                    <div class="row row-cols-3 col-4 ml-2 p-4 inicio">
+                    <div class="row row-cols-3 col-4 ml-4 p-4 inicio">
                         <div class="row mr-1">
                             <div class="calloutG">
                                 <select id="idanioInicio" name="anioInicio" class="form-control" onchange="cambioAnioInicio(this)">
@@ -153,9 +161,9 @@
                             
                         </div>
                     </div>
-                    <div class="row row-cols-3 col-4 mr-1  ml-1 ">
-                        <div class="row mr-1 fin">
-                            <div class="calloutG">
+                    <div class="row row-cols-3 col-4 mr-1 pl-4 fin ">
+                        <div class="row mr-1 ">
+                            <div class="calloutG anioFi ">
                                 <select id="idanioFin" name="anioFin" class="form-control" onchange="cambioAnioFin(this)">
                                     @foreach($anios as $anio)
                                         <option value="{{$anio->anio}}">{{$anio->anio}}</option>
@@ -163,7 +171,7 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="calloutG2" >
+                        <div class="calloutG2 mesFin " >
                             <select id="inputState" name="mesFin" class="form-control" onchange="cambioMesFin(this)">
                                 @foreach($meses as $mes)
                                     <option value="{{$mes[1]}}">{{$mes[0]}}</option>
@@ -183,7 +191,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row row-cols-2 col-2   ml-2 mesDia">
+                    <div class="row row-cols-2 col-2 mesDia">
                         <div class="row ml-1">
                             <div class="calloutGM">
                                 <select id="inputState" name="ejeX" class="form-control" onchange="cambioEjeX(this)">
@@ -199,7 +207,7 @@
                 <section class="espacioGrafica" ></section>
                 <div class="row col-13">
                     <div class="form-group col-md-2 graficaColums" >
-                        <h3>Columna </h3><br>
+                        <h5 style="margin-bottom: 0.5em;">Columna </h5> 
                         <input type="checkbox" name="checkins" id="checkins" value="checkins" onchange="seleccionarFilas(this)">
                         <label for="checkins"> Checkins</label><br>
                         <input type="checkbox" name="checkouts" id="checkouts" value="checkouts" onchange="seleccionarFilas(this)">
@@ -214,12 +222,13 @@
                         <label for="habitaciones_ocupadas"> Hab. Ocupadas</label><br>
                         <input type="checkbox" name="habitaciones_disponibles" id="habitaciones_disponibles" value="habitaciones_disponibles" onchange="seleccionarFilas(this)">
                         <label for="habitaciones_disponibles"> Hab. Disponibles</label><br>
+                        <input type="checkbox" name="ventas_netas" id="ventas_netas" value="ventas_netas" onchange="seleccionarFilas(this)">
+                        <label for="ventas_netas"> Ventas Netas</label>
+                        <hr style="margin: 0.3em;">
                         <input type="checkbox" name="tarifa_promedio" id="tarifa_promedio" value="tarifa_promedio" onchange="seleccionarFilas(this)">
                         <label for="tarifa_promedio"> Tarifa Prom. Hab.</label><br>
                         <input type="checkbox" name="TAR_PER" id="TAR_PER" value="TAR_PER" onchange="seleccionarFilas(this)">
-                        <label for="TAR_PER"> Tarifa Prom. Per.</label><br>
-                        <input type="checkbox" name="ventas_netas" id="ventas_netas" value="ventas_netas" onchange="seleccionarFilas(this)">
-                        <label for="ventas_netas"> Ventas Netas</label><br>
+                        <label for="TAR_PER"> Tarifa Prom. Per.</label><br> 
                         <input type="checkbox" name="porcentaje_ocupacion" id="porcentaje_ocupacion" value="porcentaje_ocupacion" onchange="seleccionarFilas(this)" checked>
                         <label for="porcentaje_ocupacion"> Porcent. Ocupación</label><br>
                         <input type="checkbox" name="revpar" id="revpar" value="revpar" onchange="seleccionarFilas(this)">
@@ -235,16 +244,16 @@
 
 
         <section class="graficaWelcome">
-            <section class="tituloGrafica" ><h2>Datos Hoteleros Por Categoría </h2></section>
+            <section class="tituloGrafica" ><h2>DATOS HOTELEROS POR CATEGORÍA</h2></section>
             <section class="lineatituloGrafica" ></section>
                 <div class="form-row align-items-center">
                     
-                    <div class="row row-cols-3 col-lg-12 text-center titulosPanel">
-                        <label  for="inputState"> <h3>Año</h3></label>
-                        <label  for="inputState" > <h3>Estadisticos</h3></label>
+                    <div class="row row-cols-3 col-lg-12 pl-5 text-left titulosPanel">
+                        <label  for="inputState"> <h5>Año</h5></label>
+                        <label  for="inputState" style="margin-left: -14em;"> <h5>Estadísticos</h5></label>
                     </div>
-                    <div class="row row-cols-3 col-5 ml-1 p-5 inicio">
-                        <div class="row mr-2">
+                    <div class="row row-cols-2 col-3 ml-1 p-3 inicio">
+                        <div class="row ml-3">
                             <div class="calloutG">
                                 <select id="idanioInicio" name="anio" class="form-control" onchange="cambioAnio(this)">
                                     
@@ -255,7 +264,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row row-cols-2 col-3 mr-5  ml-2 inicio">
+                    <div class="row row-cols-2 col-3 mr-2 ml-1 inicio">
                         <div class="row mr-2">
                             <div class="calloutG">
                                 <select id="inputState" name="estadistico" class="form-control" onchange="cambioEstadistico(this)">
@@ -273,7 +282,7 @@
                 
                 <div class="row col-13">
                     <div class="form-group col-md-2 graficaColums" >
-                        <h3>Columna </h3><br>
+                        <h5 style="margin-bottom: 0.5em;">Columna </h5>
                         <input type="checkbox" name="checkins2" id="checkins2" value="checkins" onchange="seleccionarFilas2(this)">
                         <label for="checkins2"> Checkins</label><br>
                         <input type="checkbox" name="checkouts2" id="checkouts2" value="checkouts" onchange="seleccionarFilas2(this)">
@@ -288,12 +297,13 @@
                         <label for="habitaciones_ocupadas2"> Hab. Ocupadas</label><br>
                         <input type="checkbox" name="habitaciones_disponibles2" id="habitaciones_disponibles2" value="habitaciones_disponibles" onchange="seleccionarFilas2(this)">
                         <label for="habitaciones_disponibles2"> Hab. Disponibles</label><br>
+                        <input type="checkbox" name="ventas_netas2" id="ventas_netas2" value="ventas_netas" onchange="seleccionarFilas2(this)">
+                        <label for="ventas_netas2"> Ventas Netas</label>
+                        <hr style="margin: 0.3em;">
                         <input type="checkbox" name="tarifa_promedio2" id="tarifa_promedio2" value="tarifa_promedio" onchange="seleccionarFilas2(this)">
                         <label for="tarifa_promedio2"> Tarifa Prom. Hab.</label><br>
                         <input type="checkbox" name="TAR_PER2" id="TAR_PER2" value="TAR_PER" onchange="seleccionarFilas2(this)">
                         <label for="TAR_PER2"> Tarifa Prom. Per.</label><br>
-                        <input type="checkbox" name="ventas_netas2" id="ventas_netas2" value="ventas_netas" onchange="seleccionarFilas2(this)">
-                        <label for="ventas_netas2"> Ventas Netas</label><br>
                         <input type="checkbox" name="porcentaje_ocupacion2" id="porcentaje_ocupacion2" value="porcentaje_ocupacion" onchange="seleccionarFilas2(this)" checked>
                         <label for="porcentaje_ocupacion2"> Porcent. Ocupación</label><br>
                         <input type="checkbox" name="revpar2" id="revpar2" value="revpar" onchange="seleccionarFilas2(this)">
@@ -317,23 +327,23 @@
             <article class="servicios">    
                     <img src="{{ asset('imgs/hotel.png')}}">
                     <h4>Residencia</h4>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam error voluptatibus rerum quam, 
-                        at qui laboriosam explicabo debitis odit esse alias obcaecati? Dignissimos dolor commodi aspernatur 
-                        eligendi quidem totam dicta!</p>
+                    <p>El personal usa equipos de protección; se controla la temperatura del personal; 
+                        hay controles de temperatura disponibles para los huéspedes; y se ofrece desinfectante para 
+                        manos a los huéspedes.</p>
             </article >
             <article class="servicios">    
                     <img src="{{ asset('imgs/plato.png')}}">
                     <h4>Restaurantes</h4>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam error voluptatibus rerum quam, 
-                        at qui laboriosam explicabo debitis odit esse alias obcaecati? Dignissimos dolor commodi aspernatur 
-                        eligendi quidem totam dicta!</p>
+                    <p>La gastronomía del Ecuador, se caracteriza por su variada forma de preparar 
+                        comidas y bebidas.Dentro de la “comida típica” podemos encontrar; arroz, huevo, papas, 
+                        aguacate, carne de res o de cerdo.</p>
             </article >
             <article class="servicios">    
                     <img src="{{ asset('imgs/lugar.png')}}">
                     <h4>Sitios</h4>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam error voluptatibus rerum quam, 
-                        at qui laboriosam explicabo debitis odit esse alias obcaecati? Dignissimos dolor commodi aspernatur 
-                        eligendi quidem totam dicta!</p>
+                    <p>Ecuador Travel - Turismo en Ecuador les presenta los mejores lugares 
+                        turísticos de Ecuador, una amplia gama de turismo y aventura construido 
+                        en el sitio perfecto. </p>
             </article >
         </section>
         <section class="serviciosL2">
@@ -409,6 +419,28 @@
 
 @section('scripts')
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
+
+
+ <!--Flecha-->
+ <script>
+    $(document).ready(function(){ //Hacia arriba
+        irArriba();
+    });
+
+    function irArriba(){
+        $('.flechaInicio').click(function(){ 
+            $('body,html').animate({ scrollTop:'10px' },100); 
+        });
+        $(window).scroll(function(){
+            if($(this).scrollTop() > 0){ 
+                $('.flechaInicio').slideDown(600); 
+            }else{ 
+                $('.flechaInicio').slideUp(600);
+            }
+        });
+        $('.flechaInicio').click(function(){ $('body,html').animate({ scrollTop:'0px' },2); });
+        }
+</script>
 
 <script>
     
@@ -488,11 +520,10 @@
     
     var porcentaje_ocupacion2 = {
                 label: 'porcentaje_ocupacion',
-                fillColor: "rgba(220,220,220,0.5)",
-                strokeColor: "rgba(220,220,220,0.8)",
-                highlightFill: "rgba(220,220,220,0.75)",
-                highlightStroke: "rgba(220,220,220,1)",
-                data: [1,2,3,4,5]
+                backgroundColor: "rgba(211, 214, 30,0.6)",
+                borderColor: "rgba(211, 214, 30)",
+                borderWidth: 2,
+                data: dataPorcOcupacion2
             };
 
     var columnas2 = [porcentaje_ocupacion2];
@@ -503,6 +534,15 @@
         data: {
             labels: ["5 Estrellas", "4 Estrellas", "3 Estrellas", "2 Estrellas", "1 Estrella"],
             datasets: columnas2
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
         }
     });
 
@@ -655,7 +695,7 @@
                 dataHabOcupadas2.push(arreglo[i].habitaciones_ocupadas);
                 dataHabDisponibles2.push(arreglo[i].habitaciones_disponibles);
                 dataTarPromHab2.push(arreglo[i].tarifa_promedio);
-                dataTarPromPer2.push(arreglo[i].TAR_PER);
+                dataTarPromPer2.push(arreglo[i].tar_per);
                 dataVentasNetas2.push(arreglo[i].ventas_netas);
                 dataPorcOcupacion2.push(arreglo[i].porcentaje_ocupacion);
                 dataREVPAR2.push(arreglo[i].revpar);
@@ -868,7 +908,7 @@
         dataPorcOcupacion2 = [];
         dataREVPAR2 = [];
 
-        anio = val.value;
+        estadisticoBarras = val.value;
         
         consultaBarras();
     }
@@ -965,63 +1005,76 @@
         var datos;
         var bandera;
         var color;
+        var borde;
         
         if(valor == 'checkins'){
-            color = 'rgba(0, 0, 0)';
+            color = 'rgba(0, 0, 0,0.6)';
+            borde = 'rgba(0, 0, 0)';
             datos = dataCheckins2;
             bandera = document.getElementById('checkins2').checked;
         }else if(valor == 'checkouts'){
-            color = 'rgba(255, 0, 0)';
+            color = 'rgba(255, 0, 0,0.6)';
+            borde = 'rgba(255, 0, 0)';
             datos = dataCheckouts2;
             bandera = document.getElementById('checkouts2').checked;
         }else if(valor == 'pernoctaciones'){
-            color = 'rgba(110, 54, 54)';
+            color = 'rgba(110, 54, 54,0.6)';
+            borde = 'rgba(110, 54, 54)';
             datos = dataPernoctaciones2;
             bandera = document.getElementById('pernoctaciones2').checked;
         }else if(valor == 'nacionales'){
-            color = 'rgba(131, 119, 119)';
+            color = 'rgba(131, 119, 119,0.6)';
+            borde = 'rgba(131, 119, 119)';
             datos = dataNacionales2;
             bandera = document.getElementById('nacionales2').checked;
         }else if(valor == 'extranjeros'){
-            color = 'rgba(223, 172, 32)';
+            color = 'rgba(223, 172, 32,0.6)';
+            borde = 'rgba(223, 172, 32)';
             datos = dataExtranjeros2;
             bandera = document.getElementById('extranjeros2').checked;
         }else if(valor == 'habitaciones_ocupadas'){
-            color = 'rgba(109, 209, 84)';
+            color = 'rgba(109, 209, 84,0.6)';
+            borde = 'rgba(109, 209, 84)';
             datos = dataHabOcupadas2;
             bandera = document.getElementById('habitaciones_ocupadas2').checked;
         }else if(valor == 'habitaciones_disponibles'){
-            color = 'rgba(39, 215, 228)';
+            color = 'rgba(39, 215, 228,0.6)';
+            borde = 'rgba(39, 215, 228)';
             datos = dataHabDisponibles2;
             bandera = document.getElementById('habitaciones_disponibles2').checked;
         }else if(valor == 'tarifa_promedio'){
-            color = 'rgba(41, 77, 175)';
+            color = 'rgba(41, 77, 175,0.6)';
+            borde = 'rgba(41, 77, 175)';
             datos = dataTarPromHab2;
             bandera = document.getElementById('tarifa_promedio2').checked;
         }else if(valor == 'TAR_PER'){
-            color = 'rgba(99, 41, 175)';
+            color = 'rgba(99, 41, 175,0.6)';
+            borde = 'rgba(99, 41, 175)';
             datos = dataTarPromPer2;
             bandera = document.getElementById('TAR_PER2').checked;
         }else if(valor == 'ventas_netas'){
-            color = 'rgba(216, 44, 193)';
+            color = 'rgba(216, 44, 193,0.6)';
+            borde = 'rgba(216, 44, 193)';
             datos = dataVentasNetas2;
             bandera = document.getElementById('ventas_netas2').checked;
         }else if(valor == 'porcentaje_ocupacion'){
-            color = 'rgba(211, 214, 30)';
+            color = 'rgba(211, 214, 30,0.6)';
+            borde = 'rgba(211, 214, 30)';
             datos = dataPorcOcupacion2;
             bandera = document.getElementById('porcentaje_ocupacion2').checked;
         }else if(valor == 'revpar'){
-            color = 'rgba(19, 190, 153)';
+            color = 'rgba(19, 190, 153,0.6)';
+            borde = 'rgba(19, 190, 153)';
             datos = dataREVPAR2;
             bandera = document.getElementById('revpar2').checked;
         }
 
         var aux = {
             label: valor,
-            data: datos,
-            backgroundColor: 'rgb(255,255,255,0.01)',
-            borderColor: color,
-            borderWidth: 3
+            backgroundColor: color,
+            borderColor: borde,
+            borderWidth: 2,
+            data: datos
         };
         
         if(bandera){

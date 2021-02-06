@@ -17,13 +17,7 @@
                                 <i class="fa fa-arrow-up fa-stack-2x fa-inverse"></i>
                             </span>
                         </a>
-                        <a  class="dropdown-toggle" data-toggle="dropdown" class="etiquetaA" href="#">Todas</a>
-                        <ul  class="dropdown-menu">
-                            <li><a href="#tarifaPromedio">Tarifa Promedio</a></li>
-                            <li><a href="#estadiaPromedio">Estadia Promedio</a></li>
-                            <li><a href="#porcentajeOcupacion">Porcentaje Ocupacion</a></li>       
-                            <li><a href="#revpar">RevPar</a></li>                    
-                        </ul>
+                       
                         @csrf
                             <select name="anio"  class="form-select" required > 
                                 @foreach($anios as $a)
@@ -58,7 +52,7 @@
             <section class="indicadoresDeHues" id="huespedes">
                 <h2 >
                     <img src="{{ asset('imgs/invitado.png')}}"> HUÉSPEDES 
-                </h2><hr>
+                </h2><p></p> <hr>
                 <div class="row row-cols-1 row-cols-md-3 g-3">
                     <div class="col-lg-4 col-md-12 mb-4">
                             <div class="card-sectionDeh  border rounded">
@@ -145,226 +139,228 @@
             <!--Fin huespedes>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-->
             <!--Tarifa promedio>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-->
             
-        <section class="indicadoresDe" id="tarifaPromedio">
-            <h2><img src="{{ asset('imgs/sigdolar.png')}}">TARIFA PROMEDIO</h2><hr>
-            <h4>Por Habitación</h4><p></p><br>
-            <div class="row row-cols-2 row-cols-md-4 g-3">
-                <div class="col-lg-2 col-md-2 mr-5 ">
-                    <div class="card-sectionPo  border rounded">
-                        
-                        <div class="card-headerTp5 text-center mb-2 rounded">
-                        <h2>5<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 150 165">
-                            <polygon fill="yellow" points="129,150 85,119 41,150 57,104 15,66,68,66 85,15 102,65 156,66 113,98" />
-                        </svg></h2>  
-                        </div>
-                        <h4>${{$arrTarifaH5Est[0]}}</h4>
-                            @if( $arrTarifaH5Est[2] === 1)
-                                <p> <img src="{{ asset('imgs/decrec.png')}}"> Decrecimiento de: $ {{$arrTarifaH5Est[1]}} vs mes anterior</p>
-                            @elseif( $arrTarifaH5Est[2] === 2)
-                                <p><img  src="{{ asset('imgs/crec.png')}}">Crecimiento de: $ {{$arrTarifaH5Est[1]}} vs mes anterior</p>
-                            @elseif( $arrTarifaH5Est[2] === 3)
-                                <p><img  src="{{ asset('imgs/crec.png')}}">No registra cambio vs el mes anterior</p>
-                            @else
-                                <p>---------------</p>
-                            @endif
-                    </div>
-                </div>
-
-                <div class="col-lg-2 col-md-2 mr-5">
-                    <div class="card-sectionPo  border rounded">
-                        <div class="card-headerTp4 text-center mb-2 rounded">
-                            <h2>4<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 150 165">
+            <section class="indicadoresDe" id="tarifaPromedio">
+                <h2><img src="{{ asset('imgs/sigdolar.png')}}">TARIFA PROMEDIO</h2>
+                <p class="significadoEstadisticas">Dinero promedio que recepta un establecimiento, ya sea por cada persona que ingresa, o por cada habitación ocupada</p><hr>
+                <h4>Por Habitación</h4><p></p><br>
+                <div class="row row-cols-2 row-cols-md-4 g-3">
+                    <div class="col-lg-2 col-md-2 mr-5 ">
+                        <div class="card-sectionPo  border rounded">
+                            
+                            <div class="card-headerTp5 text-center mb-2 rounded">
+                            <h2>5<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 150 165">
                                 <polygon fill="yellow" points="129,150 85,119 41,150 57,104 15,66,68,66 85,15 102,65 156,66 113,98" />
                             </svg></h2>  
+                            </div>
+                            <h4>${{$arrTarifaH5Est[0]}}</h4>
+                                @if( $arrTarifaH5Est[2] === 1)
+                                    <p> <img src="{{ asset('imgs/decrec.png')}}"> Decrecimiento de: $ {{$arrTarifaH5Est[1]}} vs mes anterior</p>
+                                @elseif( $arrTarifaH5Est[2] === 2)
+                                    <p><img  src="{{ asset('imgs/crec.png')}}">Crecimiento de: $ {{$arrTarifaH5Est[1]}} vs mes anterior</p>
+                                @elseif( $arrTarifaH5Est[2] === 3)
+                                    <p><img  src="{{ asset('imgs/crec.png')}}">No registra cambio vs el mes anterior</p>
+                                @else
+                                    <p>---------------</p>
+                                @endif
                         </div>
-                            <h4>${{$arrTarifaH4Est[0]}}</h4>
-                                @if( $arrTarifaH4Est[2] === 1)
-                                    <p> <img src="{{ asset('imgs/decrec.png')}}"> Decrecimiento de: $ {{$arrTarifaH4Est[1]}} vs mes anterior</p>
-                                @elseif($arrTarifaH4Est[2] === 2)
-                                    <p><img src="{{ asset('imgs/crec.png')}}">Crecimiento de: $ {{$arrTarifaH4Est[1]}} vs mes anterior</p>
-                                @elseif($arrTarifaH4Est[2] === 3)
+                    </div>
+
+                    <div class="col-lg-2 col-md-2 mr-5">
+                        <div class="card-sectionPo  border rounded">
+                            <div class="card-headerTp4 text-center mb-2 rounded">
+                                <h2>4<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 150 165">
+                                    <polygon fill="yellow" points="129,150 85,119 41,150 57,104 15,66,68,66 85,15 102,65 156,66 113,98" />
+                                </svg></h2>  
+                            </div>
+                                <h4>${{$arrTarifaH4Est[0]}}</h4>
+                                    @if( $arrTarifaH4Est[2] === 1)
+                                        <p> <img src="{{ asset('imgs/decrec.png')}}"> Decrecimiento de: $ {{$arrTarifaH4Est[1]}} vs mes anterior</p>
+                                    @elseif($arrTarifaH4Est[2] === 2)
+                                        <p><img src="{{ asset('imgs/crec.png')}}">Crecimiento de: $ {{$arrTarifaH4Est[1]}} vs mes anterior</p>
+                                    @elseif($arrTarifaH4Est[2] === 3)
+                                        <p><img  src="{{ asset('imgs/crec.png')}}">No registra cambio vs mes anterior</p>
+                                    @else
+                                        <p>---------------</p>
+                                    @endif
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-2 mr-5">
+                        <div class="card-sectionPo  border rounded">
+                            <div class="card-headerTp3 text-center mb-2 rounded">
+                                <h2>3<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 150 165">
+                                    <polygon fill="yellow" points="129,150 85,119 41,150 57,104 15,66,68,66 85,15 102,65 156,66 113,98" />
+                                </svg></h2>  
+                            </div>
+                            <h4 >${{$arrTarifaH3Est[0]}}</h4>
+                                @if( $arrTarifaH3Est[2] === 1)
+                                    <p> <img src="{{ asset('imgs/decrec.png')}}"> Decrecimiento de: $ {{$arrTarifaH3Est[1]}} vs mes anterior</p>
+                                @elseif( $arrTarifaH3Est[2] === 2)
+                                    <p><img src="{{ asset('imgs/crec.png')}}">Crecimiento de: $ {{$arrTarifaH3Est[1]}} vs mes anterior</p>
+                                @elseif( $arrTarifaH3Est[2] === 3)
+                                    <p><img src="{{ asset('imgs/crec.png')}}">No registra cambio vs mes anterior</p>
+                                @else
+                                    <p>---------------</p>
+                                @endif
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-2 mr-5">
+                        <div class="card-sectionPo  border rounded">
+                            <div class="card-headerTp2 text-center mb-2 rounded">
+                                <h2>2<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 150 165">
+                                    <polygon fill="yellow" points="129,150 85,119 41,150 57,104 15,66,68,66 85,15 102,65 156,66 113,98" />
+                                </svg></h2>  
+                            </div>
+                            <h4>${{$arrTarifaH2Est[0]}}</h4>
+                                @if( $arrTarifaH2Est[2] === 1)
+                                    <p> <img src="{{ asset('imgs/decrec.png')}}"> Decrecimiento de: $ {{$arrTarifaH2Est[1]}} vs mes anterior</p>
+                                @elseif( $arrTarifaH2Est[2] === 2)
+                                    <p><img  src="{{ asset('imgs/crec.png')}}">Crecimiento de: $ {{$arrTarifaH2Est[1]}} vs mes anterior</p>
+                                @elseif( $arrTarifaH2Est[2] === 3)
+                                    <p><img  src="{{ asset('imgs/crec.png')}}">No registra cambio vs el mes anterior</p>
+                                @else
+                                    <p>---------------</p>
+                                @endif
+                        </div>
+                    </div>
+                
+                    <div class="col-lg-2 col-md-2 mr-1">
+                        <div class="card-sectionPo  border rounded">
+                            <div class="card-headerTp1 text-center mb-2 rounded">
+                                <h2>1<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 150 165">
+                                    <polygon fill="yellow" points="129,150 85,119 41,150 57,104 15,66,68,66 85,15 102,65 156,66 113,98" />
+                                </svg></h2>  
+                            </div>
+                            <h4>${{$arrTarifaH1Est[0]}}</h4>
+                                @if( $arrTarifaH1Est[2] === 1)
+                                    <p> <img src="{{ asset('imgs/decrec.png')}}"> Decrecimiento de: $ {{$arrTarifaH1Est[1]}} vs mes anterior</p>
+                                @elseif( $arrTarifaH1Est[2] === 2)
+                                    <p><img  src="{{ asset('imgs/crec.png')}}">Crecimiento de: $ {{$arrTarifaH1Est[1]}} vs mes anterior</p>
+                                @elseif( $arrTarifaH1Est[2] === 3)
+                                    <p><img  src="{{ asset('imgs/crec.png')}}">No registra cambio vs el mes anterior</p>
+                                @else
+                                    <p>---------------</p>
+                                @endif
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-body" style="background-color: rgb(238,238,238);">
+                        <canvas style="background-color: rgb(238,238,238);" id="tarifaPromHabitacion" width="800" height="300"></canvas>
+                    </div>
+                </div>
+                <hr>
+            </section>
+                <!-- fin promedio por habitacion -->
+                
+                <!-- inicio promedio por persona -->
+            <section class="indicadoresDe porPersona">
+                <h3>Por Persona</h3><p></p><br>
+                <div class="row row-cols-2 row-cols-md-4 g-3">
+                    <div class="col-lg-2 col-md-2 mr-5 ">
+                        <div class="card-sectionPo  border rounded">
+                            <div class="card-headerTp5 text-center mb-2 rounded">
+                                <h2>5<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 150 165">
+                                <polygon fill="yellow" points="129,150 85,119 41,150 57,104 15,66,68,66 85,15 102,65 156,66 113,98" />
+                                </svg></h2>  
+                            </div>
+                                <h4>${{$arrTarifaP5Est[0]}}</h4>
+                                @if( $arrTarifaP5Est[2] === 1)
+                                    <p> <img src="{{ asset('imgs/decrec.png')}}"> Decrecimiento de: $ {{$arrTarifaP5Est[1]}} vs mes anterior</p>
+                                @elseif( $arrTarifaP5Est[2] === 2)
+                                    <p><img src="{{ asset('imgs/crec.png')}}">Crecimiento de: $ {{$arrTarifaP5Est[1]}} vs mes anterior</p>
+                                @elseif( $arrTarifaP5Est[2] === 3)
+                                    <p><img src="{{ asset('imgs/crec.png')}}">No registra cambio vs mes anterior</p>
+                                @else
+                                    <p>---------------</p>
+                                @endif 
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-2 mr-5 ">
+                        <div class="card-sectionPo  border rounded">
+                            <div class="card-headerTp4 text-center mb-2 rounded">
+                                <h2>4<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 150 165">
+                                <polygon fill="yellow" points="129,150 85,119 41,150 57,104 15,66,68,66 85,15 102,65 156,66 113,98" />
+                                </svg></h2>  
+                            </div>
+                                <h4>${{$arrTarifaP4Est[0]}}</h4>
+                                @if( $arrTarifaP4Est[2] === 1)
+                                    <p> <img src="{{ asset('imgs/decrec.png')}}"> Decrecimiento de: $ {{$arrTarifaP4Est[1]}} vs mes anterior</p>
+                                @elseif( $arrTarifaP4Est[2] === 2)
+                                    <p><img  src="{{ asset('imgs/crec.png')}}">Crecimiento de: $ {{$arrTarifaP4Est[1]}} vs mes anterior</p>
+                                @elseif( $arrTarifaP4Est[2] === 3)
                                     <p><img  src="{{ asset('imgs/crec.png')}}">No registra cambio vs mes anterior</p>
                                 @else
                                     <p>---------------</p>
                                 @endif
+                        </div>
                     </div>
-                </div>
-                <div class="col-lg-2 col-md-2 mr-5">
-                    <div class="card-sectionPo  border rounded">
-                        <div class="card-headerTp3 text-center mb-2 rounded">
-                            <h2>3<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 150 165">
+                    <div class="col-lg-2 col-md-2 mr-5 ">
+                        <div class="card-sectionPo  border rounded">
+                            <div class="card-headerTp3 text-center mb-2 rounded">
+                                <h2>3<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 150 165">
+                                    <polygon fill="yellow" points="129,150 85,119 41,150 57,104 15,66,68,66 85,15 102,65 156,66 113,98" />
+                                </svg></h2>  
+                            </div>
+                                <h4>${{$arrTarifaP3Est[0]}}</h4>
+                                @if( $arrTarifaP3Est[2] === 1)
+                                    <p style="font-size:10px;"> <img src="{{ asset('imgs/decrec.png')}}"> Decrecimiento de: $ {{$arrTarifaP3Est[1]}} vs mes anterior</p>
+                                @elseif( $arrTarifaP3Est[2] === 2)
+                                    <p><img src="{{ asset('imgs/crec.png')}}">Crecimiento de: $ {{$arrTarifaP3Est[1]}} vs mes anterior</p>
+                                @elseif( $arrTarifaP3Est[2] === 3)
+                                    <p><img src="{{ asset('imgs/crec.png')}}">No registra cambio vs mes anterior</p>
+                                @else
+                                    <p>---------------</p>
+                                @endif
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-2 mr-5 ">
+                        <div class="card-sectionPo  border rounded">
+                            <div class="card-headerTp2 text-center mb-2 rounded">
+                                <h2>2<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 150 165">
                                 <polygon fill="yellow" points="129,150 85,119 41,150 57,104 15,66,68,66 85,15 102,65 156,66 113,98" />
                             </svg></h2>  
+                            </div>
+                                <h4>${{$arrTarifaP2Est[0]}}</h4>
+                                @if( $arrTarifaP2Est[2] === 1)
+                                    <p> <img src="{{ asset('imgs/decrec.png')}}"> Decrecimiento de: $ {{$arrTarifaP2Est[1]}} vs mes anterior</p>
+                                @elseif( $arrTarifaP2Est[2] === 2)
+                                    <p><img src="{{ asset('imgs/crec.png')}}">Crecimiento de: $ {{$arrTarifaP2Est[1]}} vs mes anterior</p>
+                                @elseif( $arrTarifaP2Est[2] === 3)
+                                    <p><img src="{{ asset('imgs/crec.png')}}">No registra cambio vs mes anterior</p>
+                                @else
+                                    <p>---------------</p>
+                                @endif 
                         </div>
-                        <h4 >${{$arrTarifaH3Est[0]}}</h4>
-                            @if( $arrTarifaH3Est[2] === 1)
-                                <p> <img src="{{ asset('imgs/decrec.png')}}"> Decrecimiento de: $ {{$arrTarifaH3Est[1]}} vs mes anterior</p>
-                            @elseif( $arrTarifaH3Est[2] === 2)
-                                <p><img src="{{ asset('imgs/crec.png')}}">Crecimiento de: $ {{$arrTarifaH3Est[1]}} vs mes anterior</p>
-                            @elseif( $arrTarifaH3Est[2] === 3)
-                                <p><img src="{{ asset('imgs/crec.png')}}">No registra cambio vs mes anterior</p>
-                            @else
-                                <p>---------------</p>
-                            @endif
                     </div>
-                </div>
-                <div class="col-lg-2 col-md-2 mr-5">
-                    <div class="card-sectionPo  border rounded">
-                        <div class="card-headerTp2 text-center mb-2 rounded">
-                            <h2>2<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 150 165">
-                                <polygon fill="yellow" points="129,150 85,119 41,150 57,104 15,66,68,66 85,15 102,65 156,66 113,98" />
-                            </svg></h2>  
-                        </div>
-                        <h4>${{$arrTarifaH2Est[0]}}</h4>
-                            @if( $arrTarifaH2Est[2] === 1)
-                                <p> <img src="{{ asset('imgs/decrec.png')}}"> Decrecimiento de: $ {{$arrTarifaH2Est[1]}} vs mes anterior</p>
-                            @elseif( $arrTarifaH2Est[2] === 2)
-                                <p><img  src="{{ asset('imgs/crec.png')}}">Crecimiento de: $ {{$arrTarifaH2Est[1]}} vs mes anterior</p>
-                            @elseif( $arrTarifaH2Est[2] === 3)
-                                <p><img  src="{{ asset('imgs/crec.png')}}">No registra cambio vs el mes anterior</p>
-                            @else
-                                <p>---------------</p>
-                            @endif
-                    </div>
-                </div>
             
-                <div class="col-lg-2 col-md-2 mr-1">
-                    <div class="card-sectionPo  border rounded">
-                        <div class="card-headerTp1 text-center mb-2 rounded">
-                            <h2>1<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 150 165">
+                    <div class="col-lg-2 col-md-2 mr-1 ">
+                        <div class="card-sectionPo  border rounded">
+                            <div class="card-headerTp1 text-center mb-2 rounded">
+                                <h2>1<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 150 165">
                                 <polygon fill="yellow" points="129,150 85,119 41,150 57,104 15,66,68,66 85,15 102,65 156,66 113,98" />
                             </svg></h2>  
+                            </div>
+                                <h4>${{$arrTarifaP1Est[0]}}</h4>
+                                @if( $arrTarifaP1Est[2] === 1)
+                                    <p> <img src="{{ asset('imgs/decrec.png')}}"> Decrecimiento de: $ {{$arrTarifaP1Est[1]}} vs mes anterior</p>
+                                @elseif( $arrTarifaP1Est[2] === 2)
+                                    <p><img src="{{ asset('imgs/crec.png')}}">Crecimiento de: $ {{$arrTarifaP1Est[1]}} vs mes anterior</p>
+                                @elseif( $arrTarifaP1Est[2] === 3)
+                                    <p><img src="{{ asset('imgs/crec.png')}}">No registra cambio vs mes anterior</p>
+                                @else
+                                    <p>---------------</p>
+                                @endif 
                         </div>
-                        <h4>${{$arrTarifaH1Est[0]}}</h4>
-                            @if( $arrTarifaH1Est[2] === 1)
-                                <p> <img src="{{ asset('imgs/decrec.png')}}"> Decrecimiento de: $ {{$arrTarifaH1Est[1]}} vs mes anterior</p>
-                            @elseif( $arrTarifaH1Est[2] === 2)
-                                <p><img  src="{{ asset('imgs/crec.png')}}">Crecimiento de: $ {{$arrTarifaH1Est[1]}} vs mes anterior</p>
-                            @elseif( $arrTarifaH1Est[2] === 3)
-                                <p><img  src="{{ asset('imgs/crec.png')}}">No registra cambio vs el mes anterior</p>
-                            @else
-                                <p>---------------</p>
-                            @endif
                     </div>
                 </div>
-            </div>
-               
-            <div class="card">
-                <div class="card-body">
-                    <canvas id="tarifaPromHabitacion" width="800" height="300"></canvas>
-                </div>
-            </div>
-            <hr>
-        </section>
-            <!-- fin promedio por habitacion -->
-            
-            <!-- inicio promedio por persona -->
-        <section class="indicadoresDe porPersona">
-            <h3>Por Persona</h3><p></p><br>
-            <div class="row row-cols-2 row-cols-md-4 g-3">
-                <div class="col-lg-2 col-md-2 mr-5 ">
-                    <div class="card-sectionPo  border rounded">
-                        <div class="card-headerTp5 text-center mb-2 rounded">
-                            <h2>5<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 150 165">
-                            <polygon fill="yellow" points="129,150 85,119 41,150 57,104 15,66,68,66 85,15 102,65 156,66 113,98" />
-                            </svg></h2>  
-                        </div>
-                            <h4>${{$arrTarifaP5Est[0]}}</h4>
-                            @if( $arrTarifaP5Est[2] === 1)
-                                <p> <img src="{{ asset('imgs/decrec.png')}}"> Decrecimiento de: $ {{$arrTarifaP5Est[1]}} vs mes anterior</p>
-                            @elseif( $arrTarifaP5Est[2] === 2)
-                                <p><img src="{{ asset('imgs/crec.png')}}">Crecimiento de: $ {{$arrTarifaP5Est[1]}} vs mes anterior</p>
-                            @elseif( $arrTarifaP5Est[2] === 3)
-                                <p><img src="{{ asset('imgs/crec.png')}}">No registra cambio vs mes anterior</p>
-                            @else
-                                <p>---------------</p>
-                            @endif 
+                <div class="card">
+                    <div class="card-body" style="background-color: rgb(238,238,238);">
+                        <canvas style="background-color: rgb(238,238,238);" id="tarifaPromPerson" width="800" height="300"></canvas>
                     </div>
                 </div>
-                <div class="col-lg-2 col-md-2 mr-5 ">
-                    <div class="card-sectionPo  border rounded">
-                        <div class="card-headerTp4 text-center mb-2 rounded">
-                            <h2>4<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 150 165">
-                            <polygon fill="yellow" points="129,150 85,119 41,150 57,104 15,66,68,66 85,15 102,65 156,66 113,98" />
-                            </svg></h2>  
-                        </div>
-                            <h4>${{$arrTarifaP4Est[0]}}</h4>
-                            @if( $arrTarifaP4Est[2] === 1)
-                                <p> <img src="{{ asset('imgs/decrec.png')}}"> Decrecimiento de: $ {{$arrTarifaP4Est[1]}} vs mes anterior</p>
-                            @elseif( $arrTarifaP4Est[2] === 2)
-                                <p><img  src="{{ asset('imgs/crec.png')}}">Crecimiento de: $ {{$arrTarifaP4Est[1]}} vs mes anterior</p>
-                            @elseif( $arrTarifaP4Est[2] === 3)
-                                <p><img  src="{{ asset('imgs/crec.png')}}">No registra cambio vs mes anterior</p>
-                            @else
-                                <p>---------------</p>
-                            @endif
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-2 mr-5 ">
-                    <div class="card-sectionPo  border rounded">
-                        <div class="card-headerTp3 text-center mb-2 rounded">
-                            <h2>3<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 150 165">
-                                <polygon fill="yellow" points="129,150 85,119 41,150 57,104 15,66,68,66 85,15 102,65 156,66 113,98" />
-                            </svg></h2>  
-                        </div>
-                            <h4>${{$arrTarifaP3Est[0]}}</h4>
-                            @if( $arrTarifaP3Est[2] === 1)
-                                <p style="font-size:10px;"> <img src="{{ asset('imgs/decrec.png')}}"> Decrecimiento de: $ {{$arrTarifaP3Est[1]}} vs mes anterior</p>
-                            @elseif( $arrTarifaP3Est[2] === 2)
-                                <p><img src="{{ asset('imgs/crec.png')}}">Crecimiento de: $ {{$arrTarifaP3Est[1]}} vs mes anterior</p>
-                            @elseif( $arrTarifaP3Est[2] === 3)
-                                <p><img src="{{ asset('imgs/crec.png')}}">No registra cambio vs mes anterior</p>
-                            @else
-                                <p>---------------</p>
-                            @endif
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-2 mr-5 ">
-                    <div class="card-sectionPo  border rounded">
-                        <div class="card-headerTp2 text-center mb-2 rounded">
-                            <h2>2<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 150 165">
-                            <polygon fill="yellow" points="129,150 85,119 41,150 57,104 15,66,68,66 85,15 102,65 156,66 113,98" />
-                        </svg></h2>  
-                        </div>
-                            <h4>${{$arrTarifaP2Est[0]}}</h4>
-                            @if( $arrTarifaP2Est[2] === 1)
-                                <p> <img src="{{ asset('imgs/decrec.png')}}"> Decrecimiento de: $ {{$arrTarifaP2Est[1]}} vs mes anterior</p>
-                            @elseif( $arrTarifaP2Est[2] === 2)
-                                <p><img src="{{ asset('imgs/crec.png')}}">Crecimiento de: $ {{$arrTarifaP2Est[1]}} vs mes anterior</p>
-                            @elseif( $arrTarifaP2Est[2] === 3)
-                                <p><img src="{{ asset('imgs/crec.png')}}">No registra cambio vs mes anterior</p>
-                            @else
-                                <p>---------------</p>
-                            @endif 
-                    </div>
-                </div>
+            </section>
         
-                <div class="col-lg-2 col-md-2 mr-1 ">
-                    <div class="card-sectionPo  border rounded">
-                        <div class="card-headerTp1 text-center mb-2 rounded">
-                            <h2>1<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 150 165">
-                            <polygon fill="yellow" points="129,150 85,119 41,150 57,104 15,66,68,66 85,15 102,65 156,66 113,98" />
-                        </svg></h2>  
-                        </div>
-                            <h4>${{$arrTarifaP1Est[0]}}</h4>
-                            @if( $arrTarifaP1Est[2] === 1)
-                                <p> <img src="{{ asset('imgs/decrec.png')}}"> Decrecimiento de: $ {{$arrTarifaP1Est[1]}} vs mes anterior</p>
-                            @elseif( $arrTarifaP1Est[2] === 2)
-                                <p><img src="{{ asset('imgs/crec.png')}}">Crecimiento de: $ {{$arrTarifaP1Est[1]}} vs mes anterior</p>
-                            @elseif( $arrTarifaP1Est[2] === 3)
-                                <p><img src="{{ asset('imgs/crec.png')}}">No registra cambio vs mes anterior</p>
-                            @else
-                                <p>---------------</p>
-                            @endif 
-                    </div>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-body">
-                    <canvas id="tarifaPromPerson" width="800" height="300"></canvas>
-                </div>
-            </div>
-        </section>
         <!--Segunda parte =======================================================================================================================================-->
             <!-- fin promedio por persona -->
             
@@ -372,7 +368,8 @@
         <section class="fondoBlanco">
             <section class="indicadoresDe porcentajeFondo" id="porcentajeOcupacion">
                 <h2 class="card-header-title mb-4 text-black">
-                    <img  style="padding-right:0.4em;" src="{{ asset('imgs/porciento.png')}}">PORCENTAJE DE OCUPACIÓN</h2><hr>
+                    <img  style="padding-right:0.4em;" src="{{ asset('imgs/porciento.png')}}">PORCENTAJE DE OCUPACIÓN</h2>
+                    <p class="significadoEstadisticas">Es la relación entre las habitaciones ocupadas y las disponibles durante un período dado</p><hr>
                 <div class="row row-cols-2 row-cols-md-4 g-3">
                     <div class="col-lg-2 col-md-2 mr-5 ">
                         <div class="card-sectionPo  border rounded">
@@ -381,7 +378,7 @@
                                     <polygon fill="yellow" points="129,150 85,119 41,150 57,104 15,66,68,66 85,15 102,65 156,66 113,98" />
                                     </svg> </h2>
                             </div>
-                                <h4>${{$arrOcupacion5Est[0]}}</h4>
+                                <h4>{{$arrOcupacion5Est[0]}}%</h4>
                                 
                                 @if( $arrOcupacion5Est[2] === 1)
                                     <p> <img src="{{ asset('imgs/decrec.png')}}"> Decrecimiento de: {{$arrOcupacion5Est[1]}}% vs mes anterior</p>
@@ -402,7 +399,7 @@
                                 <polygon fill="yellow" points="129,150 85,119 41,150 57,104 15,66,68,66 85,15 102,65 156,66 113,98" />
                                 </svg> </h2>
                             </div>
-                            <h4>${{$arrOcupacion4Est[0]}}</h4>
+                            <h4>{{$arrOcupacion4Est[0]}}%</h4>
                             
                             @if( $arrOcupacion4Est[2] === 1)
                                 <p> <img  src="{{ asset('imgs/decrec.png')}}"> Decrecimiento de: {{$arrOcupacion4Est[1]}}% vs mes anterior</p>
@@ -423,7 +420,7 @@
                                     <polygon fill="yellow" points="129,150 85,119 41,150 57,104 15,66,68,66 85,15 102,65 156,66 113,98" />
                                 </svg> </h2>
                             </div>
-                            <h4>${{$arrOcupacion3Est[0]}}</h4>
+                            <h4>{{$arrOcupacion3Est[0]}}%</h4>
                             
                             @if( $arrOcupacion3Est[2] === 1)
                                 <p> <img  src="{{ asset('imgs/decrec.png')}}"> Decrecimiento de: {{$arrOcupacion3Est[1]}}% vs mes anterior</p>
@@ -445,7 +442,7 @@
                                     <polygon fill="yellow" points="129,150 85,119 41,150 57,104 15,66,68,66 85,15 102,65 156,66 113,98" />
                                     </svg> </h2>
                             </div>
-                                <h4>${{$arrOcupacion2Est[0]}}</h4>
+                                <h4>{{$arrOcupacion2Est[0]}}%</h4>
                                 
                                 @if( $arrOcupacion2Est[2] === 1)
                                     <p> <img src="{{ asset('imgs/decrec.png')}}"> Decrecimiento de: {{$arrOcupacion2Est[1]}}% vs mes anterior</p>
@@ -466,7 +463,7 @@
                                     <polygon fill="yellow" points="129,150 85,119 41,150 57,104 15,66,68,66 85,15 102,65 156,66 113,98" />
                                     </svg> </h2>
                             </div>
-                                <h4>${{$arrOcupacion1Est[0]}}</h4>
+                                <h4>{{$arrOcupacion1Est[0]}}%</h4>
                                 
                                 @if( $arrOcupacion1Est[2] === 1)
                                     <p> <img src="{{ asset('imgs/decrec.png')}}"> Decrecimiento de: {{$arrOcupacion1Est[1]}}% vs mes anterior</p>
@@ -498,7 +495,7 @@
             <h2>
                 <img  style="padding-right:0.4em;" src="{{ asset('imgs/revpar.png')}}">
                 REVPAR
-            <h2><hr>
+            <h2><p class="significadoEstadisticas">Significa "ingreso por habitación disponible" y sirve para valorar el rendimiento financiero</p> <hr>
             <div class="row row-cols-2 row-cols-md-4 g-3">
                 <div class="col-lg-2 col-md-2 mr-5 ">
                     <div class="card-sectionPo  border rounded">
@@ -507,7 +504,7 @@
                                 <polygon fill="yellow" points="129,150 85,119 41,150 57,104 15,66,68,66 85,15 102,65 156,66 113,98" />
                             </svg> </h2>
                         </div>
-                        <h4>{{$arrRevpar5Est[0]}}</h4>
+                        <h4>${{$arrRevpar5Est[0]}}</h4>
                         
                         @if( $arrRevpar5Est[2] === 1)
                             <p> <img  src="{{ asset('imgs/decrec.png')}}"> Decrecimiento de: {{$arrRevpar5Est[1]}} vs mes anterior</p>
@@ -528,7 +525,7 @@
                                 <polygon fill="yellow" points="129,150 85,119 41,150 57,104 15,66,68,66 85,15 102,65 156,66 113,98" />
                             </svg> </h2>
                         </div>
-                        <h4>{{$arrRevpar4Est[0]}}</h4>
+                        <h4>${{$arrRevpar4Est[0]}}</h4>
                         
                         @if( $arrRevpar4Est[2] === 1)
                             <p> <img  src="{{ asset('imgs/decrec.png')}}"> Decrecimiento de: {{$arrRevpar4Est[1]}} vs mes anterior</p>
@@ -549,7 +546,7 @@
                                 <polygon fill="yellow" points="129,150 85,119 41,150 57,104 15,66,68,66 85,15 102,65 156,66 113,98" />
                             </svg> </h2>
                         </div>
-                        <h4>{{$arrRevpar3Est[0]}}</h4>
+                        <h4>${{$arrRevpar3Est[0]}}</h4>
                         
                         @if( $arrRevpar3Est[2] === 1)
                             <p> <img  src="{{ asset('imgs/decrec.png')}}"> Decrecimiento de: {{$arrRevpar3Est[1]}} vs mes anterior</p>
@@ -572,7 +569,7 @@
                                 <polygon fill="yellow" points="129,150 85,119 41,150 57,104 15,66,68,66 85,15 102,65 156,66 113,98" />
                             </svg> </h2>
                         </div>
-                        <h4>{{$arrRevpar2Est[0]}}</h4>
+                        <h4>${{$arrRevpar2Est[0]}}</h4>
                         
                         @if( $arrRevpar2Est[2] === 1)
                             <p> <img  src="{{ asset('imgs/decrec.png')}}"> Decrecimiento de: {{$arrRevpar2Est[1]}} vs mes anterior</p>
@@ -594,7 +591,7 @@
                                 <polygon fill="yellow" points="129,150 85,119 41,150 57,104 15,66,68,66 85,15 102,65 156,66 113,98" />
                             </svg> </h2>
                         </div>
-                        <h4>{{$arrRevpar1Est[0]}}</h4>
+                        <h4>${{$arrRevpar1Est[0]}}</h4>
                         
                         @if( $arrRevpar1Est[2] === 1)
                             <p> <img  src="{{ asset('imgs/decrec.png')}}"> Decrecimiento de: {{$arrRevpar1Est[1]}} vs mes anterior</p>
@@ -610,8 +607,8 @@
                 </div>
             </div>
             <div class="card">
-                <div class="card-body">
-                    <canvas id="MyLineREVPAR" width="800" height="300"></canvas>
+                <div class="card-body" style="background-color: rgb(238,238,238);">
+                    <canvas style="background-color: rgb(238,238,238);" id="MyLineREVPAR" width="800" height="300"></canvas>
                 </div>
             </div>
         </section>
@@ -623,7 +620,7 @@
                     <h2>
                         <img  style="padding-right:0.4em;" src="{{ asset('imgs/estancia.png')}}">
                         ESTADIA PROMEDIO
-                    <h2><hr>
+                    <h2><p class="significadoEstadisticas">Es una aproximación al número de días que por término medio permanece un viajero en un establecimiento</p><hr>
                     <div class="row row-cols-2 row-cols-md-4 g-3">
                         <div class="col-lg-2 col-md-2 mr-5 ">
                             <div class="card-sectionPo  border rounded">
@@ -932,13 +929,13 @@
                     label: 'Porcentaje Ocupación',
                     data: ocupacion,
                     backgroundColor: [
-                        'rgb(125, 255, 102)'
+                        'rgb(125, 255, 102, 0.7)'
                     ],
                     borderColor: [
                         ' rgb(69,202,0)'
                     ],
-                    borderWidth: 1,
-                    pointRadius: 8
+                    borderWidth: 2,
+                    pointRadius: 6
                 }]
             },
             options: {
@@ -963,14 +960,15 @@
                 datasets: [{
                     label: 'Tarifa Promedio por Persona',
                     data: tarifaPP,
+                    
                     backgroundColor: [
-                        'rgb(125, 255, 102)'
+                        'rgb(125, 255, 102, 0.7)'
                     ],
                     borderColor: [
                         ' rgb(69,202,0)'
                     ],
-                    borderWidth: 1,
-                    pointRadius: 8
+                    borderWidth: 2,
+                    pointRadius: 6
                 }]
             },
             options: {
@@ -996,13 +994,13 @@
                     label: 'Tarifa Promedio por Habitación',
                     data: tarifaPH,
                     backgroundColor: [
-                        'rgb(125, 255, 102)'
+                        'rgb(125, 255, 102, 0.7)'
                     ],
                     borderColor: [
                         ' rgb(69,202,0)'
                     ],
-                    borderWidth: 1,
-                    pointRadius: 8
+                    borderWidth: 2,
+                    pointRadius: 6
                 }]
             },
             options: {
@@ -1012,7 +1010,10 @@
                         ticks: {
                             beginAtZero: true
                         }
-                    }]
+                    }],
+                    backgroundColor: [
+                        'rgb(125, 255, 102)'
+                    ]
                 }
             }
             
@@ -1028,13 +1029,13 @@
                     label: 'REVPAR',
                     data: revpar,
                     backgroundColor: [
-                        'rgb(125, 255, 102)'
+                        'rgb(125, 255, 102, 0.7)'
                     ],
                     borderColor: [
                         ' rgb(69,202,0)'
                     ],
-                    borderWidth: 1,
-                    pointRadius: 8
+                    borderWidth: 2,
+                    pointRadius: 6
                 }]
             },
             options: {
@@ -1060,13 +1061,13 @@
                     label: 'Tarifa Promedio por Persona',
                     data: estadiaProm,
                     backgroundColor: [
-                        'rgb(125, 255, 102)'
+                        'rgb(125, 255, 102,0.7)'
                     ],
                     borderColor: [
                         ' rgb(69,202,0)'
                     ],
-                    borderWidth: 1,
-                    pointRadius: 8
+                    borderWidth: 2,
+                    pointRadius: 6
                 }]
             },
             options: {

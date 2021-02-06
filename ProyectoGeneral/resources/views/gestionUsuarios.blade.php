@@ -9,7 +9,7 @@
     <section class="fondo">
         <section class="fondo2">
             <nav class="navAdmin">
-                <a href="{{url('home/')}}"><img src="{{ asset('imgs/metrica1.png')}}">Inicio</a>
+                <a href="{{url('home/')}}"><img src="{{ asset('imgs/inicio.png')}}">Inicio</a>
                 <a href="{{url('home/visualizarArchivos')}}"><img src="{{ asset('imgs/vision1.png')}}">Visualizar Registros</a>
                 <a href="{{url('home/archivos')}}"><img src="{{ asset('imgs/sub2.png')}}">Cargar Archivos</a>
                 <a style="background: white; color: #000000 ;font-weight: 800;" href="{{url('home/gestionUsuarios')}}"><img src="{{ asset('imgs/group.png')}}">Gestionar Usuarios</a>
@@ -29,8 +29,8 @@
             <div class="modal fade" id="modalAgregar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Nuevo Usuario</h5>
+                        <div  class="modal-header modalHeader">
+                            <h5 class="modal-title"  id="exampleModalLabel">Nuevo Usuario</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                             </button>

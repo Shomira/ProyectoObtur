@@ -4,9 +4,9 @@
     <section class="fondo">
         <section class="fondo2">
             <nav class="navAdmin">
-                <a  style="background: white; color: #000000;font-weight: 800;" href="{{url('home/comparativas')}}"><img src="{{ asset('imgs/metrica1.png')}}">Comparativas</a>
-                <a  href="{{url('home/resumenMensual')}}"><img src="{{ asset('imgs/metrica1.png')}}">Resumen Mensual</a>
-                <a  href="{{url('home/analisisDeNegocio')}}"><img src="{{ asset('imgs/metrica1.png')}}">Análisis De Negocio</a>
+                <a  style="background: white; color: #000000;font-weight: 800;" href="{{url('home/comparativas')}}"><img src="{{ asset('imgs/comparar.png')}}">Comparativas</a>
+                <a  href="{{url('home/resumenMensual')}}"><img src="{{ asset('imgs/resumen.png')}}">Resumen Mensual</a>
+                <a  href="{{url('home/analisisDeNegocio')}}"><img src="{{ asset('imgs/analisisNegocio.png')}}">Análisis De Negocio</a>
                 <a href="{{url('home/visualizarRegistros')}}"><img src="{{ asset('imgs/vision1.png')}}"> Visualizar Registros </a>                
             </nav>
 
@@ -32,45 +32,64 @@
                             </div>
                         </div>
                     </div>
-                </div>
-   
-                <div class="form-row align-items-center">
-                    <div class="panelVisualizar">
-                        <label  for="inputState"> <h5>Inicio</h5>
-                        <div class="row col-md-7">
-                            <select id="idanioInicio" name="anioInicio" class="form-control" onchange="cambioAnioInicio(this)"> 
-                                <option disable>Elegir año ...</option>
-                                @foreach($anios as $anio)
-                                    <option value="{{$anio->anio}}">{{$anio->anio}}</option>
-                                @endforeach
-                            </select>
-                    
-                            <select id="idmesInicio" name="mesInicio" class="form-control" onchange="cambioMesInicio(this)">
-                                <option disable>Elegir mes ...</option>
-                                @foreach($meses as $mes)
-                                    <option value="{{$mes[1]}}">{{$mes[0]}}</option>
-                                @endforeach
-                            </select>
-                         </div></label>
-                        <label  for="inputState" > <h5>Fin</h5>
-                        <div class="row col-md-7">   
-                            <select id="idanioFin" name="anioFin" class="form-control" onchange="cambioAnioFin(this)">
-                                @foreach($anios as $anio)
-                                    <option value="{{$anio->anio}}">{{$anio->anio}}</option>
-                                @endforeach
-                            </select>
-                            <select id="inputState" name="mesFin" class="form-control" onchange="cambioMesFin(this)">
-                                
-                                @foreach($meses as $mes)
-                                    <option value="{{$mes[1]}}">{{$mes[0]}}</option>
-                                @endforeach
-                            </select>
-                        </div></label>
+                </div><br>
+                <div class="row" style="margin: -2% 0% -2% -4%; background:none">
+                    <div class="col-sm-5">
+                      <div class="card" style="border:none;background:none">
+                        <div class="card-body">
+                          <div>
+                            <h5 style="padding-left: 2%">Inicio:
+                                <label for="inputState" >
+                                    <select id="idanioInicio" name="anioInicio" class="form-control" onchange="cambioAnioInicio(this)"> 
+                                        <option disable>Elegir año ...</option>
+                                        @foreach($anios as $anio)
+                                            <option value="{{$anio->anio}}">{{$anio->anio}}</option>
+                                        @endforeach
+                                    </select>
+                                </label>
+                                <label for="inputState" style="padding-left: 2.5%;" >
+                                    <select id="idmesInicio" name="mesInicio" class="form-control" onchange="cambioMesInicio(this)">
+                                        <option disable>Elegir mes ...</option>
+                                        @foreach($meses as $mes)
+                                            <option value="{{$mes[1]}}">{{$mes[0]}}</option>
+                                        @endforeach
+                                    </select>
+                                </label>
+                            </h5>
+                        </div>
+                        </div>
+                      </div>
                     </div>
-                </div>
+                    <div class="col-sm-6">
+                      <div class="card" style="border:none; padding-left:">
+                        <div class="card-body">
+                            <h5>Fin: 
+                                <label for="inputState" style="padding-left: 1%; margin:0">
+                                    <select id="idanioFin" name="anioFin" class="form-control" onchange="cambioAnioFin(this)">
+                                        @foreach($anios as $anio)
+                                            <option value="{{$anio->anio}}">{{$anio->anio}}</option>
+                                        @endforeach
+                                    </select>
+                                </label>
+                                <label for="inputState" style="padding-left: 2.5%; margin:0">
+                                    <select id="inputState" name="mesFin" class="form-control" onchange="cambioMesFin(this)">
+                                
+                                        @foreach($meses as $mes)
+                                            <option value="{{$mes[1]}}">{{$mes[0]}}</option>
+                                        @endforeach
+                                    </select>
+                                </label>
+                            </h5>
+                        </div>
+                      </div>
+                    </div>
+                </div><br>
+              
+                
+        
                 <hr>
                 <div class="row col-13">
-                    <div class="form-group col-md-2 panelVisualColums" >
+                    <div class="form-group col-md-2 panelVisualColums" ">
                         <label for="inputState"><h5>Columna</h5></label><br>
                         <input type="checkbox" name="checkins" id="checkins" value="checkins" onchange="seleccionarFilas(this)">
                         <label for="checkins"> Checkins</label><br>
@@ -86,20 +105,20 @@
                         <label for="habitaciones_ocupadas"> Hab. Ocupadas</label><br>
                         <input type="checkbox" name="habitaciones_disponibles" id="habitaciones_disponibles" value="habitaciones_disponibles" onchange="seleccionarFilas(this)">
                         <label for="habitaciones_disponibles"> Hab. Disponibles</label><br>
+                        <input type="checkbox" name="ventas_netas" id="ventas_netas" value="ventas_netas" onchange="seleccionarFilas(this)">
+                        <label for="ventas_netas"> Ventas Netas</label><br>
                         <input type="checkbox" name="tarifa_promedio" id="tarifa_promedio" value="tarifa_promedio" onchange="seleccionarFilas(this)">
                         <label for="tarifa_promedio"> Tarifa Prom. Hab.</label><br>
                         <input type="checkbox" name="TAR_PER" id="TAR_PER" value="TAR_PER" onchange="seleccionarFilas(this)">
                         <label for="TAR_PER"> Tarifa Prom. Per.</label><br>
-                        <input type="checkbox" name="ventas_netas" id="ventas_netas" value="ventas_netas" onchange="seleccionarFilas(this)">
-                        <label for="ventas_netas"> Ventas Netas</label><br>
                         <input type="checkbox" name="porcentaje_ocupacion" id="porcentaje_ocupacion" value="porcentaje_ocupacion" onchange="seleccionarFilas(this)" checked>
                         <label for="porcentaje_ocupacion"> Porcent. Ocupación</label><br>
                         <input type="checkbox" name="revpar" id="revpar" value="revpar" onchange="seleccionarFilas(this)">
                         <label for="revpar"> REVPAR</label><br>
                    
                     </div> 
-                    <div class="form-group col-md-10">
-                        <canvas id="graficaMeses" width="1400" height="600"></canvas>
+                    <div class="form-group col-md-10"  >
+                        <canvas id="graficaMeses" width="1400" height="600" ></canvas>
                     </div>
                 </div>
                 <br>
@@ -150,12 +169,12 @@
                             <label for="habitaciones_ocupadas2"> Hab. Ocupadas</label><br>
                             <input type="checkbox" name="habitaciones_disponibles2" id="habitaciones_disponibles2" value="habitaciones_disponibles" onchange="seleccionarFilas2(this)">
                             <label for="habitaciones_disponibles2"> Hab. Disponibles</label><br>
+                            <input type="checkbox" name="ventas_netas2" id="ventas_netas2" value="ventas_netas" onchange="seleccionarFilas2(this)">
+                            <label for="ventas_netas2"> Ventas Netas</label><br>
                             <input type="checkbox" name="tarifa_promedio2" id="tarifa_promedio2" value="tarifa_promedio" onchange="seleccionarFilas2(this)">
                             <label for="tarifa_promedio2"> Tarifa Prom. Hab.</label><br>
                             <input type="checkbox" name="TAR_PER2" id="TAR_PER2" value="TAR_PER" onchange="seleccionarFilas2(this)">
                             <label for="TAR_PER2"> Tarifa Prom. Per.</label><br>
-                            <input type="checkbox" name="ventas_netas2" id="ventas_netas2" value="ventas_netas" onchange="seleccionarFilas2(this)">
-                            <label for="ventas_netas2"> Ventas Netas</label><br>
                             <input type="checkbox" name="porcentaje_ocupacion2" id="porcentaje_ocupacion2" value="porcentaje_ocupacion" onchange="seleccionarFilas2(this)" checked>
                             <label for="porcentaje_ocupacion2"> Porcent. Ocupación</label><br>
                             <input type="checkbox" name="revpar2" id="revpar2" value="revpar" onchange="seleccionarFilas2(this)">
@@ -165,7 +184,7 @@
                     </div>
                 
                     <div class="form-group col-md-10">
-                        <canvas id="graficaDias" width="1350" height="600"></canvas>
+                        <canvas id="graficaDias" width="1400" height="600" ></canvas>
                     </div>
                 </div>
             </section>   

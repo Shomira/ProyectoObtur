@@ -103,9 +103,9 @@ section.sitiosLoja article.sitios:hover{
 /*Grafica Welcome*/
     
 
-
-.titulosPanel h4{
-    color: rgb(8, 13, 90);
+.titulosPanel h5{
+    color: #444449;
+    margin-bottom: -1em;
 }
 .graficaWelcome{
     width: 90%;
@@ -113,39 +113,41 @@ section.sitiosLoja article.sitios:hover{
     border-radius: 8px;
     background: linear-gradient(
         rgb(238,238,238), 
-        rgb(255,255,255),rgb(238,238,238)); 
-    
-      
+        rgb(255,255,255),rgb(238,238,238));      
 }
-section.graficaWelcome .categoria{
-    margin-left: -13.5rem ;
-    width: 40px;
-
+.inicio{
+    margin-right: -6em;
 }
-section.graficaWelcome .categoria select{
-    padding-right:  8rem;
-
+.categoria{
+    margin-left: -12em;
 }
-section.graficaWelcome div.fin{
-    margin-left: -90px ;
+div.titulosPanel label.mensajeDoM{
+    margin-left: -9em;
+}
+.mesDia{
+    margin-left: -9em;
 }
 .lineatituloGrafica{
-    margin-top: -1em;
-    border-top: 10px solid rgb(239, 255, 92);
-    margin-bottom: 1em;
+    margin-top: -1.4em;
+    border-top: 5px solid rgb(255, 251, 6);
+    margin-bottom: 1.8em;
 }
 
 .tituloGrafica{
     margin: 0 auto;
     align-items: center;
     text-align: center;
-
+    margin-bottom: 1.5em;
+    margin-top: 0.7em;
 }
 .tituloGrafica h2{
     margin: 1em;
-    padding: 1.5em 0.2em 0.5em 1em;
+    margin-top: -0.2em;
+    padding: 1.5em 0.2em 0.2em 1em;
     text-shadow: 0px 8px 8px rgba(0, 0, 0, 0.25);  
-    border-bottom: 10px solid rgb(49, 58, 66);
+    border-bottom: 5px solid rgb(49, 58, 66);
+    padding-bottom: 0.6em;
+    
 }
 
 .calloutG, .calloutGcat,.calloutG2, .calloutGM{
@@ -161,8 +163,9 @@ section.graficaWelcome div.fin{
 
  .calloutG2{
     border-left-color: rgba(255, 255, 255, 0);
-
+    margin-left: 0.2em;
  }
+
 
  .calloutGcat{
      margin-left: 6em;
@@ -176,6 +179,15 @@ section.graficaWelcome div.fin{
 }
 .calloutGM{
     margin-left: -3rem;
+}
+.graficaDos h5 .graficaDosEstadisticos h5{
+    margin-top: 0.5em;
+}
+.graficaDosAnio{
+    margin-left: -3rem;
+}
+.graficaDos h5{
+padding-left: 8em;
 }
 /*Servicos Home PAGE----------------------------- */
 section.sericiosL, section.datosEstab{
@@ -230,10 +242,12 @@ section.datosEstab article.datEs {
 
 section.datosEstab article.datEs h4{
     border-bottom: 0px ;
-    color: rgb(196, 36, 36);
+    color: rgb(255, 126, 6);
  
 }
-
+section.datosEstab article.datEs:hover h4{
+    color: rgb(161, 161, 161);
+}
 .serviciosL article.servicios p, .serviciosL2 article.servicios p{
     text-align: justify;
     padding: 1.2em 1.2em;
@@ -283,8 +297,8 @@ section.serviciosL2 article.servicios:hover{
     height: 970%;
     width: 93%;
     opacity: 0;
-    transition: .5s ease;
-    background-color: #8a8a8a;
+    transition: .4s ease;
+    background-color: #1c1c1ddc;
   }
   
   .container2:hover .overlay {
@@ -294,11 +308,11 @@ section.serviciosL2 article.servicios:hover{
       background-color: #ffffff;
   }
   .text {
-    color: white;
-    font-size: 20px;
+    color: rgb(255, 255, 255);
+    font-size: 18px;
     position: absolute;
-    top: 50%;
-    left: 50%;
+    top: 54%;
+    left: 45%;
     -webkit-transform: translate(-50%, -50%);
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
@@ -307,6 +321,11 @@ section.serviciosL2 article.servicios:hover{
 /*///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
 
 /*Home Administrador */
+
+.dropdown-item:hover{
+    background:
+        rgb(255, 182, 99);
+}
 
 section.fondo, nav.navAdmin{
   
@@ -389,6 +408,14 @@ section.espacioAdmin h4{
     margin-top: 1em;
     background:  rgb(255, 255, 255);
 }
+.modalHeader{
+    color: #ffffff;
+
+    background-color: rgb(0, 105, 217);
+}
+.close{
+    color: #ffffff;
+}
 section.espacioUsuarios{
     padding: 5em 20em;
 }
@@ -415,6 +442,7 @@ button.crearUs{
 
 .tablaAr thead{
     background:  rgb(214, 198, 176);
+    border-top: 4px solid rgb(111, 59, 24);
 }
 
 /*  Carga Archivos   Administrador-------------------------------------------*/
@@ -424,6 +452,10 @@ section.espacioCA{
     width: 78.5%;
     padding: 3em 5em 2em 5em;
     margin-left: 2.5em;
+}
+section.espacioCA h4{
+text-shadow: 1px 7px 15px rgb(157, 149, 133);
+border-radius: 8px;
 }
 .cardCargaAr{
     width: 100%;
@@ -484,13 +516,22 @@ section.datosAd article.datAd h5{
 /*-------------------------------------------------------------------------------------------------*/
 /*Datos Estadisticos*/
 
+/*Significado Estadisticas */
+.significadoEstadisticas{
+    padding-top: 0.4em;
+    color: rgb(128, 123, 123);
+    margin-top: 0.2em;
+    margin-bottom: 1em;
+    font-size:13px;
+
+}
 /*Flecha para regresar a inicio*/
 .flechaInicio{
     display:none;
     background-repeat:no-repeat;
     font-size:18px;
-    color:black;
-    
+    background-color:black;
+    border-radius: 5px;
     position:fixed;
     bottom:50px;
     right:50px;
@@ -499,7 +540,7 @@ section.datosAd article.datAd h5{
   }
 .flechaInicio:hover {
     
-    background-color: rgb(253, 111, 29);
+    background-color: rgb(52, 24, 206);
 }
 
 
@@ -606,11 +647,7 @@ nav.navDatosEs button:hover{
     border-radius: 3px;
 }
 
-.formDe a{
-background-color: #000000;
-padding: 0.2em;
-border-radius: 5px;
-}
+
 
 .formDe button{
     color:white;
@@ -907,7 +944,7 @@ footer article.final article.contactos h3{
 
     margin-left: 20em;
 }
-.panelVisualizar, .panelVisualizar2{
+.panelVisualizar{
     margin-left: 15em ;
 }
 .panelVisualizar select{
@@ -915,10 +952,16 @@ footer article.final article.contactos h3{
 
 }
 
-.panelVisualizar2 label{
-    margin-left: 4em;
-}
 .panelVisualColums label:hover{
     color: rgb(156, 71, 14);
+
     font-weight: 1000;
+}
+/*Analisis de Negocio*/
+.card-header-second{
+	box-shadow:1px 7px 15px #a2a2a2;
+    margin:-25px -20px 0px -20px;
+    height: 50px; 
+    /*background: linear-gradient(-90deg, #ec933fe5 , #e6ad31); */
+    background: rgb(255,114,74,0.8);
 }

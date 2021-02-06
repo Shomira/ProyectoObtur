@@ -12,7 +12,7 @@
 <section class="fondo">
     <section class="fondo2">
         <nav class="navAdmin">
-            <a href="{{url('home/')}}"><img src="{{ asset('imgs/metrica1.png')}}">Inicio</a>
+            <a href="{{url('home/')}}"><img src="{{ asset('imgs/inicio.png')}}">Inicio</a>
             <a href="{{url('home/visualizarArchivos')}}"><img src="{{ asset('imgs/vision1.png')}}">Visualizar Registros</a>
             <a style="background: white; color: #000000;font-weight: 800;" href="{{url('home/archivos')}}">
             <img src="{{ asset('imgs/sub2.png')}}">Cargar Archivos</a>
@@ -21,7 +21,7 @@
         
 
         <section class="espacioCA">
-            <h3><img style="padding-right: 0.5em;"  src="{{ asset('imgs/carga.png')}}">CARGA DE ARCHIVOS A LA BASE DE DATOS</h3>
+            <h4><img style="padding-right: 0.5em;"  src="{{ asset('imgs/carga.png')}}">CARGA DE ARCHIVOS A LA BASE DE DATOS</h4>
             <div class="card mt-4">
                 <div class="card-header">
                     Importación de archivos a la base de datos

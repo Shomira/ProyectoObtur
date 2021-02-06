@@ -91,7 +91,7 @@
                     <section class="logo">
                         <img class="logo" src="{{ asset('imgs/logo.png')}}" alt="logo">
                     </section>
-                    <a class="navbar-brand" href="{{ url('/') }}">
+                    <a  class="navbar-brand" href="{{ url('/') }}">
                         OBTUR-UTPL
                     </a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -118,10 +118,10 @@
                                         {{ Auth::user()->name }}
                                     </a>
 
-                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <div style="background-color:rgb(245, 122, 40); "  class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                         <a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
-                                                        document.getElementById('logout-form').submit();">
+                                                        document.getElementById('logout-form').submit();"><img src="{{ asset('imgs/salir.png')}}">
                                             {{ __('Salir') }}
                                         </a>
 

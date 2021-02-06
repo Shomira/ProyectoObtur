@@ -11,9 +11,9 @@
 <section class="fondo">
     <section class="fondo2">
         <nav class="navAdmin">
-            <a  href="{{url('home/comparativas')}}"><img src="{{ asset('imgs/metrica1.png')}}">Comparativas</a>
-            <a  href="{{url('home/resumenMensual')}}"><img src="{{ asset('imgs/metrica1.png')}}">Resumen Mensual</a>
-            <a  href="{{url('home/analisisDeNegocio')}}"><img src="{{ asset('imgs/metrica1.png')}}">Análisis De Negocio</a>
+            <a  href="{{url('home/comparativas')}}"><img src="{{ asset('imgs/comparar.png')}}">Comparativas</a>
+            <a  href="{{url('home/resumenMensual')}}"><img src="{{ asset('imgs/resumen.png')}}">Resumen Mensual</a>
+            <a  href="{{url('home/analisisDeNegocio')}}"><img src="{{ asset('imgs/analisisNegocio.png')}}">Análisis De Negocio</a>
             <a style="background: white; color: #000000;font-weight: 800;"  href="{{url('home/visualizarRegistros')}}"><img src="{{ asset('imgs/vision1.png')}}"> Visualizar Registros </a>                
         </nav>
 
@@ -32,7 +32,7 @@
                             <div class="col-lg-30  col-md-8 mb-4">
                                 <div class="card-section3 border rounded p-3">
                                     <div class="card-header-s rounded pb-4">
-                                        <h5 class="card-header-title text-white pt-3">Registros</h5>
+                                        <h5 class="card-header-title text-white pt-3">REGISTROS</h5>
                                     </div>
                                 </div>
                             </div>
@@ -82,7 +82,7 @@
                         <div class="card-header overflow-auto"> {{$mensaje}}</div>
                         <div class="card-body overflow-auto">
                             <div class="table-responsive table-striped overflow-auto">
-                                <table class="table col-12 table-responsive overflow-auto" id='t_registros'>
+                                <table class="tablaAr col-12 table-responsive overflow-auto" id='t_registros'>
                                     <thead>
                                         <tr>
                                             <th>Id</th>

@@ -249,6 +249,66 @@ class WelcomeController extends Controller
                 GROUP BY categoria
                 ORDER BY categoria desc";
 
+        }elseif($request->estadistico == "prom"){
+
+            $consulta = "SELECT  AVG(checkins) as 'checkins',
+                                AVG(checkouts) as 'checkouts',
+                                AVG(pernoctaciones) as 'pernoctaciones',
+                                AVG(nacionales) as 'nacionales',
+                                AVG(extranjeros) as 'extranjeros',
+                                AVG(habitaciones_ocupadas) as 'habitaciones_ocupadas',
+                                AVG(habitaciones_disponibles) as 'habitaciones_disponibles',
+                                AVG(tarifa_promedio) as 'tarifa_promedio',
+                                AVG(TAR_PER) as 'tar_per',
+                                AVG(ventas_netas) as 'ventas_netas',
+                                AVG(porcentaje_ocupacion) as 'porcentaje_ocupacion',
+                                AVG(revpar) as 'revpar',
+                                categoria
+                FROM registros r, establecimientos e
+                WHERE e.id = r.idEstablecimiento AND YEAR(fecha) = '$request->anio' 
+                GROUP BY categoria
+                ORDER BY categoria desc";
+
+        }elseif($request->estadistico == "max"){
+
+            $consulta = "SELECT  MAX(checkins) as 'checkins',
+                                MAX(checkouts) as 'checkouts',
+                                MAX(pernoctaciones) as 'pernoctaciones',
+                                MAX(nacionales) as 'nacionales',
+                                MAX(extranjeros) as 'extranjeros',
+                                MAX(habitaciones_ocupadas) as 'habitaciones_ocupadas',
+                                MAX(habitaciones_disponibles) as 'habitaciones_disponibles',
+                                MAX(tarifa_promedio) as 'tarifa_promedio',
+                                MAX(TAR_PER) as 'tar_per',
+                                MAX(ventas_netas) as 'ventas_netas',
+                                MAX(porcentaje_ocupacion) as 'porcentaje_ocupacion',
+                                MAX(revpar) as 'revpar',
+                                categoria
+                FROM registros r, establecimientos e
+                WHERE e.id = r.idEstablecimiento AND YEAR(fecha) = '$request->anio' 
+                GROUP BY categoria
+                ORDER BY categoria desc";
+
+        }elseif($request->estadistico == "min"){
+
+            $consulta = "SELECT  MIN(checkins) as 'checkins',
+                                MIN(checkouts) as 'checkouts',
+                                MIN(pernoctaciones) as 'pernoctaciones',
+                                MIN(nacionales) as 'nacionales',
+                                MIN(extranjeros) as 'extranjeros',
+                                MIN(habitaciones_ocupadas) as 'habitaciones_ocupadas',
+                                MIN(habitaciones_disponibles) as 'habitaciones_disponibles',
+                                MIN(tarifa_promedio) as 'tarifa_promedio',
+                                MIN(TAR_PER) as 'tar_per',
+                                MIN(ventas_netas) as 'ventas_netas',
+                                MIN(porcentaje_ocupacion) as 'porcentaje_ocupacion',
+                                MIN(revpar) as 'revpar',
+                                categoria
+                FROM registros r, establecimientos e
+                WHERE e.id = r.idEstablecimiento AND YEAR(fecha) = '$request->anio' 
+                GROUP BY categoria
+                ORDER BY categoria desc";
+
         }
 
 
