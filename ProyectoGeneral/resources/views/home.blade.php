@@ -44,6 +44,7 @@
     <section class="fondo">
         <section class="fondo2">
             <nav class="navAdmin">
+                <a style="background: white; color: #000000;font-weight: 800;" href="{{url('home/')}}"><img src="{{ asset('imgs/inicio.png')}}">Inicio</a>
                 <a  href="{{url('home/comparativas')}}"><img src="{{ asset('imgs/comparar.png')}}">Comparativas</a>
                 <a  href="{{url('home/resumenMensual')}}"><img src="{{ asset('imgs/resumen.png')}}">Resumen Mensual</a>
                 <a  href="{{url('home/analisisDeNegocio')}}"><img src="{{ asset('imgs/analisisNegocio.png')}}">Análisis De Negocio</a>
@@ -55,12 +56,21 @@
                   
                 <section class="datosAd">
                     <article class="datAd">
-                        <section class="partsup"  ><h5>Visualizar Archivos</h5></section>   
-                        <p> <img src="{{ asset('imgs/verArchivos.png')}}"></p>
+                        <section class="partsup"  ><h5>Comparativas</h5></section>   
+                        <p> <img src="{{ asset('imgs/compararInicio.png')}}">Ofrece  dos gráficas detelladas, basadas en el tiempo según los parámetros seleccionados.</p>
                     </article >     
                     <article class="datAd">
-                            <section class="partsup" style="background: rgb(255,114,74)" ><h5>Ver Estadísticas</h5></section>  
-                                <p> <img src="{{ asset('imgs/cargarDatos.png')}}"></p>
+                            <section class="partsup" style="background: rgb(255,114,74)" ><h5>Resumen Mensual</h5></section>  
+                                <p> <img src="{{ asset('imgs/resumenInicio.png')}}">Muestra características como: 
+                                promedio, mínino y máximo según el tiempo.</p>
+                    </article >
+                    <article class="datAd">
+                            <section class="partsup" style="background: rgb(255,114,74)" ><h5>Análisis De Negocio</h5></section>  
+                                <p> <img src="{{ asset('imgs/analisisInicio.png')}}">Presenta los parámetros más destacados del establecimiento.</p>
+                    </article >
+                    <article class="datAd">
+                            <section class="partsup"  ><h5>Visualizar Registros</h5></section>  
+                                <p> <img src="{{ asset('imgs/verArchivos.png')}}">Permite acceder a los registros del establecimiento y filtrarlos por fecha.</p>
                     </article >
                     
             </section>                

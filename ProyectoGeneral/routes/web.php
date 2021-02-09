@@ -35,15 +35,18 @@ Route::get('/informacionTuristica', function () {
 });
 
 Route::post('import-excel', 'App\Http\Controllers\ImportExcel\ImportExcelController@import');
-
+     
 
 Route::group(['prefix'=>'home', 'as'=>'home'], function(){
     Route::get('/comparativas', 'App\Http\Controllers\ComparativasController@index');
     Route::post('/comparativas/all', 'App\Http\Controllers\ComparativasController@all');
     Route::post('/comparativas/dias', 'App\Http\Controllers\ComparativasController@dias');
     Route::get('/resumenMensual', 'App\Http\Controllers\ResumenMensualController@index');
+    Route::post('/resumenMensual', 'App\Http\Controllers\ResumenMensualController@all');
     Route::get('/analisisDeNegocio', 'App\Http\Controllers\AnalisisDeNegocioController@index');
+    Route::post('/analisisDeNegocio', 'App\Http\Controllers\AnalisisDeNegocioController@all');
     Route::get('/', 'App\Http\Controllers\HomeController@index')->name('home');
+    Route::get('/homeEstablecimiento', 'App\Http\Controllers\HomeEstablecimientoController@index'); 
     Route::get('/gestionUsuarios', 'App\Http\Controllers\UsersController@index');
     Route::resource('/gestionUsuarios', 'App\Http\Controllers\UsersController');
     Route::post('/gestionUsuarios/edit', 'App\Http\Controllers\UsersController@editarUsuario');
@@ -53,5 +56,6 @@ Route::group(['prefix'=>'home', 'as'=>'home'], function(){
     Route::post('/visualizarRegistros', 'App\Http\Controllers\VisualizarRegistrosController@mostrar');
     Route::get('/archivos', 'App\Http\Controllers\ImportExcel\ImportExcelController@index');
     Route::delete('/archivos/{file}', 'App\Http\Controllers\ImportExcel\ImportExcelController@destroy');
+           
 
 });

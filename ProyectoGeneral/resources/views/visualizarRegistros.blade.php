@@ -11,6 +11,7 @@
 <section class="fondo">
     <section class="fondo2">
         <nav class="navAdmin">
+            <a  href="{{url('home/')}}"><img src="{{ asset('imgs/inicio.png')}}">Inicio</a>
             <a  href="{{url('home/comparativas')}}"><img src="{{ asset('imgs/comparar.png')}}">Comparativas</a>
             <a  href="{{url('home/resumenMensual')}}"><img src="{{ asset('imgs/resumen.png')}}">Resumen Mensual</a>
             <a  href="{{url('home/analisisDeNegocio')}}"><img src="{{ asset('imgs/analisisNegocio.png')}}">Análisis De Negocio</a>

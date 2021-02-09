@@ -121,103 +121,106 @@ class WelcomeController extends Controller
             $fechaInicio = $request->anioInicio."-".$request->mesInicio."-01";
         }
 
+
         if($request->ejeX == 1){
-
-            if($request->categoria == "Todas"){
-
-                $consulta = "SELECT  SUM(checkins) as 'checkins',
-                                        SUM(checkouts) as 'checkouts',
-                                        SUM(pernoctaciones) as 'pernoctaciones',
-                                        SUM(nacionales) as 'nacionales',
-                                        SUM(extranjeros) as 'extranjeros',
-                                        SUM(habitaciones_ocupadas) as 'habitaciones_ocupadas',
-                                        SUM(habitaciones_disponibles) as 'habitaciones_disponibles',
-                                        (SUM(ventas_netas) / SUM(habitaciones_ocupadas)) as 'tarifa_promedio',
-                                        (SUM(ventas_netas) / SUM(pernoctaciones)) as 'TAR_PER',
-                                        SUM(ventas_netas) as 'ventas_netas',
-                                        (SUM(habitaciones_ocupadas) / SUM(habitaciones_disponibles)) as 'porcentaje_ocupacion',
-                                        (SUM(ventas_netas) / SUM(habitaciones_disponibles)) as 'revpar',
-                                        MONTH(fecha) as 'mes',
-                                        YEAR(fecha) as 'anio'
-                        FROM registros r, establecimientos e
-                        WHERE e.id = r.idEstablecimiento 
-                            AND fecha >= '$fechaInicio' AND fecha <= '$fechaFin' 
-                        GROUP BY MONTH(fecha), YEAR(fecha)
-                        ORDER BY MAX(YEAR(fecha)), MONTH(fecha)";
-
-            }else{
-
-                $consulta = "SELECT  SUM(checkins) as 'checkins',
-                                        SUM(checkouts) as 'checkouts',
-                                        SUM(pernoctaciones) as 'pernoctaciones',
-                                        SUM(nacionales) as 'nacionales',
-                                        SUM(extranjeros) as 'extranjeros',
-                                        SUM(habitaciones_ocupadas) as 'habitaciones_ocupadas',
-                                        SUM(habitaciones_disponibles) as 'habitaciones_disponibles',
-                                        SUM(tarifa_promedio) as 'tarifa_promedio',
-                                        SUM(TAR_PER) as 'tar_per',
-                                        SUM(ventas_netas) as 'ventas_netas',
-                                        SUM(porcentaje_ocupacion) as 'porcentaje_ocupacion',
-                                        SUM(revpar) as 'revpar',
-                                        MONTH(fecha) as 'mes',
-                                        YEAR(fecha) as 'anio'
-                        FROM registros r, establecimientos e
-                        WHERE e.id = r.idEstablecimiento 
-                            AND fecha >= '$fechaInicio' AND fecha <= '$fechaFin' AND categoria = '$request->categoria'
-                        GROUP BY MONTH(fecha), YEAR(fecha)
-                        ORDER BY MAX(YEAR(fecha)), MONTH(fecha)";
-
-                
-            }
-
-
+            $group = " MONTH(fecha), YEAR(fecha) ";
         }else{
+            $group = "fecha";
+        }
 
-            if($request->categoria == "Todas"){
+        if($request->categoria == "Todas"){
+            $condicionCategoria = "";
+        }else{
+            $condicionCategoria = " AND categoria = '$request->categoria'";
+        }
+        
+        if($request->estadistico == "total"){
 
-                $consulta = "SELECT  SUM(checkins) as 'checkins',
-                                        SUM(checkouts) as 'checkouts',
-                                        SUM(pernoctaciones) as 'pernoctaciones',
-                                        SUM(nacionales) as 'nacionales',
-                                        SUM(extranjeros) as 'extranjeros',
-                                        SUM(habitaciones_ocupadas) as 'habitaciones_ocupadas',
-                                        SUM(habitaciones_disponibles) as 'habitaciones_disponibles',
-                                        (SUM(ventas_netas) / SUM(habitaciones_ocupadas)) as 'tarifa_promedio',
-                                        (SUM(ventas_netas) / SUM(pernoctaciones)) as 'TAR_PER',
-                                        SUM(ventas_netas) as 'ventas_netas',
-                                        (SUM(habitaciones_ocupadas) / SUM(habitaciones_disponibles)) as 'porcentaje_ocupacion',
-                                        (SUM(ventas_netas) / SUM(habitaciones_disponibles)) as 'revpar',
-                                        fecha
-                        FROM registros r, establecimientos e
-                        WHERE e.id = r.idEstablecimiento 
-                            AND fecha >= '$fechaInicio' AND fecha <= '$fechaFin' 
-                        GROUP BY fecha
-                        ORDER BY fecha ";
+            $consulta = "SELECT  SUM(checkins) as 'checkins',
+                                SUM(checkouts) as 'checkouts',
+                                SUM(pernoctaciones) as 'pernoctaciones',
+                                SUM(nacionales) as 'nacionales',
+                                SUM(extranjeros) as 'extranjeros',
+                                SUM(habitaciones_ocupadas) as 'habitaciones_ocupadas',
+                                SUM(habitaciones_disponibles) as 'habitaciones_disponibles',
+                                SUM(tarifa_promedio) as 'tarifa_promedio',
+                                SUM(TAR_PER) as 'tar_per',
+                                SUM(ventas_netas) as 'ventas_netas',
+                                SUM(porcentaje_ocupacion) as 'porcentaje_ocupacion',
+                                SUM(revpar) as 'revpar',
+                                MONTH(fecha) as 'mes',
+                                YEAR(fecha) as 'anio'
+                FROM registros r, establecimientos e
+                WHERE e.id = r.idEstablecimiento 
+                    AND fecha >= '$fechaInicio' AND fecha <= '$fechaFin' $condicionCategoria
+                GROUP BY $group
+                ORDER BY MAX(YEAR(fecha)), MONTH(fecha)";
 
-            }else{
+        }elseif($request->estadistico == "prom"){
 
-                $consulta = "SELECT  SUM(checkins) as 'checkins',
-                                        SUM(checkouts) as 'checkouts',
-                                        SUM(pernoctaciones) as 'pernoctaciones',
-                                        SUM(nacionales) as 'nacionales',
-                                        SUM(extranjeros) as 'extranjeros',
-                                        SUM(habitaciones_ocupadas) as 'habitaciones_ocupadas',
-                                        SUM(habitaciones_disponibles) as 'habitaciones_disponibles',
-                                        SUM(tarifa_promedio) as 'tarifa_promedio',
-                                        SUM(TAR_PER) as 'tar_per',
-                                        SUM(ventas_netas) as 'ventas_netas',
-                                        SUM(porcentaje_ocupacion) as 'porcentaje_ocupacion',
-                                        SUM(revpar) as 'revpar',
-                                        fecha
-                        FROM registros r, establecimientos e
-                        WHERE e.id = r.idEstablecimiento 
-                            AND fecha >= '$fechaInicio' AND fecha <= '$fechaFin' AND categoria = '$request->categoria'
-                        GROUP BY fecha
-                        ORDER BY fecha ";
+            $consulta = "SELECT  AVG(checkins) as 'checkins',
+                                AVG(checkouts) as 'checkouts',
+                                AVG(pernoctaciones) as 'pernoctaciones',
+                                AVG(nacionales) as 'nacionales',
+                                AVG(extranjeros) as 'extranjeros',
+                                AVG(habitaciones_ocupadas) as 'habitaciones_ocupadas',
+                                AVG(habitaciones_disponibles) as 'habitaciones_disponibles',
+                                AVG(tarifa_promedio) as 'tarifa_promedio',
+                                AVG(TAR_PER) as 'tar_per',
+                                AVG(ventas_netas) as 'ventas_netas',
+                                AVG(porcentaje_ocupacion) as 'porcentaje_ocupacion',
+                                AVG(revpar) as 'revpar',
+                                MONTH(fecha) as 'mes',
+                                YEAR(fecha) as 'anio'
+                FROM registros r, establecimientos e
+                WHERE e.id = r.idEstablecimiento 
+                    AND fecha >= '$fechaInicio' AND fecha <= '$fechaFin' $condicionCategoria
+                GROUP BY $group
+                ORDER BY MAX(YEAR(fecha)), MONTH(fecha)";
 
-                
-            }
+        }elseif($request->estadistico == "max"){
 
+            $consulta = "SELECT  MAX(checkins) as 'checkins',
+                                MAX(checkouts) as 'checkouts',
+                                MAX(pernoctaciones) as 'pernoctaciones',
+                                MAX(nacionales) as 'nacionales',
+                                MAX(extranjeros) as 'extranjeros',
+                                MAX(habitaciones_ocupadas) as 'habitaciones_ocupadas',
+                                MAX(habitaciones_disponibles) as 'habitaciones_disponibles',
+                                MAX(tarifa_promedio) as 'tarifa_promedio',
+                                MAX(TAR_PER) as 'tar_per',
+                                MAX(ventas_netas) as 'ventas_netas',
+                                MAX(porcentaje_ocupacion) as 'porcentaje_ocupacion',
+                                MAX(revpar) as 'revpar',
+                                MONTH(fecha) as 'mes',
+                                YEAR(fecha) as 'anio'
+                FROM registros r, establecimientos e
+                WHERE e.id = r.idEstablecimiento 
+                    AND fecha >= '$fechaInicio' AND fecha <= '$fechaFin' $condicionCategoria
+                GROUP BY $group
+                ORDER BY MAX(YEAR(fecha)), MONTH(fecha)";
+
+        }elseif($request->estadistico == "min"){
+
+            $consulta = "SELECT  MIN(checkins) as 'checkins',
+                                MIN(checkouts) as 'checkouts',
+                                MIN(pernoctaciones) as 'pernoctaciones',
+                                MIN(nacionales) as 'nacionales',
+                                MIN(extranjeros) as 'extranjeros',
+                                MIN(habitaciones_ocupadas) as 'habitaciones_ocupadas',
+                                MIN(habitaciones_disponibles) as 'habitaciones_disponibles',
+                                MIN(tarifa_promedio) as 'tarifa_promedio',
+                                MIN(TAR_PER) as 'tar_per',
+                                MIN(ventas_netas) as 'ventas_netas',
+                                MIN(porcentaje_ocupacion) as 'porcentaje_ocupacion',
+                                MIN(revpar) as 'revpar',
+                                MONTH(fecha) as 'mes',
+                                YEAR(fecha) as 'anio'
+                FROM registros r, establecimientos e
+                WHERE e.id = r.idEstablecimiento 
+                    AND fecha >= '$fechaInicio' AND fecha <= '$fechaFin' $condicionCategoria
+                GROUP BY $group
+                ORDER BY MAX(YEAR(fecha)), MONTH(fecha)";
 
         }
 

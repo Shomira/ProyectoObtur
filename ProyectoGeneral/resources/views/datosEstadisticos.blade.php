@@ -99,7 +99,7 @@
                             <section class="row centrado">
                                 <div class="col-lg-5">
                                     <div class="card-sectionDeh  border rounded ">
-                                        <div class="card-headerDe3  rounded ">
+                                        <div class="card-headerDe2  rounded ">
                                             <canvas id="huespedes2" ></canvas>
                                         </div>
                                         <div class="card-body text-center mb-2" >
@@ -116,7 +116,7 @@
                             <section class="centrado2">
                                 <div class="col-lg-5">
                                     <div class="card-sectionDeh  border rounded">
-                                        <div class="card-headerDe3  rounded ">
+                                        <div class="card-headerDe1  rounded ">
                                             <canvas id="huespedes1" ></canvas>
                                         </div>
                                         <div class="card-body text-center mb-2" >
@@ -866,7 +866,7 @@
                     label: '# of Votes',
                     data: ['{{$arrHuespedes3Est[0]}}' , '{{$arrHuespedes3Est[1]}}'],
                     backgroundColor: [
-                        'rgb(28, 255, 149)',
+                        'rgb(148, 243, 122)',
                         'rgb(255, 236, 60)'
                     ],
                     
@@ -886,7 +886,7 @@
                     label: '# of Votes',
                     data: ['{{$arrHuespedes2Est[0]}}' , '{{$arrHuespedes2Est[1]}}'],
                     backgroundColor: [
-                        'rgb(28, 255, 149)',
+                        'rgb(148, 243, 122)',
                         'rgb(255, 236, 60)'
                     ],
                     
@@ -906,7 +906,7 @@
                     label: '# of Votes',
                     data: ['{{$arrHuespedes1Est[0]}}' , '{{$arrHuespedes1Est[1]}}'],
                     backgroundColor: [
-                        'rgb(28, 255, 149)',
+                        'rgb(148, 243, 122)',
                         'rgb(255, 236, 60)'
                     ],
                     

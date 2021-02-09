@@ -734,7 +734,7 @@ class DatosEstadisticosController extends Controller
     public function mostrar(Request $request)
     {
         //Cálculo de los años disponibles
-        $anios = \DB::select('SELECT distinct YEAR(fecha) as "anio" FROM registros');
+        $anios = \DB::select('SELECT distinct YEAR(fecha) as "anio" FROM registros ORDER BY anio desc');
 
         switch ($request->mes) {
             case 1:

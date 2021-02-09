@@ -4,6 +4,7 @@
     <section class="fondo">
         <section class="fondo2">
             <nav class="navAdmin">
+                <a href="{{url('home')}}"><img src="{{ asset('imgs/inicio.png')}}">Inicio</a>
                 <a  href="{{url('home/comparativas')}}"><img src="{{ asset('imgs/comparar.png')}}">Comparativas</a>
                 <a style="background: white; color: #000000;font-weight: 800;"  href="{{url('home/resumenMensual')}}"><img src="{{ asset('imgs/resumen.png')}}">Resumen Mensual</a>
                 <a  href="{{url('home/analisisDeNegocio')}}"><img src="{{ asset('imgs/analisisNegocio.png')}}">Análisis De Negocio</a>
@@ -13,11 +14,8 @@
             <form action="" method="POST">
                 @csrf
             </form>
-
            
             <section class="espacioAdminEs">  
-                
-
                 <div class="container principalV">
                     <div class="row">
                         <div class="col-lg-12 text-left">
@@ -36,38 +34,38 @@
                 </div>
                 <br>
                 <div class="row" style="margin: -3%; background:none">
-                    <div class="col-sm-6">
+                    <div class="col-sm-5">
                       <div class="card" style="border:none">
                         <div class="card-body">
                           <div>
-                                <h5 style="padding-left: 2%">Inicio:
-                                    <label for="inputState" style="padding-left: 2%;">
-                                        <select style="padding-right: 2.8em;" id="idanioInicio" name="anioInicio" class="form-control" onchange="cambioAnio(this)"> 
-                                            @foreach($anios as $anio)
-                                                <option value="{{$anio->anio}}">{{$anio->anio}}</option>
-                                            @endforeach
-                                        </select>
-                                    </label>
-                                    <label for="inputState" >
-                                        <select id="idmesInicio" name="mesInicio" class="form-control" onchange="cambioMes(this)">
-                                            @foreach($meses as $mes)
-                                                <option value="{{$mes[1]}}">{{$mes[0]}}</option>
-                                            @endforeach
-                                        </select>
-                                    </label>
-                                </h5>
-                            </div>
+                            <h5 >Año-Mes:
+                                <label for="inputState" style=" width:30%; padding-left: 4.5%; ">
+                                    <select id="idanioInicio" name="anioInicio" class="form-control" onchange="cambioAnio(this)"> 
+                                        @foreach($anios as $anio)
+                                            <option value="{{$anio->anio}}">{{$anio->anio}}</option>
+                                        @endforeach
+                                    </select>
+                                </label>
+                                <label for="inputState"  style=" width:25%;">
+                                    <select id="idmesInicio" name="mesInicio" class="form-control" onchange="cambioMes(this)">
+                                        @foreach($meses as $mes)
+                                            <option value="{{$mes[1]}}">{{$mes[0]}}</option>
+                                        @endforeach
+                                    </select>
+                                </label>
+                            </h5>
+                        </div>
                         </div>
                       </div>
                     </div>
                     <div class="col-sm-6">
                       <div class="card" style="border:none">
-                        <div class="card-body" style="margin-left: -10em;">
-                            <h5>Estadísticos:
-                                <label for="inputState" style="padding-left: 1%;">
-                                    <select id="inputState" name="estadistico" style="padding-right: 1.8em;" class="form-control" onchange="cambioEstadistico(this)">
-                                        <option value="Total" >Total</option>
+                        <div class="card-body">
+                            <h5>Estadísticos: 
+                                <label for="inputState" style="padding-left: 4.5%; margin:0">
+                                    <select id="inputState" name="estadistico" class="form-control" onchange="cambioEstadistico(this)">
                                         <option value="Promedio">Promedio</option>
+                                        <option value="Total" >Total</option>
                                         <option value="Max">Máximo</option>
                                         <option value="Min" >Mínimo</option>
                                     </select>
@@ -81,7 +79,7 @@
                 <div class="row col-13">
                     <div class="form-group col-md-2 panelVisualColums" >
                     
-                        <label for="inputState"><h5>Columna</h5></label><br>
+                        <label for="inputState"><h5>Parámetros</h5></label><br>
                         <input type="checkbox" name="checkins" id="checkins" value="Checkins" onchange="seleccionarColumna(this)">
                         <label for="checkins"> Checkins</label><br>
                         <input type="checkbox" name="checkouts" id="checkouts" value="Checkouts" onchange="seleccionarColumna(this)">
@@ -96,12 +94,13 @@
                         <label for="habitaciones_ocupadas"> Hab. Ocupadas</label><br>
                         <input type="checkbox" name="habitaciones_disponibles" id="habitaciones_disponibles" value="Hab Disponibles" onchange="seleccionarColumna(this)">
                         <label for="habitaciones_disponibles"> Hab. Disponibles</label><br>
+                        <input type="checkbox" name="ventas_netas" id="ventas_netas" value="Ventas Netas" onchange="seleccionarColumna(this)">
+                        <label for="ventas_netas"> Ventas Netas</label><br>
+                        <hr style="margin: 0.4em;">
                         <input type="checkbox" name="tarifa_promedio" id="tarifa_promedio" value="Tarifa Hab" onchange="seleccionarColumna(this)">
                         <label for="tarifa_promedio"> Tarifa Prom. Hab.</label><br>
                         <input type="checkbox" name="TAR_PER" id="TAR_PER" value="Tarifa Per" onchange="seleccionarColumna(this)">
                         <label for="TAR_PER"> Tarifa Prom. Per.</label><br>
-                        <input type="checkbox" name="ventas_netas" id="ventas_netas" value="Ventas Netas" onchange="seleccionarColumna(this)">
-                        <label for="ventas_netas"> Ventas Netas</label><br>
                         <input type="checkbox" name="porcentaje_ocupacion" id="porcentaje_ocupacion" value="Porcn Ocupación" onchange="seleccionarColumna(this)" checked>
                         <label for="porcentaje_ocupacion"> Porcent. Ocupación</label><br>
                         <input type="checkbox" name="revpar" id="revpar" value="REVPAR" onchange="seleccionarColumna(this)">
@@ -109,7 +108,7 @@
                    
                     </div> 
                     <div class="form-group col-md-10">
-                        <canvas id="graficaMes" width="1400" height="600"></canvas>
+                        <canvas id="graficaMes" width="1400" height="640"  ></canvas>
                     </div>
                 </div>
 
@@ -126,7 +125,7 @@
 
     var anio = '{{$anioFin}}';
     var mes = '{{$mesFin}}';
-    var estadistico = 'Total';
+    var estadistico = 'Promedio';
 
     var datoCheckins = 0;
     var datoCheckouts = 0;
@@ -151,15 +150,34 @@
             labels: columnas,
             datasets: [{
                 label: estadistico,
+                width: 6,
                 barPercentage: 0.5,
-                barThickness: 6,
-                maxBarThickness: 8,
+                barThickness: 30,
+                maxBarThickness: 30,
                 minBarLength: 2,
-                backgroundColor: 'rgba(211, 214, 30,0.8)',
+                
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.5)',
+                    'rgba(54, 162, 235, 0.5)',
+                    'rgba(255, 206, 86, 0.5)',
+                    'rgba(75, 192, 192, 0.5)',
+                    'rgba(153, 102, 255, 0.5)',
+                    'rgba(255, 159, 64, 0.5)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+
                 data: datos
             }]
         },
         options: {
+            
             scales: {
                 yAxes: [{
                     ticks: {
@@ -256,6 +274,42 @@
     function cambioEstadistico(val){
 
         datos = [];
+
+        if(val.value == 'Total'){
+
+            document.getElementById("tarifa_promedio").checked = false;
+            document.getElementById("TAR_PER").checked = false;
+            document.getElementById("porcentaje_ocupacion").checked = false;
+            document.getElementById("revpar").checked = false;
+
+            document.getElementById("tarifa_promedio").disabled = true;
+            document.getElementById("TAR_PER").disabled = true;
+            document.getElementById("porcentaje_ocupacion").disabled = true;
+            document.getElementById("revpar").disabled = true;
+
+            for(var i=0;i<columnas.length;i++){
+                
+                if(columnas[i] == 'Tarifa Hab' || columnas[i] == 'Tarifa Per'|| columnas[i] == 'Porcn Ocupación'|| columnas[i] == 'REVPAR'){
+                    columnas.splice(i, 1);
+                    datos.splice(i, 1);
+                    i--;
+                }
+
+            }
+            
+            graficaMes.data.labels = columnas;
+            graficaMes.data.datasets[0].data = datos;
+            graficaMes.update(); 
+
+
+        }else{
+            document.getElementById("tarifa_promedio").disabled = false;
+            document.getElementById("TAR_PER").disabled = false;
+            document.getElementById("porcentaje_ocupacion").disabled = false;
+            document.getElementById("revpar").disabled = false;
+
+        }
+        
 
         estadistico = val.value;
         

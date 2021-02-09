@@ -24,30 +24,22 @@
                     <div class="carousel-item active">
                     <img src="{{ asset('imgs/Buss2Slider.png')}}" class="d-block w-100" alt="...">
                     <div class="carousel-caption d-none d-md-block">
-                        <h5>First slide label</h5>
-                        <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
                     </div>
                     </div>
                     <div class="carousel-item">
                     <img src="{{ asset('imgs/img2SliderT2.png')}}" class="d-block w-100" alt="...">
                     <div class="carousel-caption d-none d-md-block">
-                        <h5>Second slide label</h5>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                     </div>
                     </div>
                     
                     <div class="carousel-item">
                     <img src="{{ asset('imgs/destSlider.png')}}" class="d-block w-100" alt="...">
                     <div class="carousel-caption d-none d-md-block">
-                        <h5>Third slide label</h5>
-                        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
                     </div>
                     </div>
                     <div class="carousel-item">
                     <img src="{{ asset('imgs/Buss1Slider.png')}}" class="d-block w-100" alt="...">
                     <div class="carousel-caption d-none d-md-block">
-                        <h5>Third slide label</h5>
-                        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
                     </div>
                     </div>
                     <div class="carousel-item">
@@ -84,196 +76,226 @@
         </section>
         <section class="datosEstab">
             <h2>DATOS ESTABLECIMIENTO</h2>
-
-            <div class="container2">
-                <article class="datEs">    
-                    <img src="{{ asset('imgs/velocidad.png')}}" alt="Avatar" class="image">
-                    <div class="overlay">
-                        <div class="text">Significa "ingreso por habitación disponible" y sirve para valorar el rendimiento financiero </div>
-                    </div>
-                    <div class="hoverDe">
-                        <h4>Revpar</h4>
-                    </div> 
-                </article >
-            </div>
-            <div class="container2">
-                <article class="datEs">    
-                        <img src="{{ asset('imgs/cargar.png')}}" alt="Avatar" class="image">
+            <a href="{{url('http://127.0.0.1:8000/datosEstadisticos#revpar')}}">
+                <div class="container2">
+                    <article class="datEs">    
+                        <img src="{{ asset('imgs/velocidad.png')}}" alt="Avatar" class="image">
                         <div class="overlay">
-                            <div class="text">Dinero promedio que recepta un establecimiento, ya sea por cada persona que ingresa, o por cada habitación ocupada</div>
+                            <div class="text">Significa "ingreso por habitación disponible" y sirve para valorar el rendimiento financiero. </div>
                         </div>
                         <div class="hoverDe">
-                            <h4>Tarifa Promedio</h4>
-                        </div>
-                </article >
-            </div>
-            <div class="container2">
-                <article class="datEs">    
-                        <img src="{{ asset('imgs/vendedor.png')}}"  alt="Avatar" class="image">
-                        <div class="overlay">
-                            <div class="text">Es la relación entre las habitaciones ocupadas y las disponibles durante un período dado</div>
-                        </div>
-                        <div class="hoverDe">
-                            <h4>Porcentaje Ocupación</h4>
-                        </div>
-                </article >
-            </div>
-            <div class="container2">
-                <article class="datEs">    
-                        <img src="{{ asset('imgs/cama.png')}}"  alt="Avatar" class="image">
-                        <div class="overlay">
-                            <div class="text">Es una aproximación al número de días que por término medio permanece un viajero en un establecimiento</div>
-                        </div>
-                        <div class="hoverDe">
-                            <h4>Estadia Promedio</h4>
-                        </div>
-                </article >
-            </div>
+                            <h4>Revpar</h4>
+                        </div> 
+                    </article >
+                </div>
+            </a>
+            <a href="{{url('http://127.0.0.1:8000/datosEstadisticos#tarifaPromedio')}}">
+                <div class="container2">
+                    <article class="datEs">    
+                            <img src="{{ asset('imgs/cargar.png')}}" alt="Avatar" class="image">
+                            <div class="overlay">
+                                <div class="text">Dinero promedio que recepta un establecimiento, ya sea por cada persona que ingresa, o por cada habitación ocupada.</div>
+                            </div>
+                            <div class="hoverDe">
+                                <h4>Tarifa Promedio</h4>
+                            </div>
+                    </article >
+                </div>
+            </a>
+            <a href="{{url('http://127.0.0.1:8000/datosEstadisticos#porcentajeOcupacion')}}">
+                <div class="container2">
+                    <article class="datEs">    
+                            <img src="{{ asset('imgs/vendedor.png')}}"  alt="Avatar" class="image">
+                            <div class="overlay">
+                                <div class="text">Es la relación entre las habitaciones ocupadas y las disponibles durante un período dado.</div>
+                            </div>
+                            <div class="hoverDe">
+                                <h4>Porcentaje Ocupación</h4>
+                            </div>
+                    </article >
+                </div>
+            </a>
+            <a href="{{url('http://127.0.0.1:8000/datosEstadisticos#estadiaPromedio')}}">
+                <div class="container2">
+                    <article class="datEs">    
+                            <img src="{{ asset('imgs/cama.png')}}"  alt="Avatar" class="image">
+                            <div class="overlay">
+                                <div class="text">Es una aproximación al número de días que por término medio permanece un viajero en un establecimiento.</div>
+                            </div>
+                            <div class="hoverDe">
+                                <h4>Estadia Promedio</h4>
+                            </div>
+                    </article >
+                </div>
+            </a>
         </section>
         <section class="graficaWelcome">
             <section class="tituloGrafica" ><h2>COMPARATIVAS DE DATOS HOTELEROS</h2></section>
+            
             <section class="lineatituloGrafica" ></section>
-                <div class="form-row align-items-center"> 
-                    <div class="row row-cols-4 col-lg-12 text-center titulosPanel">
-                        <label> <h5>Fecha Inicio</h5></label>
-                        <label> <h5>Fecha Fin</h5></label>
-                        <label style="margin-left: -4rem;" class="mensajeDoM1"> <h5> Categoría</h5></label>
-                        <label class="mensajeDoM"><h5> ¿Dias o Meses?</h5></label>
-                    </div>
-                    <div class="row row-cols-3 col-4 ml-4 p-4 inicio">
-                        <div class="row mr-1">
-                            <div class="calloutG">
-                                <select id="idanioInicio" name="anioInicio" class="form-control" onchange="cambioAnioInicio(this)">
-                                    <option disable>Elegir año</option>
-                                    @foreach($anios as $anio)
-                                        <option value="{{$anio->anio}}">{{$anio->anio}}</option>
-                                    @endforeach
-                                </select>
+            <div class="card-group" >
+                <div class="card" style="border: none; background:none" >
+                    <div class="row titulosPanel">
+                        <div class="col">
+                            <div class="card-body">
+                                <h5 class="card-title text-center">Fecha inicio</h5>
+                                <div class="row">
+                                    <div style="padding: 0% 2%">
+                                        <select id="idanioInicio" name="anioInicio" class="form-control" onchange="cambioAnioInicio(this)">
+                                            <option disable>Elegir año</option>
+                                            @foreach($anios as $anio)
+                                                <option value="{{$anio->anio}}">{{$anio->anio}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div >
+                                        <select id="idmesInicio" name="mesInicio" class="form-control" onchange="cambioMesInicio(this)">
+                                            <option disable>Elegir mes</option>
+                                            @foreach($meses as $mes)
+                                                <option value="{{$mes[1]}}">{{$mes[0]}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="calloutG2">   
-                            <select id="idmesInicio" name="mesInicio" class="form-control" onchange="cambioMesInicio(this)">
-                                <option disable>Elegir mes</option>
-                                @foreach($meses as $mes)
-                                    <option value="{{$mes[1]}}">{{$mes[0]}}</option>
-                                @endforeach
-                            </select>
+                        <div class="col">
+                            <div class="card-body">
+                                <h5 class="card-title text-center">Fecha Fin</h5>
+                                <div class="row">
+                                    <div class="col-6" >
+                                        <select id="idanioFin" name="anioFin" class="form-control" onchange="cambioAnioFin(this)">
+                                            @foreach($anios as $anio)
+                                                <option value="{{$anio->anio}}">{{$anio->anio}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div >
+                                        <select id="inputState" name="mesFin" class="form-control" onchange="cambioMesFin(this)">
+                                            @foreach($meses as $mes)
+                                                <option value="{{$mes[1]}}">{{$mes[0]}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
                             
                         </div>
                     </div>
-                    <div class="row row-cols-3 col-4 mr-1 pl-4 fin ">
-                        <div class="row mr-1 ">
-                            <div class="calloutG anioFi ">
-                                <select id="idanioFin" name="anioFin" class="form-control" onchange="cambioAnioFin(this)">
-                                    @foreach($anios as $anio)
-                                        <option value="{{$anio->anio}}">{{$anio->anio}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                        <div class="calloutG2 mesFin " >
-                            <select id="inputState" name="mesFin" class="form-control" onchange="cambioMesFin(this)">
-                                @foreach($meses as $mes)
-                                    <option value="{{$mes[1]}}">{{$mes[0]}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
-                    <div class="row row-cols-2 col-4  categoria">
-                        <div class="row mr-4">
-                            <div class="calloutGcat">
-                                <select id="inputState" name="categoria" class="form-control" onchange="cambioCategoria(this)">
-                                    <option value="Todas">Todas</option>
-                                    @foreach($categorias as $categoria)
-                                        <option value="{{$categoria->categoria}}">{{$categoria->categoria}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row row-cols-2 col-2 mesDia">
-                        <div class="row ml-1">
-                            <div class="calloutGM">
-                                <select id="inputState" name="ejeX" class="form-control" onchange="cambioEjeX(this)">
-                                    <option value="1" >Meses</option>
-                                    <option value="2">Días</option>
-                                    
-                                </select>
-                            </div>
-                        </div>
-                    </div>
                 </div>
+                <div class="card" style="border: none; background:none">
+                    <div class="row titulosPanel">
+                        <div class="col-5">
+                            <div class="card-body">
+                                <h5 class="card-title text-center">¿Dias o Meses?</h5>
+                                <div >
+                                    <select id="inputState" name="ejeX" class="form-control" onchange="cambioEjeX(this)">
+                                        <option value="1" >Meses</option>
+                                        <option value="2">Días</option>
+                                    </select>
 
-                <section class="espacioGrafica" ></section>
-                <div class="row col-13">
-                    <div class="form-group col-md-2 graficaColums" >
-                        <h5 style="margin-bottom: 0.5em;">Columna </h5> 
-                        <input type="checkbox" name="checkins" id="checkins" value="checkins" onchange="seleccionarFilas(this)">
-                        <label for="checkins"> Checkins</label><br>
-                        <input type="checkbox" name="checkouts" id="checkouts" value="checkouts" onchange="seleccionarFilas(this)">
-                        <label for="checkouts"> Checkouts</label><br>
-                        <input type="checkbox" name="pernoctaciones" id="pernoctaciones" value="pernoctaciones" onchange="seleccionarFilas(this)">
-                        <label for="pernoctaciones"> Pernoctaciones</label><br>
-                        <input type="checkbox" name="nacionales" id="nacionales" value="nacionales" onchange="seleccionarFilas(this)">
-                        <label for="nacionales"> Nacionales</label><br>
-                        <input type="checkbox" name="extranjeros" id="extranjeros" value="extranjeros" onchange="seleccionarFilas(this)">
-                        <label for="extranjeros"> Extranjeros</label><br>
-                        <input type="checkbox" name="habitaciones_ocupadas" id="habitaciones_ocupadas" value="habitaciones_ocupadas" onchange="seleccionarFilas(this)">
-                        <label for="habitaciones_ocupadas"> Hab. Ocupadas</label><br>
-                        <input type="checkbox" name="habitaciones_disponibles" id="habitaciones_disponibles" value="habitaciones_disponibles" onchange="seleccionarFilas(this)">
-                        <label for="habitaciones_disponibles"> Hab. Disponibles</label><br>
-                        <input type="checkbox" name="ventas_netas" id="ventas_netas" value="ventas_netas" onchange="seleccionarFilas(this)">
-                        <label for="ventas_netas"> Ventas Netas</label>
-                        <hr style="margin: 0.3em;">
-                        <input type="checkbox" name="tarifa_promedio" id="tarifa_promedio" value="tarifa_promedio" onchange="seleccionarFilas(this)">
-                        <label for="tarifa_promedio"> Tarifa Prom. Hab.</label><br>
-                        <input type="checkbox" name="TAR_PER" id="TAR_PER" value="TAR_PER" onchange="seleccionarFilas(this)">
-                        <label for="TAR_PER"> Tarifa Prom. Per.</label><br> 
-                        <input type="checkbox" name="porcentaje_ocupacion" id="porcentaje_ocupacion" value="porcentaje_ocupacion" onchange="seleccionarFilas(this)" checked>
-                        <label for="porcentaje_ocupacion"> Porcent. Ocupación</label><br>
-                        <input type="checkbox" name="revpar" id="revpar" value="revpar" onchange="seleccionarFilas(this)">
-                        <label for="revpar"> REVPAR</label><br>
-                        
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card-body">
+                                <h5 class="card-title text-center">Categoría</h5>
+                                <div class="col-13">
+                                    <select id="inputState" name="categoria" class="form-control" onchange="cambioCategoria(this)">
+                                        <option value="Todas">Todas</option>
+                                        @foreach($categorias as $categoria)
+                                            <option value="{{$categoria->categoria}}">{{$categoria->categoria}}</option>
+                                        @endforeach
+                                    </select>
+                                  </div>
+                              </div>
+    
+                        </div>
+                        <div class="col">
+                            <div class="card-body">
+                                <h5 class="card-title text-center">Estadísticos</h5>
+                                <div >
+                                    <select id="inputState" name="estadistico" class="form-control" onchange="cambioEstadisticoComparativas(this)">
+                                        <option value="prom">Promedio</option>
+                                        <option value="total" >Total</option>
+                                        <option value="max">Máximo</option>
+                                        <option value="min" >Mínimo</option>
+                                    </select>
+                                </div>
+                            </div>
+    
+                        </div>
+
                     </div>
-                    <div class="form-group col-md-9">
-                        <br>
-                        <canvas id="graficaMeses" width="1500" height="600"></canvas>
-                    </div>
+                    
                 </div>
+            </div>
+              
+
+            <section class="espacioGrafica" ></section>
+            <div class="row col-13">
+                <div class="form-group col-md-2 graficaColums titulosPanel" >
+                    <h5 style="margin-bottom: 0.5em;">Parámetros </h5> 
+                    <input type="checkbox" name="checkins" id="checkins" value="checkins" onchange="seleccionarFilas(this)">
+                    <label for="checkins"> Checkins</label><br>
+                    <input type="checkbox" name="checkouts" id="checkouts" value="checkouts" onchange="seleccionarFilas(this)">
+                    <label for="checkouts"> Checkouts</label><br>
+                    <input type="checkbox" name="pernoctaciones" id="pernoctaciones" value="pernoctaciones" onchange="seleccionarFilas(this)">
+                    <label for="pernoctaciones"> Pernoctaciones</label><br>
+                    <input type="checkbox" name="nacionales" id="nacionales" value="nacionales" onchange="seleccionarFilas(this)">
+                    <label for="nacionales"> Nacionales</label><br>
+                    <input type="checkbox" name="extranjeros" id="extranjeros" value="extranjeros" onchange="seleccionarFilas(this)">
+                    <label for="extranjeros"> Extranjeros</label><br>
+                    <input type="checkbox" name="habitaciones_ocupadas" id="habitaciones_ocupadas" value="habitaciones_ocupadas" onchange="seleccionarFilas(this)">
+                    <label for="habitaciones_ocupadas"> Hab. Ocupadas</label><br>
+                    <input type="checkbox" name="habitaciones_disponibles" id="habitaciones_disponibles" value="habitaciones_disponibles" onchange="seleccionarFilas(this)">
+                    <label for="habitaciones_disponibles"> Hab. Disponibles</label><br>
+                    <input type="checkbox" name="ventas_netas" id="ventas_netas" value="ventas_netas" onchange="seleccionarFilas(this)">
+                    <label for="ventas_netas"> Ventas Netas</label>
+                    <hr style="margin: 0.4em;">
+                    <input type="checkbox" name="tarifa_promedio" id="tarifa_promedio" value="tarifa_promedio" onchange="seleccionarFilas(this)">
+                    <label for="tarifa_promedio"> Tarifa Prom. Hab.</label><br>
+                    <input type="checkbox" name="TAR_PER" id="TAR_PER" value="TAR_PER" onchange="seleccionarFilas(this)">
+                    <label for="TAR_PER"> Tarifa Prom. Per.</label><br> 
+                    <input type="checkbox" name="porcentaje_ocupacion" id="porcentaje_ocupacion" value="porcentaje_ocupacion" onchange="seleccionarFilas(this)" checked>
+                    <label for="porcentaje_ocupacion"> Porcent. Ocupación</label><br>
+                    <input type="checkbox" name="revpar" id="revpar" value="revpar" onchange="seleccionarFilas(this)">
+                    <label for="revpar"> REVPAR</label><br>
+                    
+                </div>
+                <div class="form-group col-md-9">
+                    <br>
+                    <canvas id="graficaMeses" width="1500" height="600"></canvas>
+                </div>
+            </div>
         </section>
 
 
         <section class="graficaWelcome">
             <section class="tituloGrafica" ><h2>DATOS HOTELEROS POR CATEGORÍA</h2></section>
             <section class="lineatituloGrafica" ></section>
-                <div class="form-row align-items-center">
-                    
-                    <div class="row row-cols-3 col-lg-12 pl-5 text-left titulosPanel">
-                        <label  for="inputState"> <h5>Año</h5></label>
-                        <label  for="inputState" style="margin-left: -14em;"> <h5>Estadísticos</h5></label>
+                <div class="form-row align-items-center"> 
+                    <div class="row row-cols-3 col-lg-12 pl-5 text-left titulosPanel" style="margin-bottom: -1.3em;">
+                        <label   style="margin-left: 4em;"> <h5>Año</h5></label>
+                        <label   style="margin-left: -17em;"> <h5>Estadísticos</h5></label>
                     </div>
-                    <div class="row row-cols-2 col-3 ml-1 p-3 inicio">
+                    <div class="row row-cols-2 col-3 ml-2 p-3 inicio">
                         <div class="row ml-3">
-                            <div class="calloutG">
-                                <select id="idanioInicio" name="anio" class="form-control" onchange="cambioAnio(this)">
-                                    
-                                    @foreach($anios as $anio)
-                                        <option value="{{$anio->anio}}">{{$anio->anio}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
+                            <select id="idanioInicio" name="anio" class="form-control" onchange="cambioAnio(this)">
+                                @foreach($anios as $anio)
+                                    <option value="{{$anio->anio}}">{{$anio->anio}}</option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
-                    <div class="row row-cols-2 col-3 mr-2 ml-1 inicio">
+                    <div class="row row-cols-2 col-3 mr-2 ml-2 inicio">
                         <div class="row mr-2">
-                            <div class="calloutG">
-                                <select id="inputState" name="estadistico" class="form-control" onchange="cambioEstadistico(this)">
-                                    <option value="total" >Total</option>
-                                    <option value="prom">Promedio</option>
-                                    <option value="max">Máximo</option>
-                                    <option value="min" >Mínimo</option>
-                                </select>
-                            </div>
+                            <select id="inputState" name="estadistico" class="form-control" onchange="cambioEstadistico(this)">
+                                <option value="prom">Promedio</option>
+                                <option value="total" >Total</option>
+                                <option value="max">Máximo</option>
+                                <option value="min" >Mínimo</option>
+                            </select>
                         </div>
                     </div>
                 </div>
@@ -281,8 +303,8 @@
                 <section class="espacioGrafica" ></section>
                 
                 <div class="row col-13">
-                    <div class="form-group col-md-2 graficaColums" >
-                        <h5 style="margin-bottom: 0.5em;">Columna </h5>
+                    <div class="form-group col-md-2 graficaColums  titulosPanel" >
+                        <h5 style="margin-bottom: 0.5em; margin-top:0.2em;">Parámetros</h5>
                         <input type="checkbox" name="checkins2" id="checkins2" value="checkins" onchange="seleccionarFilas2(this)">
                         <label for="checkins2"> Checkins</label><br>
                         <input type="checkbox" name="checkouts2" id="checkouts2" value="checkouts" onchange="seleccionarFilas2(this)">
@@ -299,7 +321,7 @@
                         <label for="habitaciones_disponibles2"> Hab. Disponibles</label><br>
                         <input type="checkbox" name="ventas_netas2" id="ventas_netas2" value="ventas_netas" onchange="seleccionarFilas2(this)">
                         <label for="ventas_netas2"> Ventas Netas</label>
-                        <hr style="margin: 0.3em;">
+                        <hr style="margin: 0.4em;">
                         <input type="checkbox" name="tarifa_promedio2" id="tarifa_promedio2" value="tarifa_promedio" onchange="seleccionarFilas2(this)">
                         <label for="tarifa_promedio2"> Tarifa Prom. Hab.</label><br>
                         <input type="checkbox" name="TAR_PER2" id="TAR_PER2" value="TAR_PER" onchange="seleccionarFilas2(this)">
@@ -350,26 +372,31 @@
             <h2 >SERVICIOS DE HOTELES</h2>
             <article style="background-color: rgba(238, 230, 118, 0.466)" class="servicios">    
                     <img style="width: 45%; "src="{{ asset('imgs/redess.png')}}">
-                    <h4 style="color:#1b0ba8;">Acceso a Wifi</h4>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam error voluptatibus rerum quam, 
-                        at qui laboriosam explicabo debitis odit esse alias obcaecati? Dignissimos dolor commodi aspernatur 
-                        eligendi quidem totam dicta!</p>
+                    <h4 style="color:#1b0ba8;">Concierge</h4>
+                    <p>
+                        Es un asesor personal que se convierte en el “mejor amigo” del huésped. Tiene un alto 
+                        conocimiento de cultura general, gastronomía, sitios turísticos y además debe tener 
+                        conocimiento en la actualidad de planes y agenda de la ciudad. 
+                    </p>
             </article >
             <article style="background-color: rgba(238, 230, 118, 0.466)" class="servicios">    
                     <img src="{{ asset('imgs/dormitorio.png')}}">
                     <h4 style="color:#1b0ba8;">Servicios de Habitación</h4>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam error voluptatibus rerum quam, 
-                        at qui laboriosam explicabo debitis odit esse alias obcaecati? Dignissimos dolor commodi aspernatur 
-                        eligendi quidem totam dicta!</p>
+                    <p>El servicio de habitaciones de un hotel es la asistencia que reciben sus huéspedes 
+                        directamente en su propia habitación. Puede abarcar desde el servicio de comida y bebida, 
+                        hasta cualquier tipo de petición dependiendo de la oferta disponible.</p>
             </article >
             <article  style="background-color: rgba(238, 230, 118, 0.466)" class="servicios">    
                     <img src="{{ asset('imgs/promocion.png')}}">
-                    <h4 style="color:#1b0ba8;">Promociones</h4>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam error voluptatibus rerum quam, 
-                        at qui laboriosam explicabo debitis odit esse alias obcaecati? Dignissimos dolor commodi aspernatur 
-                        eligendi quidem totam dicta!</p>
+                    <h4 style="color:#1b0ba8;">Reservación</h4>
+                    <p>
+                        Es la obligación que asume un alojamiento turístico de guardar
+                         para una fecha o un periodo de tiempo determinado una o varias habitaciones o plazas,
+                        con la exigencia inmediata de pago de todo o parte del precio que éste supondrá la cancelación.
+                    </p>
             </article >
         </section>
+        
     
         
         <section class="sitiosLoja">
@@ -460,7 +487,6 @@
     var dataREVPAR = [];
 
 
-    var categorias = [];
     var dataCheckins2 = [];
     var dataCheckouts2 = [];
     var dataPernoctaciones2 = [];
@@ -493,8 +519,9 @@
     var nomColumnaGrafica1 = '{{$columna}}';
     var nomCategoria = 'Todas';
     var ejeX = 1;
+    var estadistico = 'prom'
     var anio = '{{$anioFin}}';
-    var estadisticoBarras = 'total'
+    var estadisticoBarras = 'prom'
     
     
     var ctx2 = document.getElementById('graficaMeses').getContext('2d');
@@ -566,6 +593,7 @@
                 anioFin: anioFinGrafica1,
                 columna: nomColumnaGrafica1,
                 categoria: nomCategoria,
+                estadistico: estadistico,
                 ejeX: ejeX,
                 _token: $('input[name="_token"]').val()
             }
@@ -616,7 +644,7 @@
                 dataHabOcupadas.push(arreglo[i].habitaciones_ocupadas);
                 dataHabDisponibles.push(arreglo[i].habitaciones_disponibles);
                 dataTarPromHab.push(arreglo[i].tarifa_promedio);
-                dataTarPromPer.push(arreglo[i].TAR_PER);
+                dataTarPromPer.push(arreglo[i].tar_per);
                 dataVentasNetas.push(arreglo[i].ventas_netas);
                 dataPorcOcupacion.push(arreglo[i].porcentaje_ocupacion);
                 dataREVPAR.push(arreglo[i].revpar);
@@ -685,8 +713,7 @@
             var arreglo = JSON.parse(res);
             
             for(var i=0;i<arreglo.length;i++){
-                    
-                categorias.push(arreglo[i].categoria);
+                
                 dataCheckins2.push(arreglo[i].checkins);
                 dataCheckouts2.push(arreglo[i].checkouts);
                 dataPernoctaciones2.push(arreglo[i].pernoctaciones);
@@ -701,6 +728,7 @@
                 dataREVPAR2.push(arreglo[i].revpar);
 
             }
+            
             
 
             for(var i=0;i<columnas2.length;i++){
@@ -873,8 +901,60 @@
         consultaMeses();
     }
 
+    function cambioEstadisticoComparativas(val){
+        mesesGrafica1 = [];
+        dataCheckins = [];
+        dataCheckouts = [];
+        dataPernoctaciones = [];
+        dataNacionales = [];
+        dataExtranjeros = [];
+        dataHabOcupadas = [];
+        dataHabDisponibles = [];
+        dataTarPromHab = [];
+        dataTarPromPer = [];
+        dataVentasNetas = [];
+        dataPorcOcupacion = [];
+        dataREVPAR = [];
+
+        if(val.value == 'total'){
+
+            document.getElementById("tarifa_promedio").checked = false;
+            document.getElementById("TAR_PER").checked = false;
+            document.getElementById("porcentaje_ocupacion").checked = false;
+            document.getElementById("revpar").checked = false;
+
+            document.getElementById("tarifa_promedio").disabled = true;
+            document.getElementById("TAR_PER").disabled = true;
+            document.getElementById("porcentaje_ocupacion").disabled = true;
+            document.getElementById("revpar").disabled = true;
+
+            for(var i=0;i<columnas.length;i++){
+                
+                if(columnas[i].label == 'tarifa_promedio' || columnas[i].label == 'TAR_PER'|| columnas[i].label == 'porcentaje_ocupacion'|| columnas[i].label == 'revpar'){
+                    columnas.splice(i, 1);
+                    i--;
+                }
+
+            }
+
+            graficaMeses.update();
+
+
+        }else{
+            
+            document.getElementById("tarifa_promedio").disabled = false;
+            document.getElementById("TAR_PER").disabled = false;
+            document.getElementById("porcentaje_ocupacion").disabled = false;
+            document.getElementById("revpar").disabled = false;
+
+        }
+
+        estadistico = val.value;
+        
+        consultaMeses();
+    }
+
     function cambioAnio(val){
-        categorias = [];
         dataCheckins2 = [];
         dataCheckouts2 = [];
         dataPernoctaciones2 = [];
@@ -894,7 +974,6 @@
     }
 
     function cambioEstadistico(val){
-        categorias = [];
         dataCheckins2 = [];
         dataCheckouts2 = [];
         dataPernoctaciones2 = [];
@@ -907,6 +986,38 @@
         dataVentasNetas2 = [];
         dataPorcOcupacion2 = [];
         dataREVPAR2 = [];
+
+        if(val.value == 'total'){
+
+            document.getElementById("tarifa_promedio2").checked = false;
+            document.getElementById("TAR_PER2").checked = false;
+            document.getElementById("porcentaje_ocupacion2").checked = false;
+            document.getElementById("revpar2").checked = false;
+
+            document.getElementById("tarifa_promedio2").disabled = true;
+            document.getElementById("TAR_PER2").disabled = true;
+            document.getElementById("porcentaje_ocupacion2").disabled = true;
+            document.getElementById("revpar2").disabled = true;
+
+            for(var i=0;i<columnas2.length;i++){
+                
+                if(columnas2[i].label == 'tarifa_promedio' || columnas2[i].label == 'TAR_PER'|| columnas2[i].label == 'porcentaje_ocupacion'|| columnas2[i].label == 'revpar'){
+                    columnas2.splice(i, 1);
+                    i--;
+                }
+
+            }
+
+            barChartCategorias.update();
+
+
+        }else{
+            document.getElementById("tarifa_promedio2").disabled = false;
+            document.getElementById("TAR_PER2").disabled = false;
+            document.getElementById("porcentaje_ocupacion2").disabled = false;
+            document.getElementById("revpar2").disabled = false;
+
+        }
 
         estadisticoBarras = val.value;
         
@@ -1093,6 +1204,7 @@
                 }
 
             }
+            
             
             barChartCategorias.update();
             

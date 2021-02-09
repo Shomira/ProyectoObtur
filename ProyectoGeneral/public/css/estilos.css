@@ -105,7 +105,7 @@ section.sitiosLoja article.sitios:hover{
 
 .titulosPanel h5{
     color: #444449;
-    margin-bottom: -1em;
+
 }
 .graficaWelcome{
     width: 90%;
@@ -121,7 +121,7 @@ section.sitiosLoja article.sitios:hover{
 .categoria{
     margin-left: -12em;
 }
-div.titulosPanel label.mensajeDoM{
+label.mensajeDoM{
     margin-left: -9em;
 }
 .mesDia{
@@ -150,7 +150,7 @@ div.titulosPanel label.mensajeDoM{
     
 }
 
-.calloutG, .calloutGcat,.calloutG2, .calloutGM{
+.calloutG,.calloutG2, .calloutGM{
     padding: 5px;
     height: 50px;
     width: 200px;
@@ -166,10 +166,6 @@ div.titulosPanel label.mensajeDoM{
     margin-left: 0.2em;
  }
 
-
- .calloutGcat{
-     margin-left: 6em;
- }
  .graficaColums{
      margin-left: 2em;
  }
@@ -309,10 +305,10 @@ section.serviciosL2 article.servicios:hover{
   }
   .text {
     color: rgb(255, 255, 255);
-    font-size: 18px;
+    font-size: 17.5px;
     position: absolute;
-    top: 54%;
-    left: 45%;
+    top: 52%;
+    left: 48%;
     -webkit-transform: translate(-50%, -50%);
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
@@ -590,8 +586,7 @@ section.porPersona h3{
     margin: 0 130px 0 150px ;
 }
 .centrado2{
-
-    margin-top: 42px;
+    padding-bottom: 2em;
 }
 section.fondoBlanco{
     width: 100%;
@@ -673,7 +668,7 @@ nav.navDatosEs button:hover{
 }
 
 /*tarjeta 1*/
-.card-headerDe5, .card-headerDe4, .card-headerDe3{
+.card-headerDe5, .card-headerDe4, .card-headerDe3, .card-headerDe2,.card-headerDe1{
 	margin-top:-30px;
     height: 220px;
     width: 350px;
@@ -681,12 +676,21 @@ nav.navDatosEs button:hover{
     background: rgb(252, 178, 74);
 }
 .card-headerDe4{
-    background: rgb(114, 193, 121);
+    background: rgb(141, 216, 147);
 }
 .card-headerDe3{
      
-    background: rgb(248, 195, 121);
+    background: rgba(248, 195, 121, 0.877);
 }
+.card-headerDe2{
+     
+    background: rgb(243, 159, 136);
+}
+.card-headerDe1{
+     
+    background: rgb(241, 243, 139);
+}
+
 .card-sectionDeh{
     margin-top: 40px;
     width: 380px;
@@ -740,14 +744,15 @@ nav.navDatosEs button:hover{
     background: rgb(202, 49, 133);
 }
 .card-headerTp3{
-    background: rgb(238, 90, 88);
+    background: rgb(245, 81, 81);
 }
 .card-headerTp1{
 
-    background: rgb(218, 84, 46);
+    background: rgb(231, 64, 18);
+
 }
 .card-headerTp2{
-    background: rgb(45, 212, 134);
+    background: rgb(6, 209, 114);
 }
 
 
@@ -965,3 +970,53 @@ footer article.final article.contactos h3{
     /*background: linear-gradient(-90deg, #ec933fe5 , #e6ad31); */
     background: rgb(255,114,74,0.8);
 }
+
+/*///////////////////////////////////////////////////////////////////////////////////////////////*/
+* {
+    box-sizing: border-box;
+  }
+  
+  .header {
+    text-align: center;
+    padding: 32px;
+  }
+  
+  .row {
+    display: -ms-flexbox; /* IE10 */
+    display: flex;
+    -ms-flex-wrap: wrap; /* IE10 */
+    flex-wrap: wrap;
+    padding: 0 4px;
+  }
+  
+  /* Create four equal columns that sits next to each other */
+  .column {
+    -ms-flex: 25%; /* IE10 */
+    flex: 25%;
+    max-width: 25%;
+    padding: 0 4px;
+  }
+  
+  .column img {
+    margin-top: 8px;
+    vertical-align: middle;
+    width: 100%;
+  }
+  
+  /* Responsive layout - makes a two column-layout instead of four columns */
+  @media screen and (max-width: 800px) {
+    .column {
+      -ms-flex: 50%;
+      flex: 50%;
+      max-width: 50%;
+    }
+  }
+  
+  /* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+  @media screen and (max-width: 600px) {
+    .column {
+      -ms-flex: 100%;
+      flex: 100%;
+      max-width: 100%;
+    }
+  }
