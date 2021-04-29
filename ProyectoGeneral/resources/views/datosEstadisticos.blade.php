@@ -245,8 +245,8 @@
                 </div>
                 
                 <div class="card">
-                    <div class="card-body" style="background-color: rgb(238,238,238);">
-                        <canvas style="background-color: rgb(238,238,238);" id="tarifaPromHabitacion" width="800" height="300"></canvas>
+                    <div class="card-body divGrafica" >
+                        <canvas  id="tarifaPromHabitacion" width="800" height="300"></canvas>
                     </div>
                 </div>
                 <hr>
@@ -304,7 +304,7 @@
                             </div>
                                 <h4>${{$arrTarifaP3Est[0]}}</h4>
                                 @if( $arrTarifaP3Est[2] === 1)
-                                    <p style="font-size:10px;"> <img src="{{ asset('imgs/decrec.png')}}"> Decrecimiento de: $ {{$arrTarifaP3Est[1]}} vs mes anterior</p>
+                                    <p> <img src="{{ asset('imgs/decrec.png')}}"> Decrecimiento de: $ {{$arrTarifaP3Est[1]}} vs mes anterior</p>
                                 @elseif( $arrTarifaP3Est[2] === 2)
                                     <p><img src="{{ asset('imgs/crec.png')}}">Crecimiento de: $ {{$arrTarifaP3Est[1]}} vs mes anterior</p>
                                 @elseif( $arrTarifaP3Est[2] === 3)
@@ -355,8 +355,8 @@
                     </div>
                 </div>
                 <div class="card">
-                    <div class="card-body" style="background-color: rgb(238,238,238);">
-                        <canvas style="background-color: rgb(238,238,238);" id="tarifaPromPerson" width="800" height="300"></canvas>
+                    <div class="card-body divGrafica">
+                        <canvas  id="tarifaPromPerson" width="800" height="300"></canvas>
                     </div>
                 </div>
             </section>
@@ -368,7 +368,7 @@
         <section class="fondoBlanco">
             <section class="indicadoresDe porcentajeFondo" id="porcentajeOcupacion">
                 <h2 class="card-header-title mb-4 text-black">
-                    <img  style="padding-right:0.4em;" src="{{ asset('imgs/porciento.png')}}">PORCENTAJE DE OCUPACIÓN</h2>
+                    <img  class="imgTituloDatosEs" src="{{ asset('imgs/porciento.png')}}">PORCENTAJE DE OCUPACIÓN</h2>
                     <p class="significadoEstadisticas">Es la relación entre las habitaciones ocupadas y las disponibles durante un período dado</p><hr>
                 <div class="row row-cols-2 row-cols-md-4 g-3">
                     <div class="col-lg-2 col-md-2 mr-5 ">
@@ -493,7 +493,7 @@
         <!-- Incio REVPAR--> 
         <section  class="indicadoresDe" id="revpar">
             <h2>
-                <img  style="padding-right:0.4em;" src="{{ asset('imgs/revpar.png')}}">
+                <img class="imgTituloDatosEs" src="{{ asset('imgs/revpar.png')}}">
                 REVPAR
             <h2><p class="significadoEstadisticas">Significa "ingreso por habitación disponible" y sirve para valorar el rendimiento financiero</p> <hr>
             <div class="row row-cols-2 row-cols-md-4 g-3">
@@ -607,8 +607,8 @@
                 </div>
             </div>
             <div class="card">
-                <div class="card-body" style="background-color: rgb(238,238,238);">
-                    <canvas style="background-color: rgb(238,238,238);" id="MyLineREVPAR" width="800" height="300"></canvas>
+                <div class="card-body divGrafica" >
+                    <canvas  id="MyLineREVPAR" width="800" height="300"></canvas>
                 </div>
             </div>
         </section>
@@ -618,7 +618,7 @@
             <section class="fondoBlanco">
                 <section  class="indicadoresDe porcentajeFondo" id="estadiaPromedio">
                     <h2>
-                        <img  style="padding-right:0.4em;" src="{{ asset('imgs/estancia.png')}}">
+                        <img  class="imgTituloDatosEs" src="{{ asset('imgs/estancia.png')}}">
                         ESTADIA PROMEDIO
                     <h2><p class="significadoEstadisticas">Es una aproximación al número de días que por término medio permanece un viajero en un establecimiento</p><hr>
                     <div class="row row-cols-2 row-cols-md-4 g-3">

@@ -1,4 +1,4 @@
-@extends('layouts.app')
+ @extends('layouts.app')
 
 @section('content')
 <section class="fondo">
@@ -7,15 +7,15 @@
         <a href="{{url('home/')}}"><img src="{{ asset('imgs/inicio.png')}}">Inicio</a>
             <a  href="{{url('home/comparativas')}}"><img src="{{ asset('imgs/comparar.png')}}">Comparativas</a>
             <a  href="{{url('home/resumenMensual')}}"><img src="{{ asset('imgs/resumen.png')}}">Resumen Mensual</a>
-            <a style="background: white; color: #000000;font-weight: 800;" href="{{url('home/analisisDeNegocio')}}"><img src="{{ asset('imgs/analisisNegocio.png')}}">Análisis De Negocio</a>
-            <a href="{{url('home/visualizarRegistros')}}"><img src="{{ asset('imgs/vision1.png')}}"> Visualizar Registros</a> 
+            <a  class="etiquetaActiva" href="{{url('home/analisisDeNegocio')}}"><img src="{{ asset('imgs/analisisNegocio.png')}}">Análisis De Negocio</a>
+            <a  href="{{url('home/visualizarRegistros')}}"><img src="{{ asset('imgs/vision1.png')}}"> Visualizar Registros</a> 
         </nav>
 
         <form action="" method="POST">
             @csrf
         </form>
 
- 	 	<section class="espacioAdminEs ">
+ 	 	<section class="espacioAdminEs">
             <div class="container principalV">
                 <div class="row">
                     <div class="col-lg-12 text-left">
@@ -35,25 +35,25 @@
             <br>
                 
             <br>
-            <div class="row">
+            <div  class="row tituloFiltrosGraficasEs" >
                 <div>
                     <h5 class="pl-3 pt-2 pr-2">Estadísticos:</h5>
                 </div>
                 <div>
-                    <select class="form-select" style="padding-right: 3em; width: 100%; height: 36px; border-color: rgb(83, 82, 85,0.15); border-radius:5px" onchange="cambioEstadistico(this)">
+                    <select class="form-select filtroAnalisisN" onchange="cambioEstadistico(this)">
                         <option value="Promedio">Promedio</option>
                         <option value="Total" >Total</option>
                         <option value="Max">Máximo</option>
                         <option value="Min" >Mínimo</option>
                     </select>
                 </div>
-                <div class="pt-2 pr-2">
-                    <h5 style="padding-left: 1em;">Ver registros desde:</h5>
+                <div class="pt-2 pl-4">
+                    <h5 >Ver registros desde:</h5>
                 </div>
                 <div>
                     <input type="date" name="inicio" value="{{$diaMin}}" class="form-control" id="cambioFechaInicio"  aria-describedby="inputGroupPrepend2" >
                 </div>
-                <div class="pt-2 pr-2 pl-3">
+                <div class="pt-2 pr-2 pl-4">
                     <h5>Ver registros hasta:</h5>
                 </div>  
                 <div>

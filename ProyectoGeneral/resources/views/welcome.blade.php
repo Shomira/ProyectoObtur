@@ -38,7 +38,7 @@
                     </div>
                     </div>
                     <div class="carousel-item">
-                    <img src="{{ asset('imgs/Buss1Slider.png')}}" class="d-block w-100" alt="...">
+                    <img src="{{ asset('imgs/Buss1Slider.png')}}" class="d-block w-100"  alt="...">
                     <div class="carousel-caption d-none d-md-block">
                     </div>
                     </div>
@@ -134,13 +134,13 @@
             
             <section class="lineatituloGrafica" ></section>
             <div class="card-group" >
-                <div class="card" style="border: none; background:none" >
+                <div class="card cardGraficaWelcome" >
                     <div class="row titulosPanel">
                         <div class="col">
                             <div class="card-body">
                                 <h5 class="card-title text-center">Fecha inicio</h5>
                                 <div class="row">
-                                    <div style="padding: 0% 2%">
+                                    <div class="selectGraficaAnio" >
                                         <select id="idanioInicio" name="anioInicio" class="form-control" onchange="cambioAnioInicio(this)">
                                             <option disable>Elegir año</option>
                                             @foreach($anios as $anio)
@@ -183,7 +183,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="card" style="border: none; background:none">
+                <div class="card cardGraficaWelcome" >
                     <div class="row titulosPanel">
                         <div class="col-5">
                             <div class="card-body">
@@ -223,19 +223,14 @@
                                     </select>
                                 </div>
                             </div>
-    
                         </div>
-
                     </div>
-                    
                 </div>
             </div>
-              
-
             <section class="espacioGrafica" ></section>
             <div class="row col-13">
                 <div class="form-group col-md-2 graficaColums titulosPanel" >
-                    <h5 style="margin-bottom: 0.5em;">Parámetros </h5> 
+                    <h5 >Parámetros </h5> 
                     <input type="checkbox" name="checkins" id="checkins" value="checkins" onchange="seleccionarFilas(this)">
                     <label for="checkins"> Checkins</label><br>
                     <input type="checkbox" name="checkouts" id="checkouts" value="checkouts" onchange="seleccionarFilas(this)">
@@ -252,7 +247,7 @@
                     <label for="habitaciones_disponibles"> Hab. Disponibles</label><br>
                     <input type="checkbox" name="ventas_netas" id="ventas_netas" value="ventas_netas" onchange="seleccionarFilas(this)">
                     <label for="ventas_netas"> Ventas Netas</label>
-                    <hr style="margin: 0.4em;">
+                    <hr>
                     <input type="checkbox" name="tarifa_promedio" id="tarifa_promedio" value="tarifa_promedio" onchange="seleccionarFilas(this)">
                     <label for="tarifa_promedio"> Tarifa Prom. Hab.</label><br>
                     <input type="checkbox" name="TAR_PER" id="TAR_PER" value="TAR_PER" onchange="seleccionarFilas(this)">
@@ -260,8 +255,7 @@
                     <input type="checkbox" name="porcentaje_ocupacion" id="porcentaje_ocupacion" value="porcentaje_ocupacion" onchange="seleccionarFilas(this)" checked>
                     <label for="porcentaje_ocupacion"> Porcent. Ocupación</label><br>
                     <input type="checkbox" name="revpar" id="revpar" value="revpar" onchange="seleccionarFilas(this)">
-                    <label for="revpar"> REVPAR</label><br>
-                    
+                    <label for="revpar"> REVPAR</label><br> 
                 </div>
                 <div class="form-group col-md-9">
                     <br>
@@ -275,9 +269,9 @@
             <section class="tituloGrafica" ><h2>DATOS HOTELEROS POR CATEGORÍA</h2></section>
             <section class="lineatituloGrafica" ></section>
                 <div class="form-row align-items-center"> 
-                    <div class="row row-cols-3 col-lg-12 pl-5 text-left titulosPanel" style="margin-bottom: -1.3em;">
-                        <label   style="margin-left: 4em;"> <h5>Año</h5></label>
-                        <label   style="margin-left: -17em;"> <h5>Estadísticos</h5></label>
+                    <div class="row row-cols-3 col-lg-12 pl-5 text-left titulosPanel2" >
+                        <label> <h5>Año</h5></label>
+                        <label> <h5 class="tituloEstadisticos">Estadísticos</h5></label>
                     </div>
                     <div class="row row-cols-2 col-3 ml-2 p-3 inicio">
                         <div class="row ml-3">
@@ -304,7 +298,7 @@
                 
                 <div class="row col-13">
                     <div class="form-group col-md-2 graficaColums  titulosPanel" >
-                        <h5 style="margin-bottom: 0.5em; margin-top:0.2em;">Parámetros</h5>
+                        <h5 >Parámetros</h5>
                         <input type="checkbox" name="checkins2" id="checkins2" value="checkins" onchange="seleccionarFilas2(this)">
                         <label for="checkins2"> Checkins</label><br>
                         <input type="checkbox" name="checkouts2" id="checkouts2" value="checkouts" onchange="seleccionarFilas2(this)">
@@ -321,7 +315,7 @@
                         <label for="habitaciones_disponibles2"> Hab. Disponibles</label><br>
                         <input type="checkbox" name="ventas_netas2" id="ventas_netas2" value="ventas_netas" onchange="seleccionarFilas2(this)">
                         <label for="ventas_netas2"> Ventas Netas</label>
-                        <hr style="margin: 0.4em;">
+                        <hr>
                         <input type="checkbox" name="tarifa_promedio2" id="tarifa_promedio2" value="tarifa_promedio" onchange="seleccionarFilas2(this)">
                         <label for="tarifa_promedio2"> Tarifa Prom. Hab.</label><br>
                         <input type="checkbox" name="TAR_PER2" id="TAR_PER2" value="TAR_PER" onchange="seleccionarFilas2(this)">
@@ -370,25 +364,25 @@
         </section>
         <section class="serviciosL2">
             <h2 >SERVICIOS DE HOTELES</h2>
-            <article style="background-color: rgba(238, 230, 118, 0.466)" class="servicios">    
-                    <img style="width: 45%; "src="{{ asset('imgs/redess.png')}}">
-                    <h4 style="color:#1b0ba8;">Concierge</h4>
+            <article class="servicios">    
+                    <img src="{{ asset('imgs/redess.png')}}">
+                    <h4>Concierge</h4>
                     <p>
                         Es un asesor personal que se convierte en el “mejor amigo” del huésped. Tiene un alto 
                         conocimiento de cultura general, gastronomía, sitios turísticos y además debe tener 
                         conocimiento en la actualidad de planes y agenda de la ciudad. 
                     </p>
             </article >
-            <article style="background-color: rgba(238, 230, 118, 0.466)" class="servicios">    
+            <article  class="servicios">    
                     <img src="{{ asset('imgs/dormitorio.png')}}">
-                    <h4 style="color:#1b0ba8;">Servicios de Habitación</h4>
+                    <h4>Servicios de Habitación</h4>
                     <p>El servicio de habitaciones de un hotel es la asistencia que reciben sus huéspedes 
                         directamente en su propia habitación. Puede abarcar desde el servicio de comida y bebida, 
                         hasta cualquier tipo de petición dependiendo de la oferta disponible.</p>
             </article >
-            <article  style="background-color: rgba(238, 230, 118, 0.466)" class="servicios">    
+            <article   class="servicios">    
                     <img src="{{ asset('imgs/promocion.png')}}">
-                    <h4 style="color:#1b0ba8;">Reservación</h4>
+                    <h4>Reservación</h4>
                     <p>
                         Es la obligación que asume un alojamiento turístico de guardar
                          para una fecha o un periodo de tiempo determinado una o varias habitaciones o plazas,
@@ -778,7 +772,7 @@
 
     }
 
-    function cambioMesInicio(val){
+    function limpiarArreglosGraficaMeses(){
         mesesGrafica1 = [];
         dataCheckins = [];
         dataCheckouts = [];
@@ -792,6 +786,11 @@
         dataVentasNetas = [];
         dataPorcOcupacion = [];
         dataREVPAR = [];
+    }
+
+    function cambioMesInicio(val){
+
+        limpiarArreglosGraficaMeses()
 
         mesInicioGrafica1 = val.value;
         
@@ -800,19 +799,8 @@
     }
 
     function cambioMesFin(val){
-        mesesGrafica1 = [];
-        dataCheckins = [];
-        dataCheckouts = [];
-        dataPernoctaciones = [];
-        dataNacionales = [];
-        dataExtranjeros = [];
-        dataHabOcupadas = [];
-        dataHabDisponibles = [];
-        dataTarPromHab = [];
-        dataTarPromPer = [];
-        dataVentasNetas = [];
-        dataPorcOcupacion = [];
-        dataREVPAR = [];
+        
+        limpiarArreglosGraficaMeses()
 
         mesFinGrafica1 = val.value;
         
@@ -820,19 +808,8 @@
     }
 
     function cambioAnioInicio(val){
-        mesesGrafica1 = [];
-        dataCheckins = [];
-        dataCheckouts = [];
-        dataPernoctaciones = [];
-        dataNacionales = [];
-        dataExtranjeros = [];
-        dataHabOcupadas = [];
-        dataHabDisponibles = [];
-        dataTarPromHab = [];
-        dataTarPromPer = [];
-        dataVentasNetas = [];
-        dataPorcOcupacion = [];
-        dataREVPAR = [];
+        
+        limpiarArreglosGraficaMeses()
 
         anioInicioGrafica1 = val.value;
         
@@ -841,19 +818,8 @@
     }
 
     function cambioAnioFin(val){
-        mesesGrafica1 = [];
-        dataCheckins = [];
-        dataCheckouts = [];
-        dataPernoctaciones = [];
-        dataNacionales = [];
-        dataExtranjeros = [];
-        dataHabOcupadas = [];
-        dataHabDisponibles = [];
-        dataTarPromHab = [];
-        dataTarPromPer = [];
-        dataVentasNetas = [];
-        dataPorcOcupacion = [];
-        dataREVPAR = [];
+        
+        limpiarArreglosGraficaMeses()
 
         anioFinGrafica1 = val.value;
         
@@ -862,19 +828,8 @@
    
 
     function cambioCategoria(val){
-        mesesGrafica1 = [];
-        dataCheckins = [];
-        dataCheckouts = [];
-        dataPernoctaciones = [];
-        dataNacionales = [];
-        dataExtranjeros = [];
-        dataHabOcupadas = [];
-        dataHabDisponibles = [];
-        dataTarPromHab = [];
-        dataTarPromPer = [];
-        dataVentasNetas = [];
-        dataPorcOcupacion = [];
-        dataREVPAR = [];
+
+        limpiarArreglosGraficaMeses()
 
         nomCategoria = val.value;
         
@@ -882,19 +837,8 @@
     }
 
     function cambioEjeX(val){
-        mesesGrafica1 = [];
-        dataCheckins = [];
-        dataCheckouts = [];
-        dataPernoctaciones = [];
-        dataNacionales = [];
-        dataExtranjeros = [];
-        dataHabOcupadas = [];
-        dataHabDisponibles = [];
-        dataTarPromHab = [];
-        dataTarPromPer = [];
-        dataVentasNetas = [];
-        dataPorcOcupacion = [];
-        dataREVPAR = [];
+        
+        limpiarArreglosGraficaMeses()
 
         ejeX = val.value;
         
@@ -902,19 +846,8 @@
     }
 
     function cambioEstadisticoComparativas(val){
-        mesesGrafica1 = [];
-        dataCheckins = [];
-        dataCheckouts = [];
-        dataPernoctaciones = [];
-        dataNacionales = [];
-        dataExtranjeros = [];
-        dataHabOcupadas = [];
-        dataHabDisponibles = [];
-        dataTarPromHab = [];
-        dataTarPromPer = [];
-        dataVentasNetas = [];
-        dataPorcOcupacion = [];
-        dataREVPAR = [];
+        
+        limpiarArreglosGraficaMeses()
 
         if(val.value == 'total'){
 

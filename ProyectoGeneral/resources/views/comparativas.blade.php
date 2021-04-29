@@ -5,7 +5,7 @@
         <section class="fondo2">
             <nav class="navAdmin">
                 <a href="{{url('home/')}}"><img src="{{ asset('imgs/inicio.png')}}">Inicio</a>
-                <a  style="background: white; color: #000000;font-weight: 800;" href="{{url('home/comparativas')}}"><img src="{{ asset('imgs/comparar.png')}}">Comparativas</a>
+                <a  class="etiquetaActiva" href="{{url('home/comparativas')}}"><img src="{{ asset('imgs/comparar.png')}}">Comparativas</a>
                 <a  href="{{url('home/resumenMensual')}}"><img src="{{ asset('imgs/resumen.png')}}">Resumen Mensual</a>
                 <a  href="{{url('home/analisisDeNegocio')}}"><img src="{{ asset('imgs/analisisNegocio.png')}}">Análisis De Negocio</a>
                 <a href="{{url('home/visualizarRegistros')}}"><img src="{{ asset('imgs/vision1.png')}}"> Visualizar Registros </a>                
@@ -15,9 +15,7 @@
                 @csrf
             </form>
 
-            <section class="espacioAdminEs">  
-                
-
+            <section class="espacioAdminEs"> 
                 <div class="container principalV">
                     <div class="row">
                         <div class="col-lg-12 text-left">
@@ -34,59 +32,59 @@
                         </div>
                     </div>
                 </div><br>
-                <div class="row" style="margin: -2% 0% -2% -4%; background:none">
+                <div class="row " >
                     <div class="col-sm-4">
-                      <div class="card" style="border:none;background:none">
-                        <div class="card-body">
-                          <div>
-                            <h5 style="padding-left: 2%">Inicio:
-                                <label  >
-                                    <select id="idanioInicio" name="anioInicio" class="form-control" onchange="cambioAnioInicio(this)"> 
-                                        <option disable>Año ...</option>
-                                        @foreach($anios as $anio)
-                                            <option value="{{$anio->anio}}">{{$anio->anio}}</option>
-                                        @endforeach
-                                    </select>
-                                </label>
-                                <label  style="padding-left: 2.5%;" >
-                                    <select id="idmesInicio" name="mesInicio" class="form-control" onchange="cambioMesInicio(this)">
-                                        <option disable>Mes ...</option>
-                                        @foreach($meses as $mes)
-                                            <option value="{{$mes[1]}}">{{$mes[0]}}</option>
-                                        @endforeach
-                                    </select>
-                                </label>
-                            </h5>
+                        <div class="card cardGrafica" >
+                            <div class="card-body">
+                                <div>
+                                    <h5>Inicio:
+                                        <label>
+                                            <select id="idanioInicio" name="anioInicio" class="form-control" onchange="cambioAnioInicio(this)"> 
+                                                <option disable>Año ...</option>
+                                                @foreach($anios as $anio)
+                                                    <option value="{{$anio->anio}}">{{$anio->anio}}</option>
+                                                @endforeach
+                                            </select>
+                                        </label>
+                                        <label>
+                                            <select id="idmesInicio" name="mesInicio" class="form-control" onchange="cambioMesInicio(this)">
+                                                <option disable>Mes ...</option>
+                                                @foreach($meses as $mes)
+                                                    <option value="{{$mes[1]}}">{{$mes[0]}}</option>
+                                                @endforeach
+                                            </select>
+                                        </label>
+                                    </h5>
+                                </div>
+                            </div>
                         </div>
-                        </div>
-                      </div>
                     </div>
                     <div class="col-sm-4">
-                      <div class="card" style="border:none; background:none">
-                        <div class="card-body">
-                            <h5>Fin: 
-                                <label  style="padding-left: 1%; margin:0">
-                                    <select id="idanioFin" name="anioFin" class="form-control" onchange="cambioAnioFin(this)">
-                                        @foreach($anios as $anio)
-                                            <option value="{{$anio->anio}}">{{$anio->anio}}</option>
-                                        @endforeach
-                                    </select>
-                                </label>
-                                <label  style="padding-left: 2.5%; margin:0">
-                                    <select id="inputState" name="mesFin" class="form-control" onchange="cambioMesFin(this)">
-                                
-                                        @foreach($meses as $mes)
-                                            <option value="{{$mes[1]}}">{{$mes[0]}}</option>
-                                        @endforeach
-                                    </select>
-                                </label>
-                            </h5>
+                        <div class="card  cardGrafica" >
+                            <div class="card-body">
+                                <h5>Fin: 
+                                    <label>
+                                        <select id="idanioFin" name="anioFin" class="form-control" onchange="cambioAnioFin(this)">
+                                            @foreach($anios as $anio)
+                                                <option value="{{$anio->anio}}">{{$anio->anio}}</option>
+                                            @endforeach
+                                        </select>
+                                    </label>
+                                    <label>
+                                        <select id="inputState" name="mesFin" class="form-control" onchange="cambioMesFin(this)">
+                                    
+                                            @foreach($meses as $mes)
+                                                <option value="{{$mes[1]}}">{{$mes[0]}}</option>
+                                            @endforeach
+                                        </select>
+                                    </label>
+                                </h5>
+                            </div>
                         </div>
-                      </div>
                     </div>
 
                     <div class="col-sm-4">
-                      <div class="card" style="border:none;background:none">
+                      <div class="card cardGrafica" >
                         <div class="card-body">
                           <div>
                             <h5>Estadístico:
@@ -104,11 +102,8 @@
                       </div>
                     </div>
 
-
                 </div>
-              
-                
-        
+          
                 <hr>
                 <div class="row col-13">
                     <div class="form-group col-md-2 panelVisualColums" >
@@ -129,7 +124,7 @@
                         <label for="habitaciones_disponibles"> Hab. Disponibles</label><br>
                         <input type="checkbox" name="ventas_netas" id="ventas_netas" value="ventas_netas" onchange="seleccionarFilas(this)">
                         <label for="ventas_netas"> Ventas Netas</label><br>
-                        <hr style="margin: 0.4em;">
+                        <hr>
                         <input type="checkbox" name="tarifa_promedio" id="tarifa_promedio" value="tarifa_promedio" onchange="seleccionarFilas(this)">
                         <label for="tarifa_promedio"> Tarifa Prom. Hab.</label><br>
                         <input type="checkbox" name="TAR_PER" id="TAR_PER" value="TAR_PER" onchange="seleccionarFilas(this)">
@@ -162,17 +157,17 @@
                     </div>
                 </div>
                 <br>
-                <div class="row">
-                    <div class="pt-2 ml-2" style="padding-right: 2%">
+                <div class="row tituloFiltrosGraficasEs">
+                    <div class="pt-2 ml-2 pr-3" >
                         <label><h5>Fecha inicio:</h5> </label>
                     </div>
-                    <div style="padding-right: 2%">
+                    <div class="pr-5">
                         <input type="date" name="inicio" class="form-control" id="cambioFechaInicio" value="{{$diaMin}}"> 
                     </div>
-                    <div class="pt-2" style="padding-right: 2%" >
+                    <div class="pt-2 pr-3" >
                         <label><h5>Fecha final:<h5></label>
                     </div>
-                    <div style="padding-right: 2%">
+                    <div class="pr-3">
                         <input type="date" name="inicio" class="form-control" id="cambioFechaFin" value="{{$diaMax}}">
                     </div>
                 </div>
@@ -181,7 +176,7 @@
                 <div class="row col-13">
                     <div class="form-group col-md-2 panelVisualColums" >
                         <div class="callout">
-                            <label ><h5>Prámetros:</h5></label><br>
+                            <label ><h5>Parámetros:</h5></label><br>
                             <input type="checkbox" name="checkins2" id="checkins2" value="checkins" onchange="seleccionarFilas2(this)">
                             <label for="checkins2"> Checkins</label><br>
                             <input type="checkbox" name="checkouts2" id="checkouts2" value="checkouts" onchange="seleccionarFilas2(this)">
@@ -198,7 +193,7 @@
                             <label for="habitaciones_disponibles2"> Hab. Disponibles</label><br>
                             <input type="checkbox" name="ventas_netas2" id="ventas_netas2" value="ventas_netas" onchange="seleccionarFilas2(this)">
                             <label for="ventas_netas2"> Ventas Netas</label><br>
-                            <hr style="margin: 0.4em;">
+                            <hr>
                             <input type="checkbox" name="tarifa_promedio2" id="tarifa_promedio2" value="tarifa_promedio" onchange="seleccionarFilas2(this)">
                             <label for="tarifa_promedio2"> Tarifa Prom. Hab.</label><br>
                             <input type="checkbox" name="TAR_PER2" id="TAR_PER2" value="TAR_PER" onchange="seleccionarFilas2(this)">
@@ -565,7 +560,7 @@
 
     }
 
-    function cambioMesInicio(val){
+    function limpiarArreglosGraficaMes(){
         mesesGrafica1 = [];
         dataCheckins1 = [];
         dataCheckouts1 = [];
@@ -579,6 +574,11 @@
         dataVentasNetas1 = [];
         dataPorcOcupacion1 = [];
         dataREVPAR1 = [];
+    }
+
+    function cambioMesInicio(val){
+
+        limpiarArreglosGraficaMes();
 
         mesInicioGrafica1 = val.value;
         
@@ -587,19 +587,8 @@
     }
 
     function cambioMesFin(val){
-        mesesGrafica1 = [];
-        dataCheckins1 = [];
-        dataCheckouts1 = [];
-        dataPernoctaciones1 = [];
-        dataNacionales1 = [];
-        dataExtranjeros1 = [];
-        dataHabOcupadas1 = [];
-        dataHabDisponibles1 = [];
-        dataTarPromHab1 = [];
-        dataTarPromPer1 = [];
-        dataVentasNetas1 = [];
-        dataPorcOcupacion1 = [];
-        dataREVPAR1 = [];
+        
+        limpiarArreglosGraficaMes();
 
         mesFinGrafica1 = val.value;
         
@@ -607,19 +596,8 @@
     }
 
     function cambioAnioInicio(val){
-        mesesGrafica1 = [];
-        dataCheckins1 = [];
-        dataCheckouts1 = [];
-        dataPernoctaciones1 = [];
-        dataNacionales1 = [];
-        dataExtranjeros1 = [];
-        dataHabOcupadas1 = [];
-        dataHabDisponibles1 = [];
-        dataTarPromHab1 = [];
-        dataTarPromPer1 = [];
-        dataVentasNetas1 = [];
-        dataPorcOcupacion1 = [];
-        dataREVPAR1 = [];
+        
+        limpiarArreglosGraficaMes();
 
         anioInicioGrafica1 = val.value;
         
@@ -628,19 +606,8 @@
     }
 
     function cambioAnioFin(val){
-        mesesGrafica1 = [];
-        dataCheckins1 = [];
-        dataCheckouts1 = [];
-        dataPernoctaciones1 = [];
-        dataNacionales1 = [];
-        dataExtranjeros1 = [];
-        dataHabOcupadas1 = [];
-        dataHabDisponibles1 = [];
-        dataTarPromHab1 = [];
-        dataTarPromPer1 = [];
-        dataVentasNetas1 = [];
-        dataPorcOcupacion1 = [];
-        dataREVPAR1 = [];
+        
+        limpiarArreglosGraficaMes();
 
         anioFinGrafica1 = val.value;
         
@@ -648,19 +615,8 @@
     }
 
     function cambioEstadisticoMeses(val){
-        mesesGrafica1 = [];
-        dataCheckins1 = [];
-        dataCheckouts1 = [];
-        dataPernoctaciones1 = [];
-        dataNacionales1 = [];
-        dataExtranjeros1 = [];
-        dataHabOcupadas1 = [];
-        dataHabDisponibles1 = [];
-        dataTarPromHab1 = [];
-        dataTarPromPer1 = [];
-        dataVentasNetas1 = [];
-        dataPorcOcupacion1 = [];
-        dataREVPAR1 = [];
+        
+        limpiarArreglosGraficaMes();
 
         if(val.value == 'total'){
 

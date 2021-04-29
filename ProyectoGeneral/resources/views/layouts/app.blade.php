@@ -56,28 +56,30 @@
                         <!-- Right Side Of Navbar -->
                         <ul class="navbar-nav ml-auto">
                             <!-- Authentication Links -->
-        
+                            <li class="nav-item {{ request()->is('/') ? 'active': ' '}}">
+                                <a class="nav-link" aria-current="page" href="{{url('/')}}">INICIO</a>
+                            </li>
+                            <li class="nav-item {{ request()->is('obtur') ? 'active': ' '}}">    
+                                <a class="nav-link" href="{{url('obtur')}}">OBTUR</a>
+                            </li>
+                            <li class="nav-item {{ request()->is('informacionTuristica') ? 'active': ' '}}">
+                                <a class="nav-link" href="{{url('informacionTuristica')}}">INFORMACIÓN TURÍSTICA</a>
+                            </li>
+                            <li class="nav-item {{ request()->is('datosEstadisticos') ? 'active': ' '}}">  
+                                <a class="nav-link" href="{{url('datosEstadisticos')}}"tabindex="-1" aria-disabled="true">DATOS ESTADÍSTICOS</a>
+                            </li>
 
-                                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                                    <div class="navbar-nav">
-                                        <a class="nav-link" aria-current="page" href="{{url('/')}}">INICIO</a>
-                                        <a class="nav-link" href="{{url('obtur')}}">OBTUR</a>
-                                        <a class="nav-link" href="{{url('informacionTuristica')}}">INFORMACIÓN TURÍSTICA</a>
-                                        <a class="nav-link" href="{{url('datosEstadisticos')}}"tabindex="-1" aria-disabled="true">DATOS ESTADÍSTICOS</a>
-                                    </div>
-                                </div>
-
-                                @if (Route::has('login'))
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="{{ route('login') }}">{{ __('INGRESAR') }}</a>
-                                    </li>
-                                @endif
-                              
-                                <!--  @if (Route::has('register'))
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                    </li>
-                                @endif-->
+                            @if (Route::has('login'))
+                                <li class="nav-item {{ ! route::is('login')? :'active'}}">
+                                    <a class="nav-link" href="{{ route('login') }}">{{ __('INGRESAR') }}</a>
+                                </li>
+                            @endif
+                        
+                            @if (Route::has('register'))
+                                <li class="nav-item {{ ! route::is('register')? :'active'}}">
+                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                </li>
+                            @endif
                                 
                          
                         </ul>

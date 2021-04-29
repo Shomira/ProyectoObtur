@@ -15,7 +15,7 @@
             <a  href="{{url('home/comparativas')}}"><img src="{{ asset('imgs/comparar.png')}}">Comparativas</a>
             <a  href="{{url('home/resumenMensual')}}"><img src="{{ asset('imgs/resumen.png')}}">Resumen Mensual</a>
             <a  href="{{url('home/analisisDeNegocio')}}"><img src="{{ asset('imgs/analisisNegocio.png')}}">Análisis De Negocio</a>
-            <a style="background: white; color: #000000;font-weight: 800;"  href="{{url('home/visualizarRegistros')}}"><img src="{{ asset('imgs/vision1.png')}}"> Visualizar Registros </a>                
+            <a class="etiquetaActiva"  href="{{url('home/visualizarRegistros')}}"><img src="{{ asset('imgs/vision1.png')}}"> Visualizar Registros </a>                
         </nav>
 
         <section class="espacioVisualizarA">
@@ -49,7 +49,7 @@
                 <div class="form-row ">
                     <form action="{{url('home/visualizarRegistros')}}" method="POST" class="visualizarArchivo">
                     
-                        <div class="form-row">
+                        <div class="form-row tituloFiltrosGraficasEs">
                             @csrf
                             <div class="col-md-5">
                                 <p>Ver registros desde:</p>

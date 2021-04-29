@@ -14,7 +14,7 @@
     <section class="fondo2">
         <nav class="navAdmin">
             <a href="{{url('home/')}}"><img src="{{ asset('imgs/inicio.png')}}">Inicio</a>
-            <a  style="background: white;" class="a-sub-menu" href="{{url('home/visualizarArchivos')}}">
+            <a  class="a-sub-menu etiquetaActiva" href="{{url('home/visualizarArchivos')}}">
             <img src="{{ asset('imgs/vision1.png')}}">Visualizar Registros</a>
             <a href="{{url('home/archivos')}}"><img src="{{ asset('imgs/sub2.png')}}">Cargar Archivos</a>      
 

@@ -14,19 +14,32 @@
         <nav class="navAdmin">
             <a href="{{url('home/')}}"><img src="{{ asset('imgs/inicio.png')}}">Inicio</a>
             <a href="{{url('home/visualizarArchivos')}}"><img src="{{ asset('imgs/vision1.png')}}">Visualizar Registros</a>
-            <a style="background: white; color: #000000;font-weight: 800;" href="{{url('home/archivos')}}">
+            <a class="etiquetaActiva" href="{{url('home/archivos')}}">
             <img src="{{ asset('imgs/sub2.png')}}">Cargar Archivos</a>
             <a href="{{url('home/gestionUsuarios')}}"><img src="{{ asset('imgs/group.png')}}">Gestionar Usuarios</a>
         </nav>
-        
-
         <section class="espacioCA">
-            <h4><img style="padding-right: 0.5em;"  src="{{ asset('imgs/carga.png')}}">CARGA DE ARCHIVOS A LA BASE DE DATOS</h4>
-            <div class="card mt-4">
+            <div class="container ">
+                <div class="row">
+                    <div class="col-lg-12 text-left">
+                        <div class="row">
+                            <!--tarjeta 1-->
+                            <div class="col-lg-30  col-md-8 mb-4">
+                                <div class="card-section2 border rounded p-3">
+                                    <div class="card-header-s rounded pb-4">
+                                        <h5 class="card-header-title text-white pt-3">Carga de Archivos a la Base de datos</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+            <div class="card mt-4 ml-1">
                 <div class="card-header">
                     Importación de archivos a la base de datos
                 </div>
-               @if ($errors->any())
+            @if ($errors->any())
                     
                     @foreach ($errors->all() as $error)
                         <!-- <li>{{ $error }}</li>-->
@@ -58,27 +71,36 @@
                         <input type="file" name="import_file[]" class="form-control" multiple>
                         <br>
                         <button class="btn btn-success" name="opcion" value="1">Cargar archivo</button>
-                        <button class="btn text-white" style="background:#1a135a" name="opcion" value="2">Probar archivo</button>
+                        <button class="btn btn-primary text-white" name="opcion" value="2">Probar archivo</button>
                     </form>
                 </div>
                 
 
             </div>
-
         </section>
-        
         <section class="col-6">
             @if($message = Session::get('eliminado'))
                 <script>swal("{!! $message !!}",'success')</script>
             @endif
         </section>
-        
-
        <!-- Tabla de Archivos-->
-       <section class="section-archivos">
-                <h4><img style="padding-right: 1em;"  src="{{ asset('imgs/lista.png')}}">LISTA DE ARCHIVOS</h4>
-
-        </section>
+        <div class="container ">
+            <div class="row">
+                <div class="col-lg-12 text-left">
+                    <div class="row">
+                        <!--tarjeta 1-->
+                        <div class="col-lg-30  col-md-8 mb-4">
+                            <div class="card-section2 border rounded p-3">
+                                <div class="card-header-s rounded pb-4">
+                                    <h5 class="card-header-title text-white pt-3">Lista de Archivos</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> 
+     
         <div class="row justify-content-left "> 
             <div class="cardCargaAr justify-content-left" >
                 

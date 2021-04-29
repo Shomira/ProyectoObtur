@@ -6,7 +6,7 @@
             <nav class="navAdmin">
                 <a href="{{url('home')}}"><img src="{{ asset('imgs/inicio.png')}}">Inicio</a>
                 <a  href="{{url('home/comparativas')}}"><img src="{{ asset('imgs/comparar.png')}}">Comparativas</a>
-                <a style="background: white; color: #000000;font-weight: 800;"  href="{{url('home/resumenMensual')}}"><img src="{{ asset('imgs/resumen.png')}}">Resumen Mensual</a>
+                <a class="etiquetaActiva" href="{{url('home/resumenMensual')}}"><img src="{{ asset('imgs/resumen.png')}}">Resumen Mensual</a>
                 <a  href="{{url('home/analisisDeNegocio')}}"><img src="{{ asset('imgs/analisisNegocio.png')}}">Análisis De Negocio</a>
                 <a href="{{url('home/visualizarRegistros')}}"><img src="{{ asset('imgs/vision1.png')}}"> Visualizar Registros</a> 
             </nav>
@@ -33,20 +33,20 @@
                     </div>
                 </div>
                 <br>
-                <div class="row" style="margin: -3%; background:none">
+                <div class="row filtroGraficaEs tituloFiltrosGraficasEs">
                     <div class="col-sm-5">
-                      <div class="card" style="border:none">
-                        <div class="card-body">
+                      <div class="card cardResumenM" >
+                        <div class="card-body ">
                           <div>
-                            <h5 >Año-Mes:
-                                <label for="inputState" style=" width:30%; padding-left: 4.5%; ">
+                            <h5>Año-Mes:
+                                <label for="inputState" >
                                     <select id="idanioInicio" name="anioInicio" class="form-control" onchange="cambioAnio(this)"> 
                                         @foreach($anios as $anio)
                                             <option value="{{$anio->anio}}">{{$anio->anio}}</option>
                                         @endforeach
                                     </select>
                                 </label>
-                                <label for="inputState"  style=" width:25%;">
+                                <label for="inputState">
                                     <select id="idmesInicio" name="mesInicio" class="form-control" onchange="cambioMes(this)">
                                         @foreach($meses as $mes)
                                             <option value="{{$mes[1]}}">{{$mes[0]}}</option>
@@ -59,10 +59,9 @@
                       </div>
                     </div>
                     <div class="col-sm-6">
-                      <div class="card" style="border:none">
-                        <div class="card-body">
+                        <div class="card-body cardBodyResumenM">
                             <h5>Estadísticos: 
-                                <label for="inputState" style="padding-left: 4.5%; margin:0">
+                                <label for="inputState">
                                     <select id="inputState" name="estadistico" class="form-control" onchange="cambioEstadistico(this)">
                                         <option value="Promedio">Promedio</option>
                                         <option value="Total" >Total</option>
@@ -72,7 +71,6 @@
                                 </label>
                             </h5>
                         </div>
-                      </div>
                     </div>
                 </div>
                 <br><hr>
@@ -96,7 +94,7 @@
                         <label for="habitaciones_disponibles"> Hab. Disponibles</label><br>
                         <input type="checkbox" name="ventas_netas" id="ventas_netas" value="Ventas Netas" onchange="seleccionarColumna(this)">
                         <label for="ventas_netas"> Ventas Netas</label><br>
-                        <hr style="margin: 0.4em;">
+                        <hr>
                         <input type="checkbox" name="tarifa_promedio" id="tarifa_promedio" value="Tarifa Hab" onchange="seleccionarColumna(this)">
                         <label for="tarifa_promedio"> Tarifa Prom. Hab.</label><br>
                         <input type="checkbox" name="TAR_PER" id="TAR_PER" value="Tarifa Per" onchange="seleccionarColumna(this)">
