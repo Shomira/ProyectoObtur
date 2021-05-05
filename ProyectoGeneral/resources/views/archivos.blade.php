@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.main')
 
 @section('css')
 
@@ -8,83 +8,9 @@
 @endsection
 
 
-@section('content')
-<section class="fondo">
-    <section class="fondo2">
-        <nav class="navAdmin">
-            <a href="{{url('home/')}}"><img src="{{ asset('imgs/inicio.png')}}">Inicio</a>
-            <a href="{{url('home/visualizarArchivos')}}"><img src="{{ asset('imgs/vision1.png')}}">Visualizar Registros</a>
-            <a class="etiquetaActiva" href="{{url('home/archivos')}}">
-            <img src="{{ asset('imgs/sub2.png')}}">Cargar Archivos</a>
-            <a href="{{url('home/gestionUsuarios')}}"><img src="{{ asset('imgs/group.png')}}">Gestionar Usuarios</a>
-        </nav>
-        <section class="espacioCA">
-            <div class="container ">
-                <div class="row">
-                    <div class="col-lg-12 text-left">
-                        <div class="row">
-                            <!--tarjeta 1-->
-                            <div class="col-lg-30  col-md-8 mb-4">
-                                <div class="card-section2 border rounded p-3">
-                                    <div class="card-header-s rounded pb-4">
-                                        <h5 class="card-header-title text-white pt-3">Carga de Archivos a la Base de datos</h5>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div> 
-            <div class="card mt-4 ml-1">
-                <div class="card-header">
-                    Importación de archivos a la base de datos
-                </div>
-            @if ($errors->any())
-                    
-                    @foreach ($errors->all() as $error)
-                        <!-- <li>{{ $error }}</li>-->
-                        <script>
-                            var texto = "";
-                            var cadena = '{{$error}}'.split('/')
-                            for (let i = 1; i < cadena.length; i++) {
-
-                                texto += cadena[i]+"\n";
-                                
-                            }
-                            
-                            swal({
-                                title: cadena[0],
-                                text: texto,
-                                icon: "error",
-                                button: "OK",
-                                });
-                        </script> 
-                    @endforeach
-                @endif
-
-                @if($message = Session::get('success'))
-                    <script>swal("{!! Session::get('success')!!}",'success')</script>
-                @endif
-                <div class="card-body">
-                    <form action="{{ url('import-excel') }}" method="POST" name="importform" enctype="multipart/form-data">
-                        @csrf
-                        <input type="file" name="import_file[]" class="form-control" multiple>
-                        <br>
-                        <button class="btn btn-success" name="opcion" value="1">Cargar archivo</button>
-                        <button class="btn btn-primary text-white" name="opcion" value="2">Probar archivo</button>
-                    </form>
-                </div>
-                
-
-            </div>
-        </section>
-        <section class="col-6">
-            @if($message = Session::get('eliminado'))
-                <script>swal("{!! $message !!}",'success')</script>
-            @endif
-        </section>
-       <!-- Tabla de Archivos-->
-        <div class="container ">
+@section('contenido')
+    <div class="containerTab ">
+        <div class="container principalV">
             <div class="row">
                 <div class="col-lg-12 text-left">
                     <div class="row">
@@ -92,87 +18,61 @@
                         <div class="col-lg-30  col-md-8 mb-4">
                             <div class="card-section2 border rounded p-3">
                                 <div class="card-header-s rounded pb-4">
-                                    <h5 class="card-header-title text-white pt-3">Lista de Archivos</h5>
+                                    <h5 class="card-header-title text-white pt-3">Carga de Archivos a la Base de datos</h5>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div> 
-     
-        <div class="row justify-content-left "> 
-            <div class="cardCargaAr justify-content-left" >
+        </div>
+        <div class="card mt-4 ml-5 mr-5">
+            <div class="card-header">
+                Importación de archivos a la base de datos
+            </div>
+            @if ($errors->any())
                 
-                <div class="card-body">
-                    <table class="table table-striped tablaAr" id='t_archivos' >
-                        <thead>
-                            <tr>
-                                <td>Nombre</td>
-                                <td>Fecha de carga</td>
-                                <td>&nbsp;</td>
-                                <td>&nbsp;</td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach($files as $file)
-                                <tr>
-                                    <td>{{$file->nombre}}</td>
-                                    <td>{{$file->created_at}}</td>
-                                    <td>
-                                        <a href="../storage/{{$file->nombre}}" class="btn btn-sm btn-outline-secondary">Descargar</a>
-                                    </td>
-                                    <td>
-                                        <button class="btn btn-sm btn-outline-danger btnEliminar" data-id="{{ $file->id }}" data-toggle="modal" data-target="#modalEliminar">
-                                            Eliminar
-                                        </button>
-                                        
-                                        <form action="{{ url('home/archivos', $file->id ) }}" method="POST" id="formEli_{{ $file->id }}">
-                                            @method('DELETE')
-                                            @csrf
-                                            <input type="hidden" name="id" value="{{ $file->id }}">
-                                            <input type="hidden" name="_method" value="delete">
-                                        
-                                        </form>
-                                        
-                                    </td>
-                                
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    
+                @foreach ($errors->all() as $error)
+                    <!-- <li>{{ $error }}</li>-->
+                    <script>
+                        var texto = "";
+                        var cadena = '{{$error}}'.split('/')
+                        for (let i = 1; i < cadena.length; i++) {
 
-        <!-- Modal Eliminar Archivos-->
-        <div class="modal fade" id="modalEliminar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Eliminar Archivo</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
+                            texto += cadena[i]+"\n";
+                            
+                        }
+                        
+                        swal({
+                            title: cadena[0],
+                            text: texto,
+                            icon: "error",
+                            button: "OK",
+                            });
+                    </script> 
+                @endforeach
+            @endif
 
-
-                        <div class="modal-body">
-                            <h5>¿Desea Eliminar el Archivo?</h5>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                            <button type="button" class="btn btn-danger btnModalEliminar">Eliminar</button>
-                        </div>
-                    
-                </div>
+            @if($message = Session::get('success'))
+                <script>swal("{!! Session::get('success')!!}",'success')</script>
+            @endif
+            <div class="card-body">
+                <form action="{{ url('import-excel') }}" method="POST" name="importform" enctype="multipart/form-data">
+                    @csrf
+                    <input type="file" name="import_file[]" class="form-control" multiple>
+                    <br>
+                    <button class="btn btn-success" name="opcion" value="1">Cargar archivo</button>
+                    <button class="btn btn-primary text-white" name="opcion" value="2">Probar archivo</button>
+                </form>
             </div>
         </div>
 
-    </section>
-</section>
-    
+        <section class="col-6">
+            @if($message = Session::get('eliminado'))
+                <script>swal("{!! $message !!}",'success')</script>
+            @endif
+        </section>
+    </div> 
 @endsection
 
 @section('scripts') 

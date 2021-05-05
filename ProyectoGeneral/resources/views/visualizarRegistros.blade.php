@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.main')
 
 @section('css')
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css">
@@ -7,22 +7,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
 @endsection
 
-@section('content')
-<section class="fondo">
-    <section class="fondo2">
-        <nav class="navAdmin">
-            <a  href="{{url('home/')}}"><img src="{{ asset('imgs/inicio.png')}}">Inicio</a>
-            <a  href="{{url('home/comparativas')}}"><img src="{{ asset('imgs/comparar.png')}}">Comparativas</a>
-            <a  href="{{url('home/resumenMensual')}}"><img src="{{ asset('imgs/resumen.png')}}">Resumen Mensual</a>
-            <a  href="{{url('home/analisisDeNegocio')}}"><img src="{{ asset('imgs/analisisNegocio.png')}}">Análisis De Negocio</a>
-            <a class="etiquetaActiva"  href="{{url('home/visualizarRegistros')}}"><img src="{{ asset('imgs/vision1.png')}}"> Visualizar Registros </a>                
-        </nav>
+@section('contenido')
+    <section class="contened">
 
-        <section class="espacioVisualizarA">
-
-            @isset ($alerta)
-                <script>swal('No existen registros!','Aún no has subido archivos','warning')</script>
-            @endisset
+        @isset ($alerta)
+            <script>swal('No existen registros!','Aún no has subido archivos','warning')</script>
+        @endisset
 
         <br>
             <div class="container principalV">
@@ -42,93 +32,90 @@
                 </div>
             </div>
         <!--                -->
-        
-            <!-- Tabla de Registros-->
-            <div class="container overflow-auto">
+    
+        <!-- Tabla de Registros-->
+        <div class="container overflow-auto">
+            
+            <div class="form-row ">
+                <form action="{{url('home/visualizarRegistros')}}" method="POST" class="visualizarArchivo">
                 
-                <div class="form-row ">
-                    <form action="{{url('home/visualizarRegistros')}}" method="POST" class="visualizarArchivo">
-                    
-                        <div class="form-row tituloFiltrosGraficasEs">
-                            @csrf
-                            <div class="col-md-5">
-                                <p>Ver registros desde:</p>
-                                <div class="input-group"> 
-                                <input type="date" name="inicio" value="23/12/2020"  class="form-control" id="validationDefaultUsername"  aria-describedby="inputGroupPrepend2" required>
-                                </div>
+                    <div class="form-row tituloFiltrosGraficasEs">
+                        @csrf
+                        <div class="col-md-5">
+                            <p>Ver registros desde:</p>
+                            <div class="input-group"> 
+                            <input type="date" name="inicio" value="23/12/2020"  class="form-control" id="validationDefaultUsername"  aria-describedby="inputGroupPrepend2" required>
                             </div>
-                            <div class="col-md-5 ">
-                                <p>Ver registros hasta:</p>
-                                <div class="input-group">  
-                                    <input type="date" name="fin" value="{{ old('fin') }}" class="form-control" id="validationDefaultUsername" aria-describedby="inputGroupPrepend2" required>
-                                </div>
+                        </div>
+                        <div class="col-md-5 ">
+                            <p>Ver registros hasta:</p>
+                            <div class="input-group">  
+                                <input type="date" name="fin" value="{{ old('fin') }}" class="form-control" id="validationDefaultUsername" aria-describedby="inputGroupPrepend2" required>
                             </div>
-                            <div class="col-md-2">
-                                <br>
-                                <button type="submit" class="btn btn-warning mt-3">Consultar</button>
-                            </div>
-                            
+                        </div>
+                        <div class="col-md-2">
+                            <br>
+                            <button type="submit" class="btn btn-warning mt-3">Consultar</button>
                         </div>
                         
-                    </form>
-                </div>
+                    </div>
+                    
+                </form>
+            </div>
 
-            <!-- Tabla de Registros-->
-            <div class="container overflow-auto">
-                
-                <section class="linea2" ></section>
-                <div class="row justify-content-center overflow-auto">
-                    <!---->
-                    <div class="card overflow-auto">
-                        <div class="card-header overflow-auto"> {{$mensaje}}</div>
-                        <div class="card-body overflow-auto">
-                            <div class="table-responsive table-striped overflow-auto">
-                                <table class="tablaAr col-12 table-responsive overflow-auto" id='t_registros'>
-                                    <thead>
+        <!-- Tabla de Registros-->
+        <div class="container overflow-auto">
+            
+            <section class="linea2" ></section>
+            <div class="row justify-content-center overflow-auto">
+                <!---->
+                <div class="card overflow-auto">
+                    <div class="card-header overflow-auto"> {{$mensaje}}</div>
+                    <div class="card-body overflow-auto">
+                        <div class="table-responsive table-striped overflow-auto">
+                            <table class="tablaAr col-12 table-responsive overflow-auto" id='t_registros'>
+                                <thead>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Fecha</th>
+                                        <th>Id Establecimiento</th>
+                                        <th>Checkins</th>
+                                        <th>Checkouts</th>
+                                        <th>Pernoctaciones</th>
+                                        <th>Nacionales</th>
+                                        <th>Extranjeros</th>
+                                        <th>Hab. Ocupadas</th>
+                                        <th>Tarifa Prom.</th>
+                                        <th>Ventas Netas</th>
+                                        
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach($registros as $registro)
                                         <tr>
-                                            <th>Id</th>
-                                            <th>Fecha</th>
-                                            <th>Id Establecimiento</th>
-                                            <th>Checkins</th>
-                                            <th>Checkouts</th>
-                                            <th>Pernoctaciones</th>
-                                            <th>Nacionales</th>
-                                            <th>Extranjeros</th>
-                                            <th>Hab. Ocupadas</th>
-                                            <th>Tarifa Prom.</th>
-                                            <th>Ventas Netas</th>
+                                            <td>{{$registro->id}} </td>
+                                            <td>{{$registro->fecha}}</td>
+                                            <td>{{$registro->idEstablecimiento}}</td>
+                                            <td>{{$registro->checkins}}</td>
+                                            <td>{{$registro->checkouts}}</td>
+                                            <td>{{$registro->pernoctaciones}}</td>
+                                            <td>{{$registro->nacionales}}</td>
+                                            <td>{{$registro->extranjeros}}</td>
+                                            <td>{{$registro->habitaciones_ocupadas}}</td>
+                                            <td>{{$registro->tarifa_promedio}}</td>
+                                            <td>{{$registro->ventas_netas}}</td>
                                             
                                         </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach($registros as $registro)
-                                            <tr>
-                                                <td>{{$registro->id}} </td>
-                                                <td>{{$registro->fecha}}</td>
-                                                <td>{{$registro->idEstablecimiento}}</td>
-                                                <td>{{$registro->checkins}}</td>
-                                                <td>{{$registro->checkouts}}</td>
-                                                <td>{{$registro->pernoctaciones}}</td>
-                                                <td>{{$registro->nacionales}}</td>
-                                                <td>{{$registro->extranjeros}}</td>
-                                                <td>{{$registro->habitaciones_ocupadas}}</td>
-                                                <td>{{$registro->tarifa_promedio}}</td>
-                                                <td>{{$registro->ventas_netas}}</td>
-                                                
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
+                                    @endforeach
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
             </div>
-
-        </section>
+        </div>
 
     </section>
-</section>
 
 @endsection
 

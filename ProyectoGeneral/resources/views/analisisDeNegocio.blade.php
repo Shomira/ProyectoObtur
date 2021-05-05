@@ -1,104 +1,93 @@
- @extends('layouts.app')
+ @extends('layouts.main')
 
-@section('content')
-<section class="fondo">
-    <section class="fondo2">
-        <nav class="navAdmin">
-        <a href="{{url('home/')}}"><img src="{{ asset('imgs/inicio.png')}}">Inicio</a>
-            <a  href="{{url('home/comparativas')}}"><img src="{{ asset('imgs/comparar.png')}}">Comparativas</a>
-            <a  href="{{url('home/resumenMensual')}}"><img src="{{ asset('imgs/resumen.png')}}">Resumen Mensual</a>
-            <a  class="etiquetaActiva" href="{{url('home/analisisDeNegocio')}}"><img src="{{ asset('imgs/analisisNegocio.png')}}">Análisis De Negocio</a>
-            <a  href="{{url('home/visualizarRegistros')}}"><img src="{{ asset('imgs/vision1.png')}}"> Visualizar Registros</a> 
-        </nav>
+@section('contenido')
 
-        <form action="" method="POST">
-            @csrf
-        </form>
+    <form action="" method="POST">
+        @csrf
+    </form>
 
- 	 	<section class="espacioAdminEs">
-            <div class="container principalV">
-                <div class="row">
-                    <div class="col-lg-12 text-left">
-                        <div class="row">
-                            <!--tarjeta 1-->
-                            <div class="col-lg-30  col-md-8 mb-4">
-                                <div class="card-section border rounded p-3">
-                                    <div class="card-header-s rounded pb-4">
-                                        <h5 class="card-header-title text-white pt-3">Análisis</h5>
-                                    </div>
+    <section class="contenedorEs">
+        <div class="container principalV">
+            <div class="row">
+                <div class="col-lg-12 text-left">
+                    <div class="row">
+                        <!--tarjeta 1-->
+                        <div class="col-lg-30  col-md-8 mb-4">
+                            <div class="card-section border rounded p-3">
+                                <div class="card-header-s rounded pb-4">
+                                    <h5 class="card-header-title text-white pt-3">ANÁLISIS DE NEGOCIO</h5>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <br>
-                
-            <br>
-            <div  class="row tituloFiltrosGraficasEs" >
-                <div>
-                    <h5 class="pl-3 pt-2 pr-2">Estadísticos:</h5>
-                </div>
-                <div>
-                    <select class="form-select filtroAnalisisN" onchange="cambioEstadistico(this)">
-                        <option value="Promedio">Promedio</option>
-                        <option value="Total" >Total</option>
-                        <option value="Max">Máximo</option>
-                        <option value="Min" >Mínimo</option>
-                    </select>
-                </div>
-                <div class="pt-2 pl-4">
-                    <h5 >Ver registros desde:</h5>
-                </div>
-                <div>
-                    <input type="date" name="inicio" value="{{$diaMin}}" class="form-control" id="cambioFechaInicio"  aria-describedby="inputGroupPrepend2" >
-                </div>
-                <div class="pt-2 pr-2 pl-4">
-                    <h5>Ver registros hasta:</h5>
-                </div>  
-                <div>
-                    <input type="date" name="fin" value="{{$diaMax}}" class="form-control" id="cambioFechaFin" aria-describedby="inputGroupPrepend2" >
-                </div>
-            </div>
-            <hr>
+        </div>
+        <br>
             
-            <br>
-            <div class="card-group pb-4">
-                <div class="card mr-3">
-                    
-                    <div class="card-body ">
-                    <h5 class="card-header-second text-center pt-3 ">Checkins</h5> <br>
-                    <canvas id="myChartCheckins"  height="200"></canvas>
-                    </div>
-                </div>
-                <div class="card ml-3">
-                    <div class="card-body">
-                    <h5 class="card-header-second text-center pt-3">Checkouts</h5> <br>
-                    <canvas id="myChartCheckouts"  height="200"></canvas>
-                    </div>
-                </div>
-                
+        <br>
+        <div  class="row tituloFiltrosGraficasEs" >
+            <div>
+                <h5 class="pl-3 pt-2 pr-2">Estadísticos:</h5>
             </div>
-            <div class="card-group">
-                <div class="card mr-3">
-                    <div class="card-body">
-                        <h5 class="card-header-second text-center pt-3">Porcentaje Ocupación</h5><br>
-                        <canvas id="myChartPorcentajeOcup"  height="200"></canvas>
-                    </div>
+            <div>
+                <select class="form-select filtroAnalisisN" onchange="cambioEstadistico(this)">
+                    <option value="Promedio">Promedio</option>
+                    <option value="Total" >Total</option>
+                    <option value="Max">Máximo</option>
+                    <option value="Min" >Mínimo</option>
+                </select>
+            </div>
+            <div class="pt-2 pl-4">
+                <h5 >Ver registros desde:</h5>
+            </div>
+            <div>
+                <input type="date" name="inicio" value="{{$diaMin}}" class="form-control" id="cambioFechaInicio"  aria-describedby="inputGroupPrepend2" >
+            </div>
+            <div class="pt-2 pr-2 pl-4">
+                <h5>Ver registros hasta:</h5>
+            </div>  
+            <div>
+                <input type="date" name="fin" value="{{$diaMax}}" class="form-control" id="cambioFechaFin" aria-describedby="inputGroupPrepend2" >
+            </div>
+        </div>
+        <hr>
+        
+        <br>
+        <div class="card-group pb-4">
+            <div class="card mr-3">
+                
+                <div class="card-body ">
+                <h5 class="card-header-second text-center pt-3 ">Checkins</h5> <br>
+                <canvas id="myChartCheckins"  height="200"></canvas>
                 </div>
-                <div class="card ml-3">
+            </div>
+            <div class="card ml-3">
                 <div class="card-body">
-                    <h5 class="card-header-second text-center pt-3">REVPAR</h5> <br>
-                    <canvas id="myChartRevpar"  height="200"></canvas>
-                    
+                <h5 class="card-header-second text-center pt-3">Checkouts</h5> <br>
+                <canvas id="myChartCheckouts"  height="200"></canvas>
                 </div>
+            </div>
+            
+        </div>
+        <div class="card-group">
+            <div class="card mr-3">
+                <div class="card-body">
+                    <h5 class="card-header-second text-center pt-3">Porcentaje Ocupación</h5><br>
+                    <canvas id="myChartPorcentajeOcup"  height="200"></canvas>
                 </div>
-
+            </div>
+            <div class="card ml-3">
+            <div class="card-body">
+                <h5 class="card-header-second text-center pt-3">REVPAR</h5> <br>
+                <canvas id="myChartRevpar"  height="200"></canvas>
+                
+            </div>
             </div>
 
-            
-        </section>
+        </div>
     </section>
+    
 @endsection
 
 @section('scripts')

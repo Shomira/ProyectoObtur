@@ -27,7 +27,7 @@ class VisualizarArchivosController extends Controller
             $cadena = "SELECT * FROM registros";
             $alerta = "No existen registros";
         }else{
-            $cadena = "SELECT r.*, e.nombre FROM registros r, establecimientos e WHERE e.id = r.idEstablecimiento AND MONTH(fecha) = $auxMes";
+           $cadena = "SELECT r.*, e.nombre FROM registros r, establecimientos e WHERE e.id = r.idEstablecimiento AND MONTH(fecha) = $auxMes";
             $alerta = null;
         }
         
@@ -50,7 +50,7 @@ class VisualizarArchivosController extends Controller
                                         ->with('hasta',$fechaMaxima[0]->fecha);
 
     }
-
+/*
     public function mostrar(Request $request){
 
         $establecimientos = DB::table('establecimientos')
@@ -84,7 +84,7 @@ class VisualizarArchivosController extends Controller
         
     }
 
-    
+    */
 
 
 }

@@ -39,7 +39,7 @@ section.containerSlider{
   }
 
 nav.publico .navbar-nav .active {
-    font-weight: 600;
+    font-weight: 700;
 
 }  
 a.nav-link:hover{
@@ -402,11 +402,13 @@ section.porPersona h3{
 .centrado2{
     padding-bottom: 2em;
 }
+
 section.fondoBlanco{
     width: 100%;
     background-color: #ffffff;
 
 }
+
 section.indicadoresDeHues{
     background-color: #ffffff;
     margin-bottom: -60px ;
@@ -638,17 +640,19 @@ article.quienesSomosOp p {
     background:
         rgb(255, 182, 99);
 }
-
-section.fondo, nav.navAdmin{
+/*
+ nav.navAdmin{
   
     background: linear-gradient(rgb(253, 234, 197), 
     rgb(253, 234, 197));
 
 }
+*/
 nav.administrador{
     background: linear-gradient(
         rgb(239,128,1),rgb(239,128,1));
 }
+/*
 section.fondo2{
     width: 95%;
    background-color: white;
@@ -656,8 +660,9 @@ section.fondo2{
     margin:0 auto;
     padding-bottom: 6em;
 }
+*/
 /*Home Administrador*/
-.datAd section.partsup, .datAd section.partsup2{
+.datAd section.partsup{
     padding: 1em;
     margin-bottom: 0.2em;
     background: rgb(231,165,73) ;
@@ -667,10 +672,12 @@ section.fondo2{
 .datAd section.partsup2{
     background: rgb(255,114,74)
 }
+/*
 nav.navAdmin {
     width: 100%;
     padding: 2.2em 2.2em 1.7em 0em;
 }
+*/
 nav.navAdmin  a{
     background: linear-gradient(rgb(245, 245, 245), rgb(245, 245, 245) );
     color: #000000;
@@ -723,10 +730,10 @@ section.espacioAdmin h4{
     color: #491b41;
 }
 /*Gestion usuarios--------------------------------------------------*/
-.card-headerUs{
+/*.card-headerUs{
     margin-top: 1em;
     background:  rgb(255, 255, 255);
-}
+}*/
 .modalHeader{
     color: #ffffff;
 
@@ -744,19 +751,24 @@ button.crearUs{
         margin-left: 1.5em;
         background-color: #1b4c74;
 }
-.card-section2{
-    margin-left: -78px;
+.card-section2, .card-section{
+    margin-left: -50px;
     margin-top: 1.6em;
+    background:  rgb(255, 255, 255);
 }
 /*Visualizar Archivos y Gestion usuarios*/
-.containerTab{
+
+/*.containerTab{
     width: 90%;
     margin: 0 auto;
-    margin-top: 1em;    
+  
+ 
+}*/
+.containerTab thead{
+    background:  rgb(214, 198, 176);
+       
 }
-.card-section{
-    margin-left: -80px;
-}
+
 .tablaAr thead{
     background:  rgb(214, 198, 176);
     border-top: 4px solid rgb(111, 59, 24);
@@ -768,7 +780,7 @@ button.crearUs{
 
 .principalV{
 	margin-top:50px;
-	
+
 }
 /*tarjeta 1*/
 .card-header-s{
@@ -781,9 +793,7 @@ button.crearUs{
 .card-header-s h5{
     padding: 10px; 
 }
-.containerTab{
-    margin-top: 2em;
-}
+
 
 .table{
     width: 100%; 
@@ -816,46 +826,41 @@ button.crearUs{
 .input-filtros{
     border: 0;
     font-size:large;
-    background: white;
+    background: linear-gradient(rgb(245, 245, 245), rgb(245, 245, 245) );
     color: black;
 }
 .input-filtros1{
     width: 50%;
-    background: white;
+    background: linear-gradient(rgb(245, 245, 245), rgb(245, 245, 245) );
     border: 0;
     font-size:large;
 }
-.containerTab thead{
-    background:  rgb(214, 198, 176);
-       
-}
+
 
 /*  Carga Archivos   Administrador-------------------------------------------*/
+/*
 section.espacioCA{
     width: 78.5%;
     padding: 3em 5em 2em 3em;
     margin-left: 2.5em;
 }
-.espacioCA .card-section2{
+.espacioCA {
     margin-left: -1em;
 }
 .cardCargaAr{
     width: 100%;
     margin-left: 6em;
     width: 70%;
-  
-}
-.section-archivos{
+  .section-archivos{
     margin: 1.2em; 
 }
-/* -----------------------------------------------------------------------*/
- section.datosAd{
-    width: 82%;
-    margin: 0 auto;
-    padding: 0em 0em 2em 2em;
-    text-align: center;
-    
 }
+
+*/
+
+
+/* -----------------------------------------------------------------------*/
+
 section.datosAd article.datAd {
     border-radius: 0px;
     margin-right: 3em;
@@ -914,10 +919,11 @@ footer article.final article.contactos h3{
 }
 
 /* Estilos Establecimientos>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>=====================================================*/
+/*
 .espacioAdminEs {
     padding: 3em 6em 7em 6em;
 }
-
+*/
 .panelVisualColums label:hover{
     color: rgb(156, 71, 14);
 
@@ -932,6 +938,10 @@ footer article.final article.contactos h3{
     color: #492820;
 }
 /* Comparativas---------------------------------------------------------------------*/
+
+.contenedorEs{
+    margin: 0em 1.5em 0.3em 1.5em;
+}
 
 .cardGrafica, .cardResumenM{
 border:none;

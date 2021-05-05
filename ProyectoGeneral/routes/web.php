@@ -50,12 +50,16 @@ Route::group(['prefix'=>'home', 'as'=>'home'], function(){
     Route::get('/gestionUsuarios', 'App\Http\Controllers\UsersController@index');
     Route::resource('/gestionUsuarios', 'App\Http\Controllers\UsersController');
     Route::post('/gestionUsuarios/edit', 'App\Http\Controllers\UsersController@editarUsuario');
-    Route::get('/visualizarArchivos', 'App\Http\Controllers\VisualizarArchivosController@index');
-    Route::post('/visualizarArchivos', 'App\Http\Controllers\VisualizarArchivosController@mostrar');
     Route::get('/visualizarRegistros', 'App\Http\Controllers\VisualizarRegistrosController@index');
     Route::post('/visualizarRegistros', 'App\Http\Controllers\VisualizarRegistrosController@mostrar');
     Route::get('/archivos', 'App\Http\Controllers\ImportExcel\ImportExcelController@index');
-    Route::delete('/archivos/{file}', 'App\Http\Controllers\ImportExcel\ImportExcelController@destroy');
-           
-
+    Route::get('/visualizarArchivosCargados', 'App\Http\Controllers\VisualizarArchivosCargadosController@index');
+    Route::delete('/visualizarArchivosCargados/{file}', 'App\Http\Controllers\VisualizarArchivosCargadosController@destroy');
+    Route::get('/visualizarArchivos', 'App\Http\Controllers\VisualizarArchivosController@index');
+    Route::post('/visualizarArchivos', 'App\Http\Controllers\VisualizarArchivosController@index');
+    Route::get('/visualizarEstablecimientos', 'App\Http\Controllers\VisualizarEstablecimientosController@index');
+    
+    
+    
+  
 });

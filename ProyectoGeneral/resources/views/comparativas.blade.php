@@ -1,218 +1,208 @@
-@extends('layouts.app')
+@extends('layouts.main')
 
-@section('content')
-    <section class="fondo">
-        <section class="fondo2">
-            <nav class="navAdmin">
-                <a href="{{url('home/')}}"><img src="{{ asset('imgs/inicio.png')}}">Inicio</a>
-                <a  class="etiquetaActiva" href="{{url('home/comparativas')}}"><img src="{{ asset('imgs/comparar.png')}}">Comparativas</a>
-                <a  href="{{url('home/resumenMensual')}}"><img src="{{ asset('imgs/resumen.png')}}">Resumen Mensual</a>
-                <a  href="{{url('home/analisisDeNegocio')}}"><img src="{{ asset('imgs/analisisNegocio.png')}}">Análisis De Negocio</a>
-                <a href="{{url('home/visualizarRegistros')}}"><img src="{{ asset('imgs/vision1.png')}}"> Visualizar Registros </a>                
-            </nav>
+@section('contenido')
+  
+    <form action="" method="POST">
+        @csrf
+    </form>
 
-            <form action="" method="POST">
-                @csrf
-            </form>
-
-            <section class="espacioAdminEs"> 
-                <div class="container principalV">
-                    <div class="row">
-                        <div class="col-lg-12 text-left">
-                            <div class="row">
-                                <!--tarjeta 1-->
-                                <div class="col-lg-30  col-md-8 mb-4">
-                                    <div class="card-section border rounded p-3">
-                                        <div class="card-header-s rounded pb-4">
-                                            <h5 class="card-header-title text-white pt-3">GRÁFICA POR MES</h5>
-                                        </div>
-                                    </div>
-                                </div>
+    
+    <div class="container principalV">
+        <div class="row">
+            <div class="col-lg-12 text-left">
+                <div class="row">
+                    <!--tarjeta 1-->
+                    <div class="col-lg-30  col-md-8 mb-4">
+                        <div class="card-section border rounded p-3">
+                            <div class="card-header-s rounded pb-4">
+                                <h5 class="card-header-title text-white pt-3">GRÁFICA POR MES</h5>
                             </div>
                         </div>
                     </div>
-                </div><br>
-                <div class="row " >
-                    <div class="col-sm-4">
-                        <div class="card cardGrafica" >
-                            <div class="card-body">
-                                <div>
-                                    <h5>Inicio:
-                                        <label>
-                                            <select id="idanioInicio" name="anioInicio" class="form-control" onchange="cambioAnioInicio(this)"> 
-                                                <option disable>Año ...</option>
-                                                @foreach($anios as $anio)
-                                                    <option value="{{$anio->anio}}">{{$anio->anio}}</option>
-                                                @endforeach
-                                            </select>
-                                        </label>
-                                        <label>
-                                            <select id="idmesInicio" name="mesInicio" class="form-control" onchange="cambioMesInicio(this)">
-                                                <option disable>Mes ...</option>
-                                                @foreach($meses as $mes)
-                                                    <option value="{{$mes[1]}}">{{$mes[0]}}</option>
-                                                @endforeach
-                                            </select>
-                                        </label>
-                                    </h5>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="card  cardGrafica" >
-                            <div class="card-body">
-                                <h5>Fin: 
-                                    <label>
-                                        <select id="idanioFin" name="anioFin" class="form-control" onchange="cambioAnioFin(this)">
-                                            @foreach($anios as $anio)
-                                                <option value="{{$anio->anio}}">{{$anio->anio}}</option>
-                                            @endforeach
-                                        </select>
-                                    </label>
-                                    <label>
-                                        <select id="inputState" name="mesFin" class="form-control" onchange="cambioMesFin(this)">
-                                    
-                                            @foreach($meses as $mes)
-                                                <option value="{{$mes[1]}}">{{$mes[0]}}</option>
-                                            @endforeach
-                                        </select>
-                                    </label>
-                                </h5>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-4">
-                      <div class="card cardGrafica" >
-                        <div class="card-body">
-                          <div>
-                            <h5>Estadístico:
-                                <label  >
-                                    <select id="inputState" name="estadistico" class="form-control" onchange="cambioEstadisticoMeses(this)">
-                                        <option value="prom">Promedio</option>
-                                        <option value="total" >Total</option>
-                                        <option value="max">Máximo</option>
-                                        <option value="min" >Mínimo</option>
+                </div>
+            </div>
+        </div>
+    </div><br>
+    <section class="contenedorEs">
+        <div class="row " >
+            <div class="col-sm-4">
+                <div class="card cardGrafica" >
+                    <div class="card-body">
+                        <div>
+                            <h5>Inicio:
+                                <label>
+                                    <select id="idanioInicio" name="anioInicio" class="form-control" onchange="cambioAnioInicio(this)"> 
+                                        <option disable>Año ...</option>
+                                        @foreach($anios as $anio)
+                                            <option value="{{$anio->anio}}">{{$anio->anio}}</option>
+                                        @endforeach
+                                    </select>
+                                </label>
+                                <label>
+                                    <select id="idmesInicio" name="mesInicio" class="form-control" onchange="cambioMesInicio(this)">
+                                        <option disable>Mes ...</option>
+                                        @foreach($meses as $mes)
+                                            <option value="{{$mes[1]}}">{{$mes[0]}}</option>
+                                        @endforeach
                                     </select>
                                 </label>
                             </h5>
                         </div>
-                        </div>
-                      </div>
                     </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="card  cardGrafica" >
+                    <div class="card-body">
+                        <h5>Fin: 
+                            <label>
+                                <select id="idanioFin" name="anioFin" class="form-control" onchange="cambioAnioFin(this)">
+                                    @foreach($anios as $anio)
+                                        <option value="{{$anio->anio}}">{{$anio->anio}}</option>
+                                    @endforeach
+                                </select>
+                            </label>
+                            <label>
+                                <select id="inputState" name="mesFin" class="form-control" onchange="cambioMesFin(this)">
+                            
+                                    @foreach($meses as $mes)
+                                        <option value="{{$mes[1]}}">{{$mes[0]}}</option>
+                                    @endforeach
+                                </select>
+                            </label>
+                        </h5>
+                    </div>
+                </div>
+            </div>
 
+            <div class="col-sm-4">
+                <div class="card cardGrafica" >
+                <div class="card-body">
+                    <div>
+                    <h5>Estadístico:
+                        <label  >
+                            <select id="inputState" name="estadistico" class="form-control" onchange="cambioEstadisticoMeses(this)">
+                                <option value="prom">Promedio</option>
+                                <option value="total" >Total</option>
+                                <option value="max">Máximo</option>
+                                <option value="min" >Mínimo</option>
+                            </select>
+                        </label>
+                    </h5>
                 </div>
-          
+                </div>
+                </div>
+            </div>
+
+        </div>
+
+        <hr>
+        <div class="row col-13">
+            <div class="form-group col-md-2 panelVisualColums" >
+                <label ><h5>Parámetros:</h5></label><br>
+                <input type="checkbox" name="checkins" id="checkins" value="checkins" onchange="seleccionarFilas(this)">
+                <label for="checkins"> Checkins</label><br>
+                <input type="checkbox" name="checkouts" id="checkouts" value="checkouts" onchange="seleccionarFilas(this)">
+                <label for="checkouts"> Checkouts</label><br>
+                <input type="checkbox" name="pernoctaciones" id="pernoctaciones" value="pernoctaciones" onchange="seleccionarFilas(this)">
+                <label for="pernoctaciones"> Pernoctaciones</label><br>
+                <input type="checkbox" name="nacionales" id="nacionales" value="nacionales" onchange="seleccionarFilas(this)">
+                <label for="nacionales"> Nacionales</label><br>
+                <input type="checkbox" name="extranjeros" id="extranjeros" value="extranjeros" onchange="seleccionarFilas(this)">
+                <label for="extranjeros"> Extranjeros</label><br>
+                <input type="checkbox" name="habitaciones_ocupadas" id="habitaciones_ocupadas" value="habitaciones_ocupadas" onchange="seleccionarFilas(this)">
+                <label for="habitaciones_ocupadas"> Hab. Ocupadas</label><br>
+                <input type="checkbox" name="habitaciones_disponibles" id="habitaciones_disponibles" value="habitaciones_disponibles" onchange="seleccionarFilas(this)">
+                <label for="habitaciones_disponibles"> Hab. Disponibles</label><br>
+                <input type="checkbox" name="ventas_netas" id="ventas_netas" value="ventas_netas" onchange="seleccionarFilas(this)">
+                <label for="ventas_netas"> Ventas Netas</label><br>
                 <hr>
-                <div class="row col-13">
-                    <div class="form-group col-md-2 panelVisualColums" >
-                        <label ><h5>Parámetros:</h5></label><br>
-                        <input type="checkbox" name="checkins" id="checkins" value="checkins" onchange="seleccionarFilas(this)">
-                        <label for="checkins"> Checkins</label><br>
-                        <input type="checkbox" name="checkouts" id="checkouts" value="checkouts" onchange="seleccionarFilas(this)">
-                        <label for="checkouts"> Checkouts</label><br>
-                        <input type="checkbox" name="pernoctaciones" id="pernoctaciones" value="pernoctaciones" onchange="seleccionarFilas(this)">
-                        <label for="pernoctaciones"> Pernoctaciones</label><br>
-                        <input type="checkbox" name="nacionales" id="nacionales" value="nacionales" onchange="seleccionarFilas(this)">
-                        <label for="nacionales"> Nacionales</label><br>
-                        <input type="checkbox" name="extranjeros" id="extranjeros" value="extranjeros" onchange="seleccionarFilas(this)">
-                        <label for="extranjeros"> Extranjeros</label><br>
-                        <input type="checkbox" name="habitaciones_ocupadas" id="habitaciones_ocupadas" value="habitaciones_ocupadas" onchange="seleccionarFilas(this)">
-                        <label for="habitaciones_ocupadas"> Hab. Ocupadas</label><br>
-                        <input type="checkbox" name="habitaciones_disponibles" id="habitaciones_disponibles" value="habitaciones_disponibles" onchange="seleccionarFilas(this)">
-                        <label for="habitaciones_disponibles"> Hab. Disponibles</label><br>
-                        <input type="checkbox" name="ventas_netas" id="ventas_netas" value="ventas_netas" onchange="seleccionarFilas(this)">
-                        <label for="ventas_netas"> Ventas Netas</label><br>
-                        <hr>
-                        <input type="checkbox" name="tarifa_promedio" id="tarifa_promedio" value="tarifa_promedio" onchange="seleccionarFilas(this)">
-                        <label for="tarifa_promedio"> Tarifa Prom. Hab.</label><br>
-                        <input type="checkbox" name="TAR_PER" id="TAR_PER" value="TAR_PER" onchange="seleccionarFilas(this)">
-                        <label for="TAR_PER"> Tarifa Prom. Per.</label><br>
-                        <input type="checkbox" name="porcentaje_ocupacion" id="porcentaje_ocupacion" value="porcentaje_ocupacion" onchange="seleccionarFilas(this)" checked>
-                        <label for="porcentaje_ocupacion"> Porcent. Ocupación</label><br>
-                        <input type="checkbox" name="revpar" id="revpar" value="revpar" onchange="seleccionarFilas(this)">
-                        <label for="revpar"> REVPAR</label><br>
-                   
-                    </div> 
-                    <div class="form-group col-md-10"  >
-                        <canvas id="graficaMeses" width="1400" height="600" ></canvas>
-                    </div>
-                </div>
-                <br>
-                <div class="container principalV">
+                <input type="checkbox" name="tarifa_promedio" id="tarifa_promedio" value="tarifa_promedio" onchange="seleccionarFilas(this)">
+                <label for="tarifa_promedio"> Tarifa Prom. Hab.</label><br>
+                <input type="checkbox" name="TAR_PER" id="TAR_PER" value="TAR_PER" onchange="seleccionarFilas(this)">
+                <label for="TAR_PER"> Tarifa Prom. Per.</label><br>
+                <input type="checkbox" name="porcentaje_ocupacion" id="porcentaje_ocupacion" value="porcentaje_ocupacion" onchange="seleccionarFilas(this)" checked>
+                <label for="porcentaje_ocupacion"> Porcent. Ocupación</label><br>
+                <input type="checkbox" name="revpar" id="revpar" value="revpar" onchange="seleccionarFilas(this)">
+                <label for="revpar"> REVPAR</label><br>
+            
+            </div> 
+            <div class="form-group col-md-10"  >
+                <canvas id="graficaMeses" width="1400" height="600" ></canvas>
+            </div>
+        </div>
+        <br>
+        <div class="container principalV">
+            <div class="row">
+                <div class="col-lg-12 text-left">
                     <div class="row">
-                        <div class="col-lg-12 text-left">
-                            <div class="row">
-                                <!--tarjeta 1-->
-                                <div class="col-lg-30  col-md-8 mb-4">
-                                    <div class="card-section border rounded p-3">
-                                        <div class="card-header-s rounded pb-4">
-                                            <h5 class="card-header-title text-white pt-3">GRÁFICA POR DÍAS</h5>
-                                        </div>
-                                    </div>
+                        <!--tarjeta 1-->
+                        <div class="col-lg-30  col-md-8 mb-4">
+                            <div class="card-section border rounded p-3">
+                                <div class="card-header-s rounded pb-4">
+                                    <h5 class="card-header-title text-white pt-3">GRÁFICA POR DÍAS</h5>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <br>
-                <div class="row tituloFiltrosGraficasEs">
-                    <div class="pt-2 ml-2 pr-3" >
-                        <label><h5>Fecha inicio:</h5> </label>
-                    </div>
-                    <div class="pr-5">
-                        <input type="date" name="inicio" class="form-control" id="cambioFechaInicio" value="{{$diaMin}}"> 
-                    </div>
-                    <div class="pt-2 pr-3" >
-                        <label><h5>Fecha final:<h5></label>
-                    </div>
-                    <div class="pr-3">
-                        <input type="date" name="inicio" class="form-control" id="cambioFechaFin" value="{{$diaMax}}">
-                    </div>
+            </div>
+        </div>
+        <br>
+        <div class="row tituloFiltrosGraficasEs">
+            <div class="pt-2 ml-2 pr-3" >
+                <label><h5>Fecha inicio:</h5> </label>
+            </div>
+            <div class="pr-5">
+                <input type="date" name="inicio" class="form-control" id="cambioFechaInicio" value="{{$diaMin}}"> 
+            </div>
+            <div class="pt-2 pr-3" >
+                <label><h5>Fecha final:<h5></label>
+            </div>
+            <div class="pr-3">
+                <input type="date" name="inicio" class="form-control" id="cambioFechaFin" value="{{$diaMax}}">
+            </div>
+        </div>
+        
+        <hr>
+        <div class="row col-13">
+            <div class="form-group col-md-2 panelVisualColums" >
+                <div class="callout">
+                    <label ><h5>Parámetros:</h5></label><br>
+                    <input type="checkbox" name="checkins2" id="checkins2" value="checkins" onchange="seleccionarFilas2(this)">
+                    <label for="checkins2"> Checkins</label><br>
+                    <input type="checkbox" name="checkouts2" id="checkouts2" value="checkouts" onchange="seleccionarFilas2(this)">
+                    <label for="checkouts2"> Checkouts</label><br>
+                    <input type="checkbox" name="pernoctaciones2" id="pernoctaciones2" value="pernoctaciones" onchange="seleccionarFilas2(this)">
+                    <label for="pernoctaciones2"> Pernoctaciones</label><br>
+                    <input type="checkbox" name="nacionales2" id="nacionales2" value="nacionales" onchange="seleccionarFilas2(this)">
+                    <label for="nacionales2"> Nacionales</label><br>
+                    <input type="checkbox" name="extranjeros2" id="extranjeros2" value="extranjeros" onchange="seleccionarFilas2(this)">
+                    <label for="extranjeros2"> Extranjeros</label><br>
+                    <input type="checkbox" name="habitaciones_ocupadas2" id="habitaciones_ocupadas2" value="habitaciones_ocupadas" onchange="seleccionarFilas2(this)">
+                    <label for="habitaciones_ocupadas2"> Hab. Ocupadas</label><br>
+                    <input type="checkbox" name="habitaciones_disponibles2" id="habitaciones_disponibles2" value="habitaciones_disponibles" onchange="seleccionarFilas2(this)">
+                    <label for="habitaciones_disponibles2"> Hab. Disponibles</label><br>
+                    <input type="checkbox" name="ventas_netas2" id="ventas_netas2" value="ventas_netas" onchange="seleccionarFilas2(this)">
+                    <label for="ventas_netas2"> Ventas Netas</label><br>
+                    <hr>
+                    <input type="checkbox" name="tarifa_promedio2" id="tarifa_promedio2" value="tarifa_promedio" onchange="seleccionarFilas2(this)">
+                    <label for="tarifa_promedio2"> Tarifa Prom. Hab.</label><br>
+                    <input type="checkbox" name="TAR_PER2" id="TAR_PER2" value="TAR_PER" onchange="seleccionarFilas2(this)">
+                    <label for="TAR_PER2"> Tarifa Prom. Per.</label><br>
+                    <input type="checkbox" name="porcentaje_ocupacion2" id="porcentaje_ocupacion2" value="porcentaje_ocupacion" onchange="seleccionarFilas2(this)" checked>
+                    <label for="porcentaje_ocupacion2"> Porcent. Ocupación</label><br>
+                    <input type="checkbox" name="revpar2" id="revpar2" value="revpar" onchange="seleccionarFilas2(this)">
+                    <label for="revpar2"> REVPAR</label><br>
+            
                 </div>
-                
-                <hr>
-                <div class="row col-13">
-                    <div class="form-group col-md-2 panelVisualColums" >
-                        <div class="callout">
-                            <label ><h5>Parámetros:</h5></label><br>
-                            <input type="checkbox" name="checkins2" id="checkins2" value="checkins" onchange="seleccionarFilas2(this)">
-                            <label for="checkins2"> Checkins</label><br>
-                            <input type="checkbox" name="checkouts2" id="checkouts2" value="checkouts" onchange="seleccionarFilas2(this)">
-                            <label for="checkouts2"> Checkouts</label><br>
-                            <input type="checkbox" name="pernoctaciones2" id="pernoctaciones2" value="pernoctaciones" onchange="seleccionarFilas2(this)">
-                            <label for="pernoctaciones2"> Pernoctaciones</label><br>
-                            <input type="checkbox" name="nacionales2" id="nacionales2" value="nacionales" onchange="seleccionarFilas2(this)">
-                            <label for="nacionales2"> Nacionales</label><br>
-                            <input type="checkbox" name="extranjeros2" id="extranjeros2" value="extranjeros" onchange="seleccionarFilas2(this)">
-                            <label for="extranjeros2"> Extranjeros</label><br>
-                            <input type="checkbox" name="habitaciones_ocupadas2" id="habitaciones_ocupadas2" value="habitaciones_ocupadas" onchange="seleccionarFilas2(this)">
-                            <label for="habitaciones_ocupadas2"> Hab. Ocupadas</label><br>
-                            <input type="checkbox" name="habitaciones_disponibles2" id="habitaciones_disponibles2" value="habitaciones_disponibles" onchange="seleccionarFilas2(this)">
-                            <label for="habitaciones_disponibles2"> Hab. Disponibles</label><br>
-                            <input type="checkbox" name="ventas_netas2" id="ventas_netas2" value="ventas_netas" onchange="seleccionarFilas2(this)">
-                            <label for="ventas_netas2"> Ventas Netas</label><br>
-                            <hr>
-                            <input type="checkbox" name="tarifa_promedio2" id="tarifa_promedio2" value="tarifa_promedio" onchange="seleccionarFilas2(this)">
-                            <label for="tarifa_promedio2"> Tarifa Prom. Hab.</label><br>
-                            <input type="checkbox" name="TAR_PER2" id="TAR_PER2" value="TAR_PER" onchange="seleccionarFilas2(this)">
-                            <label for="TAR_PER2"> Tarifa Prom. Per.</label><br>
-                            <input type="checkbox" name="porcentaje_ocupacion2" id="porcentaje_ocupacion2" value="porcentaje_ocupacion" onchange="seleccionarFilas2(this)" checked>
-                            <label for="porcentaje_ocupacion2"> Porcent. Ocupación</label><br>
-                            <input type="checkbox" name="revpar2" id="revpar2" value="revpar" onchange="seleccionarFilas2(this)">
-                            <label for="revpar2"> REVPAR</label><br>
-                    
-                        </div>
-                    </div>
-                
-                    <div class="form-group col-md-10">
-                        <canvas id="graficaDias" width="1400" height="600" ></canvas>
-                    </div>
-                </div>
-            </section>   
-        </section>
-   </section>
+            </div>
+        
+            <div class="form-group col-md-10">
+                <canvas id="graficaDias" width="1400" height="600" ></canvas>
+            </div>
+        </div>
+    </section>
 @endsection
 
 @section('scripts')

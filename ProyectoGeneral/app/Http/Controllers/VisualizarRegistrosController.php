@@ -20,11 +20,11 @@ class VisualizarRegistrosController extends Controller
         $auxDia = $ultimaCaga[0]->dia;
         $auxMes = $ultimaCaga[0]->mes;
         $auxAnio = $ultimaCaga[0]->anio;
-
-
+    
         $cadena = "SELECT * 
                     FROM registros r, establecimientos e 
                     WHERE MONTH(fecha) = $auxMes AND e.id = r.idEstablecimiento AND e.idUsuario = $idU";
+
 
         $registros = DB::select($cadena);
         
