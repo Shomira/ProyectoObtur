@@ -56,7 +56,7 @@ Route::group(['prefix'=>'home', 'as'=>'home'], function(){
     Route::get('/visualizarArchivosCargados', 'App\Http\Controllers\VisualizarArchivosCargadosController@index');
     Route::delete('/visualizarArchivosCargados/{file}', 'App\Http\Controllers\VisualizarArchivosCargadosController@destroy');
     Route::get('/visualizarArchivos', 'App\Http\Controllers\VisualizarArchivosController@index');
-    Route::post('/visualizarArchivos', 'App\Http\Controllers\VisualizarArchivosController@index');
+    Route::post('/visualizarArchivos', 'App\Http\Controllers\VisualizarArchivosController@mostrar');
     Route::get('/visualizarEstablecimientos', 'App\Http\Controllers\VisualizarEstablecimientosController@index');
     
     

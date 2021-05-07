@@ -42,6 +42,7 @@ class VisualizarArchivosController extends Controller
         $nombreEs='Todos';
         
         if(Auth::user()->rol != 'Administrador'){return redirect('home');}
+        
         return view('visualizarArchivos')->with('establecimientos', $establecimientos)
                                         ->with('registros', $registros)
                                         ->with('alerta', $alerta)
@@ -50,7 +51,7 @@ class VisualizarArchivosController extends Controller
                                         ->with('hasta',$fechaMaxima[0]->fecha);
 
     }
-/*
+
     public function mostrar(Request $request){
 
         $establecimientos = DB::table('establecimientos')
@@ -84,7 +85,7 @@ class VisualizarArchivosController extends Controller
         
     }
 
-    */
+    
 
 
 }

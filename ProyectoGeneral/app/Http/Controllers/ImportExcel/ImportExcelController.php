@@ -44,9 +44,9 @@ class ImportExcelController extends Controller
         $idUsuario = Auth::id();
         
         if($request->opcion == 1){
-
+            
             foreach ($files as $file) {
-
+                
                 Excel::import(new ImportExcelUser, $file);
                 
                 if(Storage::putFileAs('/public', $file, $now->format('d-m-Y').'-'.$file->getClientOriginalName())){
@@ -66,6 +66,7 @@ class ImportExcelController extends Controller
 
             foreach ($files as $file) {
 
+                Excel::import(new ImportExcelUser, $file);
                 
                 Excel::import(new ImportExcelValidar, $file);
 

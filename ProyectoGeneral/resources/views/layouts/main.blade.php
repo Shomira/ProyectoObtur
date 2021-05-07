@@ -10,7 +10,8 @@
     <meta name="author" content="">
 
     <title>Observatorio de Turistimo</title>
-
+    <!-- Sweet Alert -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
 
     <!-- Custom fonts for this template-->
     <link href="{{asset('/dash/vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
