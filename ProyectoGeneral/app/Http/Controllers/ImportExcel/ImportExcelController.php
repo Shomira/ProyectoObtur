@@ -66,8 +66,6 @@ class ImportExcelController extends Controller
 
             foreach ($files as $file) {
 
-                Excel::import(new ImportExcelUser, $file);
-                
                 Excel::import(new ImportExcelValidar, $file);
 
                 //Obtenemos el id del Archivo cargado

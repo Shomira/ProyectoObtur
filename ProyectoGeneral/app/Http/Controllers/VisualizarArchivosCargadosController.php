@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Archivo;
 use Auth;
+use RealRashid\SweetAlert\Facades\Alert;
+
 class VisualizarArchivosCargadosController extends Controller
 {
     public function index()

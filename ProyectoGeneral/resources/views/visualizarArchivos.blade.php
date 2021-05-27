@@ -61,7 +61,7 @@
                         <div class="form-group col-md-2">
                             <br>
                         <!-- <button type="submit" class="btn btn-primary" >Consultar</button>-->
-                            <input type="submit"  class="btn btn-warning" value="Consultar">
+                            <input type="submit"  class="btn btnConsultar" value="Consultar">
                         </div>
                     </div>
                 </form>
@@ -87,7 +87,7 @@
                 <section class="linea" ></section>
             </section>
         <section class="section-registros">
-            <h4>RESULTADOS</h4>
+      
 
         </section>
             

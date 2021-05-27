@@ -15,7 +15,7 @@
         @endif
     </section>
     <div class="containerTab">
-        <!-- Tabla de Archivos-->
+        
         <div class="container principalV ">
             <div class="row">
                 <div class="col-lg-12 text-left">
@@ -33,47 +33,46 @@
             </div>
         </div> 
      
-      
             
-                
-                <div class="card-body">
-                    <table class="table table-striped tablaAr" id='t_archivos' >
-                        <thead>
-                            <tr>
-                                <td>Nombre</td>
-                                <td>Fecha de carga</td>
-                                <td>&nbsp;</td>
-                                <td>&nbsp;</td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach($files as $file)
-                                <tr>
-                                    <td>{{$file->nombre}}</td>
-                                    <td>{{$file->created_at}}</td>
-                                    <td>
-                                        <a href="../storage/{{$file->nombre}}" class="btn btn-sm btn-outline-secondary">Descargar</a>
-                                    </td>
-                                    <td>
-                                        <button class="btn btn-sm btn-outline-danger btnEliminar" data-id="{{ $file->id }}" data-toggle="modal" data-target="#modalEliminar">
-                                            Eliminar
-                                        </button>
-                                        
-                                        <form action="{{ url('home/archivos', $file->id ) }}" method="POST" id="formEli_{{ $file->id }}">
-                                            @method('DELETE')
-                                            @csrf
-                                            <input type="hidden" name="id" value="{{ $file->id }}">
-                                            <input type="hidden" name="_method" value="delete">
-                                        
-                                        </form>
-                                        
-                                    </td>
+        <!-- Tabla de Archivos-->        
+        <div class="card-body">
+            <table class="table table-striped tablaAr" id='t_archivos' >
+                <thead>
+                    <tr>
+                        <td>Nombre</td>
+                        <td>Fecha de carga</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($files as $file)
+                        <tr>
+                            <td>{{$file->nombre}}</td>
+                            <td>{{$file->created_at}}</td>
+                            <td>
+                                <a href="../storage/{{$file->nombre}}" class="btn btn-sm btn-outline-secondary">Descargar</a>
+                            </td>
+                            <td>
+                                <button class="btn btn-sm btn-outline-danger" id="btnEliminar" data-id="{{ $file->id }}" data-toggle="modal" data-target="#modalEliminar">
+                                    Eliminar
+                                </button>
                                 
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
+                                <form action="{{ url('home/visualizarArchivosCargados', $file->id ) }}" method="POST" id="formEli_{{ $file->id }}">
+                                    @method('DELETE')
+                                    @csrf
+                                    <input type="hidden" name="id" value="{{ $file->id }}">
+                                    <input type="hidden" name="_method" value="delete">
+                                
+                                </form>
+                                
+                            </td>
+                        
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
     
 
         <!-- Modal Eliminar Archivos-->
@@ -93,7 +92,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                            <button type="button" class="btn btn-danger btnModalEliminar">Eliminar</button>
+                            <button type="button" class="btn btn-danger" id="btnModalEliminar">Eliminar</button>
                         </div>
                     
                 </div>
@@ -116,7 +115,6 @@
             responsive:true,
             autowidth:false,
             dom: 'Blfrtip',
-     
             
             buttons: [
                    
@@ -143,10 +141,10 @@
         var idEliminar=0;
         $(document).ready(function(){
 
-            $(".btnEliminar").click(function(){
+            $("#btnEliminar").click(function(){
                 idEliminar = $(this).data('id');
             });
-            $(".btnModalEliminar").click(function(){
+            $("#btnModalEliminar").click(function(){
                 $("#formEli_"+idEliminar).submit();
             });
         });

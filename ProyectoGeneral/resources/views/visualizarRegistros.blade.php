@@ -55,7 +55,7 @@
                         </div>
                         <div class="col-md-2">
                             <br>
-                            <button type="submit" class="btn btn-warning mt-3">Consultar</button>
+                            <button type="submit" class="btn btnConsultar mt-3">Consultar</button>
                         </div>
                         
                     </div>

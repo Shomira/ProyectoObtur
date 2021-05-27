@@ -56,6 +56,21 @@ class ImportExcelValidar implements ToCollection
 
             if($key>0)
             {
+
+                // Verificamos si existe un usuario para los archivos cargados
+                $aux=$value[0];
+                $pruebaUsuario = DB::select("SELECT id FROM users WHERE name= '$aux' ");
+                
+                if( !is_null($value[1]) && !is_null($value[2]) && !is_null($value[4]) && !is_null($value[5]) ){
+                    // Validamos si existe un usuario que enlazar con el archivo cargado
+                    Validator::make($value->toArray(), [
+                        '0' => 'exists:App\Models\User,name'
+                    ],$messages = [
+                        'exists' => 'No existe un usuario relacionado al archivo que desea cargar'
+                    ])->validate();
+                }
+
+
                 // determinamos si es un fila vacía para ignorarla
                 if( !is_null($value[1]) && !is_null($value[2]) && !is_null($value[4]) && !is_null($value[5])  ){
 
@@ -130,5 +145,6 @@ class ImportExcelValidar implements ToCollection
 
             
         }
+        
     }
 }

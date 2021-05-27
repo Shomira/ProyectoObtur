@@ -89,13 +89,15 @@
             <!-- End of Main Content -->
 
             <!-- Footer -->
-            <footer class="sticky-footer bg-white">
-                <div class="container my-auto">
-                    <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2020</span>
-                    </div>
-                </div>
-            </footer>
+        
+            <div class="row marcasAdmin">
+                <hr>
+                <div class="col-sm-3 marcasImg" ></div>
+                <div class="col-sm-3 marcasImg" ><img src="{{ asset('imgs/Recurso 8@3x.png')}}" alt=""></div>
+                <div class="col-sm-3 marcasImg" ><img src="{{ asset('imgs/Recurso 13.png')}}" alt=""></div>
+                
+            </div>
+       
             <!-- End of Footer -->
 
         </div>

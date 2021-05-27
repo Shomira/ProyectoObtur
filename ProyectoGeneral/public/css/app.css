@@ -4413,6 +4413,7 @@ input[type=button].btn-block {
 .nav-link {
   display: block;
   padding: 0.5rem 1rem;
+
 }
 
 .nav-link:hover,
@@ -4854,9 +4855,9 @@ input[type=button].btn-block {
 }
 
 .navbar-light .navbar-nav .show > .nav-link,
-.navbar-light .navbar-nav .active > .nav-link,
+.navbar-light  > .nav-link,
 .navbar-light .navbar-nav .nav-link.show,
-.navbar-light .navbar-nav .nav-link.active {
+.navbar-light .navbar-nav  {
   color: rgba(0, 0, 0, 0.9);
 }
 
@@ -4908,7 +4909,7 @@ input[type=button].btn-block {
 .navbar-dark .navbar-nav .active > .nav-link,
 .navbar-dark .navbar-nav .nav-link.show,
 .navbar-dark .navbar-nav .nav-link.active {
-  color: #fff;
+  color: rgb(255, 255, 255);
 }
 
 .navbar-dark .navbar-toggler {

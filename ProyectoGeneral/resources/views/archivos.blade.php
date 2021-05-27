@@ -61,8 +61,8 @@
                     @csrf
                     <input type="file" name="import_file[]" class="form-control" multiple>
                     <br>
-                    <button class="btn btn-success" name="opcion" value="1">Cargar archivo</button>
-                    <button class="btn btn-primary text-white" name="opcion" value="2">Probar archivo</button>
+                    <button class="btn btnCargarAr" name="opcion" value="1">Cargar archivo</button>
+                    <button class="btn btn-primary  btnProbarAr" name="opcion" value="2">Probar archivo</button>
                 </form>
             </div>
         </div>

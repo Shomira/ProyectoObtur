@@ -19,9 +19,10 @@
 	<script src="../bootstrap/js/bootstrap.js"></script>
 
     <!-- Fonts     <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">-->
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Quantico&display=swap" rel="stylesheet">-->
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Quantico&display=swap" rel="stylesheet">
+
 
     @yield('css')
 
@@ -145,7 +146,13 @@
             @yield('content')
             @include('sweetalert::alert', ['cdn' => "https://cdn.jsdelivr.net/npm/sweetalert2@9"])
         </main>
-
+        <div class="row marcas">
+        
+            <div class="col-sm-3 marcasImg" ></div>
+            <div class="col-sm-3 marcasImg" ><img src="{{ asset('imgs/Recurso 8@3x.png')}}" alt=""></div>
+            <div class="col-sm-3 marcasImg" ><img src="{{ asset('imgs/Recurso 13.png')}}" alt=""></div>
+            
+        </div>
         @yield('pieDePagina')
         
     </div>

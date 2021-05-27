@@ -22,9 +22,12 @@ class ImportExcel implements ToCollection
             
             if($key>0)
             {
+                $aux=$value[0];
+                
+                $pruebaUsuario = DB::select("SELECT id FROM users WHERE name= '$aux' ");
 
                 // determinamos si es un fila vacía para ignorarla
-                if( !is_null($value[1]) && !is_null($value[2]) && !is_null($value[4]) && !is_null($value[5])  ){
+                if( !empty($pruebaUsuario)  ){
 
                     // buscamos un establecimiento que corresponda al del archivo cargado
                     $idE=DB::table('establecimientos')

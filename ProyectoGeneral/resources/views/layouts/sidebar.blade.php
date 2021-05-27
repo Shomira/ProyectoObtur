@@ -1,4 +1,4 @@
-    <ul class="navbar-nav  sidebar sidebar-dark accordion" style="background-color: rgb(84, 140, 47)" id="accordionSidebar">
+    <ul class="navbar-nav  sidebar sidebar-dark accordion" style="background-color: #004170" id="accordionSidebar">
 
         <!-- Sidebar - Brand -->
         <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{url('/ ')}}">
@@ -25,7 +25,7 @@
             <li class="nav-item">
                 <a class="nav-link  {{ request()->is('home/') ? 'activeA': ' '}} collapsed" href="{{url('home/')}}">
                     <i class="fa fa-home fa-fw"></i>
-                    <span  style="font-weight: 800;"> Inicio</span>
+                    <span> Inicio</span>
                 </a>
                 
             </li>
@@ -73,7 +73,7 @@
                 <a class="nav-link collapsed " href="#" data-toggle="collapse" data-target="#collapsePages"
                     aria-expanded="true" aria-controls="collapsePages">
                     <i class="fas fa-fw fa-folder"></i>
-                    <span style="font-weight: 800;">Archivos</span>
+                    <span>Archivos</span>
                 </a>
                 <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
