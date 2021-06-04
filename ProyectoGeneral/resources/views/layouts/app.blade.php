@@ -14,9 +14,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
     
      <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-    <script src="jquery-3.2.1.min.js"></script>
-	<script src="../bootstrap/js/bootstrap.js"></script>
+       <!-- Para el icono -->
+     
+     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 
     <!-- Fonts     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
@@ -35,6 +35,10 @@
 </head>
 <body>
     <div id="app">
+        <a class="scroll-to-top rounded" href="#page-top">
+            <!--<i class="fad fa-chevron-circle-up"></i>-->
+            <i class="fas fa-angle-up"></i>
+        </a>
         @guest
             <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm publico">
                 <div class="container">
@@ -66,10 +70,25 @@
                             <li class="nav-item {{ request()->is('informacionTuristica') ? 'active': ' '}}">
                                 <a class="nav-link" href="{{url('informacionTuristica')}}">INFORMACIÓN TURÍSTICA</a>
                             </li>
-                            <li class="nav-item {{ request()->is('datosEstadisticos') ? 'active': ' '}}">  
-                                <a class="nav-link" href="{{url('datosEstadisticos')}}"tabindex="-1" aria-disabled="true">DATOS ESTADÍSTICOS</a>
-                            </li>
-
+                            <div class="dropdown">
+                                <li class="nav-item {{ request()->is('datosEstadisticos') ? 'active': ' '}}">  
+                                    <a class="nav-link" href="{{url('')}}"tabindex="-1" aria-disabled="true">DATOS ESTADÍSTICOS</a>
+                                    <div class="dropdown-content">
+                                        <a href="{{url('indicadoresAlojamiento')}}">Indicadores Alojamiento</a>
+                                        <a href="{{url('graficasEstadisticas')}}">Gráficas Estadísticas</a>
+                                        <a href="#">Datos Turistas</a>
+                                    </div>
+                                </li>
+                            </div>
+                            <!--
+                            <div class="dropdown nav-item {{ request()->is('datosEstadisticos') ? 'active': ' '}}">
+                                <button class="dropbtn">DATOS ESTADÍSTICOS</button>
+                                <div class="dropdown-content">
+                                <a href="{{url('datosEstadisticos')}}">Indicadores de Alojamiento</a>
+                                <a href="#">Gráficas Estadísticas</a>
+                                <a href="#">Datos Turistas</a>
+                                </div>
+                            </div>-->
                             @if (Route::has('login'))
                                 <li class="nav-item {{ ! route::is('login')? :'active'}}">
                                     <a class="nav-link" href="{{ route('login') }}">{{ __('INGRESAR') }}</a>

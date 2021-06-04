@@ -5,7 +5,7 @@
         @csrf
     </form>
     
-    <section class="contenedorEs">  
+    <section class="contenedorEs">
         <div class="container principalV">
             <div class="row">
                 <div class="col-lg-12 text-left">
@@ -89,21 +89,22 @@
                 <label for="tarifa_promedio"> Tarifa Prom. Hab.</label><br>
                 <input type="checkbox" name="TAR_PER" id="TAR_PER" value="Tarifa Per" onchange="seleccionarColumna(this)">
                 <label for="TAR_PER"> Tarifa Prom. Per.</label><br>
-                <input type="checkbox" name="porcentaje_ocupacion" id="porcentaje_ocupacion" value="Porcn Ocupación" onchange="seleccionarColumna(this)" checked>
+                <input type="checkbox" name="porcentaje_ocupacion" id="porcentaje_ocupacion" value="Porcent Ocupación" onchange="seleccionarColumna(this)" checked>
                 <label for="porcentaje_ocupacion"> Porcent. Ocupación</label><br>
                 <input type="checkbox" name="revpar" id="revpar" value="REVPAR" onchange="seleccionarColumna(this)">
                 <label for="revpar"> REVPAR</label><br>
             
             </div> 
             <div class="form-group col-md-10">
-                <canvas id="graficaMes" width="1400" height="640"  ></canvas>
+                <div id="containerGrafica" style="height: 600px; min-width: 1000px"></div>
             </div>
+
         </div>
     </section>
 @endsection
 
 @section('scripts')
-<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
+<script src = "https://code.highcharts.com/highcharts.src.js"> </script>
 
 <script>
 
@@ -125,59 +126,32 @@
     var datoREVPAR = 0;
 
     var datos = [];
-    var columnas = ['Porcn Ocupación']
+    var columnas = ['Porcent Ocupación']
 
-    var ctx2 = document.getElementById('graficaMes').getContext('2d');
-    var graficaMes = new Chart(ctx2, {
-        type: "bar",
-        data: {
-            labels: columnas,
-            datasets: [{
-                label: estadistico,
-                width: 6,
-                barPercentage: 0.5,
-                barThickness: 30,
-                maxBarThickness: 30,
-                minBarLength: 2,
-                
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.5)',
-                    'rgba(54, 162, 235, 0.5)',
-                    'rgba(255, 206, 86, 0.5)',
-                    'rgba(75, 192, 192, 0.5)',
-                    'rgba(153, 102, 255, 0.5)',
-                    'rgba(255, 159, 64, 0.5)'
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)'
-                ],
-
-                data: datos
-            }]
+    var chartMes = Highcharts.chart('containerGrafica', {
+        chart: {
+            type: 'column'
         },
-        options: {
-            
-            scales: {
-                yAxes: [{
-                    ticks: {
-                        beginAtZero: true
-                    }
-                }]
+        title: {
+            text: 'Fruit Consumption'
+        },
+        xAxis: {
+            categories: columnas
+        },
+        yAxis: {
+            title: {
+                text: 'Fruit eaten'
             }
-        }
-        
+        },
+        series: [{
+            name: estadistico,
+            data: datos
+        }]
     });
 
     $(document).ready(function(){
-
         
         consulta();
-        
         
     });
 
@@ -208,50 +182,58 @@
             datoPorcOcupacion = arreglo[0].porcentaje_ocupacion;
             datoREVPAR = arreglo[0].revpar;
 
+            datoCheckins = parseFloat(datoCheckins);
+            datoCheckouts = parseFloat(datoCheckouts);
+            datoPernoctaciones = parseFloat(datoPernoctaciones);
+            datoNacionales = parseFloat(datoNacionales);
+            datoExtranjeros = parseFloat(datoExtranjeros);
+            datoHabOcupadas = parseFloat(datoHabOcupadas);
+            datoHabDisponibles = parseFloat(datoHabDisponibles);
+            datoTarPromHab = parseFloat(datoTarPromHab);
+            datoTarPromPer = parseFloat(datoTarPromPer);
+            datoVentasNetas = parseFloat(datoVentasNetas);
+            datoPorcOcupacion = parseFloat(datoPorcOcupacion);
+            datoREVPAR = parseFloat(datoREVPAR);
+
+
             for(var i=0;i<columnas.length;i++){
-                if(columnas[i] == 'Porcn Ocupación'){
+                if(columnas[i] == 'Porcent Ocupación')
                     datos.push(datoPorcOcupacion);
-                }
-                if(columnas[i]  == 'Checkins'){
+                else if(columnas[i]  == 'Checkins')
                     datos.push(datoCheckins);
-                }
-                if(columnas[i]  == 'Checkouts'){
+                else if(columnas[i]  == 'Checkouts')
                     datos.push(datoCheckouts);
-                }
-                if(columnas[i]  == 'Pernoctaciones'){
+                else if(columnas[i]  == 'Pernoctaciones')
                     datos.push(datoPernoctaciones);
-                }
-                if(columnas[i]  == 'Nacionales'){
+                else if(columnas[i]  == 'Nacionales')
                     datos.push(datoNacionales);
-                }
-                if(columnas[i]  == 'Extranjeros'){
+                else if(columnas[i]  == 'Extranjeros')
                     datos.push(datoExtranjeros);
-                }
-                if(columnas[i]  == 'Hab Ocupadas'){
+                else if(columnas[i]  == 'Hab Ocupadas')
                     datos.push(datoHabOcupadas);
-                }
-                if(columnas[i]  == 'Hab Disponibles'){
+                else if(columnas[i]  == 'Hab Disponibles')
                     datos.push(datoHabDisponibles);
-                }
-                if(columnas[i]  == 'Tarifa Hab'){
+                else if(columnas[i]  == 'Tarifa Hab')
                     datos.push(datoTarPromHab);
-                }
-                if(columnas[i]  == 'Tarifa Per'){
+                else if(columnas[i]  == 'Tarifa Per')
                     datos.push(datoTarPromPer);
-                }
-                if(columnas[i]  == 'Ventas Netas'){
+                else if(columnas[i]  == 'Ventas Netas')
                     datos.push(datoVentasNetas);
-                }
-                if(columnas[i]  == 'REVPAR'){
+                else if(columnas[i]  == 'REVPAR')
                     datos.push(datoREVPAR);
-                }
                 
             }
-            
-            graficaMes.data.datasets[0].data = datos;
-            graficaMes.data.datasets[0].label = estadistico;
-            graficaMes.update();            
 
+            chartMes.update( {
+                series: [{
+                    name: estadistico,
+                    data: datos
+                }],
+                xAxis: {
+                    categories: columnas
+                }
+            });
+            
         });
     }
 
@@ -273,18 +255,24 @@
 
             for(var i=0;i<columnas.length;i++){
                 
-                if(columnas[i] == 'Tarifa Hab' || columnas[i] == 'Tarifa Per'|| columnas[i] == 'Porcn Ocupación'|| columnas[i] == 'REVPAR'){
+                if(columnas[i] == 'Tarifa Hab' || columnas[i] == 'Tarifa Per'|| columnas[i] == 'Porcent Ocupación'|| columnas[i] == 'REVPAR'){
                     columnas.splice(i, 1);
                     datos.splice(i, 1);
+                    
                     i--;
                 }
 
             }
             
-            graficaMes.data.labels = columnas;
-            graficaMes.data.datasets[0].data = datos;
-            graficaMes.update(); 
-
+            chartMes.update( {
+                series: [{
+                    name: estadistico,
+                    data: datos
+                }],
+                xAxis: {
+                    categories: columnas
+                }
+            }); 
 
         }else{
             document.getElementById("tarifa_promedio").disabled = false;
@@ -294,7 +282,6 @@
 
         }
         
-
         estadistico = val.value;
         
         consulta();
@@ -353,7 +340,7 @@
         }else if(valor == 'Ventas Netas'){
             dato = datoVentasNetas;
             bandera = document.getElementById('ventas_netas').checked;
-        }else if(valor == 'Porcn Ocupación'){
+        }else if(valor == 'Porcent Ocupación'){
             dato = datoPorcOcupacion;
             bandera = document.getElementById('porcentaje_ocupacion').checked;
         }else if(valor == 'REVPAR'){
@@ -365,10 +352,16 @@
             
             columnas.push(valor);
             datos.push(dato);
-
-            graficaMes.data.labels = columnas;
-            graficaMes.data.datasets[0].data = datos;
-            graficaMes.update();   
+            
+            chartMes.update( {
+                series: [{
+                    name: estadistico,
+                    data: datos
+                }],
+                xAxis: {
+                    categories: columnas
+                }
+            }); 
 
         }else{
 
@@ -381,15 +374,18 @@
                 }
 
             }
-            
-            graficaMes.data.labels = columnas;
-            graficaMes.data.datasets[0].data = datos;
-            graficaMes.update(); 
-            
+
+            chartMes.update( {
+                series: [{
+                    name: estadistico,
+                    data: datos
+                }],
+                xAxis: {
+                    categories: columnas
+                }
+            }); 
         }
         
     }
-    
-
 </script>
 @endsection

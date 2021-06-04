@@ -56,42 +56,40 @@
         <br>
         <div class="card-group pb-4">
             <div class="card mr-3">
-                
                 <div class="card-body ">
-                <h5 class="card-header-second text-center pt-3 ">Checkins</h5> <br>
-                <canvas id="myChartCheckins"  height="200"></canvas>
+                    <h5 class="card-header-second text-center pt-3 ">Checkins</h5> <br>
+                    <div id="containerCheckins" style="height: 400px; width: 550px"></div>
                 </div>
             </div>
             <div class="card ml-3">
                 <div class="card-body">
-                <h5 class="card-header-second text-center pt-3">Checkouts</h5> <br>
-                <canvas id="myChartCheckouts"  height="200"></canvas>
+                    <h5 class="card-header-second text-center pt-3">Checkouts</h5> <br>
+                    <div id="containerCheckouts" style="height: 400px; width: 550px"></div>
                 </div>
             </div>
-            
         </div>
         <div class="card-group">
             <div class="card mr-3">
                 <div class="card-body">
                     <h5 class="card-header-second text-center pt-3">Porcentaje Ocupación</h5><br>
-                    <canvas id="myChartPorcentajeOcup"  height="200"></canvas>
+                    <div id="containerPorcentajeOcup" style="height: 400px; width: 550px"></div>
                 </div>
             </div>
             <div class="card ml-3">
-            <div class="card-body">
-                <h5 class="card-header-second text-center pt-3">REVPAR</h5> <br>
-                <canvas id="myChartRevpar"  height="200"></canvas>
-                
+                <div class="card-body">
+                    <h5 class="card-header-second text-center pt-3">REVPAR</h5> <br>
+                    <div id="containerRevpar" style="height: 400px; width: 550px"></div>
+                </div>
             </div>
-            </div>
-
         </div>
+        
     </section>
     
 @endsection
 
 @section('scripts')
-<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
+<script src = "https://code.highcharts.com/highcharts.src.js"> </script>
+
 <script>
 
     var fechaInicio = '{{$diaMin}}';
@@ -105,188 +103,88 @@
     var dataREVPAR = [];
     var estadistico = 'Promedio';
 
-
-    var ctx = document.getElementById('myChartCheckins').getContext('2d');
-    var myChartCheckins = new Chart(ctx, {
-        type: 'horizontalBar',
-        data: {
-            labels: dias,
-            datasets: [{
-                label: '# of Votes',
-                data: dataCheckins,
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 159, 64, 0.2)'
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)'
-                ],
-                borderWidth: 1
-            }]
+    var chartCheckins = Highcharts.chart('containerCheckins', {
+        chart: {
+            type: 'bar'
         },
-        options: {
-            legend:{
-                    position:'bottom',
-                    labels:{
-                        padding: 20,
-                        fontColor:'black'
-                    }
-
-                },
-            scales: {
-                xAxes: [{
-                    ticks: {
-                        beginAtZero: true
-                    }
-                }]
+        title: {
+            text: 'Checkins'
+        },
+        xAxis: {
+            categories: dias
+        },
+        yAxis: {
+            title: {
+                text: 'Fruit eaten'
             }
-        }
+        },
+        series: [{
+            name: 'Checkins',
+            data: dataCheckins
+        }]
     });
 
-    var ctx = document.getElementById('myChartCheckouts').getContext('2d');
-    var myChartCheckouts = new Chart(ctx, {
-        type: 'horizontalBar',
-        data: {
-            labels: dias,
-            datasets: [{
-                label: '# of Votes',
-                data: dataCheckouts,
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 159, 64, 0.2)'
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)'
-                ],
-                borderWidth: 1
-            }]
+    var chartCheckouts = Highcharts.chart('containerCheckouts', {
+        chart: {
+            type: 'bar'
         },
-        options: {
-            legend:{
-                    position:'bottom',
-                    labels:{
-                        padding: 20,
-                        fontColor:'black'
-                    }
-
-                },
-            scales: {
-                xAxes: [{
-                    ticks: {
-                        beginAtZero: true
-                    }
-                }]
+        title: {
+            text: 'Checkouts'
+        },
+        xAxis: {
+            categories: dias
+        },
+        yAxis: {
+            title: {
+                text: 'Fruit eaten'
             }
-        }
+        },
+        series: [{
+            name: 'Checkouts',
+            data: dataCheckouts
+        }]
     });
 
-    var ctx = document.getElementById('myChartPorcentajeOcup').getContext('2d');
-    var myChartPorcentajeOcup = new Chart(ctx, {
-        type: 'horizontalBar',
-        data: {
-            labels: dias,
-            datasets: [{
-                label: '# of Votes',
-                data: dataPorcOcupacion,
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 159, 64, 0.2)'
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)'
-                ],
-                borderWidth: 1
-            }]
+    var chartPorcentOcupacion = Highcharts.chart('containerPorcentajeOcup', {
+        chart: {
+            type: 'bar'
         },
-        options: {
-            legend:{
-                    position:'bottom',
-                    labels:{
-                        padding: 20,
-                        fontColor:'black'
-                    }
-
-                },
-            scales: {
-                xAxes: [{
-                    ticks: {
-                        beginAtZero: true
-                    }
-                }]
+        title: {
+            text: 'Porcentaje Ocupación'
+        },
+        xAxis: {
+            categories: dias
+        },
+        yAxis: {
+            title: {
+                text: 'Fruit eaten'
             }
-        }
+        },
+        series: [{
+            name: 'Porcentaje Ocupación',
+            data: dataPorcOcupacion
+        }]
     });
-    var ctx = document.getElementById('myChartRevpar').getContext('2d');
-    var myChartRevpar = new Chart(ctx, {
-        type: 'horizontalBar',
-        data: {
-            labels: dias,
-            datasets: [{
-                label: '# of Votes',
-                data: dataREVPAR,
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 159, 64, 0.2)'
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)'
-                ],
-                borderWidth: 1
-            }]
-        },
-        options: {
-            legend:{
-                    position:'bottom',
-                    labels:{
-                        padding: 20,
-                        fontColor:'black'
-                    }
 
-                },
-            scales: {
-                xAxes: [{
-                    ticks: {
-                        beginAtZero: true
-                    }
-                }]
+    var chartRevpar = Highcharts.chart('containerRevpar', {
+        chart: {
+            type: 'bar'
+        },
+        title: {
+            text: 'Revpar'
+        },
+        xAxis: {
+            categories: dias
+        },
+        yAxis: {
+            title: {
+                text: 'Fruit eaten'
             }
-        }
+        },
+        series: [{
+            name: 'Revpar',
+            data: dataREVPAR
+        }]
     });
 
     $(document).ready(function(){
@@ -345,15 +243,36 @@
                 dataREVPAR.push(arreglo[i].revpar);
 
             }
-            
-            myChartCheckins.data.datasets[0].data = dataCheckins;
-            myChartCheckins.update();
-            myChartCheckouts.data.datasets[0].data = dataCheckouts;
-            myChartCheckouts.update();
-            myChartPorcentajeOcup.data.datasets[0].data = dataPorcOcupacion;
-            myChartPorcentajeOcup.update();
-            myChartRevpar.data.datasets[0].data = dataREVPAR;
-            myChartRevpar.update();
+
+            dataCheckins = dataCheckins.map(element => parseFloat(element));
+            dataCheckouts = dataCheckouts.map(element => parseFloat(element));
+            dataVentasNetas = dataVentasNetas.map(element => parseFloat(element));
+            dataPorcOcupacion = dataPorcOcupacion.map(element => parseFloat(element));
+            dataREVPAR = dataREVPAR.map(element => parseFloat(element));
+
+            chartCheckins.update( {
+                series: [{
+                    data: dataCheckins
+                }]
+            });
+
+            chartCheckouts.update( {
+                series: [{
+                    data: dataCheckouts
+                }]
+            });
+
+            chartPorcentOcupacion.update( {
+                series: [{
+                    data: dataPorcOcupacion
+                }]
+            });
+
+            chartRevpar.update( {
+                series: [{
+                    data: dataREVPAR
+                }]
+            });
 
         });
     }

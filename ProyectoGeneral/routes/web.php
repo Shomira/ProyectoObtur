@@ -18,6 +18,10 @@ Route::get('/', 'App\Http\Controllers\WelcomeController@index');
 Route::post('/', 'App\Http\Controllers\WelcomeController@all');
 Route::post('/barra', 'App\Http\Controllers\WelcomeController@barra');
 
+Route::get('/graficasEstadisticas', 'App\Http\Controllers\GraficasEstadisticasController@index');
+Route::post('/graficasEstadisticas', 'App\Http\Controllers\GraficasEstadisticasController@all');
+Route::post('/graficasEstadisticas/barra', 'App\Http\Controllers\GraficasEstadisticasController@barra');
+
 Auth::routes();
 
 
@@ -26,9 +30,9 @@ Route::get('/obtur', function () {
 });
 
 
-Route::get('/datosEstadisticos', 'App\Http\Controllers\DatosEstadisticosController@index');
-Route::post('/datosEstadisticos', 'App\Http\Controllers\DatosEstadisticosController@mostrar');
-Route::post('/datosEstadisticos/all', 'App\Http\Controllers\DatosEstadisticosController@all');
+Route::get('/indicadoresAlojamiento', 'App\Http\Controllers\IndicadoresAlojamientoController@index');
+Route::post('/indicadoresAlojamiento', 'App\Http\Controllers\IndicadoresAlojamientoController@mostrar');
+Route::post('/indicadoresAlojamiento/all', 'App\Http\Controllers\IndicadoresAlojamientoController@all');
 
 Route::get('/informacionTuristica', function () {
     return view('informacionTuristica');

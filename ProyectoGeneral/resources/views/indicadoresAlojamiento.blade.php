@@ -1,3 +1,4 @@
+
 @extends('layouts.app')
 
 @section('css')
@@ -12,7 +13,7 @@
             <nav class="navDatosEs">
                 <div class="btn-group d-md-flex justify-content-center">    
                     <form action="{{url('indicadoresAlojamiento')}}" method="POST" class="formDe">
-                    
+                      
                         @csrf
                             <select name="anio"  class="form-select" required > 
                                 @foreach($anios as $a)
@@ -52,7 +53,7 @@
                     <div class="col-lg-4 col-md-12 mb-4">
                             <div class="card-sectionDeh  border rounded">
                                     <div class="card-headerDe5  rounded ">
-                                        <canvas id="huespedes5" ></canvas>
+                                        <div id="containerPie5" style="height: 300px; min-width: 300px"></div>
                                     </div>
                                     <div class="card-body text-center mb-2" >
                                         @for ($i = 0; $i < 5; $i++)
@@ -66,7 +67,7 @@
                             <div class="col-lg-4 col-md-12 mb-4">
                                 <div class="card-sectionDeh  border rounded">
                                     <div class="card-headerDe4  rounded ">
-                                        <canvas id="huespedes4" ></canvas>
+                                        <div id="containerPie4" style="height: 300px; min-width: 300px"></div>
                                     </div>
                                     <div class="card-body text-center mb-2" >
                                         @for ($i = 0; $i < 4; $i++)
@@ -80,7 +81,7 @@
                             <div class="col-lg-4 col-md-12 mb-4">
                                 <div class="card-sectionDeh  border rounded">
                                     <div class="card-headerDe3  rounded ">
-                                        <canvas id="huespedes3" ></canvas>
+                                        <div id="containerPie3" style="height: 300px; min-width: 300px"></div>
                                     </div>
                                     <div class="card-body text-center mb-2" >
                                         @for ($i = 0; $i < 3; $i++)
@@ -93,9 +94,9 @@
                             </div>
                             <section class="row centrado">
                                 <div class="col-lg-5">
-                                    <div class="card-sectionDeh2  border rounded ">
+                                    <div class="card-sectionDeh  border rounded ">
                                         <div class="card-headerDe2  rounded ">
-                                            <canvas id="huespedes2" ></canvas>
+                                            <div id="containerPie2" style="height: 300px; min-width: 300px"></div>
                                         </div>
                                         <div class="card-body text-center mb-2" >
                                             @for ($i = 0; $i < 2; $i++)
@@ -110,9 +111,9 @@
                             
                             <section class="centrado2">
                                 <div class="col-lg-5">
-                                    <div class="card-sectionDeh1  border rounded">
+                                    <div class="card-sectionDeh  border rounded">
                                         <div class="card-headerDe1  rounded ">
-                                            <canvas id="huespedes1" ></canvas>
+                                            <div id="containerPie1" style="height: 300px; min-width: 300px"></div>
                                         </div>
                                         <div class="card-body text-center mb-2" >
                                             <svg version="1.1" xmlns="http://www.w3.org/2000/svg"width="40" height="40" viewBox="0 0 150 165">
@@ -241,7 +242,7 @@
                 
                 <div class="card">
                     <div class="card-body divGrafica" >
-                        <canvas  id="tarifaPromHabitacion" width="800" height="300"></canvas>
+                        <div id="chartTarifaPromPerson" style="height: 500px; min-width: 800px"></div>
                     </div>
                 </div>
                 <hr>
@@ -351,7 +352,7 @@
                 </div>
                 <div class="card">
                     <div class="card-body divGrafica">
-                        <canvas  id="tarifaPromPerson" width="800" height="300"></canvas>
+                        <div id="chartTarifaPromHabitacion" style="height: 500px; min-width: 800px"></div>
                     </div>
                 </div>
             </section>
@@ -475,7 +476,7 @@
                 </div>
                 <div class="card">
                     <div class="card-body">
-                        <canvas id="myLineChart" width="800" height="300"></canvas>
+                        <div id="chartPorcentajeOcupacion" style="height: 500px; min-width: 800px"></div>
                     </div>
                 </div>
                 <!---->
@@ -603,7 +604,7 @@
             </div>
             <div class="card">
                 <div class="card-body divGrafica" >
-                    <canvas  id="MyLineREVPAR" width="800" height="300"></canvas>
+                    <div id="chartRevpar" style="height: 500px; min-width: 800px"></div>
                 </div>
             </div>
         </section>
@@ -726,13 +727,13 @@
                     </div>
                     <div class="card">
                         <div class="card-body">
-                            <canvas id="MyLineEstadiaP" width="800" height="300"></canvas>
+                            <div id="chartEstadiaProm" style="height: 500px; min-width: 800px"></div>
                         </div>
                     </div>
                 </section>
             </section>
     </section>
-   
+    <!-- Fin Estadía promeidio--> 
     
 @endsection
 
@@ -747,6 +748,8 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
 
+<script src = "https://code.highcharts.com/highcharts.src.js"> </script>
+
 
 <script>
     var fecha = [];
@@ -755,6 +758,16 @@
     var tarifaPP = [];
     var revpar = [];
     var estadiaProm = [];
+    var nacionales5 = parseFloat('{{$arrHuespedes5Est[0]}}');
+    var extranjeros5 = parseFloat('{{$arrHuespedes5Est[1]}}');
+    var nacionales4 = parseFloat('{{$arrHuespedes4Est[0]}}');
+    var extranjeros4 = parseFloat('{{$arrHuespedes4Est[1]}}');
+    var nacionales3 = parseFloat('{{$arrHuespedes3Est[0]}}');
+    var extranjeros3 = parseFloat('{{$arrHuespedes3Est[1]}}');
+    var nacionales2 = parseFloat('{{$arrHuespedes2Est[0]}}');
+    var extranjeros2 = parseFloat('{{$arrHuespedes2Est[1]}}');
+    var nacionales1 = parseFloat('{{$arrHuespedes1Est[0]}}');
+    var extranjeros1 = parseFloat('{{$arrHuespedes1Est[1]}}');
 
     $(document).ready(function(){
         $.ajax({
@@ -783,6 +796,13 @@
                     revpar.push(auxRevpar);
                     estadiaProm.push(auxEstadiaProm);
             }
+
+            tarifaPP = tarifaPP.map(element => parseFloat(element));
+            tarifaPH = tarifaPH.map(element => parseFloat(element));
+            revpar = revpar.map(element => parseFloat(element));
+            ocupacion = ocupacion.map(element => parseFloat(element));
+            estadiaProm = estadiaProm.map(element => parseFloat(element));
+
             graficasPastel();
             graficaLineaPorcentajeO();
             graficaLineaTarifaPromP();
@@ -793,270 +813,588 @@
     });
 
     function graficasPastel(){
-        var ctx5 = document.getElementById('huespedes5');
-        var huespedes5 = new Chart(ctx5, {
-            type: 'pie',
-            data: {
-                labels: ['Nacionales', 'Extranjeros'],
-                datasets: [{
-                    label: '# of Votes',
-                    data: ['{{$arrHuespedes5Est[0]}}' , '{{$arrHuespedes5Est[1]}}'],
-                    backgroundColor: [
-                        'rgb(148, 243, 122)',
-                        'rgb(255, 236, 60)'
-                    ],
-                    
-                    borderWidth: 1
-                }]
-            }
-            
+
+        Highcharts.chart('containerPie5', {
+            chart: {
+                 
+                plotBackgroundColor: 'rgba(90,92,105,.5)',
+                type: 'pie'
+            },
+            title: {
+                text: 'Browser market shares. January, 2018'
+            },
+            subtitle: {
+                text: 'Click the slices to view versions. Source: <a href="http://statcounter.com" target="_blank">statcounter.com</a>'
+            },
+
+            accessibility: {
+                announceNewData: {
+                    enabled: true
+                },
+                point: {
+                    valueSuffix: '%'
+                }
+            },
+
+            plotOptions: {
+                series: {
+                    dataLabels: {
+                        enabled: true,
+                        format: '{point.name}: {point.y:.1f}%'
+                    }
+                }
+            },
+
+            tooltip: {
+                headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+                pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}%</b> of total<br/>'
+            },
+            series: [
+                {
+                    name: "Browsers",
+                    colorByPoint: true,
+                    data: [
+                        {
+                            name: "Nacionales",
+                            y: nacionales5
+                        },
+                        {
+                            name: "Extranjeros",
+                            y: extranjeros5
+                        }
+                    ]
+                }
+            ]
         });
 
-        var ctx4 = document.getElementById('huespedes4');
-        var huespedes4 = new Chart(ctx4, {
-            type: 'pie',
-            data: {
-                labels: ['Nacionales', 'Extranjeros'],
-                datasets: [{
-                    label: '# of Votes',
-                    data: ['{{$arrHuespedes4Est[0]}}' , '{{$arrHuespedes4Est[1]}}'],
-                    backgroundColor: [
-                        'rgb(148, 243, 122)',
-                        'rgb(255, 236, 60)'
-                    ],
-                    
-                    borderWidth: 1
-                }]
-            }
-            
-            
+        Highcharts.chart('containerPie4', {
+            chart: {
+                plotBackgroundColor: 'rgba(90,92,105,.5)',
+                type: 'pie'
+            },
+            title: {
+                backgroundColor: 'rgba(90,92,105,.5)',
+                text: 'Browser market shares. January, 2019'
+            },
+            subtitle: {
+                text: 'Click the slices to view versions. Source: <a href="http://statcounter.com" target="_blank">statcounter.com</a>'
+            },
+
+            accessibility: {
+                announceNewData: {
+                    enabled: true
+                },
+                point: {
+                    valueSuffix: '%'
+                }
+            },
+
+            plotOptions: {
+                series: {
+                    dataLabels: {
+                        enabled: true,
+                        format: '{point.name}: {point.y:.1f}%'
+                    }
+                }
+            },
+
+            tooltip: {
+                headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+                pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}%</b> of total<br/>'
+            },
+            series: [
+                {
+                    name: "Browsers",
+                    colorByPoint: true,
+                    data: [
+                        {
+                            name: "Nacionales",
+                            y: nacionales4
+                        },
+                        {
+                            name: "Extranjeros",
+                            y: extranjeros4
+                        }
+                    ]
+                }
+            ]
         });
 
+        Highcharts.chart('containerPie3', {
+            chart: {
+                type: 'pie'
+            },
+            title: {
+                text: 'Browser market shares. January, 2018'
+            },
+            subtitle: {
+                text: 'Click the slices to view versions. Source: <a href="http://statcounter.com" target="_blank">statcounter.com</a>'
+            },
 
-        var ctx3 = document.getElementById('huespedes3');
-        var huespedes3 = new Chart(ctx3, {
-            type: 'pie',
-            data: {
-                labels: ['Nacionales', 'Extranjeros'],
-                datasets: [{
-                    label: '# of Votes',
-                    data: ['{{$arrHuespedes3Est[0]}}' , '{{$arrHuespedes3Est[1]}}'],
-                    backgroundColor: [
-                        'rgb(148, 243, 122)',
-                        'rgb(255, 236, 60)'
-                    ],
-                    
-                    borderWidth: 1
-                }]
-            }
-            
-            
+            accessibility: {
+                announceNewData: {
+                    enabled: true
+                },
+                point: {
+                    valueSuffix: '%'
+                }
+            },
+
+            plotOptions: {
+                series: {
+                    dataLabels: {
+                        enabled: true,
+                        format: '{point.name}: {point.y:.1f}%'
+                    }
+                }
+            },
+
+            tooltip: {
+                headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+                pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}%</b> of total<br/>'
+            },
+            series: [
+                {
+                    name: "Browsers",
+                    colorByPoint: true,
+                    data: [
+                        {
+                            name: "Nacionales",
+                            y: nacionales3
+                        },
+                        {
+                            name: "Extranjeros",
+                            y: extranjeros3
+                        }
+                    ]
+                }
+            ]
         });
 
-        var ctx2 = document.getElementById('huespedes2');
-        var huespedes2 = new Chart(ctx2, {
-            type: 'pie',
-            data: {
-                labels: ['Nacionales', 'Extranjeros'],
-                datasets: [{
-                    label: '# of Votes',
-                    data: ['{{$arrHuespedes2Est[0]}}' , '{{$arrHuespedes2Est[1]}}'],
-                    backgroundColor: [
-                        'rgb(148, 243, 122)',
-                        'rgb(255, 236, 60)'
-                    ],
-                    
-                    borderWidth: 1
-                }]
-            }
-            
-            
+        Highcharts.chart('containerPie2', {
+            chart: {
+                type: 'pie'
+            },
+            title: {
+                text: 'Browser market shares. January, 2018'
+            },
+            subtitle: {
+                text: 'Click the slices to view versions. Source: <a href="http://statcounter.com" target="_blank">statcounter.com</a>'
+            },
+
+            accessibility: {
+                announceNewData: {
+                    enabled: true
+                },
+                point: {
+                    valueSuffix: '%'
+                }
+            },
+
+            plotOptions: {
+                series: {
+                    dataLabels: {
+                        enabled: true,
+                        format: '{point.name}: {point.y:.1f}%'
+                    }
+                }
+            },
+
+            tooltip: {
+                headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+                pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}%</b> of total<br/>'
+            },
+            series: [
+                {
+                    name: "Browsers",
+                    colorByPoint: true,
+                    data: [
+                        {
+                            name: "Nacionales",
+                            y: nacionales2
+                        },
+                        {
+                            name: "Extranjeros",
+                            y: extranjeros2
+                        }
+                    ]
+                }
+            ]
         });
 
-        var ctx1 = document.getElementById('huespedes1');
-        var huespedes1 = new Chart(ctx1, {
-            type: 'pie',
-            data: {
-                labels: ['Nacionales', 'Extranjeros'],
-                datasets: [{
-                    label: '# of Votes',
-                    data: ['{{$arrHuespedes1Est[0]}}' , '{{$arrHuespedes1Est[1]}}'],
-                    backgroundColor: [
-                        'rgb(148, 243, 122)',
-                        'rgb(255, 236, 60)'
-                    ],
-                    
-                    borderWidth: 1
-                }]
-            }
-            
-            
+        Highcharts.chart('containerPie1', {
+            chart: {
+                type: 'pie'
+            },
+            title: {
+                text: 'Browser market shares. January, 2018'
+            },
+            subtitle: {
+                text: 'Click the slices to view versions. Source: <a href="http://statcounter.com" target="_blank">statcounter.com</a>'
+            },
+
+            accessibility: {
+                announceNewData: {
+                    enabled: true
+                },
+                point: {
+                    valueSuffix: '%'
+                }
+            },
+
+            plotOptions: {
+                series: {
+                    dataLabels: {
+                        enabled: true,
+                        format: '{point.name}: {point.y:.1f}%'
+                    }
+                }
+            },
+
+            tooltip: {
+                headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+                pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}%</b> of total<br/>'
+            },
+            series: [
+                {
+                    name: "Browsers",
+                    colorByPoint: true,
+                    data: [
+                        {
+                            name: "Nacionales",
+                            y: nacionales1
+                        },
+                        {
+                            name: "Extranjeros",
+                            y: extranjeros1
+                        }
+                    ]
+                }
+            ]
         });
 
     }
     
     function graficaLineaPorcentajeO(){
-        var ctx2 = document.getElementById('myLineChart').getContext('2d');
-        var myLineChart = new Chart(ctx2, {
-            type: 'line',
-            data: {
-                labels: fecha,
-                datasets: [{
-                    label: 'Porcentaje Ocupación',
-                    data: ocupacion,
-                    backgroundColor: [
-                        'rgb(125, 255, 102, 0.7)'
-                    ],
-                    borderColor: [
-                        ' rgb(69,202,0)'
-                    ],
-                    borderWidth: 2,
-                    pointRadius: 6
-                }]
+        
+        Highcharts.chart('chartPorcentajeOcupacion', {
+            chart: {
+                type: 'line'
             },
-            options: {
-                
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true
-                        }
-                    }]
+            title: {
+                text: 'Gráfica por Días de los indicadores',
+                style: {
+                    color: '#000',
+                    font: '16px "Trebuchet MS", Verdana, sans-serif'
                 }
-            }
-            
-        });
-    }
-    function graficaLineaTarifaPromP(){
-        var ctx2 = document.getElementById('tarifaPromPerson').getContext('2d');
-        var tarifaPromPerson = new Chart(ctx2, {
-            type: 'line',
-            data: {
-                labels: fecha,
-                datasets: [{
-                    label: 'Tarifa Promedio por Persona',
-                    data: tarifaPP,
+            },
+            subtitle: {
+                text: 'Para hacer una comparación segun su categoría o ciudad, no elija más de 1 indicador'
+            },
+            yAxis: {
+                title: {
+                    text: 'Number of Employees'
+                }
+            },
+            xAxis: {
+                categories: fecha
+            },
+            legend: {
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'middle',
+                itemStyle: {
+                font: '9pt Trebuchet MS, Verdana, sans-serif',
+                color: 'black'
+                },
+                itemHoverStyle:{
+                    color: 'gray'
+                }
+            },
+            plotOptions: {
+                series: {
+                    label: {
+                        connectorAllowed: false
+                    },
                     
-                    backgroundColor: [
-                        'rgb(125, 255, 102, 0.7)'
-                    ],
-                    borderColor: [
-                        ' rgb(69,202,0)'
-                    ],
-                    borderWidth: 2,
-                    pointRadius: 6
-                }]
-            },
-            options: {
-                
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true
-                        }
-                    }]
                 }
+            },
+            series: [{
+                name: 'Porcentaje Ocupación',
+                data: ocupacion
+            }],
+            responsive: {
+                rules: [{
+                    condition: {
+                        maxWidth: 500
+                    },
+                    chartOptions: {
+                        legend: {
+                            layout: 'horizontal',
+                            align: 'center',
+                            verticalAlign: 'bottom'
+                        }
+                    }
+                }]
             }
-            
         });
     }
-    function graficaLineaTarifaPromH(){
-        var ctx2 = document.getElementById('tarifaPromHabitacion').getContext('2d');
-        var tarifaPromHabitacion = new Chart(ctx2, {
-            type: 'line',
-            data: {
-                labels: fecha,
-                datasets: [{
-                    label: 'Tarifa Promedio por Habitación',
-                    data: tarifaPH,
-                    backgroundColor: [
-                        'rgb(125, 255, 102, 0.7)'
-                    ],
-                    borderColor: [
-                        ' rgb(69,202,0)'
-                    ],
-                    borderWidth: 2,
-                    pointRadius: 6
-                }]
+
+    function graficaLineaTarifaPromP(){
+        
+        Highcharts.chart('chartTarifaPromPerson', {
+            chart: {
+                type: 'line'
             },
-            options: {
-                
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true
-                        }
-                    }],
-                    backgroundColor: [
-                        'rgb(125, 255, 102)'
-                    ]
+            title: {
+                text: 'Gráfica por Días de los indicadores',
+                style: {
+                    color: '#000',
+                    font: '16px "Trebuchet MS", Verdana, sans-serif'
                 }
+            },
+            subtitle: {
+                text: 'Para hacer una comparación segun su categoría o ciudad, no elija más de 1 indicador'
+            },
+            yAxis: {
+                title: {
+                    text: 'Number of Employees'
+                }
+            },
+            xAxis: {
+                categories: fecha
+            },
+            legend: {
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'middle',
+                itemStyle: {
+                font: '9pt Trebuchet MS, Verdana, sans-serif',
+                color: 'black'
+                },
+                itemHoverStyle:{
+                    color: 'gray'
+                }
+            },
+            plotOptions: {
+                series: {
+                    label: {
+                        connectorAllowed: false
+                    },
+                    
+                }
+            },
+            series: [{
+                name: 'Tarifa Promedio por Persona',
+                data: tarifaPP
+            }],
+            responsive: {
+                rules: [{
+                    condition: {
+                        maxWidth: 500
+                    },
+                    chartOptions: {
+                        legend: {
+                            layout: 'horizontal',
+                            align: 'center',
+                            verticalAlign: 'bottom'
+                        }
+                    }
+                }]
             }
-            
+        });
+    }
+
+    function graficaLineaTarifaPromH(){
+        
+        Highcharts.chart('chartTarifaPromHabitacion', {
+            chart: {
+                type: 'line'
+            },
+            title: {
+                text: 'Gráfica por Días de los indicadores',
+                style: {
+                    color: '#000',
+                    font: '16px "Trebuchet MS", Verdana, sans-serif'
+                }
+            },
+            subtitle: {
+                text: 'Para hacer una comparación segun su categoría o ciudad, no elija más de 1 indicador'
+            },
+            yAxis: {
+                title: {
+                    text: 'Number of Employees'
+                }
+            },
+            xAxis: {
+                categories: fecha
+            },
+            legend: {
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'middle',
+                itemStyle: {
+                font: '9pt Trebuchet MS, Verdana, sans-serif',
+                color: 'black'
+                },
+                itemHoverStyle:{
+                    color: 'gray'
+                }
+            },
+            plotOptions: {
+                series: {
+                    label: {
+                        connectorAllowed: false
+                    },
+                    
+                }
+            },
+            series: [{
+                name: 'Tarifa Promedio por Habitación',
+                data: tarifaPH
+            }],
+            responsive: {
+                rules: [{
+                    condition: {
+                        maxWidth: 500
+                    },
+                    chartOptions: {
+                        legend: {
+                            layout: 'horizontal',
+                            align: 'center',
+                            verticalAlign: 'bottom'
+                        }
+                    }
+                }]
+            }
         });
     }
     function graficaLineaREVPAR(){
-        var ctx2 = document.getElementById('MyLineREVPAR').getContext('2d');
-        var MyLineREVPAR = new Chart(ctx2, {
-            type: 'line',
-            data: {
-                labels: fecha,
-                datasets: [{
-                    label: 'REVPAR',
-                    data: revpar,
-                    backgroundColor: [
-                        'rgb(125, 255, 102, 0.7)'
-                    ],
-                    borderColor: [
-                        ' rgb(69,202,0)'
-                    ],
-                    borderWidth: 2,
-                    pointRadius: 6
-                }]
+        
+        Highcharts.chart('chartRevpar', {
+            chart: {
+                type: 'line'
             },
-            options: {
-                
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true
-                        }
-                    }]
+            title: {
+                text: 'Gráfica por Días de los indicadores',
+                style: {
+                    color: '#000',
+                    font: '16px "Trebuchet MS", Verdana, sans-serif'
                 }
+            },
+            subtitle: {
+                text: 'Para hacer una comparación segun su categoría o ciudad, no elija más de 1 indicador'
+            },
+            yAxis: {
+                title: {
+                    text: 'Number of Employees'
+                }
+            },
+            xAxis: {
+                categories: fecha
+            },
+            legend: {
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'middle',
+                itemStyle: {
+                font: '9pt Trebuchet MS, Verdana, sans-serif',
+                color: 'black'
+                },
+                itemHoverStyle:{
+                    color: 'gray'
+                }
+            },
+            plotOptions: {
+                series: {
+                    label: {
+                        connectorAllowed: false
+                    },
+                    
+                }
+            },
+            series: [{
+                name: 'REVPAR',
+                data: revpar
+            }],
+            responsive: {
+                rules: [{
+                    condition: {
+                        maxWidth: 500
+                    },
+                    chartOptions: {
+                        legend: {
+                            layout: 'horizontal',
+                            align: 'center',
+                            verticalAlign: 'bottom'
+                        }
+                    }
+                }]
             }
-            
         });
     }
     function graficaLineaEstadiaP(){
-        var ctx2 = document.getElementById('MyLineEstadiaP').getContext('2d');
-        var MyLineEstadiaP = new Chart(ctx2, {
-            type: 'line',
-            data: {
-                labels: fecha,
-                datasets: [{
-                    label: 'Tarifa Promedio por Persona',
-                    data: estadiaProm,
-                    backgroundColor: [
-                        'rgb(125, 255, 102,0.7)'
-                    ],
-                    borderColor: [
-                        ' rgb(69,202,0)'
-                    ],
-                    borderWidth: 2,
-                    pointRadius: 6
-                }]
+        
+        Highcharts.chart('chartEstadiaProm', {
+            chart: {
+                type: 'line'
             },
-            options: {
-                
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true
-                        }
-                    }]
+            title: {
+                text: 'Gráfica por Días de los indicadores',
+                style: {
+                    color: '#000',
+                    font: '16px "Trebuchet MS", Verdana, sans-serif'
                 }
+            },
+            subtitle: {
+                text: 'Para hacer una comparación segun su categoría o ciudad, no elija más de 1 indicador'
+            },
+            yAxis: {
+                title: {
+                    text: 'Number of Employees'
+                }
+            },
+            xAxis: {
+                categories: fecha
+            },
+            legend: {
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'middle',
+                itemStyle: {
+                font: '9pt Trebuchet MS, Verdana, sans-serif',
+                color: 'black'
+                },
+                itemHoverStyle:{
+                    color: 'gray'
+                }
+            },
+            plotOptions: {
+                series: {
+                    label: {
+                        connectorAllowed: false
+                    },
+                    
+                }
+            },
+            series: [{
+                name: 'Tarifa Promedio por Persona',
+                data: estadiaProm
+            }],
+            responsive: {
+                rules: [{
+                    condition: {
+                        maxWidth: 500
+                    },
+                    chartOptions: {
+                        legend: {
+                            layout: 'horizontal',
+                            align: 'center',
+                            verticalAlign: 'bottom'
+                        }
+                    }
+                }]
             }
-            
         });
     }
 </script>
@@ -1064,3 +1402,4 @@
 
 
 @endsection
+

@@ -54,7 +54,7 @@
                                 <a href="../storage/{{$file->nombre}}" class="btn btn-sm btn-outline-secondary">Descargar</a>
                             </td>
                             <td>
-                                <button class="btn btn-sm btn-outline-danger" id="btnEliminar" data-id="{{ $file->id }}" data-toggle="modal" data-target="#modalEliminar">
+                                <button class="btn btn-sm btn-outline-danger" id="btnEliminar" value="{{ $file->id }}" data-toggle="modal" data-target="#modalEliminar" onclick="eliminar(this)">
                                     Eliminar
                                 </button>
                                 
@@ -140,14 +140,16 @@
     <script>
         var idEliminar=0;
         $(document).ready(function(){
-
-            $("#btnEliminar").click(function(){
-                idEliminar = $(this).data('id');
-            });
+            
+            
             $("#btnModalEliminar").click(function(){
                 $("#formEli_"+idEliminar).submit();
             });
         });
+
+        function eliminar(val){
+            idEliminar = val.value;
+        }
     </script>
 
 

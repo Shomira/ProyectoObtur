@@ -134,13 +134,12 @@
                             <td>{{$usuario->rol}}</td>
                             <td>{{$usuario->email}}</td>
                             <td>
-                                <button class="btn btn-danger btnEliminar" data-id="{{ $usuario->id }}" data-toggle="modal" data-target="#modalEliminar">
+                                <button class="btn btn-danger btnEliminar" value="{{ $usuario->id }}" data-toggle="modal" data-target="#modalEliminar" onclick="eliminar(this)">
                                     <img src="{{ asset('imgs/eliminar.png')}}"></button>
                                                 
                             </td>
                             <td>
-                                <button class="btn btn-primary btnEditar" data-id="{{ $usuario->id }}" data-name="{{ $usuario->name }}" 
-                                    data-email="{{ $usuario->email }}" data-rol="{{ $usuario->rol }}"data-toggle="modal" data-target="#modalEditar">
+                                <button class="btn btn-primary btnEditar" value="{{ $usuario->id }}"  data-toggle="modal" data-target="#modalEditar" onclick="editar(this)">
                                     <img src="{{ asset('imgs/ed3.png')}}">
                                 </button>
                                 <form action="{{ url('home/gestionUsuarios', ['id'=>$usuario->id ]) }}" method="POST" id="formEli_{{ $usuario->id }}">
@@ -278,21 +277,40 @@
         });
         var idEliminar=0;
         $(document).ready(function(){
+            
             @if($message = Session::get('ErrorInsert'))
                 $("#modalAgregar").modal('show');
             @endif
-            $(".btnEliminar").click(function(){
-                idEliminar = $(this).data('id');
-            });
+
             $(".btnModalEliminar").click(function(){
                 $("#formEli_"+idEliminar).submit();
             });
-            $(".btnEditar").click(function(){
-                $("#idEdit").val($(this).data('id'));
-                $("#nameEditar").val($(this).data('name'));
-                $("#emailEditar").val($(this).data('email'));
-                $("#rolEditar").val($(this).data('rol'));
-            });
+
         });
+
+        function eliminar(val){
+            idEliminar = val.value;
+        }
+        function editar(val){
+
+            $.ajax({
+                url:'{{url("home/gestionUsuarios/datosEditar")}}',
+                method: 'POST',
+                data:{
+                    id: val.value,
+                    _token: $('input[name="_token"]').val()
+                }
+            }).done(function(res){
+                
+                var arreglo = JSON.parse(res);
+
+                $("#idEdit").val(arreglo[0].id);
+                $("#nameEditar").val(arreglo[0].name);
+                $("#emailEditar").val(arreglo[0].email);
+                $("#rolEditar").val(arreglo[0].rol);
+
+            });
+        }
+
     </script>    
 @endsection
