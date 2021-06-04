@@ -5,7 +5,7 @@ use DateTime;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class DatosEstadisticosController extends Controller
+class IndicadoresAlojamientoController extends Controller
 {
     public function index()
     {
@@ -695,7 +695,7 @@ class DatosEstadisticosController extends Controller
 
         
         
-        return view('datosEstadisticos')->with('arrHuespedes5Est', $arrHuespedes5Est)
+        return view('indicadoresAlojamiento')->with('arrHuespedes5Est', $arrHuespedes5Est)
                                         ->with('arrTarifaH5Est', $arrTarifaH5Est)
                                         ->with('arrTarifaP5Est', $arrTarifaP5Est)
                                         ->with('arrOcupacion5Est', $arrOcupacion5Est)
@@ -1417,7 +1417,7 @@ class DatosEstadisticosController extends Controller
 
 
         
-        return view('datosEstadisticos')->with('arrHuespedes5Est', $arrHuespedes5Est)
+        return view('indicadoresAlojamiento')->with('arrHuespedes5Est', $arrHuespedes5Est)
                                         ->with('arrTarifaH5Est', $arrTarifaH5Est)
                                         ->with('arrTarifaP5Est', $arrTarifaP5Est)
                                         ->with('arrOcupacion5Est', $arrOcupacion5Est)

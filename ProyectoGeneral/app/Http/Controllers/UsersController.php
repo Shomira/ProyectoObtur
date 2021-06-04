@@ -101,4 +101,9 @@ class UsersController extends Controller
         }
 
     }
+
+    public function datosEditar(Request $request){
+        $datos= DB::select("SELECT * FROM users WHERE id = '$request->id' ");
+        return response(json_encode($datos), 200)->header('Content-type', 'text/plain');
+    }
 }
