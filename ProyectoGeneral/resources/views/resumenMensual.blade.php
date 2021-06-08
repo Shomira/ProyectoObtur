@@ -96,7 +96,7 @@
             
             </div> 
             <div class="form-group col-md-10">
-                <div id="containerGrafica" style="height: 600px; min-width: 1000px"></div>
+                <div id="containerGrafica" style="height: 500px; min-width: 900px"></div>
             </div>
 
         </div>
@@ -105,6 +105,9 @@
 
 @section('scripts')
 <script src = "https://code.highcharts.com/highcharts.src.js"> </script>
+<!-- Scripts Graficas Higcharts -->
+<script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/stock/modules/export-data.js"></script>
 
 <script>
 
@@ -129,30 +132,35 @@
     var columnas = ['Porcent Ocupación']
 
     var chartMes = Highcharts.chart('containerGrafica', {
+        //'rgb(242,170,59)'
+        colors: ['#F24333'],
         chart: {
-            type: 'column'
+            type: 'column',
         },
         title: {
-            text: 'Fruit Consumption'
+            text: 'Gráfica Resumen Mensual',
+            style: {
+                color: '#000',
+                font: 'bold 16px "Roboto Condensed", Verdana, sans-serif'
+            }
         },
         xAxis: {
             categories: columnas
         },
         yAxis: {
             title: {
-                text: 'Fruit eaten'
+                text: 'Escala'
             }
         },
         series: [{
+      
             name: estadistico,
             data: datos
         }]
     });
-
     $(document).ready(function(){
-        
         consulta();
-        
+
     });
 
     function consulta(){
@@ -163,8 +171,11 @@
                 mes: mes,
                 anio: anio,
                 estadistico: estadistico,
+                
+                
                 _token: $('input[name="_token"]').val()
             }
+    
         }).done(function(res){
             
             var arreglo = JSON.parse(res);
@@ -231,10 +242,12 @@
                 }],
                 xAxis: {
                     categories: columnas
+                 
                 }
             });
             
         });
+        
     }
 
     function cambioEstadistico(val){
@@ -352,14 +365,15 @@
             
             columnas.push(valor);
             datos.push(dato);
-            
+           
             chartMes.update( {
                 series: [{
                     name: estadistico,
                     data: datos
                 }],
                 xAxis: {
-                    categories: columnas
+                    categories: columnas,
+                                   
                 }
             }); 
 
@@ -379,9 +393,10 @@
                 series: [{
                     name: estadistico,
                     data: datos
+                    
                 }],
                 xAxis: {
-                    categories: columnas
+                    categories: columnas,
                 }
             }); 
         }

@@ -5,7 +5,6 @@
     <form action="" method="POST">
         @csrf
     </form>
-
     
     <div class="container principalV">
         <div class="row">
@@ -32,17 +31,25 @@
                             <h5>Inicio:
                                 <label>
                                     <select id="idanioInicio" name="anioInicio" class="form-control" onchange="cambioAnioInicio(this)"> 
-                                        <option disable>Año ...</option>
                                         @foreach($anios as $anio)
-                                            <option value="{{$anio->anio}}">{{$anio->anio}}</option>
+                                            @if( $anio->anio ===  $anioInicio )
+                                                <option value="{{$anio->anio}}" selected>{{$anio->anio}}</option>
+                                            @else
+                                                <option value="{{$anio->anio}}">{{$anio->anio}}</option>
+                                            @endif
                                         @endforeach
                                     </select>
                                 </label>
                                 <label>
                                     <select id="idmesInicio" name="mesInicio" class="form-control" onchange="cambioMesInicio(this)">
-                                        <option disable>Mes ...</option>
                                         @foreach($meses as $mes)
-                                            <option value="{{$mes[1]}}">{{$mes[0]}}</option>
+                                            @if($mes[2] ===  $anioInicio)
+                                                @if( $mes[1] ===  $mesInicio )
+                                                    <option value="{{$mes[1]}}" selected>{{$mes[0]}}</option>
+                                                @else
+                                                    <option value="{{$mes[1]}}">{{$mes[0]}}</option>
+                                                @endif
+                                            @endif
                                         @endforeach
                                     </select>
                                 </label>
@@ -54,19 +61,28 @@
             <div class="col-sm-4">
                 <div class="card  cardGrafica" >
                     <div class="card-body">
-                        <h5>Fin: 
+                        <h5 class="h5Comparativas">Fin: 
                             <label>
                                 <select id="idanioFin" name="anioFin" class="form-control" onchange="cambioAnioFin(this)">
                                     @foreach($anios as $anio)
-                                        <option value="{{$anio->anio}}">{{$anio->anio}}</option>
+                                        @if( $anio ===  $anioFin )
+                                            <option value="{{$anio->anio}}" selected>{{$anio->anio}}</option>
+                                        @else
+                                            <option value="{{$anio->anio}}">{{$anio->anio}}</option>
+                                        @endif
                                     @endforeach
                                 </select>
                             </label>
                             <label>
-                                <select id="inputState" name="mesFin" class="form-control" onchange="cambioMesFin(this)">
-                            
+                                <select id="idmesFin" name="mesFin" class="form-control" onchange="cambioMesFin(this)">
                                     @foreach($meses as $mes)
-                                        <option value="{{$mes[1]}}">{{$mes[0]}}</option>
+                                        @if($mes[2] ===  $anioFin)
+                                            @if( $mes[1] ===  $mesFin )
+                                                <option value="{{$mes[1]}}" selected>{{$mes[0]}}</option>
+                                            @else
+                                                <option value="{{$mes[1]}}">{{$mes[0]}}</option>
+                                            @endif
+                                        @endif
                                     @endforeach
                                 </select>
                             </label>
@@ -77,25 +93,30 @@
 
             <div class="col-sm-4">
                 <div class="card cardGrafica" >
-                <div class="card-body">
-                    <div>
-                    <h5>Estadístico:
-                        <label  >
-                            <select id="inputState" name="estadistico" class="form-control" onchange="cambioEstadisticoMeses(this)">
-                                <option value="prom">Promedio</option>
-                                <option value="total">Total</option>
-                                <option value="max">Máximo</option>
-                                <option value="min" >Mínimo</option>
-                            </select>
-                        </label>
-                    </h5>
-                </div>
-                </div>
+                    <div class="card-body">
+                        <div>
+                            <h5>Estadístico:
+                                <label  >
+                                    <select id="inputState" name="estadistico" class="form-control" onchange="cambioEstadisticoMeses(this)">
+                                        <option value="prom">Promedio</option>
+                                        <option value="total">Total</option>
+                                        <option value="max">Máximo</option>
+                                        <option value="min" >Mínimo</option>
+                                    </select>
+                                </label>
+                            </h5>
+                        </div>
+                    </div>
                 </div>
             </div>
-                <h5>Añadir linea por:</h5>
-                <label class="containerRb" ><input type="checkbox" name="lineaCategoria" id="categoria" value="categoria" onchange="seleccionadoCategoria(this)"> Categoria</label><br>
-                <label class="containerRb" ><input type="checkbox" name="lineaCiudad" id="ciudad" value="ciudad" onchange="seleccionadoCiudad(this)"> Ciudad</label><br>
+            <div class="analisisCiuyCat">
+            <p>Al elegir cualquiera de las opciones de Ciudad o Categoria, se le proporciona una comparación entre sus datos y la Ciudad o Categoria</p>
+                <h5>
+                <label class="labCiuyCat" >Análisis por: <input type="checkbox" name="lineaCategoria" id="categoria" value="categoria" onchange="generarLinea(this)"> Categoría
+                <input type="checkbox" name="lineaCiudad" id="ciudad" value="ciudad" onchange="generarLinea(this)"> Ciudad</label>
+                </h5>
+            </div>
+           
             <div>
 
             </div>
@@ -168,8 +189,15 @@
             <div class="pr-3">
                 <input type="date" name="inicio" class="form-control" id="cambioFechaFin" value="{{$diaMax}}">
             </div>
+           
         </div>
-        
+        <div class="analisisCiuyCatDias">
+            <p>Al elegir cualquiera de las opciones de Ciudad o Categoria, se le proporciona una comparación entre sus datos y la Ciudad o Categoria</p>
+            <h5>
+                <label class="labCiuyCat" >Análisis por: <input type="checkbox" name="lineaCategoria" id="categoria" value="categoria" onchange="generarLinea(this)"> Categoría
+                <input type="checkbox" name="lineaCiudad" id="ciudad" value="ciudad" onchange="generarLinea(this)"> Ciudad</label>
+            </h5>
+        </div>
         <hr>
         <div class="row col-13">
             <div class="form-group col-md-2 panelVisualColums" >
@@ -205,7 +233,7 @@
             </div>
         
             <div class="form-group col-md-10">
-                <div id="containerchart2" style="height: 500px; min-width: 800px"></div>
+                <div id="containerchart2" style="height: 500px; min-width: 850px"></div>
             </div>
         </div>
     </section>
@@ -215,10 +243,17 @@
 
 <script src = "https://code.highcharts.com/highcharts.src.js"> </script>
 
-
+<!-- Scripts para exportación Graficas Higcharts -->
+<script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/stock/modules/export-data.js"></script>
 <script>
     
+    /* 
+        Variables para crear la gráfica mensual
+    */
+
     var mesesGrafica1 = [];
+    var fechas = [];
 
     var dataCheckins1 = [];
     var dataCheckouts1 = [];
@@ -232,20 +267,13 @@
     var dataVentasNetas1 = [];
     var dataPorcOcupacion1 = [];
     var dataREVPAR1 = [];
-    
-    var parametroMeses = {
-                name: 'Porcent. Ocupación',
-                data: dataPorcOcupacion1
-            };
-
-    
-    var arrParametrosMeses = [parametroMeses]; 
+    var dataCategoria = [];
+    var dataCiudad = [];
 
     var mesInicioGrafica1 = '{{$mesInicio}}';
     var mesFinGrafica1 = '{{$mesFin}}';
     var anioInicioGrafica1 = '{{$anioInicio}}';
     var anioFinGrafica1 = '{{$anioFin}}';
-    var nomColumnaGrafica1 = '{{$columna}}';
     var estadisticoMeses = 'prom';
 
     var chartMes = Highcharts.chart('containerchart', {
@@ -256,15 +284,21 @@
             text: 'Gráfica Mensual de los indicadores',
             style: {
                 color: '#000',
-                font: '16px "Trebuchet MS", Verdana, sans-serif'
+                font: 'bold 16px "Roboto Condensed", Verdana, sans-serif'
             }
         },
         subtitle: {
-            text: 'Para hacer una comparación segun su categoría o ciudad, no elija más de 1 indicador'
+            text: 'Para hacer una comparación segun su categoría o ciudad, no elija más de 1 indicador',
+            style:{
+                font:'9pt "Roboto Condensed", Verdana, sans-serif',
+            }
+        },
+        credits: {
+                enabled: false
         },
         yAxis: {
             title: {
-                text: 'Number of Employees'
+                text: 'Escala'
             }
         },
         xAxis: {
@@ -275,7 +309,7 @@
             align: 'right',
             verticalAlign: 'middle',
             itemStyle: {
-            font: '9pt Trebuchet MS, Verdana, sans-serif',
+            font:'9pt "Roboto Condensed", Verdana, sans-serif',
             color: 'black'
             },
             itemHoverStyle:{
@@ -290,7 +324,11 @@
                 
             }
         },
-        series: arrParametrosMeses,
+        series: [{
+                name: 'Porcent. Ocupación',
+                data: dataPorcOcupacion1,
+                color: 'rgba(211, 214, 30)'
+        }],
         responsive: {
             rules: [{
                 condition: {
@@ -326,16 +364,6 @@
 
     var fechaInicioGrafica2 = '{{$diaMin}}';
     var fechaFinGrafica2 = '{{$diaMax}}';
-    var nomColumnaGrafica2 = '{{$columna}}';
-
-    var parametroDias = {
-                name: 'Porcent. Ocupación',
-                data: dataPorcOcupacion2
-            };
-
-    
-    var arrParametrosDias = [parametroDias]; 
-
 
     var chartDia = Highcharts.chart('containerchart2', {
         chart: {
@@ -345,26 +373,32 @@
             text: 'Gráfica por Días de los indicadores',
             style: {
                 color: '#000',
-                font: '16px "Trebuchet MS", Verdana, sans-serif'
+                font: 'bold 16px "Roboto Condensed", Verdana, sans-serif'
             }
         },
         subtitle: {
-            text: 'Para hacer una comparación segun su categoría o ciudad, no elija más de 1 indicador'
+            text: 'Para hacer una comparación segun su categoría o ciudad, no elija más de 1 indicador',
+            style:{
+                font:'9pt "Roboto Condensed", Verdana, sans-serif',
+            }
         },
         yAxis: {
             title: {
-                text: 'Number of Employees'
+                text: 'Escala'
             }
         },
         xAxis: {
             categories: diasGrafica2
+        },
+        credits: {
+                enabled: false
         },
         legend: {
             layout: 'vertical',
             align: 'right',
             verticalAlign: 'middle',
             itemStyle: {
-            font: '9pt Trebuchet MS, Verdana, sans-serif',
+            font: '7pt Trebuchet MS, Verdana, sans-serif',
             color: 'black'
             },
             itemHoverStyle:{
@@ -379,7 +413,10 @@
                 
             }
         },
-        series: arrParametrosDias,
+        series: [{
+            name: 'Porcent. Ocupación',
+            data: dataPorcOcupacion2
+        }],
         responsive: {
             rules: [{
                 condition: {
@@ -395,7 +432,6 @@
             }]
         }
     });
-
 
     $(document).ready(function(){
         $('#cambioFechaInicio').focusout(function() {
@@ -438,7 +474,7 @@
         
             consultaDias();
         });
-        
+
         consultaMeses();
         consultaDias();
         
@@ -458,7 +494,6 @@
                 mesFin: mesFinGrafica1,
                 anioInicio: anioInicioGrafica1,
                 anioFin: anioFinGrafica1,
-                columna: nomColumnaGrafica1,
                 estadistico: estadisticoMeses,
                 _token: $('input[name="_token"]').val()
             }
@@ -494,6 +529,7 @@
                     nombreMes = "Diciembre-"+arreglo[i].anio;
                 
                 mesesGrafica1.push(nombreMes);
+                fechas.push(arreglo[i].anio + "-" + arreglo[i].mes);
                 dataCheckins1.push(arreglo[i].checkins);
                 dataCheckouts1.push(arreglo[i].checkouts);
                 dataPernoctaciones1.push(arreglo[i].pernoctaciones);
@@ -525,41 +561,38 @@
 
             for(var i=0; i<chartMes.series.length; i++){
                 if(chartMes.series[i].name == 'Porcent. Ocupación')
-                    datos = dataPorcOcupacion1;
+                    chartMes.series[i].update({data: dataPorcOcupacion1});
                 else if(chartMes.series[i].name == 'Checkins')
-                    datos = dataCheckins1;
+                    chartMes.series[i].update({data: dataCheckins1});
                 else if(chartMes.series[i].name == 'Checkouts')
-                    datos = dataCheckouts1;
+                    chartMes.series[i].update({data: dataCheckouts1});
                 else if(chartMes.series[i].name == 'Pernoctaciones')
-                    datos = dataPernoctaciones1;
+                    chartMes.series[i].update({data: dataPernoctaciones1});
                 else if(chartMes.series[i].name == 'Nacionales')
-                    datos = dataNacionales1;
+                    chartMes.series[i].update({data: dataNacionales1});
                 else if(chartMes.series[i].name == 'Extranjeros')
-                    datos = dataExtranjeros1;
+                    chartMes.series[i].update({data: dataExtranjeros1});
                 else if(chartMes.series[i].name == 'Hab. Ocupadas')
-                    datos = dataHabOcupadas1;
+                    chartMes.series[i].update({data: dataHabOcupadas1});
                 else if(chartMes.series[i].name == 'Hab. Disponibles')
-                    datos = dataHabDisponibles1;
+                    chartMes.series[i].update({data: dataHabDisponibles1});
                 else if(chartMes.series[i].name == 'Tarifa Prom. Hab.')
-                    datos = dataTarPromHab1;
+                    chartMes.series[i].update({data: dataTarPromHab1});
                 else if(chartMes.series[i].name == 'Tarifa Prom. Per.')
-                    datos = dataTarPromPer1;
+                    chartMes.series[i].update({data: dataTarPromPer1});
                 else if(chartMes.series[i].name == 'Ventas Netas')
-                    datos = dataVentasNetas1;
+                    chartMes.series[i].update({data: dataVentasNetas1});
                 else if(chartMes.series[i].name  == 'Revpar')
-                    datos = dataREVPAR1;
-
-                arrParametrosMeses[i] = {
-                                    name: chartMes.series[i].name,
-                                    data: datos
-                                    };
-                
+                    chartMes.series[i].update({data: dataREVPAR1});
+                else if(chartMes.series[i].name == '{{$categoria}}')
+                    consultaGenerarLinea('categoria');
+                else if(chartMes.series[i].name  == 'ciudad')
+                    consultaGenerarLinea('ciudad');
             }
             
             chartMes.update( {
-                series: arrParametrosMeses,
                 xAxis: {
-                categories: mesesGrafica1
+                    categories: mesesGrafica1
                 }
             });
             
@@ -582,6 +615,18 @@
         dataVentasNetas1 = [];
         dataPorcOcupacion1 = [];
         dataREVPAR1 = [];
+        fechas = [];
+    }
+
+    function cambioAnioInicio(val){
+        
+        limpiarArreglosGraficaMes();
+
+        anioInicioGrafica1 = val.value;
+        
+        consultaMeses();
+
+        mesesOption(anioInicioGrafica1, mesInicioGrafica1, 1);
     }
 
     function cambioMesInicio(val){
@@ -592,6 +637,17 @@
         
         consultaMeses();
         
+    }
+    
+    function cambioAnioFin(val){
+        
+        limpiarArreglosGraficaMes();
+
+        anioFinGrafica1 = val.value;
+        
+        consultaMeses();
+        
+        mesesOption(anioFinGrafica1, mesFinGrafica1, 2);
     }
 
     function cambioMesFin(val){
@@ -608,6 +664,17 @@
         limpiarArreglosGraficaMes();
 
         if(val.value == 'total'){
+
+            if(document.getElementById("tarifa_promedio").checked || document.getElementById("TAR_PER").checked || document.getElementById("porcentaje_ocupacion").checked || document.getElementById("revpar").checked){
+                document.getElementById("categoria").checked = false;
+                document.getElementById("ciudad").checked = false;
+                for(var i=0;i<chartMes.series.length;i++){
+                    if(chartMes.series[i].name == '{{$categoria}}' || chartMes.series[i].name == 'ciudad'){
+                        chartMes.series[i].remove(true);
+                        i--;
+                    }
+                }
+            }
 
             document.getElementById("tarifa_promedio").checked = false;
             document.getElementById("TAR_PER").checked = false;
@@ -649,11 +716,11 @@
         var color;
         
         if(valor == 'Checkins'){
-            color = 'rgba(0, 0, 0)';
+            color = 'rgba(255, 87, 51)';
             datos = dataCheckins1;
             bandera = document.getElementById('checkins').checked;
         }else if(valor == 'Checkouts'){
-            color = 'rgba(255, 0, 0)';
+            color = 'rgba(9, 187, 148)';
             datos = dataCheckouts1;
             bandera = document.getElementById('checkouts').checked;
         }else if(valor == 'Pernoctaciones'){
@@ -699,10 +766,11 @@
         }
         
         if(bandera){
-
             chartMes.addSeries({
                     name: valor,
-                    data: datos
+                    data: datos,
+                    color: color
+                    
                     });
 
         }else{
@@ -712,15 +780,177 @@
                 if(chartMes.series[i].name == valor){
                     chartMes.series[i].remove(true);
                 }
-
             }
-            
         }
         
+        if(chartMes.series.length > 1){
+            document.getElementById("categoria").checked = false;
+            document.getElementById("ciudad").checked = false;
+            document.getElementById("categoria").disabled = true;
+            document.getElementById("ciudad").disabled = true;
+
+            for(var i=0;i<chartMes.series.length;i++){
+                if(chartMes.series[i].name == '{{$categoria}}' || chartMes.series[i].name == 'ciudad'){
+                    chartMes.series[i].remove(true);
+                    i--;
+                }
+            }
+        }else{
+            document.getElementById("categoria").disabled = false;
+            document.getElementById("ciudad").disabled = false;
+        }
+    }
+
+    function mesesOption(anio, mes, etiqueta){
+
+        $.ajax({
+            url:'{{url("home/comparativas/meses/")}}',
+            method: 'POST',
+            data:{
+                inicio: fechaInicioGrafica2,
+                fin: fechaFinGrafica2,
+                _token: $('input[name="_token"]').val()
+            }
+        }).done(function(res){
+
+            var arreglo = JSON.parse(res);
+            var cadena = "";
+            var bandera = true;
+
+            for(var i=0;i<arreglo.length;i++){
+                if(arreglo[i][2] == parseFloat(anio)){
+                    if(arreglo[i][1] == parseFloat(mes)){
+                        cadena = cadena + "<option value=" + arreglo[i][1] + " selected>" + arreglo[i][0] + "</option>";
+                        bandera = false;
+                    }else{
+                        cadena = cadena + "<option value="+ arreglo[i][1] + ">" + arreglo[i][0] + "</option>";
+                    }
+                }
+            }
+
+            if(bandera){
+                cadena = "<option disable>Elegir mes...</option>" + cadena;
+            }
+            
+            if(etiqueta == 2){
+                document.getElementById("idmesFin").innerHTML = cadena;
+            }else{
+                document.getElementById("idmesInicio").innerHTML = cadena;
+            }
+            
+        });
+    }
+
+    function generarLinea(val){
+        if(val.value == 'categoria'){
+            if(document.getElementById("categoria").checked){
+
+                consultaGenerarLinea(val.value);
+
+            }else{
+                for(var i=0;i<chartMes.series.length;i++){
+                    
+                    if(chartMes.series[i].name == '{{$categoria}}'){
+                        chartMes.series[i].remove(true);
+                    }
+
+                }
+            }
+        }else{
+            if(document.getElementById("ciudad").checked){
+
+                consultaGenerarLinea(val.value);
+                
+            }else{
+                for(var i=0;i<chartMes.series.length;i++){
+                    
+                    if(chartMes.series[i].name == val.value){
+                        chartMes.series[i].remove(true);
+                    }
+
+                }
+            }
+        }
+    }
+
+    function consultaGenerarLinea(val){
+        
+        $.ajax({
+            url:'{{url("home/comparativas/nuevaLinea")}}',
+            method: 'POST',
+            data:{
+                mesInicio: mesInicioGrafica1,
+                mesFin: mesFinGrafica1,
+                anioInicio: anioInicioGrafica1,
+                anioFin: anioFinGrafica1,
+                estadistico: estadisticoMeses,
+                agrupacion: val,
+                _token: $('input[name="_token"]').val()
+            }
+        }).done(function(res){
+            var arreglo = JSON.parse(res);
+            var bandera = true;
+            var datos = [];
+
+            for(var i=0;i<arreglo.length;i++){
+                
+                if(fechas.includes(arreglo[i].anio + "-" + arreglo[i].mes)){
+                    if(chartMes.series[0].name == 'Porcent. Ocupación')
+                        datos.push(arreglo[i].porcentaje_ocupacion);
+                    else if(chartMes.series[0].name == 'Checkins')
+                        datos.push(arreglo[i].checkins);
+                    else if(chartMes.series[0].name == 'Checkouts')
+                        datos.push(arreglo[i].checkouts);
+                    else if(chartMes.series[0].name == 'Pernoctaciones')
+                        datos.push(arreglo[i].pernoctaciones);
+                    else if(chartMes.series[0].name == 'Nacionales')
+                        datos.push(arreglo[i].nacionales);
+                    else if(chartMes.series[0].name == 'Extranjeros')
+                        datos.push(arreglo[i].extranjeros);
+                    else if(chartMes.series[0].name == 'Hab. Ocupadas')
+                        datos.push(arreglo[i].habitaciones_ocupadas);
+                    else if(chartMes.series[0].name == 'Hab. Disponibles')
+                        datos.push(arreglo[i].habitaciones_disponibles);
+                    else if(chartMes.series[0].name == 'Tarifa Prom. Hab.')
+                        datos.push(arreglo[i].tarifa_promedio);
+                    else if(chartMes.series[0].name == 'Tarifa Prom. Per.')
+                        datos.push(arreglo[i].tar_per);
+                    else if(chartMes.series[0].name == 'Ventas Netas')
+                        datos.push(arreglo[i].ventas_netas);
+                    else if(chartMes.series[0].name  == 'Revpar')
+                        datos.push(arreglo[i].revpar);
+
+                }
+            }
+            
+            datos = datos.map(element => parseFloat(element));
+
+            for(var i=0;i<chartMes.series.length;i++){
+                if( (val == 'categoria' && chartMes.series[i].name == '{{$categoria}}') || (val == 'ciudad' && chartMes.series[i].name == 'ciudad') ){
+                    chartMes.series[i].update({data: datos});
+                    bandera = false;
+                }
+            }
+            if(bandera){
+                if(val == 'categoria'){
+                    var color = 'red';
+                }else{
+                    var color = 'black';
+                }
+                
+                chartMes.addSeries({
+                    name: arreglo[0].categoria,
+                    data: datos,
+                    color: color,
+                    lineWidth: 3.5
+                    });
+            }
+            
+        });
     }
 
     /* 
-        Funciones para interactuar con la gráfica mensual
+        Funciones para interactuar con la gráfica diaria
     */
 
     function consultaDias(){
@@ -768,74 +998,44 @@
             dataPorcOcupacion2 = dataPorcOcupacion2.map(element => parseFloat(element));
             dataREVPAR2 = dataREVPAR2.map(element => parseFloat(element));
 
-
             var datos;
 
             for(var i=0;i<chartDia.series.length;i++){
                 if(chartDia.series[i].name == 'Porcent. Ocupación')
-                    datos = dataPorcOcupacion2;
+                    chartDia.series[i].update({data: dataPorcOcupacion2});
                 else if(chartDia.series[i].name == 'Checkins')
-                    datos = dataCheckins2;
+                    chartDia.series[i].update({data: dataCheckins2});
                 else if(chartDia.series[i].name == 'Checkouts')
-                    datos = dataCheckouts2;
+                    chartDia.series[i].update({data: dataCheckouts2});
                 else if(chartDia.series[i].name == 'Pernoctaciones')
-                    datos = dataPernoctaciones2;
+                    chartDia.series[i].update({data: dataPernoctaciones2});
                 else if(chartDia.series[i].name == 'Nacionales')
-                    datos = dataNacionales2;
+                    chartDia.series[i].update({data: dataNacionales2});
                 else if(chartDia.series[i].name == 'Extranjeros')
-                    datos = dataExtranjeros2;
+                    chartDia.series[i].update({data: dataExtranjeros2});
                 else if(chartDia.series[i].name == 'Hab. Ocupadas')
-                    datos = dataHabOcupadas2;
+                    chartDia.series[i].update({data: dataHabOcupadas2});
                 else if(chartDia.series[i].name == 'Hab. Disponibles')
-                    datos = dataHabDisponibles2;
+                    chartDia.series[i].update({data: dataHabDisponibles2});
                 else if(chartDia.series[i].name == 'Tarifa Prom. Hab.')
-                    datos = dataTarPromHab2;
+                    chartDia.series[i].update({data: dataTarPromHab2});
                 else if(chartDia.series[i].name == 'Tarifa Prom. Per.')
-                    datos = dataTarPromPer2;
+                    chartDia.series[i].update({data: dataTarPromPer2});
                 else if(chartDia.series[i].name == 'Ventas Netas')
-                    datos = dataVentasNetas2;
+                    chartDia.series[i].update({data: dataVentasNetas2});
                 else if(chartDia.series[i].name  == 'Revpar')
-                    datos = dataREVPAR2;
-
-                arrParametrosDias[i] = {
-                                name: chartDia.series[i].name,
-                                data: datos
-                                };
-                
+                    chartDia.series[i].update({data: dataREVPAR2});
             }
-            console.log(arreglo);
+
             chartDia.update( {
-                series: arrParametrosDias,
                 xAxis: {
                 categories: diasGrafica2
                 }
             });
             
-            
-            
         });
 
     }
-
-    function cambioAnioInicio(val){
-        
-        limpiarArreglosGraficaMes();
-
-        anioInicioGrafica1 = val.value;
-        
-        consultaMeses();
-        
-    }
-
-    function cambioAnioFin(val){
-        
-        limpiarArreglosGraficaMes();
-
-        anioFinGrafica1 = val.value;
-        
-        consultaMeses();
-    }
-
 
     function seleccionarFilasDias(val){
         var valor = val.value;
@@ -913,24 +1113,6 @@
         }
         
     }
-
-    function seleccionadoCategoria(val){
-            
-        if(document.getElementById("mes").checked){
-
-            $("#variables").append("<input id='diasDelMes' type='button' class='btn btn-default' value='Num(Días)' onclick='escribir(this)'>");
-
-            document.getElementById("anio").disabled = true;
-        }else{
-
-            $("#diasDelMes").remove();
-            document.getElementById("anio").disabled = false;
-            cadena = "";
-            document.getElementById("formula").value=cadena;
-        }
-        
-    }
     
-
 </script>
 @endsection

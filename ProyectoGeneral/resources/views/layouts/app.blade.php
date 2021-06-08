@@ -12,9 +12,8 @@
 
     <!-- Sweet Alert -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
-    
-     <!-- Scripts -->
-       <!-- Para el icono -->
+
+    <!-- Para el icono -->
      
      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 
@@ -34,6 +33,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.2/dropzone.min.css" integrity="sha512-3g+prZHHfmnvE1HBLwUnVuunaPOob7dpksI7/v6UnF/rnKGwHf/GdEq9K7iEN7qTtW+S0iivTcGpeTBqqB04wA==" crossorigin="anonymous">
 </head>
 <body>
+
     <div id="app">
         <a class="scroll-to-top rounded" href="#page-top">
             <!--<i class="fad fa-chevron-circle-up"></i>-->
@@ -72,7 +72,7 @@
                             </li>
                             <div class="dropdown">
                                 <li class="nav-item {{ request()->is('datosEstadisticos') ? 'active': ' '}}">  
-                                    <a class="nav-link" href="{{url('')}}"tabindex="-1" aria-disabled="true">DATOS ESTADÍSTICOS</a>
+                                    <a class="nav-link" href=""tabindex="-1" aria-disabled="true">DATOS ESTADÍSTICOS</a>
                                     <div class="dropdown-content">
                                         <a href="{{url('indicadoresAlojamiento')}}">Indicadores Alojamiento</a>
                                         <a href="{{url('graficasEstadisticas')}}">Gráficas Estadísticas</a>

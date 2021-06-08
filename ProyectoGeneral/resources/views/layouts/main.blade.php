@@ -21,6 +21,9 @@
     <!-- Custom styles for this template-->
     <link href="{{asset('/dash/css/sb-admin-2.min.css')}}" rel="stylesheet">
     <link href="{{ asset('css/estilos.css') }}" rel="stylesheet">
+
+
+        
     @yield('css')
 </head>
 
@@ -159,6 +162,7 @@
     <!-- Page level plugins -->
     <script src="{{asset('/dash/vendor/chart.js/Chart.min.js')}}"></script>
 
+    
     <!-- Page level custom scripts -->
     <script src="{{asset('/dash/js/demo/chart-area-demo.js')}}"></script>
     <script src="{{asset('/dash/js/demo/chart-pie-demo.js')}}"></script>

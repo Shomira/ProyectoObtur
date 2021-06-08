@@ -1,8 +1,8 @@
 @extends('layouts.app')
 @section('content')
-
-<section>
-    <section class="graficaWelcome">
+    <div id="page-top"></div>
+    <section class="fondoDatosEsta">
+        <section class="graficaWelcome">
             <section class="tituloGrafica" ><h2>COMPARATIVAS DE DATOS HOTELEROS</h2></section>
             
             <section class="lineatituloGrafica" ></section>
@@ -102,42 +102,42 @@
             </div>
             <section class="espacioGrafica" ></section>
             <div class="row col-13">
-                <div class="form-group col-md-2 graficaColums titulosPanel" >
+                <div class="form-group col-md-2 graficaColums titulosPanel titulosPanelGe" >
                     <h5 >Parámetros </h5> 
-                    <input type="checkbox" name="checkins" id="checkins" value="checkins" onchange="seleccionarFilas(this)">
+                    <input type="checkbox" name="checkins" id="checkins" value="Checkins" onchange="seleccionarFilas(this)">
                     <label for="checkins"> Checkins</label><br>
-                    <input type="checkbox" name="checkouts" id="checkouts" value="checkouts" onchange="seleccionarFilas(this)">
+                    <input type="checkbox" name="checkouts" id="checkouts" value="Checkouts" onchange="seleccionarFilas(this)">
                     <label for="checkouts"> Checkouts</label><br>
-                    <input type="checkbox" name="pernoctaciones" id="pernoctaciones" value="pernoctaciones" onchange="seleccionarFilas(this)">
+                    <input type="checkbox" name="pernoctaciones" id="pernoctaciones" value="Pernoctaciones" onchange="seleccionarFilas(this)">
                     <label for="pernoctaciones"> Pernoctaciones</label><br>
-                    <input type="checkbox" name="nacionales" id="nacionales" value="nacionales" onchange="seleccionarFilas(this)">
+                    <input type="checkbox" name="nacionales" id="nacionales" value="Nacionales" onchange="seleccionarFilas(this)">
                     <label for="nacionales"> Nacionales</label><br>
-                    <input type="checkbox" name="extranjeros" id="extranjeros" value="extranjeros" onchange="seleccionarFilas(this)">
+                    <input type="checkbox" name="extranjeros" id="extranjeros" value="Extranjeros" onchange="seleccionarFilas(this)">
                     <label for="extranjeros"> Extranjeros</label><br>
-                    <input type="checkbox" name="habitaciones_ocupadas" id="habitaciones_ocupadas" value="habitaciones_ocupadas" onchange="seleccionarFilas(this)">
+                    <input type="checkbox" name="habitaciones_ocupadas" id="habitaciones_ocupadas" value="Hab. Ocupadas" onchange="seleccionarFilas(this)">
                     <label for="habitaciones_ocupadas"> Hab. Ocupadas</label><br>
-                    <input type="checkbox" name="habitaciones_disponibles" id="habitaciones_disponibles" value="habitaciones_disponibles" onchange="seleccionarFilas(this)">
+                    <input type="checkbox" name="habitaciones_disponibles" id="habitaciones_disponibles" value="Hab. Disponibles" onchange="seleccionarFilas(this)">
                     <label for="habitaciones_disponibles"> Hab. Disponibles</label><br>
-                    <input type="checkbox" name="ventas_netas" id="ventas_netas" value="ventas_netas" onchange="seleccionarFilas(this)">
+                    <input type="checkbox" name="ventas_netas" id="ventas_netas" value="Ventas Netas" onchange="seleccionarFilas(this)">
                     <label for="ventas_netas"> Ventas Netas</label>
                     <hr>
-                    <input type="checkbox" name="tarifa_promedio" id="tarifa_promedio" value="tarifa_promedio" onchange="seleccionarFilas(this)">
+                    <input type="checkbox" name="tarifa_promedio" id="tarifa_promedio" value="Tarifa Prom. Hab." onchange="seleccionarFilas(this)">
                     <label for="tarifa_promedio"> Tarifa Prom. Hab.</label><br>
-                    <input type="checkbox" name="TAR_PER" id="TAR_PER" value="TAR_PER" onchange="seleccionarFilas(this)">
+                    <input type="checkbox" name="TAR_PER" id="TAR_PER" value="Tarifa Prom. Per." onchange="seleccionarFilas(this)">
                     <label for="TAR_PER"> Tarifa Prom. Per.</label><br> 
-                    <input type="checkbox" name="porcentaje_ocupacion" id="porcentaje_ocupacion" value="porcentaje_ocupacion" onchange="seleccionarFilas(this)" checked>
+                    <input type="checkbox" name="porcentaje_ocupacion" id="porcentaje_ocupacion" value="Porcent. Ocupación" onchange="seleccionarFilas(this)" checked>
                     <label for="porcentaje_ocupacion"> Porcent. Ocupación</label><br>
-                    <input type="checkbox" name="revpar" id="revpar" value="revpar" onchange="seleccionarFilas(this)">
+                    <input type="checkbox" name="revpar" id="revpar" value="Revpar" onchange="seleccionarFilas(this)">
                     <label for="revpar"> REVPAR</label><br> 
                 </div>
                 <div class="form-group col-md-9">
                     <br>
-                    <canvas id="graficaMeses" width="1500" height="600"></canvas>
+                        <div id="containerChartComparativa" style="height: 500px; min-width: 800px"></div>
                 </div>
             </div>
         </section>
-
-
+    </section>
+    <section class="fondoBlanco">
         <section class="graficaWelcome">
             <section class="tituloGrafica" ><h2>DATOS HOTELEROS POR CATEGORÍA</h2></section>
             <section class="lineatituloGrafica" ></section>
@@ -170,52 +170,52 @@
                 <section class="espacioGrafica" ></section>
                 
                 <div class="row col-13">
-                    <div class="form-group col-md-2 graficaColums  titulosPanel" >
+                    <div class="form-group col-md-2 graficaColums  titulosPanel titulosPanelGe" >
                         <h5 >Parámetros</h5>
-                        <input type="checkbox" name="checkins2" id="checkins2" value="checkins" onchange="seleccionarFilas2(this)">
+                        <input type="checkbox" name="checkins2" id="checkins2" value="Checkins" onchange="seleccionarFilas2(this)">
                         <label for="checkins2"> Checkins</label><br>
-                        <input type="checkbox" name="checkouts2" id="checkouts2" value="checkouts" onchange="seleccionarFilas2(this)">
+                        <input type="checkbox" name="checkouts2" id="checkouts2" value="Checkouts" onchange="seleccionarFilas2(this)">
                         <label for="checkouts2"> Checkouts</label><br>
-                        <input type="checkbox" name="pernoctaciones2" id="pernoctaciones2" value="pernoctaciones" onchange="seleccionarFilas2(this)">
+                        <input type="checkbox" name="pernoctaciones2" id="pernoctaciones2" value="Pernoctaciones" onchange="seleccionarFilas2(this)">
                         <label for="pernoctaciones2"> Pernoctaciones</label><br>
-                        <input type="checkbox" name="nacionales2" id="nacionales2" value="nacionales" onchange="seleccionarFilas2(this)">
+                        <input type="checkbox" name="nacionales2" id="nacionales2" value="Nacionales" onchange="seleccionarFilas2(this)">
                         <label for="nacionales2"> Nacionales</label><br>
-                        <input type="checkbox" name="extranjeros2" id="extranjeros2" value="extranjeros" onchange="seleccionarFilas2(this)">
+                        <input type="checkbox" name="extranjeros2" id="extranjeros2" value="Extranjeros" onchange="seleccionarFilas2(this)">
                         <label for="extranjeros2"> Extranjeros</label><br>
-                        <input type="checkbox" name="habitaciones_ocupadas2" id="habitaciones_ocupadas2" value="habitaciones_ocupadas" onchange="seleccionarFilas2(this)">
+                        <input type="checkbox" name="habitaciones_ocupadas2" id="habitaciones_ocupadas2" value="Hab. Ocupadas" onchange="seleccionarFilas2(this)">
                         <label for="habitaciones_ocupadas2"> Hab. Ocupadas</label><br>
-                        <input type="checkbox" name="habitaciones_disponibles2" id="habitaciones_disponibles2" value="habitaciones_disponibles" onchange="seleccionarFilas2(this)">
+                        <input type="checkbox" name="habitaciones_disponibles2" id="habitaciones_disponibles2" value="Hab. Disponibles" onchange="seleccionarFilas2(this)">
                         <label for="habitaciones_disponibles2"> Hab. Disponibles</label><br>
-                        <input type="checkbox" name="ventas_netas2" id="ventas_netas2" value="ventas_netas" onchange="seleccionarFilas2(this)">
+                        <input type="checkbox" name="ventas_netas2" id="ventas_netas2" value="Ventas Netas" onchange="seleccionarFilas2(this)">
                         <label for="ventas_netas2"> Ventas Netas</label>
                         <hr>
-                        <input type="checkbox" name="tarifa_promedio2" id="tarifa_promedio2" value="tarifa_promedio" onchange="seleccionarFilas2(this)">
+                        <input type="checkbox" name="tarifa_promedio2" id="tarifa_promedio2" value="Tarifa Prom. Hab." onchange="seleccionarFilas2(this)">
                         <label for="tarifa_promedio2"> Tarifa Prom. Hab.</label><br>
-                        <input type="checkbox" name="TAR_PER2" id="TAR_PER2" value="TAR_PER" onchange="seleccionarFilas2(this)">
+                        <input type="checkbox" name="TAR_PER2" id="TAR_PER2" value="Tarifa Prom. Per." onchange="seleccionarFilas2(this)">
                         <label for="TAR_PER2"> Tarifa Prom. Per.</label><br>
-                        <input type="checkbox" name="porcentaje_ocupacion2" id="porcentaje_ocupacion2" value="porcentaje_ocupacion" onchange="seleccionarFilas2(this)" checked>
+                        <input type="checkbox" name="porcentaje_ocupacion2" id="porcentaje_ocupacion2" value="Porcent. Ocupación" onchange="seleccionarFilas2(this)" checked>
                         <label for="porcentaje_ocupacion2"> Porcent. Ocupación</label><br>
-                        <input type="checkbox" name="revpar2" id="revpar2" value="revpar" onchange="seleccionarFilas2(this)">
+                        <input type="checkbox" name="revpar2" id="revpar2" value="Revpar" onchange="seleccionarFilas2(this)">
                         <label for="revpar2"> REVPAR</label><br>
                     </div>
                     <div class="form-group col-md-9">
                         <br>
-                        <canvas id="barChartCategorias" width="1500" height="600"></canvas>
+                        <div id="containerChartCaregorias" style="height: 500px; min-width: 800px"></div>
                     </div>
                 </div>
         </section>
+    </section>
+    <form action="" method="POST">
+        @csrf
+    </form>
+        
 
-      
-        
-        <form action="" method="POST">
-            @csrf
-        </form>
-        
-</section>
+
 
 @endsection
 @section('scripts')
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
+<script src = "https://code.highcharts.com/highcharts.src.js"> </script>
 
 
  <!--Flecha-->
@@ -256,6 +256,94 @@
     var dataPorcOcupacion = [];
     var dataREVPAR = [];
 
+    var mesInicioGrafica1 = '{{$mesInicio}}';
+    var mesFinGrafica1 = '{{$mesFin}}';
+    var anioInicioGrafica1 = '{{$anioInicio}}';
+    var anioFinGrafica1 = '{{$anioFin}}';
+    var nomColumnaGrafica1 = '{{$columna}}';
+    var nomCategoria = 'Todas';
+    var ejeX = 1;
+    var estadistico = 'prom';
+    
+     /*Tema general de las graficas */
+     Highcharts.theme = {
+       
+        chart: {
+            backgroundColor: null,
+            type: 'line'   
+        },
+        yAxis: {
+            title: {
+                text: 'Escala'
+            }
+        },
+        title: {
+            style: {
+                color: '#000',
+                font: 'bold 16px "Roboto Condensed", Verdana, sans-serif'
+            }
+         },
+         legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle',
+            itemStyle: {
+            font: '9pt Trebuchet MS, Verdana, sans-serif',
+            color: 'black'
+            },
+            itemHoverStyle:{
+                color: 'gray'
+            }
+        },
+        responsive: {
+            rules: [{
+                condition: {
+                    maxWidth: 500
+                },
+                chartOptions: {
+                    legend: {
+                        layout: 'horizontal',
+                        align: 'center',
+                        verticalAlign: 'bottom'
+                    }
+                }
+            }]
+        },
+        plotOptions: {
+            series: {
+                label: {
+                    connectorAllowed: false
+                },
+                
+            }
+        },
+    };
+    // Apply the theme
+    Highcharts.setOptions(Highcharts.theme);
+
+    /*Fin Tema */
+//---------------------------------------Grafica de Comparativas
+
+    var chartComparativa = Highcharts.chart('containerChartComparativa', {
+        chart: {
+            type: 'line'   
+        },
+        title: {
+            text: 'Gráfica Mensual de los indicadores',
+        },
+        xAxis: {
+            categories: mesesGrafica1
+        },
+        
+        series: [{
+                name: 'Porcent. Ocupación',
+                data: dataPorcOcupacion
+        }]
+    });
+
+    //--------------------------------------- Grafica de barras por categorias
+    var anio = '{{$anioFin}}';
+    var estadisticoBarras = 'prom';
 
     var dataCheckins2 = [];
     var dataCheckouts2 = [];
@@ -270,89 +358,34 @@
     var dataPorcOcupacion2 = [];
     var dataREVPAR2 = [];
 
-
-    var porcentaje_ocupacion = {
-                label: 'porcentaje_ocupacion',
-                data: dataPorcOcupacion,
-                backgroundColor: 'rgb(255,255,255,0.20)',
-                borderColor: 'rgba(211, 214, 30, 0.74)',
-                borderWidth: 3
-            };
-
-            
-    var columnas = [porcentaje_ocupacion];
-
-    var mesInicioGrafica1 = '{{$mesInicio}}';
-    var mesFinGrafica1 = '{{$mesFin}}';
-    var anioInicioGrafica1 = '{{$anioInicio}}';
-    var anioFinGrafica1 = '{{$anioFin}}';
-    var nomColumnaGrafica1 = '{{$columna}}';
-    var nomCategoria = 'Todas';
-    var ejeX = 1;
-    var estadistico = 'prom'
-    var anio = '{{$anioFin}}';
-    var estadisticoBarras = 'prom'
-    
-    
-    var ctx2 = document.getElementById('graficaMeses').getContext('2d');
-    var graficaMeses = new Chart(ctx2, {
-        type: "line",
-        data: {
-            labels: mesesGrafica1,
-            datasets: columnas
+    var chartCategorias = Highcharts.chart('containerChartCaregorias', {
+        chart: {
+            type: 'column'
         },
-        options: {
-            capBezierPoints: true,
-            scales: {
-                yAxes: [{
-                    ticks: {
-                        beginAtZero: true
-                    }
-                }]
-            }
-        }
-        
-    });
-
-    
-    var porcentaje_ocupacion2 = {
-                label: 'porcentaje_ocupacion',
-                backgroundColor: "rgba(211, 214, 30,0.6)",
-                borderColor: "rgba(211, 214, 30)",
-                borderWidth: 2,
-                data: dataPorcOcupacion2
-            };
-
-    var columnas2 = [porcentaje_ocupacion2];
-
-    var ctx = document.getElementById('barChartCategorias').getContext('2d');
-    var barChartCategorias = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: ["5 Estrellas", "4 Estrellas", "3 Estrellas", "2 Estrellas", "1 Estrella"],
-            datasets: columnas2
+        title: {
+            text: 'Grafica deacuerdo a categorias de los Establecimientos'
         },
-        options: {
-            scales: {
-                yAxes: [{
-                    ticks: {
-                        beginAtZero: true
-                    }
-                }]
-            }
-        }
+        xAxis: {
+            categories: ["5 Estrellas", "4 Estrellas", "3 Estrellas", "2 Estrellas", "1 Estrella"]
+        },
+   
+        series: [{
+            name: 'Porcent. Ocupación',
+            data: dataPorcOcupacion2
+        }]
     });
-
-
 
     $(document).ready(function(){
-        
-        consultaMeses();
-        consultaBarras();
+        consultaChartComparativa();
+        consultaCategorias();
         
     });
 
-    function consultaMeses(){
+    /* 
+        Funciones para interactuar con la gráfica mensual
+    */
+
+    function consultaChartComparativa(){
         $.ajax({
             url:'{{url("/")}}',
             method: 'POST',
@@ -404,8 +437,6 @@
                     mesesGrafica1.push(arreglo[i].fecha);
                 }
 
-                    
-
                 dataCheckins.push(arreglo[i].checkins);
                 dataCheckouts.push(arreglo[i].checkouts);
                 dataPernoctaciones.push(arreglo[i].pernoctaciones);
@@ -419,55 +450,219 @@
                 dataPorcOcupacion.push(arreglo[i].porcentaje_ocupacion);
                 dataREVPAR.push(arreglo[i].revpar);
             }
+
+            dataCheckins = dataCheckins.map(element => parseFloat(element));
+            dataCheckouts = dataCheckouts.map(element => parseFloat(element));
+            dataPernoctaciones = dataPernoctaciones.map(element => parseFloat(element));
+            dataNacionales = dataNacionales.map(element => parseFloat(element));
+            dataExtranjeros = dataExtranjeros.map(element => parseFloat(element));
+            dataHabOcupadas = dataHabOcupadas.map(element => parseFloat(element));
+            dataHabDisponibles = dataHabDisponibles.map(element => parseFloat(element));
+            dataTarPromHab = dataTarPromHab.map(element => parseFloat(element));
+            dataTarPromPer = dataTarPromPer.map(element => parseFloat(element));
+            dataVentasNetas = dataVentasNetas.map(element => parseFloat(element));
+            dataPorcOcupacion = dataPorcOcupacion.map(element => parseFloat(element));
+            dataREVPAR = dataREVPAR.map(element => parseFloat(element));
             
-            for(var i=0;i<columnas.length;i++){
-                if(graficaMeses.data.datasets[i].label == 'porcentaje_ocupacion'){
-                    graficaMeses.data.datasets[i].data = dataPorcOcupacion;
-                }
-                if(graficaMeses.data.datasets[i].label == 'checkins'){
-                    graficaMeses.data.datasets[i].data = dataCheckins;
-                }
-                if(graficaMeses.data.datasets[i].label == 'checkouts'){
-                    graficaMeses.data.datasets[i].data = dataCheckouts;
-                }
-                if(graficaMeses.data.datasets[i].label == 'pernoctaciones'){
-                    graficaMeses.data.datasets[i].data = dataPernoctaciones;
-                }
-                if(graficaMeses.data.datasets[i].label == 'nacionales'){
-                    graficaMeses.data.datasets[i].data = dataNacionales;
-                }
-                if(graficaMeses.data.datasets[i].label == 'extranjeros'){
-                    graficaMeses.data.datasets[i].data = dataExtranjeros;
-                }
-                if(graficaMeses.data.datasets[i].label == 'habitaciones_ocupadas'){
-                    graficaMeses.data.datasets[i].data = dataHabOcupadas;
-                }
-                if(graficaMeses.data.datasets[i].label == 'habitaciones_disponibles'){
-                    graficaMeses.data.datasets[i].data = dataHabDisponibles;
-                }
-                if(graficaMeses.data.datasets[i].label == 'tarifa_promedio'){
-                    graficaMeses.data.datasets[i].data = dataTarPromHab;
-                }
-                if(graficaMeses.data.datasets[i].label == 'TAR_PER'){
-                    graficaMeses.data.datasets[i].data = dataTarPromPer;
-                }
-                if(graficaMeses.data.datasets[i].label == 'ventas_netas'){
-                    graficaMeses.data.datasets[i].data = dataVentasNetas;
-                }
-                if(graficaMeses.data.datasets[i].label == 'revpar'){
-                    graficaMeses.data.datasets[i].data = dataREVPAR;
-                }
-                
+            for(var i=0;i<chartComparativa.series.length;i++){ 
+                if(chartComparativa.series[i].name == 'Porcent. Ocupación')
+                    chartComparativa.series[i].update({data: dataPorcOcupacion});
+                else if(chartComparativa.series[i].name == 'Checkins')
+                    chartComparativa.series[i].update({data: dataCheckins});
+                else if(chartComparativa.series[i].name == 'Checkouts')
+                    chartComparativa.series[i].update({data: dataCheckouts});
+                else if(chartComparativa.series[i].name == 'Pernoctaciones')
+                    chartComparativa.series[i].update({data: dataPernoctaciones});
+                else if(chartComparativa.series[i].name == 'Nacionales')
+                    chartComparativa.series[i].update({data: dataNacionales});
+                else if(chartComparativa.series[i].name == 'Extranjeros')
+                    chartComparativa.series[i].update({data: dataExtranjeros});
+                else if(chartComparativa.series[i].name == 'Hab. Ocupadas')
+                    chartComparativa.series[i].update({data: dataHabOcupadas});
+                else if(chartComparativa.series[i].name == 'Hab. Disponibles')
+                    chartComparativa.series[i].update({data: dataHabDisponibles});
+                else if(chartComparativa.series[i].name == 'Tarifa Prom. Hab.')
+                    chartComparativa.series[i].update({data: dataTarPromHab});
+                else if(chartComparativa.series[i].name == 'Tarifa Prom. Per.')
+                    chartComparativa.series[i].update({data: dataTarPromPer});
+                else if(chartComparativa.series[i].name == 'Ventas Netas')
+                    chartComparativa.series[i].update({data: dataVentasNetas});
+                else if(chartComparativa.series[i].name  == 'Revpar')
+                    chartComparativa.series[i].update({data: dataREVPAR});
             }
-        
-            graficaMeses.data.labels = mesesGrafica1;
-            graficaMeses.update();
+
+            chartComparativa.update( {
+                xAxis: {
+                    categories: mesesGrafica1
+                }
+            });
             
         });
 
     }
 
-    function consultaBarras(){
+    function limpiarArreglosChartComparativa(){
+        mesesGrafica1 = [];
+        dataCheckins = [];
+        dataCheckouts = [];
+        dataPernoctaciones = [];
+        dataNacionales = [];
+        dataExtranjeros = [];
+        dataHabOcupadas = [];
+        dataHabDisponibles = [];
+        dataTarPromHab = [];
+        dataTarPromPer = [];
+        dataVentasNetas = [];
+        dataPorcOcupacion = [];
+        dataREVPAR = [];
+    }
+
+    function cambioMesInicio(val){
+        limpiarArreglosChartComparativa();
+        mesInicioGrafica1 = val.value;
+        consultaChartComparativa();
+    }
+
+    function cambioMesFin(val){
+        limpiarArreglosChartComparativa();
+        mesFinGrafica1 = val.value;
+        consultaChartComparativa();
+    }
+
+    function cambioAnioInicio(val){
+        limpiarArreglosChartComparativa();
+        anioInicioGrafica1 = val.value;
+        consultaChartComparativa();
+    }
+
+    function cambioAnioFin(val){
+        limpiarArreglosChartComparativa();
+        anioFinGrafica1 = val.value;
+        consultaChartComparativa();
+    }
+   
+    function cambioCategoria(val){
+        limpiarArreglosChartComparativa();
+        nomCategoria = val.value;
+        consultaChartComparativa();
+    }
+
+    function cambioEjeX(val){
+        limpiarArreglosChartComparativa();
+        ejeX = val.value;
+        consultaChartComparativa();
+    }
+
+    function cambioEstadisticoComparativas(val){
+        
+        limpiarArreglosChartComparativa();
+
+        if(val.value == 'total'){
+
+            document.getElementById("tarifa_promedio").checked = false;
+            document.getElementById("TAR_PER").checked = false;
+            document.getElementById("porcentaje_ocupacion").checked = false;
+            document.getElementById("revpar").checked = false;
+
+            document.getElementById("tarifa_promedio").disabled = true;
+            document.getElementById("TAR_PER").disabled = true;
+            document.getElementById("porcentaje_ocupacion").disabled = true;
+            document.getElementById("revpar").disabled = true;
+
+            for(var i=0;i<chartComparativa.series.length;i++){
+                if(chartComparativa.series[i].name == 'Porcent. Ocupación' || chartComparativa.series[i].name == 'Tarifa Prom. Per.'|| chartComparativa.series[i].name == 'Tarifa Prom. Hab.'|| chartComparativa.series[i].name == 'Revpar'){
+                    chartComparativa.series[i].remove(true);
+                    i--;
+                }
+            }
+
+        }else{
+            
+            document.getElementById("tarifa_promedio").disabled = false;
+            document.getElementById("TAR_PER").disabled = false;
+            document.getElementById("porcentaje_ocupacion").disabled = false;
+            document.getElementById("revpar").disabled = false;
+
+        }
+        estadistico = val.value;
+        consultaChartComparativa();
+    }
+
+    function seleccionarFilas(val){
+        var valor = val.value;
+        var datos;
+        var bandera;
+        var color;
+        
+        if(valor == 'Checkins'){
+            color = 'rgba(0, 0, 0)';
+            datos = dataCheckins;
+            bandera = document.getElementById('checkins').checked;
+        }else if(valor == 'Checkouts'){
+            color = 'rgba(255, 0, 0)';
+            datos = dataCheckouts;
+            bandera = document.getElementById('checkouts').checked;
+        }else if(valor == 'Pernoctaciones'){
+            color = 'rgba(110, 54, 54)';
+            datos = dataPernoctaciones;
+            bandera = document.getElementById('pernoctaciones').checked;
+        }else if(valor == 'Nacionales'){
+            color = 'rgba(131, 119, 119)';
+            datos = dataNacionales;
+            bandera = document.getElementById('nacionales').checked;
+        }else if(valor == 'Extranjeros'){
+            color = 'rgba(223, 172, 32)';
+            datos = dataExtranjeros;
+            bandera = document.getElementById('extranjeros').checked;
+        }else if(valor == 'Hab. Ocupadas'){
+            color = 'rgba(109, 209, 84)';
+            datos = dataHabOcupadas;
+            bandera = document.getElementById('habitaciones_ocupadas').checked;
+        }else if(valor == 'Hab. Disponibles'){
+            color = 'rgba(39, 215, 228)';
+            datos = dataHabDisponibles;
+            bandera = document.getElementById('habitaciones_disponibles').checked;
+        }else if(valor == 'Tarifa Prom. Hab.'){
+            color = 'rgba(41, 77, 175)';
+            datos = dataTarPromHab;
+            bandera = document.getElementById('tarifa_promedio').checked;
+        }else if(valor == 'Tarifa Prom. Per.'){
+            color = 'rgba(99, 41, 175)';
+            datos = dataTarPromPer;
+            bandera = document.getElementById('TAR_PER').checked;
+        }else if(valor == 'Ventas Netas'){
+            color = 'rgba(216, 44, 193)';
+            datos = dataVentasNetas;
+            bandera = document.getElementById('ventas_netas').checked;
+        }else if(valor == 'Porcent. Ocupación'){
+            color = 'rgba(211, 214, 30)';
+            datos = dataPorcOcupacion;
+            bandera = document.getElementById('porcentaje_ocupacion').checked;
+        }else if(valor == 'Revpar'){
+            color = 'rgba(19, 190, 153)';
+            datos = dataREVPAR;
+            bandera = document.getElementById('revpar').checked;
+        }
+
+        if(bandera){
+            chartComparativa.addSeries({
+                    name: valor,
+                    data: datos
+                    });
+        }else{
+            for(var i=0;i<chartComparativa.series.length;i++){
+                if(chartComparativa.series[i].name == valor){
+                    chartComparativa.series[i].remove(true);
+                }
+            }
+        }
+    }
+
+    /* 
+        Funciones para interactuar con la gráfica por categorias
+    */
+
+    function consultaCategorias(){
 
         $.ajax({
             url:'{{url("/barra")}}',
@@ -499,202 +694,74 @@
 
             }
             
-            
+            dataCheckins2 = dataCheckins2.map(element => parseFloat(element));
+            dataCheckouts2 = dataCheckouts2.map(element => parseFloat(element));
+            dataPernoctaciones2 = dataPernoctaciones2.map(element => parseFloat(element));
+            dataNacionales2 = dataNacionales2.map(element => parseFloat(element));
+            dataExtranjeros2 = dataExtranjeros2.map(element => parseFloat(element));
+            dataHabOcupadas2 = dataHabOcupadas2.map(element => parseFloat(element));
+            dataHabDisponibles2 = dataHabDisponibles2.map(element => parseFloat(element));
+            dataTarPromHab2 = dataTarPromHab2.map(element => parseFloat(element));
+            dataTarPromPer2 = dataTarPromPer2.map(element => parseFloat(element));
+            dataVentasNetas2 = dataVentasNetas2.map(element => parseFloat(element));
+            dataPorcOcupacion2 = dataPorcOcupacion2.map(element => parseFloat(element));
+            dataREVPAR2 = dataREVPAR2.map(element => parseFloat(element));
 
-            for(var i=0;i<columnas2.length;i++){
-                if(barChartCategorias.data.datasets[i].label == 'porcentaje_ocupacion'){
-                    
-                    barChartCategorias.data.datasets[i].data = dataPorcOcupacion2;
-                }
-                if(barChartCategorias.data.datasets[i].label == 'checkins'){
-                    barChartCategorias.data.datasets[i].data = dataCheckins2;
-                }
-                if(barChartCategorias.data.datasets[i].label == 'checkouts'){
-                    barChartCategorias.data.datasets[i].data = dataCheckouts2;
-                }
-                if(barChartCategorias.data.datasets[i].label == 'pernoctaciones'){
-                    barChartCategorias.data.datasets[i].data = dataPernoctaciones2;
-                }
-                if(barChartCategorias.data.datasets[i].label == 'nacionales'){
-                    barChartCategorias.data.datasets[i].data = dataNacionales2;
-                }
-                if(barChartCategorias.data.datasets[i].label == 'extranjeros'){
-                    barChartCategorias.data.datasets[i].data = dataExtranjeros2;
-                }
-                if(barChartCategorias.data.datasets[i].label == 'habitaciones_ocupadas'){
-                    barChartCategorias.data.datasets[i].data = dataHabOcupadas2;
-                }
-                if(barChartCategorias.data.datasets[i].label == 'habitaciones_disponibles'){
-                    barChartCategorias.data.datasets[i].data = dataHabDisponibles2;
-                }
-                if(barChartCategorias.data.datasets[i].label == 'tarifa_promedio'){
-                    barChartCategorias.data.datasets[i].data = dataTarPromHab2;
-                }
-                if(barChartCategorias.data.datasets[i].label == 'TAR_PER'){
-                    barChartCategorias.data.datasets[i].data = dataTarPromPer2;
-                }
-                if(barChartCategorias.data.datasets[i].label == 'ventas_netas'){
-                    barChartCategorias.data.datasets[i].data = dataVentasNetas2;
-                }
-                if(barChartCategorias.data.datasets[i].label == 'revpar'){
-                    barChartCategorias.data.datasets[i].data = dataREVPAR2;
-                }
-                
+            for(var i=0;i<chartCategorias.series.length;i++){
+                if(chartCategorias.series[i].name == 'Porcent. Ocupación')
+                    chartCategorias.series[i].update({data: dataPorcOcupacion2});
+                else if(chartCategorias.series[i].name == 'Checkins')
+                    chartCategorias.series[i].update({data: dataCheckins2});
+                else if(chartCategorias.series[i].name == 'Checkouts')
+                    chartCategorias.series[i].update({data: dataCheckouts2});
+                else if(chartCategorias.series[i].name == 'Pernoctaciones')
+                    chartCategorias.series[i].update({data: dataPernoctaciones2});
+                else if(chartCategorias.series[i].name == 'Nacionales')
+                    chartCategorias.series[i].update({data: dataNacionales2});
+                else if(chartCategorias.series[i].name == 'Extranjeros')
+                    chartCategorias.series[i].update({data: dataExtranjeros2});
+                else if(chartCategorias.series[i].name == 'Hab. Ocupadas')
+                    chartCategorias.series[i].update({data: dataHabOcupadas2});
+                else if(chartCategorias.series[i].name == 'Hab. Disponibles')
+                    chartCategorias.series[i].update({data: dataHabDisponibles2});
+                else if(chartCategorias.series[i].name == 'Tarifa Prom. Hab.')
+                    chartCategorias.series[i].update({data: dataTarPromHab2});
+                else if(chartCategorias.series[i].name == 'Tarifa Prom. Per.')
+                    chartCategorias.series[i].update({data: dataTarPromPer2});
+                else if(chartCategorias.series[i].name == 'Ventas Netas')
+                    chartCategorias.series[i].update({data: dataVentasNetas2});
+                else if(chartCategorias.series[i].name == 'Revpar')
+                    chartCategorias.series[i].update({data: dataREVPAR2});
             }
-            
-            barChartCategorias.update();
 
         });
 
     }
 
-    function limpiarArreglosGraficaMeses(){
-        mesesGrafica1 = [];
-        dataCheckins = [];
-        dataCheckouts = [];
-        dataPernoctaciones = [];
-        dataNacionales = [];
-        dataExtranjeros = [];
-        dataHabOcupadas = [];
-        dataHabDisponibles = [];
-        dataTarPromHab = [];
-        dataTarPromPer = [];
-        dataVentasNetas = [];
-        dataPorcOcupacion = [];
-        dataREVPAR = [];
-    }
-
-    function cambioMesInicio(val){
-
-        limpiarArreglosGraficaMeses()
-
-        mesInicioGrafica1 = val.value;
-        
-        consultaMeses();
-        
-    }
-
-    function cambioMesFin(val){
-        
-        limpiarArreglosGraficaMeses()
-
-        mesFinGrafica1 = val.value;
-        
-        consultaMeses();
-    }
-
-    function cambioAnioInicio(val){
-        
-        limpiarArreglosGraficaMeses()
-
-        anioInicioGrafica1 = val.value;
-        
-        consultaMeses();
-        
-    }
-
-    function cambioAnioFin(val){
-        
-        limpiarArreglosGraficaMeses()
-
-        anioFinGrafica1 = val.value;
-        
-        consultaMeses();
-    }
-   
-
-    function cambioCategoria(val){
-
-        limpiarArreglosGraficaMeses()
-
-        nomCategoria = val.value;
-        
-        consultaMeses();
-    }
-
-    function cambioEjeX(val){
-        
-        limpiarArreglosGraficaMeses()
-
-        ejeX = val.value;
-        
-        consultaMeses();
-    }
-
-    function cambioEstadisticoComparativas(val){
-        
-        limpiarArreglosGraficaMeses()
-
-        if(val.value == 'total'){
-
-            document.getElementById("tarifa_promedio").checked = false;
-            document.getElementById("TAR_PER").checked = false;
-            document.getElementById("porcentaje_ocupacion").checked = false;
-            document.getElementById("revpar").checked = false;
-
-            document.getElementById("tarifa_promedio").disabled = true;
-            document.getElementById("TAR_PER").disabled = true;
-            document.getElementById("porcentaje_ocupacion").disabled = true;
-            document.getElementById("revpar").disabled = true;
-
-            for(var i=0;i<columnas.length;i++){
-                
-                if(columnas[i].label == 'tarifa_promedio' || columnas[i].label == 'TAR_PER'|| columnas[i].label == 'porcentaje_ocupacion'|| columnas[i].label == 'revpar'){
-                    columnas.splice(i, 1);
-                    i--;
-                }
-
-            }
-
-            graficaMeses.update();
-
-
-        }else{
-            
-            document.getElementById("tarifa_promedio").disabled = false;
-            document.getElementById("TAR_PER").disabled = false;
-            document.getElementById("porcentaje_ocupacion").disabled = false;
-            document.getElementById("revpar").disabled = false;
-
-        }
-
-        estadistico = val.value;
-        
-        consultaMeses();
+    function limpiarArreglosChartCategorias(){
+        dataCheckins2 = [];
+        dataCheckouts2 = [];
+        dataPernoctaciones2 = [];
+        dataNacionales2 = [];
+        dataExtranjeros2 = [];
+        dataHabOcupadas2 = [];
+        dataHabDisponibles2 = [];
+        dataTarPromHab2 = [];
+        dataTarPromPer2 = [];
+        dataVentasNetas2 = [];
+        dataPorcOcupacion2 = [];
+        dataREVPAR2 = [];
     }
 
     function cambioAnio(val){
-        dataCheckins2 = [];
-        dataCheckouts2 = [];
-        dataPernoctaciones2 = [];
-        dataNacionales2 = [];
-        dataExtranjeros2 = [];
-        dataHabOcupadas2 = [];
-        dataHabDisponibles2 = [];
-        dataTarPromHab2 = [];
-        dataTarPromPer2 = [];
-        dataVentasNetas2 = [];
-        dataPorcOcupacion2 = [];
-        dataREVPAR2 = [];
-
+        limpiarArreglosChartCategorias();
         anio = val.value;
-        
-        consultaBarras();
+        consultaCategorias();
     }
 
     function cambioEstadistico(val){
-        dataCheckins2 = [];
-        dataCheckouts2 = [];
-        dataPernoctaciones2 = [];
-        dataNacionales2 = [];
-        dataExtranjeros2 = [];
-        dataHabOcupadas2 = [];
-        dataHabDisponibles2 = [];
-        dataTarPromHab2 = [];
-        dataTarPromPer2 = [];
-        dataVentasNetas2 = [];
-        dataPorcOcupacion2 = [];
-        dataREVPAR2 = [];
+
+        limpiarArreglosChartCategorias();
 
         if(val.value == 'total'){
 
@@ -708,17 +775,14 @@
             document.getElementById("porcentaje_ocupacion2").disabled = true;
             document.getElementById("revpar2").disabled = true;
 
-            for(var i=0;i<columnas2.length;i++){
+            for(var i=0;i<chartCategorias.series.length;i++){
                 
-                if(columnas2[i].label == 'tarifa_promedio' || columnas2[i].label == 'TAR_PER'|| columnas2[i].label == 'porcentaje_ocupacion'|| columnas2[i].label == 'revpar'){
-                    columnas2.splice(i, 1);
+                if(chartCategorias.series[i].name == 'Porcent. Ocupación' || chartCategorias.series[i].name == 'Tarifa Prom. Per.'|| chartCategorias.series[i].name == 'Tarifa Prom. Hab.'|| chartCategorias.series[i].name == 'Revpar'){
+                    chartCategorias.series[i].remove(true);
                     i--;
                 }
 
             }
-
-            barChartCategorias.update();
-
 
         }else{
             document.getElementById("tarifa_promedio2").disabled = false;
@@ -730,94 +794,7 @@
 
         estadisticoBarras = val.value;
         
-        consultaBarras();
-    }
-
-    function seleccionarFilas(val){
-        var valor = val.value;
-        var datos;
-        var bandera;
-        var color;
-        
-        if(valor == 'checkins'){
-            color = 'rgba(0, 0, 0)';
-            datos = dataCheckins;
-            bandera = document.getElementById('checkins').checked;
-        }else if(valor == 'checkouts'){
-            color = 'rgba(255, 0, 0)';
-            datos = dataCheckouts;
-            bandera = document.getElementById('checkouts').checked;
-        }else if(valor == 'pernoctaciones'){
-            color = 'rgba(110, 54, 54)';
-            datos = dataPernoctaciones;
-            bandera = document.getElementById('pernoctaciones').checked;
-        }else if(valor == 'nacionales'){
-            color = 'rgba(131, 119, 119)';
-            datos = dataNacionales;
-            bandera = document.getElementById('nacionales').checked;
-        }else if(valor == 'extranjeros'){
-            color = 'rgba(223, 172, 32)';
-            datos = dataExtranjeros;
-            bandera = document.getElementById('extranjeros').checked;
-        }else if(valor == 'habitaciones_ocupadas'){
-            color = 'rgba(109, 209, 84)';
-            datos = dataHabOcupadas;
-            bandera = document.getElementById('habitaciones_ocupadas').checked;
-        }else if(valor == 'habitaciones_disponibles'){
-            color = 'rgba(39, 215, 228)';
-            datos = dataHabDisponibles;
-            bandera = document.getElementById('habitaciones_disponibles').checked;
-        }else if(valor == 'tarifa_promedio'){
-            color = 'rgba(41, 77, 175)';
-            datos = dataTarPromHab;
-            bandera = document.getElementById('tarifa_promedio').checked;
-        }else if(valor == 'TAR_PER'){
-            color = 'rgba(99, 41, 175)';
-            datos = dataTarPromPer;
-            bandera = document.getElementById('TAR_PER').checked;
-        }else if(valor == 'ventas_netas'){
-            color = 'rgba(216, 44, 193)';
-            datos = dataVentasNetas;
-            bandera = document.getElementById('ventas_netas').checked;
-        }else if(valor == 'porcentaje_ocupacion'){
-            color = 'rgba(211, 214, 30)';
-            datos = dataPorcOcupacion;
-            bandera = document.getElementById('porcentaje_ocupacion').checked;
-        }else if(valor == 'revpar'){
-            color = 'rgba(19, 190, 153)';
-            datos = dataREVPAR;
-            bandera = document.getElementById('revpar').checked;
-        }
-
-        var aux = {
-            label: valor,
-            data: datos,
-            backgroundColor: 'rgb(255,255,255,0.01)',
-            borderColor: color,
-            borderWidth: 3
-        };
-        
-        if(bandera){
-
-            columnas.push(aux);
-            graficaMeses.update();
-
-
-        }else{
-
-            
-            for(var i=0;i<columnas.length;i++){
-                
-                if(columnas[i].label == valor){
-                    columnas.splice(i, 1);
-                }
-
-            }
-            
-            graficaMeses.update();
-            
-        }
-        
+        consultaCategorias();
     }
 
     function seleccionarFilas2(val){
@@ -827,95 +804,81 @@
         var color;
         var borde;
         
-        if(valor == 'checkins'){
+        if(valor == 'Checkins'){
             color = 'rgba(0, 0, 0,0.6)';
             borde = 'rgba(0, 0, 0)';
             datos = dataCheckins2;
             bandera = document.getElementById('checkins2').checked;
-        }else if(valor == 'checkouts'){
+        }else if(valor == 'Checkouts'){
             color = 'rgba(255, 0, 0,0.6)';
             borde = 'rgba(255, 0, 0)';
             datos = dataCheckouts2;
             bandera = document.getElementById('checkouts2').checked;
-        }else if(valor == 'pernoctaciones'){
+        }else if(valor == 'Pernoctaciones'){
             color = 'rgba(110, 54, 54,0.6)';
             borde = 'rgba(110, 54, 54)';
             datos = dataPernoctaciones2;
             bandera = document.getElementById('pernoctaciones2').checked;
-        }else if(valor == 'nacionales'){
+        }else if(valor == 'Nacionales'){
             color = 'rgba(131, 119, 119,0.6)';
             borde = 'rgba(131, 119, 119)';
             datos = dataNacionales2;
             bandera = document.getElementById('nacionales2').checked;
-        }else if(valor == 'extranjeros'){
+        }else if(valor == 'Extranjeros'){
             color = 'rgba(223, 172, 32,0.6)';
             borde = 'rgba(223, 172, 32)';
             datos = dataExtranjeros2;
             bandera = document.getElementById('extranjeros2').checked;
-        }else if(valor == 'habitaciones_ocupadas'){
+        }else if(valor == 'Hab. Ocupadas'){
             color = 'rgba(109, 209, 84,0.6)';
             borde = 'rgba(109, 209, 84)';
             datos = dataHabOcupadas2;
             bandera = document.getElementById('habitaciones_ocupadas2').checked;
-        }else if(valor == 'habitaciones_disponibles'){
+        }else if(valor == 'Hab. Disponibles'){
             color = 'rgba(39, 215, 228,0.6)';
             borde = 'rgba(39, 215, 228)';
             datos = dataHabDisponibles2;
             bandera = document.getElementById('habitaciones_disponibles2').checked;
-        }else if(valor == 'tarifa_promedio'){
+        }else if(valor == 'Tarifa Prom. Hab.'){
             color = 'rgba(41, 77, 175,0.6)';
             borde = 'rgba(41, 77, 175)';
             datos = dataTarPromHab2;
             bandera = document.getElementById('tarifa_promedio2').checked;
-        }else if(valor == 'TAR_PER'){
+        }else if(valor == 'Tarifa Prom. Per.'){
             color = 'rgba(99, 41, 175,0.6)';
             borde = 'rgba(99, 41, 175)';
             datos = dataTarPromPer2;
             bandera = document.getElementById('TAR_PER2').checked;
-        }else if(valor == 'ventas_netas'){
+        }else if(valor == 'Ventas Netas'){
             color = 'rgba(216, 44, 193,0.6)';
             borde = 'rgba(216, 44, 193)';
             datos = dataVentasNetas2;
             bandera = document.getElementById('ventas_netas2').checked;
-        }else if(valor == 'porcentaje_ocupacion'){
+        }else if(valor == 'Porcent. Ocupación'){
             color = 'rgba(211, 214, 30,0.6)';
             borde = 'rgba(211, 214, 30)';
             datos = dataPorcOcupacion2;
             bandera = document.getElementById('porcentaje_ocupacion2').checked;
-        }else if(valor == 'revpar'){
+        }else if(valor == 'Revpar'){
             color = 'rgba(19, 190, 153,0.6)';
             borde = 'rgba(19, 190, 153)';
             datos = dataREVPAR2;
             bandera = document.getElementById('revpar2').checked;
         }
 
-        var aux = {
-            label: valor,
-            backgroundColor: color,
-            borderColor: borde,
-            borderWidth: 2,
-            data: datos
-        };
-        
         if(bandera){
-
-            columnas2.push(aux);
-            barChartCategorias.update();
-
-
+            chartCategorias.addSeries({
+                    name: valor,
+                    data: datos
+                    });
         }else{
-
-            
-            for(var i=0;i<columnas2.length;i++){
+            for(var i=0;i<chartCategorias.series.length;i++){
                 
-                if(columnas2[i].label == valor){
-                    columnas2.splice(i, 1);
+                if(chartCategorias.series[i].name == valor){
+                    chartCategorias.series[i].remove(true);
                 }
 
             }
-            
-            
-            barChartCategorias.update();
             
         }
         

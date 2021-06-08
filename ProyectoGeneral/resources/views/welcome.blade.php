@@ -4,16 +4,9 @@
 @endsection
 
 @section('content')
-    <section class="fondoWelcome">
+    <section class="fondoWelcome" id="page-top">
         <section class="containerSlider">
-     
-        <!--
-            <a class="flechaInicio"  javascript:void(0) title="Volver arriba">
-                <span class="fa-stack">
-                    <i class="fa fa-arrow-up fa-stack-2x fa-inverse"></i>
-                </span>
-            </a>
-            -->
+
             <!--inicia el slider-->
             <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
                 <ol class="carousel-indicators">
@@ -270,7 +263,7 @@
         <section class="map">
             <h2>Ubicación</h2>
 
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d63680.998371727175!2d-79.2433984719824!3d-4.007594453866496!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x91cb480661b91d2d%3A0x8e12137cdc1eee09!2sLoja!5e0!3m2!1ses!2sec!4v1608711364387!5m2!1ses!2sec" width="1515" height="500" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d63680.998371727175!2d-79.2433984719824!3d-4.007594453866496!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x91cb480661b91d2d%3A0x8e12137cdc1eee09!2sLoja!5e0!3m2!1ses!2sec!4v1608711364387!5m2!1ses!2sec" width="1510" height="500" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
         </section>
         <script>
             var myCarousel = document.querySelector('#myCarousel')
@@ -294,28 +287,5 @@
 
 @section('scripts')
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
-
-
- <!--Flecha-->
- <script>
-    $(document).ready(function(){ //Hacia arriba
-        irArriba();
-    });
-
-    function irArriba(){
-        $('.flechaInicio').click(function(){ 
-            $('body,html').animate({ scrollTop:'10px' },100); 
-        });
-        $(window).scroll(function(){
-            if($(this).scrollTop() > 0){ 
-                $('.flechaInicio').slideDown(600); 
-            }else{ 
-                $('.flechaInicio').slideUp(600);
-            }
-        });
-        $('.flechaInicio').click(function(){ $('body,html').animate({ scrollTop:'0px' },2); });
-        }
-</script>
-
 
 @endsection

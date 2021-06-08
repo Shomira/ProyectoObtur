@@ -89,6 +89,9 @@
 
 @section('scripts')
 <script src = "https://code.highcharts.com/highcharts.src.js"> </script>
+<!-- Scripts Graficas Higcharts -->
+<script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/stock/modules/export-data.js"></script>
 
 <script>
 
@@ -103,87 +106,88 @@
     var dataREVPAR = [];
     var estadistico = 'Promedio';
 
-    var chartCheckins = Highcharts.chart('containerCheckins', {
+    /*Tema general de las graficas */
+    Highcharts.theme = {
+        colors:[ 'rgb(242,170,59)', '#eccd6a',
+                'rgb(182,50,52)' ,'rgb(182,50,52,0.8)','rgb(158,115,75)',
+                'rgba(20,21,24,0.8)','#c2c2c2'],
         chart: {
-            type: 'bar'
+            backgroundColor: null,
+            type: 'bar'   
         },
-        title: {
-            text: 'Checkins'
-        },
+
         xAxis: {
             categories: dias
         },
         yAxis: {
             title: {
-                text: 'Fruit eaten'
+                text: 'Escala'
             }
+        },
+        title: {
+            style: {
+                color: '#000',
+                font: 'bold 16px "Roboto Condensed", Verdana, sans-serif'
+            }
+         },
+
+        legend: {
+            itemStyle: {
+                font: '9pt "Roboto Condensed", Verdana, sans-serif',
+                color: 'black'
+            },
+            itemHoverStyle:{
+                color: 'green'
+            }
+        }
+    };
+    // Apply the theme
+    Highcharts.setOptions(Highcharts.theme);
+
+    /*Fin Tema */
+
+    var chartCheckins = Highcharts.chart('containerCheckins', {
+        title: {
+            text: ' '
         },
         series: [{
             name: 'Checkins',
-            data: dataCheckins
+            data: dataCheckins,
+            colorByPoint: true
         }]
     });
 
     var chartCheckouts = Highcharts.chart('containerCheckouts', {
-        chart: {
-            type: 'bar'
-        },
         title: {
-            text: 'Checkouts'
-        },
-        xAxis: {
-            categories: dias
-        },
-        yAxis: {
-            title: {
-                text: 'Fruit eaten'
-            }
+            text: ' '
         },
         series: [{
             name: 'Checkouts',
-            data: dataCheckouts
+            data: dataCheckouts,
+            colorByPoint: true
         }]
     });
 
     var chartPorcentOcupacion = Highcharts.chart('containerPorcentajeOcup', {
-        chart: {
-            type: 'bar'
-        },
         title: {
-            text: 'Porcentaje Ocupación'
-        },
-        xAxis: {
-            categories: dias
-        },
-        yAxis: {
-            title: {
-                text: 'Fruit eaten'
-            }
+            text: null
         },
         series: [{
             name: 'Porcentaje Ocupación',
-            data: dataPorcOcupacion
+            data: dataPorcOcupacion,
+            colorByPoint: true
         }]
     });
 
     var chartRevpar = Highcharts.chart('containerRevpar', {
-        chart: {
-            type: 'bar'
-        },
         title: {
-            text: 'Revpar'
-        },
-        xAxis: {
-            categories: dias
-        },
-        yAxis: {
-            title: {
-                text: 'Fruit eaten'
-            }
+            text: null
         },
         series: [{
             name: 'Revpar',
-            data: dataREVPAR
+            data: dataREVPAR,
+            colorByPoint: true,
+           
         }]
     });
 
