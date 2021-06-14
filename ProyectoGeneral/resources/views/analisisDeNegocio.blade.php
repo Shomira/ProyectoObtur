@@ -58,27 +58,27 @@
             <div class="card mr-3">
                 <div class="card-body ">
                     <h5 class="card-header-second text-center pt-3 ">Checkins</h5> <br>
-                    <div id="containerCheckins" style="height: 400px; width: 550px"></div>
+                    <div id="containerCheckins"></div>
                 </div>
             </div>
             <div class="card ml-3">
                 <div class="card-body">
                     <h5 class="card-header-second text-center pt-3">Checkouts</h5> <br>
-                    <div id="containerCheckouts" style="height: 400px; width: 550px"></div>
+                    <div id="containerCheckouts"></div>
                 </div>
             </div>
         </div>
-        <div class="card-group">
+        <div class="card-group b-4">
             <div class="card mr-3">
                 <div class="card-body">
                     <h5 class="card-header-second text-center pt-3">Porcentaje Ocupación</h5><br>
-                    <div id="containerPorcentajeOcup" style="height: 400px; width: 550px"></div>
+                    <div id="containerPorcentajeOcup"></div>
                 </div>
             </div>
-            <div class="card ml-3">
+            <div class="card mr-3">
                 <div class="card-body">
                     <h5 class="card-header-second text-center pt-3">REVPAR</h5> <br>
-                    <div id="containerRevpar" style="height: 400px; width: 550px"></div>
+                    <div id="containerRevpar" ></div>
                 </div>
             </div>
         </div>

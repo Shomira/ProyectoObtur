@@ -52,10 +52,9 @@
                                 </span>
                             @enderror
                         </div>
-                        
                                 
                         <div class="form-group row">
-                                <select  id="rol" type="text" class="form-control @error('rol') is-invalid @enderror" name="rol" placeholder="Rol" value="{{ old('rol') }}" >
+                            <select  id="rol" type="text" class="form-control @error('rol') is-invalid @enderror" name="rol" placeholder="Rol" value="{{ old('rol') }}" >
                                 <option selected>Elegir rol...</option>
                                 <option disable >Establecimiento</option>
                                 <option disable >Administrador</option>
@@ -67,15 +66,43 @@
                                 @enderror
                             </select>
                         </div>
-                            <div class="form-group row">
 
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" placeholder="Contraseña" required autocomplete="new-password">
+                        <div class="form-group row">
+                            <select  id="provincia" type="text" class="form-control @error('provincia') is-invalid @enderror" name="provincia" placeholder="Provincia" value="{{ old('provincia') }}" onchange="cambioProvincia(this)">
+                                <option selected>Elegir provincia...</option>
+                                @foreach($provincias as $provincia)
+                                    <option value="{{$provincia->id}}">{{$provincia->nombre}}</option>
+                                @endforeach
 
-                                @error('password')
+                                @error('provincia')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
+                            </select>
+                        </div>
+
+                        <div class="form-group row">
+                                <select  id="canton" type="text" class="form-control @error('canton') is-invalid @enderror" name="canton" placeholder="Canton" value="{{ old('canton') }}" >
+                                <option selected>Elegir canton...</option>
+
+                                @error('canton')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </select>
+                        </div>
+
+                        <div class="form-group row">
+
+                            <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" placeholder="Contraseña" required autocomplete="new-password">
+
+                            @error('password')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
 
                         <div class="form-group row">
@@ -122,6 +149,8 @@
                         <td>Nombre</td>
                         <td>Rol</td>
                         <td>Email</td>
+                        <td>Provincia</td>
+                        <td>Cantón</td>
                         <td>Eliminar</td>
                         <td>Editar</td>
                         </tr>
@@ -133,6 +162,8 @@
                             <td>{{$usuario->name}}</td>
                             <td>{{$usuario->rol}}</td>
                             <td>{{$usuario->email}}</td>
+                            <td>{{$usuario->provincia}}</td>
+                            <td>{{$usuario->canton}}</td>
                             <td>
                                 <button class="btn btn-danger btnEliminar" value="{{ $usuario->id }}" data-toggle="modal" data-target="#modalEliminar" onclick="eliminar(this)">
                                     <img src="{{ asset('imgs/eliminar.png')}}"></button>
@@ -147,7 +178,7 @@
                                         <input type="hidden" name="id" value="{{ $usuario->id }}">
                                         <input type="hidden" name="_method" value="delete">
                                 </form>
-                            </td>            
+                            </td>
                         </tr>
                         @endforeach
                     </tbody>
@@ -210,10 +241,11 @@
                             @enderror
                         </div>
                         <div class="form-group row">
-                            <select id="rolEditar" type="text" class="form-control @error('rol') is-invalid @enderror" name="rol" placeholder="Rol" value="{{ old('rol') }}" required autocomplete="rol">
+                            <select id="rolEditar" type="text" class="form-control @error('rol') is-invalid @enderror" name="rol" value="{{ old('rol') }}" required autocomplete="rol">
                                 <option selected>Elegir rol...</option>
                                 <option disable >Establecimiento</option>
                                 <option disable >Administrador</option>
+
                                 @error('rol')            
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -221,6 +253,34 @@
                                 @enderror
                             </select>
                         </div>
+
+                        <div class="form-group row">
+                            <select  id="provinciaEditar" type="text" class="form-control @error('provincia') is-invalid @enderror" name="provincia" value="{{ old('provincia') }}" onchange="cambioEditarProvincia(this)">
+                                <option selected>Elegir provincia...</option>
+                                @foreach($provincias as $provincia)
+                                    <option value="{{$provincia->id}}">{{$provincia->nombre}}</option>
+                                @endforeach
+
+                                @error('provincia')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </select>
+                        </div>
+
+                        <div class="form-group row">
+                            <select  id="cantonEditar" type="text" class="form-control @error('canton') is-invalid @enderror" name="cantonEditar" value="{{ old('canton') }}" >
+                                <option selected>Elegir canton...</option>
+
+                                @error('canton')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </select>
+                        </div>
+
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
@@ -292,7 +352,7 @@
             idEliminar = val.value;
         }
         function editar(val){
-
+            
             $.ajax({
                 url:'{{url("home/gestionUsuarios/datosEditar")}}',
                 method: 'POST',
@@ -303,13 +363,55 @@
             }).done(function(res){
                 
                 var arreglo = JSON.parse(res);
-
+                
                 $("#idEdit").val(arreglo[0].id);
                 $("#nameEditar").val(arreglo[0].name);
                 $("#emailEditar").val(arreglo[0].email);
                 $("#rolEditar").val(arreglo[0].rol);
+                $("#provinciaEditar").val(arreglo[0].provincia);
+
+                consultaCantones(arreglo[0].provincia, arreglo[0].canton);
 
             });
+        }
+
+        function cambioEditarProvincia(val){
+            cadena = consultaCantones(val.value, 2);
+        }
+
+        function cambioProvincia(val){
+            cadena = consultaCantones(val.value, 0);
+        }
+        
+        function consultaCantones(val, selectCanton){
+            
+            $.ajax({
+                url:'{{url("home/gestionUsuarios/cantones")}}',
+                method: 'POST',
+                data:{
+                    id: val,
+                    _token: $('input[name="_token"]').val()
+                }
+            }).done(function(res){
+                
+                var arreglo = JSON.parse(res);
+                var cadena = "<option selected>Elegir canton...</option> ";
+
+                for(var i=0;i<arreglo.length;i++){
+                    cadena = cadena + "<option value=" + arreglo[i].id + ">" + arreglo[i].nombre + "</option>";
+                }
+                
+                if(selectCanton == 0){
+                    document.getElementById("canton").innerHTML = cadena;
+                }else{
+                    document.getElementById("cantonEditar").innerHTML = cadena;
+                    $("#cantonEditar").val(selectCanton);
+                }
+                
+                
+            });
+            
+            
         }
 
     </script>    

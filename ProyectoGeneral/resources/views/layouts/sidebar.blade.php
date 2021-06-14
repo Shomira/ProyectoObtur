@@ -38,14 +38,7 @@
                     <span> Gestionar Usuarios</span></a>
             </li>
             <!-- Nav Item - Pages Collapse Menu -->
-            <!-- Divider -->
-            <hr class="sidebar-divider d-none d-md-block">
-            <!-- Nav Item - Charts -->
-            <li class="nav-item">
-                <a class="nav-link {{ request()->is('home/metricas') ? 'activeA': ' '}}" href="{{url('home/metricas')}}">
-                    <i class="fas fa-fw fa-chart-area"></i>
-                    <span>Métricas</span></a>
-            </li>
+            
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
             

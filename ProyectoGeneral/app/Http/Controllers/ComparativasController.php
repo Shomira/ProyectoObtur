@@ -12,7 +12,9 @@ class ComparativasController extends Controller
 {
     public function index()
     {
- 
+
+        if(!isset(Auth::user()->rol)){return redirect('login');}
+        
         $idU = Auth::user()->id;
         $datosActuales = DB::select("SELECT distinct MONTH(Max(fecha)) as 'mes', YEAR(Max(fecha)) as 'anio' 
                                     FROM registros r, establecimientos e
@@ -25,7 +27,8 @@ class ComparativasController extends Controller
         $mesesAnios = DB::select("SELECT distinct MONTH(fecha) as 'mes', YEAR(fecha) as 'anio' 
                                 FROM registros r, establecimientos e
                                 WHERE e.id = r.idEstablecimiento AND e.idUsuario = $idU
-                                ORDER BY MONTH(fecha)");
+                                GROUP BY MONTH(fecha), YEAR(fecha)
+                                ORDER BY YEAR(fecha) desc, MONTH(fecha) asc");
         
         foreach ($mesesAnios as $key => $value) {
             
@@ -96,8 +99,12 @@ class ComparativasController extends Controller
         }
 
         // categoria del establecimiento
-        $consultaAux = DB::select("SELECT categoria FROM establecimientos WHERE idUsuario = $idU");
+        $consultaAux = DB::select("SELECT e.categoria, c.nombre
+                                    FROM establecimientos e, users u, cantons c 
+                                    WHERE u.id = $idU AND u.id = e.idUsuario AND u.idCanton = c.id ");
+    
         $categoria = $consultaAux[0]->categoria;
+        $canton = $consultaAux[0]->nombre;
 
         return view('comparativas')->with('mesInicio',$mesInicio)
                                         ->with('mesFin',$auxMes)
@@ -107,7 +114,8 @@ class ComparativasController extends Controller
                                         ->with('anios',$anios)
                                         ->with('diaMin',$diaMin)
                                         ->with('diaMax',$diaMax)
-                                        ->with('categoria',$categoria);
+                                        ->with('categoria',$categoria)
+                                        ->with('canton',$canton);
 
     }
 
@@ -178,7 +186,8 @@ class ComparativasController extends Controller
                             TAR_PER as 'tar_per',
                             ventas_netas,
                             porcentaje_ocupacion,
-                            revpar, fecha 
+                            revpar, 
+                            fecha 
                             FROM registros r, establecimientos e
                             WHERE e.id = r.idEstablecimiento AND e.idUsuario = $idU AND fecha >= '$request->inicio' AND fecha <= '$request->fin' ";
         
@@ -264,13 +273,18 @@ class ComparativasController extends Controller
             $est = "MIN";
         }
 
-        $condicion = " ";
-        $categoria = $request->agrupacion;
-        if($request->agrupacion == "categoria"){
-            $idU = Auth::user()->id;
-            $consultaAux = DB::select("SELECT categoria FROM establecimientos WHERE idUsuario = $idU");
-            $categoria = $consultaAux[0]->categoria;
-            $condicion = " e.categoria = '$categoria' AND ";
+        $idU = Auth::user()->id;
+        $consultaAux = DB::select("SELECT e.categoria, c.id as 'canton', c.nombre
+                                    FROM establecimientos e, users u, cantons c
+                                    WHERE u.id = $idU AND u.id = e.idUsuario AND u.idCanton = c.id ");
+
+        if($request->parametro == "categoria"){
+            $valor = $consultaAux[0]->categoria;
+            $condicion = " e.categoria = '$valor' AND ";
+        }else{
+            $valor = $consultaAux[0]->nombre;
+            $auxiliar = $consultaAux[0]->canton;
+            $condicion = " u.idCanton = '$auxiliar' AND ";
         }
 
         $consulta = "SELECT  $est(checkins) as 'checkins',
@@ -287,12 +301,54 @@ class ComparativasController extends Controller
                                 $est(revpar) as 'revpar',
                                 MONTH(fecha) as 'mes',
                                 YEAR(fecha) as 'anio',
-                                '$categoria' as 'categoria'
-                    FROM registros r, establecimientos e
-                    WHERE e.id = r.idEstablecimiento AND  $condicion
-                        fecha >= '$fechaInicio' AND fecha <= '$fechaFin'
+                                '$valor' as 'parametro'
+                    FROM registros r, establecimientos e, users u
+                    WHERE e.id = r.idEstablecimiento AND u.id = e.idUsuario AND  $condicion  
+                        fecha >= '$fechaInicio' AND fecha <= '$fechaFin' 
                     GROUP BY MONTH(fecha), YEAR(fecha)
                     ORDER BY MAX(YEAR(fecha)), MONTH(fecha)";
+
+
+        $datos= DB::select($consulta);
+        
+        return response(json_encode($datos), 200)->header('Content-type', 'text/plain');
+    }
+
+    public function nuevaLineaDias(Request $request){
+
+        $idU = Auth::user()->id;
+        $consultaAux = DB::select("SELECT e.categoria, c.id as 'canton', c.nombre
+                                    FROM establecimientos e, users u, cantons c
+                                    WHERE u.id = $idU AND u.id = e.idUsuario AND u.idCanton = c.id ");
+
+        if($request->parametro == "categoria"){
+            $valor = $consultaAux[0]->categoria;
+            $condicion = " e.categoria = '$valor' AND ";
+        }else{
+            $valor = $consultaAux[0]->nombre;
+            $auxiliar = $consultaAux[0]->canton;
+            $condicion = " u.idCanton = '$auxiliar' AND ";
+        }
+
+        $consulta = "SELECT  AVG(checkins) as 'checkins',
+                                AVG(checkouts) as 'checkouts',
+                                AVG(pernoctaciones) as 'pernoctaciones',
+                                AVG(nacionales) as 'nacionales',
+                                AVG(extranjeros) as 'extranjeros',
+                                AVG(habitaciones_ocupadas) as 'habitaciones_ocupadas',
+                                AVG(habitaciones_disponibles) as 'habitaciones_disponibles',
+                                AVG(tarifa_promedio) as 'tarifa_promedio',
+                                AVG(TAR_PER) as 'tar_per',
+                                AVG(ventas_netas) as 'ventas_netas',
+                                AVG(porcentaje_ocupacion) as 'porcentaje_ocupacion',
+                                AVG(revpar) as 'revpar',
+                                fecha,
+                                '$valor' as 'parametro'
+                    FROM registros r, establecimientos e, users u
+                    WHERE e.id = r.idEstablecimiento AND u.id = e.idUsuario AND  $condicion
+                        fecha >= '$request->inicio' AND fecha <= '$request->fin'
+                    GROUP BY fecha
+                    ORDER BY fecha";
 
 
         $datos= DB::select($consulta);

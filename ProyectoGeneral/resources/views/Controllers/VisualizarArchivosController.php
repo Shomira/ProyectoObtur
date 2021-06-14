@@ -10,8 +10,6 @@ class VisualizarArchivosController extends Controller
 {
     public function index()
     {
-        if(!isset(Auth::user()->rol)){return redirect('login');}
-        
         $establecimientos = DB::table('establecimientos')
                     ->select('establecimientos.*')
                     ->orderBy('id','DESC')

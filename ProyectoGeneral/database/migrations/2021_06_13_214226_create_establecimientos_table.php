@@ -20,7 +20,7 @@ class CreateEstablecimientosTable extends Migration
             $table->string('categoria');
             $table->integer('habitaciones');
             $table->integer('plazas');
-            $table->unsignedBigInteger('idUsuario')->nullable;
+            $table->unsignedBigInteger('idUsuario')->nullable($value = true);
             $table->foreign('idUsuario')->references('id')->on('Users')->onDelete('cascade');
             $table->timestamps();
         });

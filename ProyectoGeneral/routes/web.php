@@ -21,6 +21,7 @@ Route::post('/barra', 'App\Http\Controllers\WelcomeController@barra');
 Route::get('/graficasEstadisticas', 'App\Http\Controllers\GraficasEstadisticasController@index');
 Route::post('/graficasEstadisticas', 'App\Http\Controllers\GraficasEstadisticasController@all');
 Route::post('/graficasEstadisticas/barra', 'App\Http\Controllers\GraficasEstadisticasController@barra');
+Route::post('/graficasEstadisticas/meses/', 'App\Http\Controllers\GraficasEstadisticasController@meses');
 
 Auth::routes();
 
@@ -47,6 +48,7 @@ Route::group(['prefix'=>'home', 'as'=>'home'], function(){
     Route::post('/comparativas/dias', 'App\Http\Controllers\ComparativasController@dias');
     Route::post('/comparativas/meses/', 'App\Http\Controllers\ComparativasController@meses');
     Route::post('/comparativas/nuevaLinea', 'App\Http\Controllers\ComparativasController@nuevaLinea');
+    Route::post('/comparativas/nuevaLineaDias', 'App\Http\Controllers\ComparativasController@nuevaLineaDias');
     Route::get('/resumenMensual', 'App\Http\Controllers\ResumenMensualController@index');
     Route::post('/resumenMensual', 'App\Http\Controllers\ResumenMensualController@all');
     Route::get('/analisisDeNegocio', 'App\Http\Controllers\AnalisisDeNegocioController@index');
@@ -57,6 +59,7 @@ Route::group(['prefix'=>'home', 'as'=>'home'], function(){
     Route::resource('/gestionUsuarios', 'App\Http\Controllers\UsersController');
     Route::post('/gestionUsuarios/edit', 'App\Http\Controllers\UsersController@editarUsuario');
     Route::post('/gestionUsuarios/datosEditar', 'App\Http\Controllers\UsersController@datosEditar');
+    Route::post('/gestionUsuarios/cantones', 'App\Http\Controllers\UsersController@cantones');
     Route::get('/visualizarRegistros', 'App\Http\Controllers\VisualizarRegistrosController@index');
     Route::post('/visualizarRegistros', 'App\Http\Controllers\VisualizarRegistrosController@mostrar');
     Route::get('/archivos', 'App\Http\Controllers\ImportExcel\ImportExcelController@index');

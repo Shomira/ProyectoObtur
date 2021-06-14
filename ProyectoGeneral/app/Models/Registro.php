@@ -15,7 +15,7 @@ class Registro extends Model
         'extranjeros', 'habitaciones_ocupadas', 'habitaciones_disponibles',
         'tipo_tarifa', 'tarifa_promedio', 'TAR_PER', 'ventas_netas',
         'porcentaje_ocupacion', 'revpar', 'empleados_temporales',
-        'estado', 'opciones'
+        'estado', 'opciones', 'idEstablecimiento', 'idArchivo'
         
     ];
 }

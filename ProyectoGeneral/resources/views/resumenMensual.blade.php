@@ -96,7 +96,7 @@
             
             </div> 
             <div class="form-group col-md-10">
-                <div id="containerGrafica" style="height: 500px; min-width: 900px"></div>
+                <div id="containerGrafica" ></div>
             </div>
 
         </div>

@@ -12,7 +12,6 @@
             <nav class="navDatosEs">
                 <div class="btn-group d-md-flex justify-content-center">    
                     <form action="{{url('indicadoresAlojamiento')}}" method="POST" class="formDe">
-                      
                         @csrf
                             <select name="anio"  class="form-select" required > 
                                 @foreach($anios as $a)
@@ -52,7 +51,7 @@
                     <div class="col-lg-4 col-md-12 mb-4">
                             <div class="card-sectionDeh  border rounded">
                                     <div class="card-headerDe5  rounded ">
-                                        <div id="containerPie5" style=" margin-left: -0.5em; height: 370px; min-width: 378px"></div>
+                                        <div id="containerPie5" ></div>
                                         
                                     </div>
                                     <div class="card-body text-center mb-2" >
@@ -67,7 +66,7 @@
                             <div class="col-lg-4 col-md-12 mb-4">
                                 <div class="card-sectionDeh  border rounded">
                                     <div class="card-headerDe4  rounded ">
-                                        <div id="containerPie4" style="margin-left: -0.5em; height: 370px; min-width: 365px"></div>
+                                        <div id="containerPie4" ></div>
                                     </div>
                                     <div class="card-body text-center mb-2" >
                                         @for ($i = 0; $i < 4; $i++)
@@ -81,7 +80,7 @@
                             <div class="col-lg-4 col-md-12 mb-4">
                                 <div class="card-sectionDeh  border rounded">
                                     <div class="card-headerDe3  rounded ">
-                                        <div id="containerPie3" style="margin-left: -0.5em;  height: 370px; min-width: 378px"></div>
+                                        <div id="containerPie3" ></div>
                                     </div>
                                     <div class="card-body text-center mb-2" >
                                         @for ($i = 0; $i < 3; $i++)
@@ -96,7 +95,7 @@
                                 <div class="col-lg-5">
                                     <div class="card-sectionDeh  border rounded ">
                                         <div class="card-headerDe2  rounded ">
-                                            <div id="containerPie2" style=" margin-left: -0.5em; height: 370px; min-width: 375px"></div>
+                                            <div id="containerPie2"></div>
                                         </div>
                                         <div class="card-body text-center mb-2" >
                                             @for ($i = 0; $i < 2; $i++)
@@ -113,7 +112,7 @@
                                 <div class="col-lg-5">
                                     <div class="card-sectionDeh  border rounded">
                                         <div class="card-headerDe1  rounded ">
-                                            <div id="containerPie1" style=" margin-left: -0.5em; height: 390px; min-width: 377px"></div>
+                                            <div id="containerPie1" ></div>
                                         </div>
                                         <div class="card-body text-center mb-2" >
                                             <svg version="1.1" xmlns="http://www.w3.org/2000/svg"width="40" height="40" viewBox="0 0 150 165">
@@ -242,7 +241,7 @@
                 
                 <div class="card">
                     <div class="card-body divGrafica" >
-                        <div id="chartTarifaPromPerson" style="height: 550px; min-width: 900px"></div>
+                        <div id="chartTarifaPromPerson" ></div>
                     </div>
                 </div>
                 <hr>
@@ -352,7 +351,7 @@
                 </div>
                 <div class="card">
                     <div class="card-body divGrafica">
-                        <div id="chartTarifaPromHabitacion" style="height: 550px; min-width: 900px"></div>
+                        <div id="chartTarifaPromHabitacion" ></div>
                     </div>
                 </div>
             </section>
@@ -476,7 +475,7 @@
                 </div>
                 <div class="card">
                     <div class="card-body">
-                        <div id="chartPorcentajeOcupacion" style="height: 550px; min-width: 900px"></div>
+                        <div id="chartPorcentajeOcupacion" ></div>
                     </div>
                 </div>
                 <!---->
@@ -604,7 +603,7 @@
             </div>
             <div class="card">
                 <div class="card-body divGrafica" >
-                    <div id="chartRevpar" style="height: 550px; min-width: 900px"></div>
+                    <div id="chartRevpar" ></div>
                 </div>
             </div>
         </section>
@@ -727,7 +726,7 @@
                     </div>
                     <div class="card">
                         <div class="card-body">
-                            <div id="chartEstadiaProm" style="height: 570px; min-width: 900px"></div>
+                            <div id="chartEstadiaProm" ></div>
                         </div>
                     </div>
                 </section>

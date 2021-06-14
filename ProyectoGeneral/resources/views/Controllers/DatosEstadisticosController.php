@@ -5,7 +5,7 @@ use DateTime;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class IndicadoresAlojamientoController extends Controller
+class DatosEstadisticosController extends Controller
 {
     public function index()
     {
@@ -62,7 +62,6 @@ class IndicadoresAlojamientoController extends Controller
                             SUM(pernoctaciones) as pernoctaciones, 
                             SUM(checkins) as checkins,
                             Sum(nacionales) as 'nacionales', 
-                            Sum(extranjeros) as 'extranjeros', 
                             Sum(habitaciones_ocupadas) as 'hab_ocupadas' ,
                             Sum(habitaciones_disponibles) as 'hab_disponibles' 
                             FROM registros r, establecimientos e
@@ -142,7 +141,7 @@ class IndicadoresAlojamientoController extends Controller
         if(isset($datos5Est)){
 
             //Cálculo huespedes
-            $huespedes5Est = ($datos5Est->nacionales * 100)/ ($datos5Est->nacionales + $datos5Est->extranjeros)  ;
+            $huespedes5Est = ($datos5Est->nacionales * 100)/ $datos5Est->checkins ;
             $arrHuespedes5Est = [round($huespedes5Est, 2), round(100 - $huespedes5Est, 2)];
             
             //Cálculo de las tarifas por habitación
@@ -258,7 +257,7 @@ class IndicadoresAlojamientoController extends Controller
         if(isset($datos4Est)){
 
             //Cálculo huespedes
-            $huespedes4Est = ($datos4Est->nacionales * 100)/ ($datos4Est->nacionales + $datos4Est->extranjeros) ;
+            $huespedes4Est = ($datos4Est->nacionales * 100)/ $datos4Est->checkins ;
             $arrHuespedes4Est = [round($huespedes4Est, 2), round(100 - $huespedes4Est, 2)];
             
             //Cálculo de las tarifas por habitación
@@ -369,7 +368,7 @@ class IndicadoresAlojamientoController extends Controller
         if(isset($datos3Est)){
 
             //Cálculo huespedes
-            $huespedes3Est = ($datos3Est->nacionales * 100)/ ($datos3Est->nacionales + $datos3Est->extranjeros) ;
+            $huespedes3Est = ($datos3Est->nacionales * 100)/ $datos3Est->checkins ;
             $arrHuespedes3Est = [round($huespedes3Est, 2), round(100 - $huespedes3Est, 2)];
             
             //Cálculo de las tarifas por habitación
@@ -480,7 +479,7 @@ class IndicadoresAlojamientoController extends Controller
         if(isset($datos2Est)){
 
             //Cálculo huespedes
-            $huespedes2Est = ($datos2Est->nacionales * 100)/ ($datos2Est->nacionales + $datos2Est->extranjeros);
+            $huespedes2Est = ($datos2Est->nacionales * 100)/ $datos2Est->checkins ;
             $arrHuespedes2Est = [round($huespedes2Est, 2), round(100 - $huespedes2Est, 2)];
             
             //Cálculo de las tarifas por habitación
@@ -591,9 +590,9 @@ class IndicadoresAlojamientoController extends Controller
         if(isset($datos1Est)){
 
             //Cálculo huespedes
-            $huespedes1Est = ($datos1Est->nacionales * 100)/ ($datos1Est->nacionales + $datos1Est->extranjeros);
+            $huespedes1Est = ($datos1Est->nacionales * 100)/ $datos1Est->checkins ;
             $arrHuespedes1Est = [round($huespedes1Est, 2), round(100 - $huespedes1Est, 2)];
-            dd(isset($datos1Est));
+            
             //Cálculo de las tarifas por habitación
             $tarifaH1Est = round( ($datos1Est->ventasNetas / $datos1Est->hab_ocupadas), 2) ;
         
@@ -696,7 +695,7 @@ class IndicadoresAlojamientoController extends Controller
 
         
         
-        return view('indicadoresAlojamiento')->with('arrHuespedes5Est', $arrHuespedes5Est)
+        return view('datosEstadisticos')->with('arrHuespedes5Est', $arrHuespedes5Est)
                                         ->with('arrTarifaH5Est', $arrTarifaH5Est)
                                         ->with('arrTarifaP5Est', $arrTarifaP5Est)
                                         ->with('arrOcupacion5Est', $arrOcupacion5Est)
@@ -781,7 +780,6 @@ class IndicadoresAlojamientoController extends Controller
                             SUM(pernoctaciones) as pernoctaciones, 
                             SUM(checkins) as checkins,
                             Sum(nacionales) as 'nacionales', 
-                            Sum(extranjeros) as 'extranjeros',
                             Sum(habitaciones_ocupadas) as 'hab_ocupadas' ,
                             Sum(habitaciones_disponibles) as 'hab_disponibles' 
                             FROM registros r, establecimientos e
@@ -864,7 +862,7 @@ class IndicadoresAlojamientoController extends Controller
         if(isset($datos5Est)){
 
             //Cálculo huespedes
-            $huespedes5Est = ($datos5Est->nacionales * 100)/ ($datos5Est->nacionales + $datos5Est->extranjeros)  ;
+            $huespedes5Est = ($datos5Est->nacionales * 100)/ $datos5Est->checkins ;
             $arrHuespedes5Est = [round($huespedes5Est, 2), round(100 - $huespedes5Est, 2)];
             
             //Cálculo de las tarifas por habitación
@@ -980,7 +978,7 @@ class IndicadoresAlojamientoController extends Controller
         if(isset($datos4Est)){
 
             //Cálculo huespedes
-            $huespedes4Est = ($datos4Est->nacionales * 100)/ ($datos4Est->nacionales + $datos4Est->extranjeros) ;
+            $huespedes4Est = ($datos4Est->nacionales * 100)/ $datos4Est->checkins ;
             $arrHuespedes4Est = [round($huespedes4Est, 2), round(100 - $huespedes4Est, 2)];
             
             //Cálculo de las tarifas por habitación
@@ -1091,7 +1089,7 @@ class IndicadoresAlojamientoController extends Controller
         if(isset($datos3Est)){
 
             //Cálculo huespedes
-            $huespedes3Est = ($datos3Est->nacionales * 100)/ ($datos3Est->nacionales + $datos3Est->extranjeros) ;
+            $huespedes3Est = ($datos3Est->nacionales * 100)/ $datos3Est->checkins ;
             $arrHuespedes3Est = [round($huespedes3Est, 2), round(100 - $huespedes3Est, 2)];
             
             //Cálculo de las tarifas por habitación
@@ -1203,7 +1201,7 @@ class IndicadoresAlojamientoController extends Controller
         if(isset($datos2Est)){
 
             //Cálculo huespedes
-            $huespedes2Est = ($datos2Est->nacionales * 100)/ ($datos2Est->nacionales + $datos2Est->extranjeros);
+            $huespedes2Est = ($datos2Est->nacionales * 100)/ $datos2Est->checkins ;
             $arrHuespedes2Est = [round($huespedes2Est, 2), round(100 - $huespedes2Est, 2)];
             
             //Cálculo de las tarifas por habitación
@@ -1314,7 +1312,7 @@ class IndicadoresAlojamientoController extends Controller
         if(isset($datos1Est)){
 
             //Cálculo huespedes
-            $huespedes1Est = ($datos1Est->nacionales * 100)/ ($datos1Est->nacionales + $datos1Est->extranjeros);
+            $huespedes1Est = ($datos1Est->nacionales * 100)/ $datos1Est->checkins ;
             $arrHuespedes1Est = [round($huespedes1Est, 2), round(100 - $huespedes1Est, 2)];
             
             //Cálculo de las tarifas por habitación
@@ -1419,7 +1417,7 @@ class IndicadoresAlojamientoController extends Controller
 
 
         
-        return view('indicadoresAlojamiento')->with('arrHuespedes5Est', $arrHuespedes5Est)
+        return view('datosEstadisticos')->with('arrHuespedes5Est', $arrHuespedes5Est)
                                         ->with('arrTarifaH5Est', $arrTarifaH5Est)
                                         ->with('arrTarifaP5Est', $arrTarifaP5Est)
                                         ->with('arrOcupacion5Est', $arrOcupacion5Est)

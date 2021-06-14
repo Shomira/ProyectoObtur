@@ -110,10 +110,9 @@
                 </div>
             </div>
             <div class="analisisCiuyCat">
-            <p>Al elegir cualquiera de las opciones de Ciudad o Categoria, se le proporciona una comparación entre sus datos y la Ciudad o Categoria</p>
                 <h5>
-                <label class="labCiuyCat" >Análisis por: <input type="checkbox" name="lineaCategoria" id="categoria" value="categoria" onchange="generarLinea(this)"> Categoría
-                <input type="checkbox" name="lineaCiudad" id="ciudad" value="ciudad" onchange="generarLinea(this)"> Ciudad</label>
+                <label class="labCiuyCat" >Análisis por: <input type="checkbox" name="lineaCategoria" id="categoria" value="categoria" onchange="generarLinea(this)"> Categoría</label>
+                <label class="labCiuyCat" ><input type="checkbox" name="lineaCanton" id="canton" value="canton" onchange="generarLinea(this)"> Canton</label>
                 </h5>
             </div>
            
@@ -155,7 +154,7 @@
             
             </div> 
             <div class="form-group col-md-10"  >
-                <div id="containerchart" style="height: 500px; min-width: 800px"></div>
+                <div id="containerchart" ></div>
             </div>
         </div>
         <br>
@@ -192,10 +191,9 @@
            
         </div>
         <div class="analisisCiuyCatDias">
-            <p>Al elegir cualquiera de las opciones de Ciudad o Categoria, se le proporciona una comparación entre sus datos y la Ciudad o Categoria</p>
             <h5>
-                <label class="labCiuyCat" >Análisis por: <input type="checkbox" name="lineaCategoria" id="categoria" value="categoria" onchange="generarLinea(this)"> Categoría
-                <input type="checkbox" name="lineaCiudad" id="ciudad" value="ciudad" onchange="generarLinea(this)"> Ciudad</label>
+                <label class="labCiuyCat" >Análisis por: <input type="checkbox" name="lineaCategoria" id="categoriaDias" value="categoria" onchange="generarLineaDias(this)"> Categoría</label>
+                <label class="labCiuyCat" ><input type="checkbox" name="lineaCanton" id="cantonDias" value="canton" onchange="generarLineaDias(this)"> Canton</label>
             </h5>
         </div>
         <hr>
@@ -233,7 +231,7 @@
             </div>
         
             <div class="form-group col-md-10">
-                <div id="containerchart2" style="height: 500px; min-width: 850px"></div>
+                <div id="containerchart2" ></div>
             </div>
         </div>
     </section>
@@ -268,7 +266,7 @@
     var dataPorcOcupacion1 = [];
     var dataREVPAR1 = [];
     var dataCategoria = [];
-    var dataCiudad = [];
+    var dataCanton = [];
 
     var mesInicioGrafica1 = '{{$mesInicio}}';
     var mesFinGrafica1 = '{{$mesFin}}';
@@ -288,7 +286,7 @@
             }
         },
         subtitle: {
-            text: 'Para hacer una comparación segun su categoría o ciudad, no elija más de 1 indicador',
+            text: 'Para hacer una comparación segun su categoría o canton, no elija más de 1 indicador',
             style:{
                 font:'9pt "Roboto Condensed", Verdana, sans-serif',
             }
@@ -377,7 +375,7 @@
             }
         },
         subtitle: {
-            text: 'Para hacer una comparación segun su categoría o ciudad, no elija más de 1 indicador',
+            text: 'Para hacer una comparación segun su categoría o canton, no elija más de 1 indicador',
             style:{
                 font:'9pt "Roboto Condensed", Verdana, sans-serif',
             }
@@ -586,8 +584,8 @@
                     chartMes.series[i].update({data: dataREVPAR1});
                 else if(chartMes.series[i].name == '{{$categoria}}')
                     consultaGenerarLinea('categoria');
-                else if(chartMes.series[i].name  == 'ciudad')
-                    consultaGenerarLinea('ciudad');
+                else if(chartMes.series[i].name  == '{{$canton}}')
+                    consultaGenerarLinea('canton');
             }
             
             chartMes.update( {
@@ -667,9 +665,9 @@
 
             if(document.getElementById("tarifa_promedio").checked || document.getElementById("TAR_PER").checked || document.getElementById("porcentaje_ocupacion").checked || document.getElementById("revpar").checked){
                 document.getElementById("categoria").checked = false;
-                document.getElementById("ciudad").checked = false;
+                document.getElementById("canton").checked = false;
                 for(var i=0;i<chartMes.series.length;i++){
-                    if(chartMes.series[i].name == '{{$categoria}}' || chartMes.series[i].name == 'ciudad'){
+                    if(chartMes.series[i].name == '{{$categoria}}' || chartMes.series[i].name == '{{$canton}}'){
                         chartMes.series[i].remove(true);
                         i--;
                     }
@@ -716,51 +714,51 @@
         var color;
         
         if(valor == 'Checkins'){
-            color = 'rgba(255, 87, 51)';
+            color = 'rgb(204, 118, 51)';
             datos = dataCheckins1;
             bandera = document.getElementById('checkins').checked;
         }else if(valor == 'Checkouts'){
-            color = 'rgba(9, 187, 148)';
+            color = 'rgb(143, 32, 119)';
             datos = dataCheckouts1;
             bandera = document.getElementById('checkouts').checked;
         }else if(valor == 'Pernoctaciones'){
-            color = 'rgba(110, 54, 54)';
+            color = 'rgb(45, 196, 146)';
             datos = dataPernoctaciones1;
             bandera = document.getElementById('pernoctaciones').checked;
         }else if(valor == 'Nacionales'){
-            color = 'rgba(131, 119, 119)';
+            color = 'rgb(28, 89, 147)';
             datos = dataNacionales1;
             bandera = document.getElementById('nacionales').checked;
         }else if(valor == 'Extranjeros'){
-            color = 'rgba(223, 172, 32)';
+            color = 'rgb(105, 191, 19)';
             datos = dataExtranjeros1;
             bandera = document.getElementById('extranjeros').checked;
         }else if(valor == 'Hab. Ocupadas'){
-            color = 'rgba(109, 209, 84)';
+            color = 'rgb(2, 3, 229)';
             datos = dataHabOcupadas1;
             bandera = document.getElementById('habitaciones_ocupadas').checked;
         }else if(valor == 'Hab. Disponibles'){
-            color = 'rgba(39, 215, 228)';
+            color = 'rgb(129, 2, 2)';
             datos = dataHabDisponibles1;
             bandera = document.getElementById('habitaciones_disponibles').checked;
         }else if(valor == 'Tarifa Prom. Hab.'){
-            color = 'rgba(41, 77, 175)';
+            color = 'rgb(186, 52, 209)';
             datos = dataTarPromHab1;
             bandera = document.getElementById('tarifa_promedio').checked;
         }else if(valor == 'Tarifa Prom. Per.'){
-            color = 'rgba(99, 41, 175)';
+            color = 'rgb(207, 45, 102)';
             datos = dataTarPromPer1;
             bandera = document.getElementById('TAR_PER').checked;
         }else if(valor == 'Ventas Netas'){
-            color = 'rgba(216, 44, 193)';
+            color = 'rgb(246, 109, 17)';
             datos = dataVentasNetas1;
             bandera = document.getElementById('ventas_netas').checked;
         }else if(valor == 'Porcent. Ocupación'){
-            color = 'rgba(211, 214, 30)';
+            color = 'rgb(19, 31, 55)';
             datos = dataPorcOcupacion1;
             bandera = document.getElementById('porcentaje_ocupacion').checked;
         }else if(valor == 'Revpar'){
-            color = 'rgba(19, 190, 153)';
+            color = 'rgb(255, 215, 1)';
             datos = dataREVPAR1;
             bandera = document.getElementById('revpar').checked;
         }
@@ -785,19 +783,19 @@
         
         if(chartMes.series.length > 1){
             document.getElementById("categoria").checked = false;
-            document.getElementById("ciudad").checked = false;
+            document.getElementById("canton").checked = false;
             document.getElementById("categoria").disabled = true;
-            document.getElementById("ciudad").disabled = true;
+            document.getElementById("canton").disabled = true;
 
             for(var i=0;i<chartMes.series.length;i++){
-                if(chartMes.series[i].name == '{{$categoria}}' || chartMes.series[i].name == 'ciudad'){
+                if(chartMes.series[i].name == '{{$categoria}}' || chartMes.series[i].name == '{{$canton}}'){
                     chartMes.series[i].remove(true);
                     i--;
                 }
             }
         }else{
             document.getElementById("categoria").disabled = false;
-            document.getElementById("ciudad").disabled = false;
+            document.getElementById("canton").disabled = false;
         }
     }
 
@@ -842,9 +840,10 @@
     }
 
     function generarLinea(val){
+
         if(val.value == 'categoria'){
             if(document.getElementById("categoria").checked){
-
+                
                 consultaGenerarLinea(val.value);
 
             }else{
@@ -857,14 +856,14 @@
                 }
             }
         }else{
-            if(document.getElementById("ciudad").checked){
-
+            if(document.getElementById("canton").checked){
+                
                 consultaGenerarLinea(val.value);
                 
             }else{
                 for(var i=0;i<chartMes.series.length;i++){
                     
-                    if(chartMes.series[i].name == val.value){
+                    if(chartMes.series[i].name == '{{$canton}}'){
                         chartMes.series[i].remove(true);
                     }
 
@@ -884,14 +883,14 @@
                 anioInicio: anioInicioGrafica1,
                 anioFin: anioFinGrafica1,
                 estadistico: estadisticoMeses,
-                agrupacion: val,
+                parametro: val,
                 _token: $('input[name="_token"]').val()
             }
         }).done(function(res){
             var arreglo = JSON.parse(res);
             var bandera = true;
             var datos = [];
-
+            
             for(var i=0;i<arreglo.length;i++){
                 
                 if(fechas.includes(arreglo[i].anio + "-" + arreglo[i].mes)){
@@ -924,9 +923,9 @@
             }
             
             datos = datos.map(element => parseFloat(element));
-
+            
             for(var i=0;i<chartMes.series.length;i++){
-                if( (val == 'categoria' && chartMes.series[i].name == '{{$categoria}}') || (val == 'ciudad' && chartMes.series[i].name == 'ciudad') ){
+                if( (val == 'categoria' && chartMes.series[i].name == '{{$categoria}}') || (val == 'canton' && chartMes.series[i].name == '{{$canton}}') ){
                     chartMes.series[i].update({data: datos});
                     bandera = false;
                 }
@@ -939,7 +938,7 @@
                 }
                 
                 chartMes.addSeries({
-                    name: arreglo[0].categoria,
+                    name: arreglo[0].parametro,
                     data: datos,
                     color: color,
                     lineWidth: 3.5
@@ -1025,6 +1024,10 @@
                     chartDia.series[i].update({data: dataVentasNetas2});
                 else if(chartDia.series[i].name  == 'Revpar')
                     chartDia.series[i].update({data: dataREVPAR2});
+                else if(chartDia.series[i].name == '{{$categoria}}')
+                    consultaGenerarLineaDias('categoria');
+                else if(chartDia.series[i].name  == '{{$canton}}')
+                    consultaGenerarLineaDias('canton');
             }
 
             chartDia.update( {
@@ -1044,60 +1047,60 @@
         var color;
         
         if(valor == 'Checkins'){
-            color = 'rgba(0, 0, 0)';
+            color = 'rgb(204, 118, 51)';
             datos = dataCheckins2;
             bandera = document.getElementById('checkins2').checked;
         }else if(valor == 'Checkouts'){
-            color = 'rgba(255, 0, 0)';
+            color = 'rgb(143, 32, 119)';
             datos = dataCheckouts2;
             bandera = document.getElementById('checkouts2').checked;
         }else if(valor == 'Pernoctaciones'){
-            color = 'rgba(110, 54, 54)';
+            color = 'rgb(45, 196, 146)';
             datos = dataPernoctaciones2;
             bandera = document.getElementById('pernoctaciones2').checked;
         }else if(valor == 'Nacionales'){
-            color = 'rgba(131, 119, 119)';
+            color = 'rgb(28, 89, 147)';
             datos = dataNacionales2;
             bandera = document.getElementById('nacionales2').checked;
         }else if(valor == 'Extranjeros'){
-            color = 'rgba(223, 172, 32)';
+            color = 'rgb(105, 191, 19)';
             datos = dataExtranjeros2;
             bandera = document.getElementById('extranjeros2').checked;
         }else if(valor == 'Hab. Ocupadas'){
-            color = 'rgba(109, 209, 84)';
+            color = 'rgb(2, 3, 229)';
             datos = dataHabOcupadas2;
             bandera = document.getElementById('habitaciones_ocupadas2').checked;
         }else if(valor == 'Hab. Disponibles'){
-            color = 'rgba(39, 215, 228)';
+            color = 'rgb(129, 2, 2)';
             datos = dataHabDisponibles2;
             bandera = document.getElementById('habitaciones_disponibles2').checked;
         }else if(valor == 'Tarifa Prom. Hab.'){
-            color = 'rgba(41, 77, 175)';
+            color = 'rgb(186, 52, 209)';
             datos = dataTarPromHab2;
             bandera = document.getElementById('tarifa_promedio2').checked;
         }else if(valor == 'Tarifa Prom. Per.'){
-            color = 'rgba(99, 41, 175)';
+            color = 'rgb(207, 45, 102)';
             datos = dataTarPromPer2;
             bandera = document.getElementById('TAR_PER2').checked;
         }else if(valor == 'Ventas Netas'){
-            color = 'rgba(216, 44, 193)';
+            color = 'rgb(246, 109, 17)';
             datos = dataVentasNetas2;
             bandera = document.getElementById('ventas_netas2').checked;
         }else if(valor == 'Porcent. Ocupación'){
-            color = 'rgba(211, 214, 30)';
+            color = 'rgb(19, 31, 55)';
             datos = dataPorcOcupacion2;
             bandera = document.getElementById('porcentaje_ocupacion2').checked;
         }else if(valor == 'Revpar'){
-            color = 'rgba(19, 190, 153)';
+            color = 'rgb(255, 215, 1)';
             datos = dataREVPAR2;
             bandera = document.getElementById('revpar2').checked;
         }
         
         if(bandera){
-
             chartDia.addSeries({
                     name: valor,
-                    data: datos
+                    data: datos,
+                    color: color
                     });
 
         }else{
@@ -1111,7 +1114,129 @@
             }
             
         }
+
+        if(chartDia.series.length > 1){
+            document.getElementById("categoriaDias").checked = false;
+            document.getElementById("cantonDias").checked = false;
+            document.getElementById("categoriaDias").disabled = true;
+            document.getElementById("cantonDias").disabled = true;
+
+            for(var i=0;i<chartDia.series.length;i++){
+                if(chartDia.series[i].name == '{{$categoria}}' || chartDia.series[i].name == 'canton'){
+                    chartDia.series[i].remove(true);
+                    i--;
+                }
+            }
+        }else{
+            document.getElementById("categoriaDias").disabled = false;
+            document.getElementById("cantonDias").disabled = false;
+        }
         
+    }
+
+    function generarLineaDias(val){
+        if(val.value == 'categoria'){
+            if(document.getElementById("categoriaDias").checked){
+            
+                consultaGenerarLineaDias(val.value);
+
+            }else{
+                for(var i=0;i<chartDia.series.length;i++){
+                    
+                    if(chartDia.series[i].name == '{{$categoria}}'){
+                        chartDia.series[i].remove(true);
+                    }
+
+                }
+            }
+        }else{
+            if(document.getElementById("cantonDias").checked){
+
+                consultaGenerarLineaDias(val.value);
+                
+            }else{
+                for(var i=0;i<chartDia.series.length;i++){
+                    
+                    if(chartDia.series[i].name == '{{$canton}}'){
+                        chartDia.series[i].remove(true);
+                    }
+
+                }
+            }
+        }
+    }
+
+    function consultaGenerarLineaDias(val){
+        
+        $.ajax({
+            url:'{{url("home/comparativas/nuevaLineaDias")}}',
+            method: 'POST',
+            data:{
+                inicio: fechaInicioGrafica2,
+                fin: fechaFinGrafica2,
+                parametro: val,
+                _token: $('input[name="_token"]').val()
+            }
+        }).done(function(res){
+            var arreglo = JSON.parse(res);
+            var bandera = true;
+            var datos = [];
+
+            for(var i=0;i<arreglo.length;i++){
+                
+                if(diasGrafica2.includes(arreglo[i].fecha)){
+                    if(chartDia.series[0].name == 'Porcent. Ocupación')
+                        datos.push(arreglo[i].porcentaje_ocupacion);
+                    else if(chartDia.series[0].name == 'Checkins')
+                        datos.push(arreglo[i].checkins);
+                    else if(chartDia.series[0].name == 'Checkouts')
+                        datos.push(arreglo[i].checkouts);
+                    else if(chartDia.series[0].name == 'Pernoctaciones')
+                        datos.push(arreglo[i].pernoctaciones);
+                    else if(chartDia.series[0].name == 'Nacionales')
+                        datos.push(arreglo[i].nacionales);
+                    else if(chartDia.series[0].name == 'Extranjeros')
+                        datos.push(arreglo[i].extranjeros);
+                    else if(chartDia.series[0].name == 'Hab. Ocupadas')
+                        datos.push(arreglo[i].habitaciones_ocupadas);
+                    else if(chartDia.series[0].name == 'Hab. Disponibles')
+                        datos.push(arreglo[i].habitaciones_disponibles);
+                    else if(chartDia.series[0].name == 'Tarifa Prom. Hab.')
+                        datos.push(arreglo[i].tarifa_promedio);
+                    else if(chartDia.series[0].name == 'Tarifa Prom. Per.')
+                        datos.push(arreglo[i].tar_per);
+                    else if(chartDia.series[0].name == 'Ventas Netas')
+                        datos.push(arreglo[i].ventas_netas);
+                    else if(chartDia.series[0].name  == 'Revpar')
+                        datos.push(arreglo[i].revpar);
+
+                }
+            }
+            
+            datos = datos.map(element => parseFloat(element));
+
+            for(var i=0;i<chartDia.series.length;i++){
+                if( (val == 'categoria' && chartDia.series[i].name == '{{$categoria}}') || (val == 'canton' && chartDia.series[i].name == '{{$canton}}') ){
+                    chartDia.series[i].update({data: datos});
+                    bandera = false;
+                }
+            }
+            if(bandera){
+                if(val == 'categoria'){
+                    var color = 'red';
+                }else{
+                    var color = 'black';
+                }
+                
+                chartDia.addSeries({
+                    name: arreglo[0].parametro,
+                    data: datos,
+                    color: color,
+                    lineWidth: 3.5
+                    });
+            }
+            
+        });
     }
     
 </script>

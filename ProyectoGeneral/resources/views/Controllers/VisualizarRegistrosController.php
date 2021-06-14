@@ -11,8 +11,6 @@ class VisualizarRegistrosController extends Controller
 {
     public function index()
     {
-        if(!isset(Auth::user()->rol)){return redirect('login');}
-        
         $idU = Auth::user()->id;
 
         $ultimaCaga = DB::select("SELECT DAY(Max(fecha)) as 'dia', MONTH(Max(fecha)) as 'mes', YEAR(Max(fecha)) as 'anio' 

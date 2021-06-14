@@ -11,8 +11,6 @@ class AnalisisDeNegocioController extends Controller
 {
     public function index()
     {
-        if(!isset(Auth::user()->rol)){return redirect('login');}
-        
         $idU = Auth::user()->id;
         $datosActuales = DB::select("SELECT distinct MONTH(Max(fecha)) as 'mes', YEAR(Max(fecha)) as 'anio' 
                                     FROM registros r, establecimientos e

@@ -20,21 +20,13 @@ class UsersController extends Controller
 
     public function index()
     {
-        if(!isset(Auth::user()->rol)){return redirect('login');}
         
-        $usuarios = DB::select("SELECT  u.name, u.id, u.rol, u.email, p.nombre as 'provincia', c.nombre as 'canton' 
-                                FROM users u, provincias p, cantons c
-                                WHERE u.idCanton = c.id AND p.id = c.idProvincia
-                                ORDER BY u.id");
-
-        $provincias = DB::table('provincias')
-                    ->select('provincias.*')
-                    ->orderBy('id','ASC')
+        $usuarios = DB::table('users')
+                    ->select('users.*')
+                    ->orderBy('id','DESC')
                     ->get();
-        
         if(Auth::user()->rol != 'Administrador'){return redirect('home');}
-        return view('gestionUsuarios')->with('usuarios', $usuarios)
-                                        ->with('provincias', $provincias);
+        return view('gestionUsuarios')->with('usuarios', $usuarios);
     }
 
     public function store(Request $request)
@@ -58,13 +50,11 @@ class UsersController extends Controller
                 ->with('ErrorInsert', 'Favor de llenar correctamente todos los campos')
                 ->withErrors($validator);
         } else {
-            User::create([
+            $usuario = User::create([
                 'name' => $request->name,
-                'idCanton' => $request->canton,
                 'email' => $request->email,
                 'password' => Hash::make($request['password']),
-                'rol' => $request->rol,
-                
+                'rol' => $request->rol
             ]);
             Alert::success('Listo', 'Usuario Creado Correctamente');
             return back();
@@ -110,19 +100,5 @@ class UsersController extends Controller
             return back();
         }
 
-    }
-
-    public function datosEditar(Request $request){
-        $datos= DB::select("SELECT  u.name, u.id, u.rol, u.email, p.id as 'provincia', c.id as 'canton' 
-                            FROM users u, provincias p, cantons c
-                            WHERE u.idCanton = c.id AND p.id = c.idProvincia AND u.id = '$request->id' ");
-
-        return response(json_encode($datos), 200)->header('Content-type', 'text/plain');
-    }
-
-    public function cantones(Request $request){
-        $datos= DB::select("SELECT * FROM cantons WHERE idProvincia = '$request->id' ");
-
-        return response(json_encode($datos), 200)->header('Content-type', 'text/plain');
     }
 }

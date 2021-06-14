@@ -72,7 +72,7 @@
         </section>
         <section class="datosEstab">
             <h2>INDICADORES DE ALOJAMIENTO</h2>
-            <a href="{{url('http://127.0.0.1:8000/datosEstadisticos#revpar')}}">
+            <a href="{{url('http://127.0.0.1:8000/indicadoresAlojamiento#revpar')}}">
                 <div class="container2">
                     <article class="datEs">    
                         <img src="{{ asset('imgs/velocidad.png')}}" alt="Avatar" class="image">
@@ -85,7 +85,7 @@
                     </article >
                 </div>
             </a>
-            <a href="{{url('http://127.0.0.1:8000/datosEstadisticos#tarifaPromedio')}}">
+            <a href="{{url('http://127.0.0.1:8000/indicadoresAlojamiento#tarifaPromedio')}}">
                 <div class="container2">
                     <article class="datEs">    
                             <img src="{{ asset('imgs/cargar.png')}}" alt="Avatar" class="image">
@@ -98,7 +98,7 @@
                     </article >
                 </div>
             </a>
-            <a href="{{url('http://127.0.0.1:8000/datosEstadisticos#porcentajeOcupacion')}}">
+            <a href="{{url('http://127.0.0.1:8000/indicadoresAlojamiento#porcentajeOcupacion')}}">
                 <div class="container2">
                     <article class="datEs">    
                             <img src="{{ asset('imgs/vendedor.png')}}"  alt="Avatar" class="image">
@@ -111,7 +111,7 @@
                     </article >
                 </div>
             </a>
-            <a href="{{url('http://127.0.0.1:8000/datosEstadisticos#estadiaPromedio')}}">
+            <a href="{{url('indicadoresAlojamiento#estadiaPromedio')}}">
                 <div class="container2">
                     <article class="datEs">    
                             <img src="{{ asset('imgs/cama.png')}}"  alt="Avatar" class="image">
@@ -127,7 +127,7 @@
         </section>
         <section class="datosEstab">
             
-            <a href="{{url('http://127.0.0.1:8000/datosEstadisticos#revpar')}}">
+            <a href="{{url('http://127.0.0.1:8000/indicadoresAlojamiento#revpar')}}">
                 <div class="container2">
                     <article class="datEsResultados">    
                         <img src="{{ asset('imgs/barra-grafica.png')}}" alt="Avatar" class="image">
@@ -140,7 +140,7 @@
                     </article >
                 </div>
             </a>
-            <a href="{{url('http://127.0.0.1:8000/datosEstadisticos#tarifaPromedio')}}">
+            <a href="{{url('http://127.0.0.1:8000/indicadoresAlojamiento#tarifaPromedio')}}">
                 <div class="container2">
                     <article class="datEsResultados">    
                             <img src="{{ asset('imgs/barra-grafica.png')}}" alt="Avatar" class="image">
@@ -153,7 +153,7 @@
                     </article >
                 </div>
             </a>
-            <a href="{{url('http://127.0.0.1:8000/datosEstadisticos#porcentajeOcupacion')}}">
+            <a href="{{url('http://127.0.0.1:8000/indicadoresAlojamiento#porcentajeOcupacion')}}">
                 <div class="container2">
                     <article class="datEsResultados">    
                             <img src="{{ asset('imgs/barra-grafica.png')}}"  alt="Avatar" class="image">
@@ -166,7 +166,7 @@
                     </article >
                 </div>
             </a>
-            <a href="{{url('http://127.0.0.1:8000/datosEstadisticos#estadiaPromedio')}}">
+            <a href="{{url('http://127.0.0.1:8000/indicadoresAlojamiento#estadiaPromedio')}}">
                 <div class="container2">
                     <article class="datEsResultados">    
                             <img src="{{ asset('imgs/barra-grafica.png')}}"  alt="Avatar" class="image">

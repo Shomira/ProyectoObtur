@@ -27,7 +27,7 @@ class GraficasEstadisticasController extends Controller
                                 FROM registros r, establecimientos e
                                 WHERE e.id = r.idEstablecimiento 
                                 GROUP BY MONTH(fecha), YEAR(fecha)
-                                ORDER BY YEAR(fecha) desc, MONTH(fecha) desc");
+                                ORDER BY YEAR(fecha) desc, MONTH(fecha) asc");
         
         if(empty($mesesAnios)){
             $meses[0] = array( 0 => "", 1 => 0) ;
@@ -38,42 +38,41 @@ class GraficasEstadisticasController extends Controller
             
             switch ($value->mes) {
                 case 1:
-                    $meses[$key] = array( 0 => "Enero", 1 => 1) ;
+                    $meses[$key] = array( 0 => "Enero", 1 => 1, 2 => $value->anio) ;
                     break;
                 case 2:
-                    $meses[$key] = array( 0 => "Febrero", 1 => 2) ;
+                    $meses[$key] = array( 0 => "Febrero", 1 => 2, 2 => $value->anio) ;
                     break;
                 case 3:
-                    $meses[$key] = array( 0 => "Marzo", 1 => 3) ;
+                    $meses[$key] = array( 0 => "Marzo", 1 => 3, 2 => $value->anio) ;
                     break;
                 case 4:
-                    $meses[$key] = array( 0 => "Abril", 1 => 4) ;
+                    $meses[$key] = array( 0 => "Abril", 1 => 4, 2 => $value->anio) ;
                     break;
                 case 5:
-                    $meses[$key] = array( 0 => "Mayo", 1 => 5) ;
+                    $meses[$key] = array( 0 => "Mayo", 1 => 5, 2 => $value->anio) ;
                     break;
                 case 6:
-                    $meses[$key] = array( 0 => "Junio", 1 => 6) ;
+                    $meses[$key] = array( 0 => "Junio", 1 => 6, 2 => $value->anio) ;
                     break;
                 case 7:
-                    $meses[$key] = array( 0 => "Julio", 1 => 7) ;
+                    $meses[$key] = array( 0 => "Julio", 1 => 7, 2 => $value->anio) ;
                     break;
                 case 8:
-                    $meses[$key] = array( 0 => "Agosto", 1 => 8) ;
+                    $meses[$key] = array( 0 => "Agosto", 1 => 8, 2 => $value->anio) ;
                     break;
                 case 9:
-                    $meses[$key] = array( 0 => "Septiembre", 1 => 9) ;
+                    $meses[$key] = array( 0 => "Septiembre", 1 => 9, 2 => $value->anio) ;
                     break;
                 case 10:
-                    $meses[$key] = array( 0 => "Octubre", 1 => 10) ;
+                    $meses[$key] = array( 0 => "Octubre", 1 => 10, 2 => $value->anio) ;
                     break;
                 case 11:
-                    $meses[$key] = array( 0 => "Noviembre", 1 => 11) ;
+                    $meses[$key] = array( 0 => "Noviembre", 1 => 11, 2 => $value->anio) ;
                     break;
                 case 12:
-                    $meses[$key] = array( 0 => "Diciembre", 1 => 12) ;
+                    $meses[$key] = array( 0 => "Diciembre", 1 => 12, 2 => $value->anio) ;
                     break;
-                
                 }
 
         }
@@ -133,97 +132,37 @@ class GraficasEstadisticasController extends Controller
         }else{
             $condicionCategoria = " AND categoria = '$request->categoria'";
         }
-        
+
         if($request->estadistico == "total"){
-
-            $consulta = "SELECT  SUM(checkins) as 'checkins',
-                                SUM(checkouts) as 'checkouts',
-                                SUM(pernoctaciones) as 'pernoctaciones',
-                                SUM(nacionales) as 'nacionales',
-                                SUM(extranjeros) as 'extranjeros',
-                                SUM(habitaciones_ocupadas) as 'habitaciones_ocupadas',
-                                SUM(habitaciones_disponibles) as 'habitaciones_disponibles',
-                                SUM(tarifa_promedio) as 'tarifa_promedio',
-                                SUM(TAR_PER) as 'tar_per',
-                                SUM(ventas_netas) as 'ventas_netas',
-                                SUM(porcentaje_ocupacion) as 'porcentaje_ocupacion',
-                                SUM(revpar) as 'revpar',
-                                MONTH(fecha) as 'mes',
-                                YEAR(fecha) as 'anio'
-                FROM registros r, establecimientos e
-                WHERE e.id = r.idEstablecimiento 
-                    AND fecha >= '$fechaInicio' AND fecha <= '$fechaFin' $condicionCategoria
-                GROUP BY $group
-                ORDER BY MAX(YEAR(fecha)), MONTH(fecha)";
-
+            $est = "SUM";
         }elseif($request->estadistico == "prom"){
-
-            $consulta = "SELECT  AVG(checkins) as 'checkins',
-                                AVG(checkouts) as 'checkouts',
-                                AVG(pernoctaciones) as 'pernoctaciones',
-                                AVG(nacionales) as 'nacionales',
-                                AVG(extranjeros) as 'extranjeros',
-                                AVG(habitaciones_ocupadas) as 'habitaciones_ocupadas',
-                                AVG(habitaciones_disponibles) as 'habitaciones_disponibles',
-                                AVG(tarifa_promedio) as 'tarifa_promedio',
-                                AVG(TAR_PER) as 'tar_per',
-                                AVG(ventas_netas) as 'ventas_netas',
-                                AVG(porcentaje_ocupacion) as 'porcentaje_ocupacion',
-                                AVG(revpar) as 'revpar',
-                                MONTH(fecha) as 'mes',
-                                YEAR(fecha) as 'anio'
-                FROM registros r, establecimientos e
-                WHERE e.id = r.idEstablecimiento 
-                    AND fecha >= '$fechaInicio' AND fecha <= '$fechaFin' $condicionCategoria
-                GROUP BY $group
-                ORDER BY MAX(YEAR(fecha)), MONTH(fecha)";
-
+            $est = "AVG";
         }elseif($request->estadistico == "max"){
-
-            $consulta = "SELECT  MAX(checkins) as 'checkins',
-                                MAX(checkouts) as 'checkouts',
-                                MAX(pernoctaciones) as 'pernoctaciones',
-                                MAX(nacionales) as 'nacionales',
-                                MAX(extranjeros) as 'extranjeros',
-                                MAX(habitaciones_ocupadas) as 'habitaciones_ocupadas',
-                                MAX(habitaciones_disponibles) as 'habitaciones_disponibles',
-                                MAX(tarifa_promedio) as 'tarifa_promedio',
-                                MAX(TAR_PER) as 'tar_per',
-                                MAX(ventas_netas) as 'ventas_netas',
-                                MAX(porcentaje_ocupacion) as 'porcentaje_ocupacion',
-                                MAX(revpar) as 'revpar',
-                                MONTH(fecha) as 'mes',
-                                YEAR(fecha) as 'anio'
-                FROM registros r, establecimientos e
-                WHERE e.id = r.idEstablecimiento 
-                    AND fecha >= '$fechaInicio' AND fecha <= '$fechaFin' $condicionCategoria
-                GROUP BY $group
-                ORDER BY MAX(YEAR(fecha)), MONTH(fecha)";
-
+            $est = "MAX";
         }elseif($request->estadistico == "min"){
-
-            $consulta = "SELECT  MIN(checkins) as 'checkins',
-                                MIN(checkouts) as 'checkouts',
-                                MIN(pernoctaciones) as 'pernoctaciones',
-                                MIN(nacionales) as 'nacionales',
-                                MIN(extranjeros) as 'extranjeros',
-                                MIN(habitaciones_ocupadas) as 'habitaciones_ocupadas',
-                                MIN(habitaciones_disponibles) as 'habitaciones_disponibles',
-                                MIN(tarifa_promedio) as 'tarifa_promedio',
-                                MIN(TAR_PER) as 'tar_per',
-                                MIN(ventas_netas) as 'ventas_netas',
-                                MIN(porcentaje_ocupacion) as 'porcentaje_ocupacion',
-                                MIN(revpar) as 'revpar',
-                                MONTH(fecha) as 'mes',
-                                YEAR(fecha) as 'anio'
-                FROM registros r, establecimientos e
-                WHERE e.id = r.idEstablecimiento 
-                    AND fecha >= '$fechaInicio' AND fecha <= '$fechaFin' $condicionCategoria
-                GROUP BY $group
-                ORDER BY MAX(YEAR(fecha)), MONTH(fecha)";
-
+            $est = "MIN";
         }
 
+        $consulta = "SELECT  $est(checkins) as 'checkins',
+                                $est(checkouts) as 'checkouts',
+                                $est(pernoctaciones) as 'pernoctaciones',
+                                $est(nacionales) as 'nacionales',
+                                $est(extranjeros) as 'extranjeros',
+                                $est(habitaciones_ocupadas) as 'habitaciones_ocupadas',
+                                $est(habitaciones_disponibles) as 'habitaciones_disponibles',
+                                $est(tarifa_promedio) as 'tarifa_promedio',
+                                $est(TAR_PER) as 'tar_per',
+                                $est(ventas_netas) as 'ventas_netas',
+                                $est(porcentaje_ocupacion) as 'porcentaje_ocupacion',
+                                $est(revpar) as 'revpar',
+                                MONTH(fecha) as 'mes',
+                                YEAR(fecha) as 'anio'
+                FROM registros r, establecimientos e
+                WHERE e.id = r.idEstablecimiento 
+                    AND fecha >= '$fechaInicio' AND fecha <= '$fechaFin' $condicionCategoria
+                GROUP BY $group
+                ORDER BY MAX(YEAR(fecha)), MONTH(fecha)";
+        
         
         $datos= DB::select($consulta);
         
@@ -231,94 +170,92 @@ class GraficasEstadisticasController extends Controller
     }
 
     public function barra(Request $request){
-        
+
         if($request->estadistico == "total"){
-            
-            $consulta = "SELECT  SUM(checkins) as 'checkins',
-                                SUM(checkouts) as 'checkouts',
-                                SUM(pernoctaciones) as 'pernoctaciones',
-                                SUM(nacionales) as 'nacionales',
-                                SUM(extranjeros) as 'extranjeros',
-                                SUM(habitaciones_ocupadas) as 'habitaciones_ocupadas',
-                                SUM(habitaciones_disponibles) as 'habitaciones_disponibles',
-                                SUM(tarifa_promedio) as 'tarifa_promedio',
-                                SUM(TAR_PER) as 'tar_per',
-                                SUM(ventas_netas) as 'ventas_netas',
-                                SUM(porcentaje_ocupacion) as 'porcentaje_ocupacion',
-                                SUM(revpar) as 'revpar',
-                                categoria
-                FROM registros r, establecimientos e
-                WHERE e.id = r.idEstablecimiento AND YEAR(fecha) = '$request->anio' 
-                GROUP BY categoria
-                ORDER BY categoria desc";
-
+            $est = "SUM";
         }elseif($request->estadistico == "prom"){
-
-            $consulta = "SELECT  AVG(checkins) as 'checkins',
-                                AVG(checkouts) as 'checkouts',
-                                AVG(pernoctaciones) as 'pernoctaciones',
-                                AVG(nacionales) as 'nacionales',
-                                AVG(extranjeros) as 'extranjeros',
-                                AVG(habitaciones_ocupadas) as 'habitaciones_ocupadas',
-                                AVG(habitaciones_disponibles) as 'habitaciones_disponibles',
-                                AVG(tarifa_promedio) as 'tarifa_promedio',
-                                AVG(TAR_PER) as 'tar_per',
-                                AVG(ventas_netas) as 'ventas_netas',
-                                AVG(porcentaje_ocupacion) as 'porcentaje_ocupacion',
-                                AVG(revpar) as 'revpar',
-                                categoria
-                FROM registros r, establecimientos e
-                WHERE e.id = r.idEstablecimiento AND YEAR(fecha) = '$request->anio' 
-                GROUP BY categoria
-                ORDER BY categoria desc";
-
+            $est = "AVG";
         }elseif($request->estadistico == "max"){
-
-            $consulta = "SELECT  MAX(checkins) as 'checkins',
-                                MAX(checkouts) as 'checkouts',
-                                MAX(pernoctaciones) as 'pernoctaciones',
-                                MAX(nacionales) as 'nacionales',
-                                MAX(extranjeros) as 'extranjeros',
-                                MAX(habitaciones_ocupadas) as 'habitaciones_ocupadas',
-                                MAX(habitaciones_disponibles) as 'habitaciones_disponibles',
-                                MAX(tarifa_promedio) as 'tarifa_promedio',
-                                MAX(TAR_PER) as 'tar_per',
-                                MAX(ventas_netas) as 'ventas_netas',
-                                MAX(porcentaje_ocupacion) as 'porcentaje_ocupacion',
-                                MAX(revpar) as 'revpar',
-                                categoria
-                FROM registros r, establecimientos e
-                WHERE e.id = r.idEstablecimiento AND YEAR(fecha) = '$request->anio' 
-                GROUP BY categoria
-                ORDER BY categoria desc";
-
+            $est = "MAX";
         }elseif($request->estadistico == "min"){
+            $est = "MIN";
+        }
+        
 
-            $consulta = "SELECT  MIN(checkins) as 'checkins',
-                                MIN(checkouts) as 'checkouts',
-                                MIN(pernoctaciones) as 'pernoctaciones',
-                                MIN(nacionales) as 'nacionales',
-                                MIN(extranjeros) as 'extranjeros',
-                                MIN(habitaciones_ocupadas) as 'habitaciones_ocupadas',
-                                MIN(habitaciones_disponibles) as 'habitaciones_disponibles',
-                                MIN(tarifa_promedio) as 'tarifa_promedio',
-                                MIN(TAR_PER) as 'tar_per',
-                                MIN(ventas_netas) as 'ventas_netas',
-                                MIN(porcentaje_ocupacion) as 'porcentaje_ocupacion',
-                                MIN(revpar) as 'revpar',
+        $consulta = "SELECT  $est(checkins) as 'checkins',
+                                $est(checkouts) as 'checkouts',
+                                $est(pernoctaciones) as 'pernoctaciones',
+                                $est(nacionales) as 'nacionales',
+                                $est(extranjeros) as 'extranjeros',
+                                $est(habitaciones_ocupadas) as 'habitaciones_ocupadas',
+                                $est(habitaciones_disponibles) as 'habitaciones_disponibles',
+                                $est(tarifa_promedio) as 'tarifa_promedio',
+                                $est(TAR_PER) as 'tar_per',
+                                $est(ventas_netas) as 'ventas_netas',
+                                $est(porcentaje_ocupacion) as 'porcentaje_ocupacion',
+                                $est(revpar) as 'revpar',
                                 categoria
                 FROM registros r, establecimientos e
                 WHERE e.id = r.idEstablecimiento AND YEAR(fecha) = '$request->anio' 
                 GROUP BY categoria
                 ORDER BY categoria desc";
-
-        }
-
 
         $datos= DB::select($consulta);
         
         return response(json_encode($datos), 200)->header('Content-type', 'text/plain');
 
+    }
+
+    public function meses(Request $request){
+        
+        //obtener todos los meses disponibles
+        $mesesAnios = DB::select("SELECT distinct MONTH(fecha) as 'mes', YEAR(fecha) as 'anio' 
+                                FROM registros 
+                                ORDER BY MONTH(fecha)");
+        
+        foreach ($mesesAnios as $key => $value) {
+            
+            switch ($value->mes) {
+                case 1:
+                    $meses[$key] = array( 0 => "Enero", 1 => 1, 2 => $value->anio) ;
+                    break;
+                case 2:
+                    $meses[$key] = array( 0 => "Febrero", 1 => 2, 2 => $value->anio) ;
+                    break;
+                case 3:
+                    $meses[$key] = array( 0 => "Marzo", 1 => 3, 2 => $value->anio) ;
+                    break;
+                case 4:
+                    $meses[$key] = array( 0 => "Abril", 1 => 4, 2 => $value->anio) ;
+                    break;
+                case 5:
+                    $meses[$key] = array( 0 => "Mayo", 1 => 5, 2 => $value->anio) ;
+                    break;
+                case 6:
+                    $meses[$key] = array( 0 => "Junio", 1 => 6, 2 => $value->anio) ;
+                    break;
+                case 7:
+                    $meses[$key] = array( 0 => "Julio", 1 => 7, 2 => $value->anio) ;
+                    break;
+                case 8:
+                    $meses[$key] = array( 0 => "Agosto", 1 => 8, 2 => $value->anio) ;
+                    break;
+                case 9:
+                    $meses[$key] = array( 0 => "Septiembre", 1 => 9, 2 => $value->anio) ;
+                    break;
+                case 10:
+                    $meses[$key] = array( 0 => "Octubre", 1 => 10, 2 => $value->anio) ;
+                    break;
+                case 11:
+                    $meses[$key] = array( 0 => "Noviembre", 1 => 11, 2 => $value->anio) ;
+                    break;
+                case 12:
+                    $meses[$key] = array( 0 => "Diciembre", 1 => 12, 2 => $value->anio) ;
+                    break;
+                }
+
+        }
+        return response(json_encode($meses), 200)->header('Content-type', 'text/plain');
     }
 
 }

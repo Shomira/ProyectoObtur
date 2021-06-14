@@ -1,8 +1,10 @@
 <?php
 
 namespace Database\Seeders;
-use App\Models\User;
+
 use Illuminate\Database\Seeder;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -13,11 +15,15 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        User::factory()->times(1)->create([
-            "name" => "David Alvarez C",
-            "rol" => "Admin",
-            "email" => "daalvarez17@utpl.edu.ec",
-            "password" => bcrypt("password")
+        $this->call(ProvinciaCantonSeeder::class);
+
+        User::create([
+            'name' => 'Leonardo',
+            'email' => 'mlaguilar@utpl.edu.ec',
+            'password' => Hash::make('12345678'),
+            'rol' => 'Administrador',
+            'idCanton' => 105
         ]);
+
     }
 }

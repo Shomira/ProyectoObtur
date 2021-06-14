@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Archivo extends Model
+class Canton extends Model
 {
     use HasFactory;
 
@@ -13,5 +13,5 @@ class Archivo extends Model
         'nombre'
         
     ];
-
+    
 }

@@ -7,26 +7,24 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
-class ResumenMensualController extends Controller
+class ComparativasController extends Controller
 {
     public function index()
     {
-        if(!isset(Auth::user()->rol)){return redirect('login');}
-        
+ 
         $idU = Auth::user()->id;
-
         $datosActuales = DB::select("SELECT distinct MONTH(Max(fecha)) as 'mes', YEAR(Max(fecha)) as 'anio' 
                                     FROM registros r, establecimientos e
                                     WHERE e.id = r.idEstablecimiento AND e.idUsuario = $idU");
 
         $auxMes = $datosActuales[0]->mes;
         $auxAnio = $datosActuales[0]->anio;
-
-
+        
+        //obtener todos los meses disponibles
         $mesesAnios = DB::select("SELECT distinct MONTH(fecha) as 'mes', YEAR(fecha) as 'anio' 
                                 FROM registros r, establecimientos e
                                 WHERE e.id = r.idEstablecimiento AND e.idUsuario = $idU
-                                ORDER BY YEAR(fecha) desc, MONTH(fecha)desc");
+                                ORDER BY MONTH(fecha)");
         
         foreach ($mesesAnios as $key => $value) {
             
@@ -75,18 +73,58 @@ class ResumenMensualController extends Controller
                                 FROM registros r, establecimientos e
                                 WHERE e.id = r.idEstablecimiento AND e.idUsuario = $idU
                                 ORDER BY YEAR(fecha) desc");
-        
-        return view('resumenMensual')->with('meses',$meses)
-                                        ->with('mesFin',$auxMes)
-                                        ->with('anioFin',$auxAnio)
-                                        ->with('anios',$anios);
-    }
 
+
+        $registros = DB::select("SELECT Min(fecha) as 'diaMin', Max(fecha) as 'diaMax'
+                                FROM registros r, establecimientos e
+                                WHERE e.id = r.idEstablecimiento 
+                                    AND e.idUsuario = $idU 
+                                    AND YEAR(fecha) = $auxAnio 
+                                    AND MONTH(fecha) = $auxMes");
+
+        $diaMin = $registros[0]->diaMin;
+        $diaMax = $registros[0]->diaMax;
+
+        //año y mes de inicio 
+        if($auxMes < 3){
+            $mesInicio = $auxMes + 10;
+            $anioInicio = $auxAnio - 1;
+        }else{
+            $mesInicio = $auxMes - 2;
+            $anioInicio = $auxAnio;
+        }
+
+        
+        return view('comparativas')->with('mesInicio',$mesInicio)
+                                        ->with('mesFin',$auxMes)
+                                        ->with('anioInicio',$anioInicio)
+                                        ->with('anioFin',$auxAnio)
+                                        ->with('meses',$meses)
+                                        ->with('anios',$anios)
+                                        ->with('diaMin',$diaMin)
+                                        ->with('diaMax',$diaMax)
+                                        ->with('columna',"porcentaje_ocupacion");
+
+    }
+   
     public function all(Request $request)
     {
         $idU = Auth::user()->id;
 
-        if($request->estadistico == "Total"){
+        if($request->mesFin < 10){
+            $fechaFin = $request->anioFin."-0".$request->mesFin."-31";
+        }else{
+            $fechaFin = $request->anioFin."-".$request->mesFin."-31";
+        }
+
+        if($request->mesInicio < 10){
+            $fechaInicio = $request->anioInicio."-0".$request->mesInicio."-01";
+        }else{
+            $fechaInicio = $request->anioInicio."-".$request->mesInicio."-01";
+        }
+        
+
+        if($request->estadistico == "total"){
 
             $consulta = "SELECT  SUM(checkins) as 'checkins',
                                 SUM(checkouts) as 'checkouts',
@@ -99,12 +137,16 @@ class ResumenMensualController extends Controller
                                 SUM(TAR_PER) as 'tar_per',
                                 SUM(ventas_netas) as 'ventas_netas',
                                 SUM(porcentaje_ocupacion) as 'porcentaje_ocupacion',
-                                SUM(revpar) as 'revpar'
-                        FROM registros r, establecimientos e
-                        WHERE e.id = r.idEstablecimiento AND e.idUsuario = $idU 
-                            AND MONTH(fecha) = '$request->mes' AND YEAR(fecha) = '$request->anio' ";
+                                SUM(revpar) as 'revpar',
+                                MONTH(fecha) as 'mes',
+                                YEAR(fecha) as 'anio'
+                                FROM registros r, establecimientos e
+                    WHERE e.id = r.idEstablecimiento AND e.idUsuario = $idU 
+                        AND fecha >= '$fechaInicio' AND fecha <= '$fechaFin'
+                    GROUP BY MONTH(fecha), YEAR(fecha)
+                    ORDER BY MAX(YEAR(fecha)), MONTH(fecha)";
 
-        }elseif($request->estadistico == "Promedio"){
+        }elseif($request->estadistico == "prom"){
 
             $consulta = "SELECT  AVG(checkins) as 'checkins',
                                 AVG(checkouts) as 'checkouts',
@@ -117,13 +159,16 @@ class ResumenMensualController extends Controller
                                 AVG(TAR_PER) as 'tar_per',
                                 AVG(ventas_netas) as 'ventas_netas',
                                 AVG(porcentaje_ocupacion) as 'porcentaje_ocupacion',
-                                AVG(revpar) as 'revpar'
-                        FROM registros r, establecimientos e
-                        WHERE e.id = r.idEstablecimiento AND e.idUsuario = $idU 
-                            AND MONTH(fecha) = '$request->mes' AND YEAR(fecha) = '$request->anio' ";
+                                AVG(revpar) as 'revpar',
+                                MONTH(fecha) as 'mes',
+                                YEAR(fecha) as 'anio'
+                    FROM registros r, establecimientos e
+                    WHERE e.id = r.idEstablecimiento AND e.idUsuario = $idU 
+                        AND fecha >= '$fechaInicio' AND fecha <= '$fechaFin'
+                    GROUP BY MONTH(fecha), YEAR(fecha)
+                    ORDER BY MAX(YEAR(fecha)), MONTH(fecha)";
 
-
-        }elseif($request->estadistico == "Max"){
+        }elseif($request->estadistico == "max"){
 
             $consulta = "SELECT  MAX(checkins) as 'checkins',
                                 MAX(checkouts) as 'checkouts',
@@ -136,12 +181,16 @@ class ResumenMensualController extends Controller
                                 MAX(TAR_PER) as 'tar_per',
                                 MAX(ventas_netas) as 'ventas_netas',
                                 MAX(porcentaje_ocupacion) as 'porcentaje_ocupacion',
-                                MAX(revpar) as 'revpar'
-                        FROM registros r, establecimientos e
-                        WHERE e.id = r.idEstablecimiento AND e.idUsuario = $idU 
-                            AND MONTH(fecha) = '$request->mes' AND YEAR(fecha) = '$request->anio' ";
+                                MAX(revpar) as 'revpar',
+                                MONTH(fecha) as 'mes',
+                                YEAR(fecha) as 'anio'
+                    FROM registros r, establecimientos e
+                    WHERE e.id = r.idEstablecimiento AND e.idUsuario = $idU 
+                        AND fecha >= '$fechaInicio' AND fecha <= '$fechaFin'
+                    GROUP BY MONTH(fecha), YEAR(fecha)
+                    ORDER BY MAX(YEAR(fecha)), MONTH(fecha)";
 
-        }elseif($request->estadistico == "Min"){
+        }elseif($request->estadistico == "min"){
 
             $consulta = "SELECT  MIN(checkins) as 'checkins',
                                 MIN(checkouts) as 'checkouts',
@@ -154,17 +203,43 @@ class ResumenMensualController extends Controller
                                 MIN(TAR_PER) as 'tar_per',
                                 MIN(ventas_netas) as 'ventas_netas',
                                 MIN(porcentaje_ocupacion) as 'porcentaje_ocupacion',
-                                MIN(revpar) as 'revpar'
-                        FROM registros r, establecimientos e
-                        WHERE e.id = r.idEstablecimiento AND e.idUsuario = $idU 
-                            AND MONTH(fecha) = '$request->mes' AND YEAR(fecha) = '$request->anio' ";
+                                MIN(revpar) as 'revpar',
+                                MONTH(fecha) as 'mes',
+                                YEAR(fecha) as 'anio'
+                    FROM registros r, establecimientos e
+                    WHERE e.id = r.idEstablecimiento AND e.idUsuario = $idU 
+                        AND fecha >= '$fechaInicio' AND fecha <= '$fechaFin'
+                    GROUP BY MONTH(fecha), YEAR(fecha)
+                    ORDER BY MAX(YEAR(fecha)), MONTH(fecha)";
 
         }
-        
 
         $datos= DB::select($consulta);
         
         return response(json_encode($datos), 200)->header('Content-type', 'text/plain');
     }
-    
+
+    public function dias(Request $request)
+    {
+        $idU = Auth::user()->id;
+
+        $consulta = "SELECT checkins,
+                            checkouts,
+                            pernoctaciones,
+                            nacionales,
+                            extranjeros,
+                            habitaciones_ocupadas,
+                            habitaciones_disponibles,
+                            tarifa_promedio,
+                            TAR_PER as 'tar_per',
+                            ventas_netas,
+                            porcentaje_ocupacion,
+                            revpar, fecha 
+                            FROM registros r, establecimientos e
+                            WHERE e.id = r.idEstablecimiento AND e.idUsuario = $idU AND fecha >= '$request->inicio' AND fecha <= '$request->fin' ";
+        
+        $datos= DB::select($consulta);
+        
+        return response(json_encode($datos), 200)->header('Content-type', 'text/plain');
+    }
 }

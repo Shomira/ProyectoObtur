@@ -12,11 +12,9 @@ class VisualizarArchivosCargadosController extends Controller
 {
     public function index()
     {
-        if(!isset(Auth::user()->rol)){return redirect('login');}
-        
         $files = Archivo::latest()->get();
-        
-        if(Auth::user()->rol != 'Administrador'){return redirect('home');}
+        if(Auth::user()->rol != 'Administrador'){
+        return redirect('home');}
         return view('visualizarArchivosCargados', compact('files'));
     }
 

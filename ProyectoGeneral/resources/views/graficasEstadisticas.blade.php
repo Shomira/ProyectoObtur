@@ -15,18 +15,28 @@
                                 <div class="row">
                                     <div class="selectGraficaAnio" >
                                         <select id="idanioInicio" name="anioInicio" class="form-control" onchange="cambioAnioInicio(this)">
-                                            <option disable>Elegir año</option>
+                                            
                                             @foreach($anios as $anio)
-                                                <option value="{{$anio->anio}}">{{$anio->anio}}</option>
+                                                @if( $anio->anio ===  $anioInicio )
+                                                    <option value="{{$anio->anio}}" selected>{{$anio->anio}}</option>
+                                                @else
+                                                    <option value="{{$anio->anio}}">{{$anio->anio}}</option>
+                                                @endif
                                             @endforeach
                                         </select>
                                     </div>
                                     <div >
                                         <select id="idmesInicio" name="mesInicio" class="form-control" onchange="cambioMesInicio(this)">
                                             <option disable>Elegir mes</option>
-                                            @foreach($meses as $mes)
-                                                <option value="{{$mes[1]}}">{{$mes[0]}}</option>
-                                            @endforeach
+                                                @foreach($meses as $mes)
+                                                    @if($mes[2] ===  $anioInicio)
+                                                        @if( $mes[1] ===  $mesInicio )
+                                                            <option value="{{$mes[1]}}" selected>{{$mes[0]}}</option>
+                                                        @else
+                                                            <option value="{{$mes[1]}}">{{$mes[0]}}</option>
+                                                        @endif
+                                                    @endif
+                                                @endforeach
                                         </select>
                                     </div>
                                 </div>
@@ -44,9 +54,15 @@
                                         </select>
                                     </div>
                                     <div >
-                                        <select id="inputState" name="mesFin" class="form-control" onchange="cambioMesFin(this)">
+                                        <select id="idmesFin" name="mesFin" class="form-control" onchange="cambioMesFin(this)">
                                             @foreach($meses as $mes)
-                                                <option value="{{$mes[1]}}">{{$mes[0]}}</option>
+                                                @if($mes[2] ===  $anioFin)
+                                                    @if( $mes[1] ===  $mesFin )
+                                                        <option value="{{$mes[1]}}" selected>{{$mes[0]}}</option>
+                                                    @else
+                                                        <option value="{{$mes[1]}}">{{$mes[0]}}</option>
+                                                    @endif
+                                                @endif
                                             @endforeach
                                         </select>
                                     </div>
@@ -132,7 +148,7 @@
                 </div>
                 <div class="form-group col-md-9">
                     <br>
-                        <div id="containerChartComparativa" style="height: 500px; min-width: 800px"></div>
+                        <div id="containerChartComparativa" ></div>
                 </div>
             </div>
         </section>
@@ -200,7 +216,7 @@
                     </div>
                     <div class="form-group col-md-9">
                         <br>
-                        <div id="containerChartCaregorias" style="height: 500px; min-width: 800px"></div>
+                        <div id="containerChartCaregorias" ></div>
                     </div>
                 </div>
         </section>
@@ -386,8 +402,9 @@
     */
 
     function consultaChartComparativa(){
+        
         $.ajax({
-            url:'{{url("/")}}',
+            url:'{{url("graficasEstadisticas")}}',
             method: 'POST',
             data:{
                 mesInicio: mesInicioGrafica1,
@@ -533,12 +550,14 @@
         limpiarArreglosChartComparativa();
         anioInicioGrafica1 = val.value;
         consultaChartComparativa();
+        mesesOption(anioInicioGrafica1, mesInicioGrafica1, 1);
     }
 
     function cambioAnioFin(val){
         limpiarArreglosChartComparativa();
         anioFinGrafica1 = val.value;
         consultaChartComparativa();
+        mesesOption(anioFinGrafica1, mesFinGrafica1, 2);
     }
    
     function cambioCategoria(val){
@@ -665,7 +684,7 @@
     function consultaCategorias(){
 
         $.ajax({
-            url:'{{url("/barra")}}',
+            url:'{{url("graficasEstadisticas/barra")}}',
             method: 'POST',
             data:{
                 anio: anio,
@@ -883,6 +902,45 @@
         }
         
     }
+
+    function mesesOption(anio, mes, etiqueta){
+
+        $.ajax({
+            url:'{{url("graficasEstadisticas/meses/")}}',
+            method: 'POST',
+            data:{
+                _token: $('input[name="_token"]').val()
+            }
+        }).done(function(res){
+            
+            var arreglo = JSON.parse(res);
+            var cadena = "";
+            var bandera = true;
+
+            for(var i=0;i<arreglo.length;i++){
+                if(arreglo[i][2] == parseFloat(anio)){
+                    if(arreglo[i][1] == parseFloat(mes)){
+                        cadena = cadena + "<option value=" + arreglo[i][1] + " selected>" + arreglo[i][0] + "</option>";
+                        bandera = false;
+                    }else{
+                        cadena = cadena + "<option value="+ arreglo[i][1] + ">" + arreglo[i][0] + "</option>";
+                    }
+                }
+            }
+
+            if(bandera){
+                cadena = "<option disable>Elegir mes...</option>" + cadena;
+            }
+            
+            if(etiqueta == 2){
+                document.getElementById("idmesFin").innerHTML = cadena;
+            }else{
+                document.getElementById("idmesInicio").innerHTML = cadena;
+            }
+            
+        });
+    }
+
 
 </script>
 

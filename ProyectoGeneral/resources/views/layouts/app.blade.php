@@ -4,7 +4,7 @@
     
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <script src="{{ asset('js/app.js') }}" defer></script>
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -94,14 +94,14 @@
                                     <a class="nav-link" href="{{ route('login') }}">{{ __('INGRESAR') }}</a>
                                 </li>
                             @endif
-                        
+                        <!--
                             @if (Route::has('register'))
                                 <li class="nav-item {{ ! route::is('register')? :'active'}}">
                                     <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                                 </li>
                             @endif
                                 
-                         
+                         -->
                         </ul>
                     </div>
                 </div>
