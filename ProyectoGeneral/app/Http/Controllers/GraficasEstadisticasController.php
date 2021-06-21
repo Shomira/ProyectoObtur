@@ -143,18 +143,18 @@ class GraficasEstadisticasController extends Controller
             $est = "MIN";
         }
 
-        $consulta = "SELECT  $est(checkins) as 'checkins',
-                                $est(checkouts) as 'checkouts',
-                                $est(pernoctaciones) as 'pernoctaciones',
-                                $est(nacionales) as 'nacionales',
-                                $est(extranjeros) as 'extranjeros',
-                                $est(habitaciones_ocupadas) as 'habitaciones_ocupadas',
-                                $est(habitaciones_disponibles) as 'habitaciones_disponibles',
-                                $est(tarifa_promedio) as 'tarifa_promedio',
-                                $est(TAR_PER) as 'tar_per',
-                                $est(ventas_netas) as 'ventas_netas',
-                                $est(porcentaje_ocupacion) as 'porcentaje_ocupacion',
-                                $est(revpar) as 'revpar',
+        $consulta = "SELECT  ROUND($est(checkins), 2) as 'checkins',
+                                ROUND($est(checkouts), 2) as 'checkouts',
+                                ROUND($est(pernoctaciones), 2) as 'pernoctaciones',
+                                ROUND($est(nacionales), 2) as 'nacionales',
+                                ROUND($est(extranjeros), 2) as 'extranjeros',
+                                ROUND($est(habitaciones_ocupadas), 2) as 'habitaciones_ocupadas',
+                                ROUND($est(habitaciones_disponibles), 2) as 'habitaciones_disponibles',
+                                ROUND($est(tarifa_promedio), 2) as 'tarifa_promedio',
+                                ROUND($est(TAR_PER), 2) as 'tar_per',
+                                ROUND($est(ventas_netas), 2) as 'ventas_netas',
+                                ROUND($est(porcentaje_ocupacion), 2) as 'porcentaje_ocupacion',
+                                ROUND($est(revpar), 2) as 'revpar',
                                 MONTH(fecha) as 'mes',
                                 YEAR(fecha) as 'anio'
                 FROM registros r, establecimientos e
@@ -182,18 +182,18 @@ class GraficasEstadisticasController extends Controller
         }
         
 
-        $consulta = "SELECT  $est(checkins) as 'checkins',
-                                $est(checkouts) as 'checkouts',
-                                $est(pernoctaciones) as 'pernoctaciones',
-                                $est(nacionales) as 'nacionales',
-                                $est(extranjeros) as 'extranjeros',
-                                $est(habitaciones_ocupadas) as 'habitaciones_ocupadas',
-                                $est(habitaciones_disponibles) as 'habitaciones_disponibles',
-                                $est(tarifa_promedio) as 'tarifa_promedio',
-                                $est(TAR_PER) as 'tar_per',
-                                $est(ventas_netas) as 'ventas_netas',
-                                $est(porcentaje_ocupacion) as 'porcentaje_ocupacion',
-                                $est(revpar) as 'revpar',
+        $consulta = "SELECT  ROUND($est(checkins), 2) as 'checkins',
+                                ROUND($est(checkouts), 2) as 'checkouts',
+                                ROUND($est(pernoctaciones), 2) as 'pernoctaciones',
+                                ROUND($est(nacionales), 2) as 'nacionales',
+                                ROUND($est(extranjeros), 2) as 'extranjeros',
+                                ROUND($est(habitaciones_ocupadas), 2) as 'habitaciones_ocupadas',
+                                ROUND($est(habitaciones_disponibles), 2) as 'habitaciones_disponibles',
+                                ROUND($est(tarifa_promedio), 2) as 'tarifa_promedio',
+                                ROUND($est(TAR_PER), 2) as 'tar_per',
+                                ROUND($est(ventas_netas), 2) as 'ventas_netas',
+                                ROUND($est(porcentaje_ocupacion), 2) as 'porcentaje_ocupacion',
+                                ROUND($est(revpar), 2) as 'revpar',
                                 categoria
                 FROM registros r, establecimientos e
                 WHERE e.id = r.idEstablecimiento AND YEAR(fecha) = '$request->anio' 

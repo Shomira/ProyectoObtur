@@ -5,7 +5,6 @@
         @csrf
     </form>
     
-    
     <div class="lineaIzquierda">
         <div class=" container principalV">
             <div class="row">
@@ -41,7 +40,7 @@
                 </div>
                 </div>
             </div>
-            <div class="col-sm-6">
+            <div class="col-sm-4">
                 <div class="card-body cardBodyResumenM">
                     <h5>Estadísticos: 
                         <label for="inputState">
@@ -53,6 +52,11 @@
                             </select>
                         </label>
                     </h5>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="card-body cardBodyResumenM">
+                    <input type="checkbox" class="from-control" id="desviacion" onclick="desviacion()">Desviación estandar
                 </div>
             </div>
         </div>
@@ -97,10 +101,10 @@
 @endsection
 
 @section('scripts')
-<script src = "https://code.highcharts.com/highcharts.src.js"> </script>
+
 <!-- Scripts Graficas Higcharts -->
-<script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
-<script src="https://code.highcharts.com/stock/modules/export-data.js"></script>
+<script src = "https://code.highcharts.com/highcharts.src.js"> </script>
+<script src="https://code.highcharts.com/highcharts-more.js"></script>
 
 <script>
 
@@ -121,6 +125,20 @@
     var datoPorcOcupacion = 0;
     var datoREVPAR = 0;
 
+    var desvCheckins = 0;
+    var desvCheckouts = 0;
+    var desvPernoctaciones = 0;
+    var desvNacionales = 0;
+    var desvExtranjeros = 0;
+    var desvHabOcupadas = 0;
+    var desvHabDisponibles = 0;
+    var desvTarPromHab = 0;
+    var desvTarPromPer = 0;
+    var desvVentasNetas = 0;
+    var desvPorcOcupacion = 0;
+    var desvREVPAR = 0;
+
+    var desviaciones = [];
     var datos = [];
     var columnas = ['Porcent Ocupación']
 
@@ -198,8 +216,7 @@
             datoVentasNetas = parseFloat(datoVentasNetas);
             datoPorcOcupacion = parseFloat(datoPorcOcupacion);
             datoREVPAR = parseFloat(datoREVPAR);
-
-
+            
             for(var i=0;i<columnas.length;i++){
                 if(columnas[i] == 'Porcent Ocupación')
                     datos.push(datoPorcOcupacion);
@@ -264,7 +281,6 @@
                 if(columnas[i] == 'Tarifa Hab' || columnas[i] == 'Tarifa Per'|| columnas[i] == 'Porcent Ocupación'|| columnas[i] == 'REVPAR'){
                     columnas.splice(i, 1);
                     datos.splice(i, 1);
-                    
                     i--;
                 }
 
@@ -289,26 +305,22 @@
         }
         
         estadistico = val.value;
-        
         consulta();
+        desviacion();
     }
 
     function cambioAnio(val){
-
         datos = [];
-
         anio = val.value;
-        
         consulta();
+        desviacion();
     }
 
     function cambioMes(val){
-
         datos = [];
-
         mes = val.value;
-
         consulta();
+        desviacion();
     }
 
     function seleccionarColumna(val){
@@ -368,18 +380,15 @@
                     categories: columnas,
                                    
                 }
-            }); 
+            });
 
         }else{
 
-            
             for(var i=0;i<columnas.length;i++){
-                
                 if(columnas[i] == valor){
                     columnas.splice(i, 1);
                     datos.splice(i, 1);
                 }
-
             }
 
             chartMes.update( {
@@ -393,7 +402,106 @@
                 }
             }); 
         }
+        desviacion();
+    }
+
+    
+    function desviacion(){
+        if(document.getElementById("desviacion").checked && estadistico == 'Promedio'){
+            desviaciones = [];
+            $.ajax({
+                url:'{{url("home/resumenMensual/desviacion")}}',
+                method: 'POST',
+                data:{
+                    mes: mes,
+                    anio: anio,
+                    _token: $('input[name="_token"]').val()
+                }
+            }).done(function(res){
+
+                var arreglo = JSON.parse(res);
+
+                desvCheckins = arreglo[0].checkins;
+                desvCheckouts = arreglo[0].checkouts;
+                desvPernoctaciones = arreglo[0].pernoctaciones;
+                desvNacionales = arreglo[0].nacionales;
+                desvExtranjeros = arreglo[0].extranjeros;
+                desvHabOcupadas = arreglo[0].habitaciones_ocupadas;
+                desvHabDisponibles = arreglo[0].habitaciones_disponibles;
+                desvTarPromHab = arreglo[0].tarifa_promedio;
+                desvTarPromPer = arreglo[0].tar_per;
+                desvVentasNetas = arreglo[0].ventas_netas;
+                desvPorcOcupacion = arreglo[0].porcentaje_ocupacion;
+                desvREVPAR = arreglo[0].revpar;
+
+                desvCheckins = parseFloat(desvCheckins);
+                desvCheckouts = parseFloat(desvCheckouts);
+                desvPernoctaciones = parseFloat(desvPernoctaciones);
+                desvNacionales = parseFloat(desvNacionales);
+                desvExtranjeros = parseFloat(desvExtranjeros);
+                desvHabOcupadas = parseFloat(desvHabOcupadas);
+                desvHabDisponibles = parseFloat(desvHabDisponibles);
+                desvTarPromHab = parseFloat(desvTarPromHab);
+                desvTarPromPer = parseFloat(desvTarPromPer);
+                desvVentasNetas = parseFloat(desvVentasNetas);
+                desvPorcOcupacion = parseFloat(desvPorcOcupacion);
+                desvREVPAR = parseFloat(desvREVPAR);
+                
+                for(var i=0;i<columnas.length;i++){
+                    if(columnas[i] == 'Porcent Ocupación')
+                        desviaciones.push([datoPorcOcupacion-desvPorcOcupacion, datoPorcOcupacion+desvPorcOcupacion]);
+                    else if(columnas[i]  == 'Checkins')
+                        desviaciones.push([datoCheckins-desvCheckins, datoCheckins+desvCheckins]);
+                    else if(columnas[i]  == 'Checkouts')
+                        desviaciones.push([datoCheckouts-desvCheckouts, datoCheckouts+desvCheckouts]);
+                    else if(columnas[i]  == 'Pernoctaciones')
+                        desviaciones.push([datoPernoctaciones-desvPernoctaciones, datoPernoctaciones+desvPernoctaciones]);
+                    else if(columnas[i]  == 'Nacionales')
+                        desviaciones.push([datoNacionales-desvNacionales, datoNacionales+desvNacionales]);
+                    else if(columnas[i]  == 'Extranjeros')
+                        desviaciones.push([datoExtranjeros-desvExtranjeros, datoExtranjeros+desvExtranjeros]);
+                    else if(columnas[i]  == 'Hab Ocupadas')
+                        desviaciones.push([datoHabOcupadas-desvHabOcupadas, datoHabOcupadas+desvHabOcupadas]);
+                    else if(columnas[i]  == 'Hab Disponibles')
+                        desviaciones.push([datoHabDisponibles-desvHabDisponibles, datoHabDisponibles+desvHabDisponibles]);
+                    else if(columnas[i]  == 'Tarifa Hab')
+                        desviaciones.push([datoTarPromHab-desvTarPromHab, datoTarPromHab+desvTarPromHab]);
+                    else if(columnas[i]  == 'Tarifa Per')
+                        desviaciones.push([datoTarPromPer-desvTarPromPer, datoTarPromPer+desvTarPromPer]);
+                    else if(columnas[i]  == 'Ventas Netas')
+                        desviaciones.push([datoVentasNetas-desvVentasNetas, datoVentasNetas+desvVentasNetas]);
+                    else if(columnas[i]  == 'REVPAR')
+                        desviaciones.push([datoREVPAR-desvREVPAR, datoREVPAR+desvREVPAR]);
+                    
+                }
+                console.log(desviaciones);
+                if(chartMes.series.length > 1){
+                    chartMes.series[1].update({data: desviaciones});
+                }else{
+                    chartMes.addSeries({
+                        name: 'Promedio error',
+                        type: 'errorbar',
+                        data: desviaciones,
+                        tooltip: {
+                            pointFormat: '(error range: {point.low}-{point.high} mm)<br/>'
+                        }
+                    });
+                }
+                
+
+            });
+
+        }else{
+            if(chartMes.series.length > 1){
+                chartMes.series[1].remove(true);
+            }
+            if(estadistico != 'Promedio'){
+                document.getElementById("desviacion").checked = false;
+                document.getElementById("desviacion").disabled = true;
+            }
+        }
         
     }
+
 </script>
 @endsection

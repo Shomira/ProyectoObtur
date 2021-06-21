@@ -21,7 +21,6 @@ class AnalisisDeNegocioController extends Controller
         $auxMes = $datosActuales[0]->mes;
         $auxAnio = $datosActuales[0]->anio;
 
-
         $registros = DB::select("SELECT Min(fecha) as 'diaMin', Max(fecha) as 'diaMax'
                                 FROM registros r, establecimientos e
                                 WHERE e.id = r.idEstablecimiento 
@@ -31,8 +30,6 @@ class AnalisisDeNegocioController extends Controller
 
         $diaMin = $registros[0]->diaMin;
         $diaMax = $registros[0]->diaMax;
-        
-        
 
         return view('analisisDeNegocio')->with('diaMin',$diaMin)
                                         ->with('diaMax',$diaMax);
@@ -42,62 +39,23 @@ class AnalisisDeNegocioController extends Controller
     public function all(Request $request)
     {
         $idU = Auth::user()->id;
+
         if($request->estadistico == "Total"){
-
-            $consulta = "SELECT WEEKDAY(fecha), 
-                    SUM(checkins) as 'checkins',
-                    SUM(checkouts) as 'checkouts',
-                    SUM(ventas_netas) as 'ventas_netas',
-                    SUM(porcentaje_ocupacion) as 'porcentaje_ocupacion',
-                    SUM(revpar) as 'revpar'
-                    FROM registros r, establecimientos e
-                    WHERE e.id = r.idEstablecimiento 
-                        AND e.idUsuario = $idU 
-                        AND fecha >= '$request->inicio'
-                        AND fecha <= '$request->fin'
-                    GROUP BY WEEKDAY(fecha)
-                    ORDER BY WEEKDAY(fecha)";
-
+            $est = "SUM";
         }elseif($request->estadistico == "Promedio"){
-
-            $consulta = "SELECT WEEKDAY(fecha), 
-                    AVG(checkins) as 'checkins',
-                    AVG(checkouts) as 'checkouts',
-                    AVG(ventas_netas) as 'ventas_netas',
-                    AVG(porcentaje_ocupacion) as 'porcentaje_ocupacion',
-                    AVG(revpar) as 'revpar'
-                    FROM registros r, establecimientos e
-                    WHERE e.id = r.idEstablecimiento 
-                        AND e.idUsuario = $idU 
-                        AND fecha >= '$request->inicio'
-                        AND fecha <= '$request->fin'
-                    GROUP BY WEEKDAY(fecha)
-                    ORDER BY WEEKDAY(fecha)";
-
+            $est = "AVG";
         }elseif($request->estadistico == "Max"){
-
-            $consulta = "SELECT WEEKDAY(fecha), 
-                    MAX(checkins) as 'checkins',
-                    MAX(checkouts) as 'checkouts',
-                    MAX(ventas_netas) as 'ventas_netas',
-                    MAX(porcentaje_ocupacion) as 'porcentaje_ocupacion',
-                    MAX(revpar) as 'revpar'
-                    FROM registros r, establecimientos e
-                    WHERE e.id = r.idEstablecimiento 
-                        AND e.idUsuario = $idU 
-                        AND fecha >= '$request->inicio'
-                        AND fecha <= '$request->fin'
-                    GROUP BY WEEKDAY(fecha)
-                    ORDER BY WEEKDAY(fecha)";
-
+            $est = "MAX";
         }elseif($request->estadistico == "Min"){
+            $est = "MIN";
+        }
 
-            $consulta = "SELECT WEEKDAY(fecha), 
-                    MIN(checkins) as 'checkins',
-                    MIN(checkouts) as 'checkouts',
-                    MIN(ventas_netas) as 'ventas_netas',
-                    MIN(porcentaje_ocupacion) as 'porcentaje_ocupacion',
-                    MIN(revpar) as 'revpar'
+        $consulta = "SELECT WEEKDAY(fecha) as 'dia', 
+                    ROUND($est(checkins), 2) as 'checkins',
+                    ROUND($est(checkouts), 2) as 'checkouts',
+                    ROUND($est(ventas_netas), 2) as 'ventas_netas',
+                    ROUND($est(porcentaje_ocupacion), 2) as 'porcentaje_ocupacion',
+                    ROUND($est(revpar), 2) as 'revpar'
                     FROM registros r, establecimientos e
                     WHERE e.id = r.idEstablecimiento 
                         AND e.idUsuario = $idU 
@@ -105,12 +63,32 @@ class AnalisisDeNegocioController extends Controller
                         AND fecha <= '$request->fin'
                     GROUP BY WEEKDAY(fecha)
                     ORDER BY WEEKDAY(fecha)";
-
-        }
-        
         
         $datos= DB::select($consulta);
         
         return response(json_encode($datos), 200)->header('Content-type', 'text/plain');
     }
+
+    public function desviacion(Request $request){
+        $idU = Auth::user()->id;
+
+        $consulta = "SELECT WEEKDAY(fecha), 
+                    ROUND(STD(checkins), 2) as 'checkins',
+                    ROUND(STD(checkouts), 2) as 'checkouts',
+                    ROUND(STD(ventas_netas), 2) as 'ventas_netas',
+                    ROUND(STD(porcentaje_ocupacion), 2) as 'porcentaje_ocupacion',
+                    ROUND(STD(revpar), 2) as 'revpar'
+                    FROM registros r, establecimientos e
+                    WHERE e.id = r.idEstablecimiento 
+                        AND e.idUsuario = $idU 
+                        AND fecha >= '$request->inicio'
+                        AND fecha <= '$request->fin'
+                    GROUP BY WEEKDAY(fecha)
+                    ORDER BY WEEKDAY(fecha)";
+        
+        $datos= DB::select($consulta);
+
+        return response(json_encode($datos), 200)->header('Content-type', 'text/plain');
+    }
+
 }

@@ -6,7 +6,6 @@
         @csrf
     </form>
 
-
     <div class="lineaIzquierda">
         <div class=" container principalV">
             <div class="row">  
@@ -16,7 +15,7 @@
             </div>
         </div>
     </div>
-    <div  class="row tituloFiltrosGraficasEs" >
+    <div class="row tituloFiltrosGraficasEs" >
         <div>
             <h5 class="pl-3 pt-2 pr-2">Estadísticos:</h5>
         </div>
@@ -39,6 +38,11 @@
         </div>  
         <div>
             <input type="date" name="fin" value="{{$diaMax}}" class="form-control" id="cambioFechaFin" aria-describedby="inputGroupPrepend2" >
+        </div>
+        <div class="col-sm-3">
+            <div class="card-body cardBodyResumenM">
+                <input type="checkbox" class="from-control" id="desviacion" onclick="desviacion(this)">Desviación estandar
+            </div>
         </div>
     </div>
     <hr>
@@ -73,15 +77,13 @@
         </div>
     </div>
         
-
     
 @endsection
 
 @section('scripts')
-<script src = "https://code.highcharts.com/highcharts.src.js"> </script>
 <!-- Scripts Graficas Higcharts -->
-<script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
-<script src="https://code.highcharts.com/stock/modules/export-data.js"></script>
+<script src = "https://code.highcharts.com/highcharts.src.js"> </script>
+<script src="https://code.highcharts.com/highcharts-more.js"></script>
 
 <script>
 
@@ -95,6 +97,12 @@
     var dataPorcOcupacion = [];
     var dataREVPAR = [];
     var estadistico = 'Promedio';
+
+    var desvCheckins = [];
+    var desvCheckouts = [];
+    var desvVentasNetas = [];
+    var desvPorcOcupacion = [];
+    var desvREVPAR = [];
 
     /*Tema general de las graficas */
     Highcharts.theme = {
@@ -194,6 +202,7 @@
             fechaInicio = $(this).val();
            
             consulta();
+            desviacion();
 
         });
 
@@ -208,6 +217,7 @@
             fechaFin = $(this).val();
         
             consulta();
+            desviacion();
         });
         
         consulta();
@@ -227,7 +237,7 @@
         }).done(function(res){
             
             var arreglo = JSON.parse(res);
-
+            
             for(var i=0;i<arreglo.length;i++){
 
                 dataCheckins.push(arreglo[i].checkins);
@@ -282,6 +292,111 @@
         estadistico = val.value;
 
         consulta();
+        desviacion();
+    }
+
+    function desviacion(){
+        if(document.getElementById("desviacion").checked && estadistico == 'Promedio'){
+            desvCheckins = [];
+            desvCheckouts = [];
+            desvPorcOcupacion = [];
+            desvREVPAR = [];
+            $.ajax({
+                url:'{{url("home/analisisDeNegocio/desviacion")}}',
+                method: 'POST',
+                data:{
+                    inicio: fechaInicio,
+                    fin: fechaFin,
+                    _token: $('input[name="_token"]').val()
+                }
+            }).done(function(res){
+
+                var arreglo = JSON.parse(res);
+
+                for(var i=0;i<arreglo.length;i++){
+
+                    desvCheckins.push(arreglo[i].checkins);
+                    desvCheckouts.push(arreglo[i].checkouts);
+                    desvVentasNetas.push(arreglo[i].ventas_netas);
+                    desvPorcOcupacion.push(arreglo[i].porcentaje_ocupacion);
+                    desvREVPAR.push(arreglo[i].revpar);
+
+                }
+
+                desvCheckins = desvCheckins.map(element => parseFloat(element));
+                desvCheckouts = desvCheckouts.map(element => parseFloat(element));
+                desvVentasNetas = desvVentasNetas.map(element => parseFloat(element));
+                desvPorcOcupacion = desvPorcOcupacion.map(element => parseFloat(element));
+                desvREVPAR = desvREVPAR.map(element => parseFloat(element));
+                
+                for(var i=0;i<arreglo.length;i++){
+
+                    desvCheckins[i] = [dataCheckins[i]-desvCheckins[i], dataCheckins[i]+desvCheckins[i]];
+                    desvCheckouts[i] = [dataCheckouts[i]-desvCheckouts[i], dataCheckouts[i]+desvCheckouts[i]];
+                    desvVentasNetas[i] = [dataVentasNetas[i]-desvVentasNetas[i], dataVentasNetas[i]+desvVentasNetas[i]];
+                    desvPorcOcupacion[i] = [dataPorcOcupacion[i]-desvPorcOcupacion[i], dataPorcOcupacion[i]+desvPorcOcupacion[i]];
+                    desvREVPAR[i] = [dataREVPAR[i]-desvREVPAR[i], dataREVPAR[i]+desvREVPAR[i]];
+
+                }
+                
+                if(chartCheckins.series.length > 1){
+                    chartCheckins.series[1].update({data: desvCheckins});
+                    chartCheckouts.series[1].update({data: desvCheckouts});
+                    chartPorcentOcupacion.series[1].update({data: desvPorcOcupacion});
+                    chartRevpar.series[1].update({data: desvREVPAR});
+
+                }else{
+                    chartCheckins.addSeries({
+                        name: 'Checkins error',
+                        type: 'errorbar',
+                        data: desvCheckins,
+                        tooltip: {
+                            pointFormat: '(error range: {point.low}-{point.high} mm)<br/>'
+                        }
+                    });
+                    chartCheckouts.addSeries({
+                        name: 'Checkouts error',
+                        type: 'errorbar',
+                        data: desvCheckouts,
+                        tooltip: {
+                            pointFormat: '(error range: {point.low}-{point.high} mm)<br/>'
+                        }
+                    });
+                    chartPorcentOcupacion.addSeries({
+                        name: 'Porcent Ocupacion error',
+                        type: 'errorbar',
+                        data: desvPorcOcupacion,
+                        tooltip: {
+                            pointFormat: '(error range: {point.low}-{point.high} mm)<br/>'
+                        }
+                    });
+                    chartRevpar.addSeries({
+                        name: 'Revpar error',
+                        type: 'errorbar',
+                        data: desvREVPAR,
+                        tooltip: {
+                            pointFormat: '(error range: {point.low}-{point.high} mm)<br/>'
+                        }
+                    });
+
+                }
+                
+
+            });
+            
+        }else{
+            if(chartCheckouts.series.length > 1){
+                chartCheckins.series[1].remove(true);
+                chartCheckouts.series[1].remove(true);
+                chartPorcentOcupacion.series[1].remove(true);
+                chartRevpar.series[1].remove(true);
+            }
+            if(estadistico != 'Promedio'){
+                document.getElementById("desviacion").checked = false;
+                document.getElementById("desviacion").disabled = true;
+            }
+        }
+        
     }
 
 </script>

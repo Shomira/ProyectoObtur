@@ -76,6 +76,8 @@ class ResumenMensualController extends Controller
                                 WHERE e.id = r.idEstablecimiento AND e.idUsuario = $idU
                                 ORDER BY YEAR(fecha) desc");
         
+
+        
         return view('resumenMensual')->with('meses',$meses)
                                         ->with('mesFin',$auxMes)
                                         ->with('anioFin',$auxAnio)
@@ -87,83 +89,60 @@ class ResumenMensualController extends Controller
         $idU = Auth::user()->id;
 
         if($request->estadistico == "Total"){
-
-            $consulta = "SELECT  SUM(checkins) as 'checkins',
-                                SUM(checkouts) as 'checkouts',
-                                SUM(pernoctaciones) as 'pernoctaciones',
-                                SUM(nacionales) as 'nacionales',
-                                SUM(extranjeros) as 'extranjeros',
-                                SUM(habitaciones_ocupadas) as 'habitaciones_ocupadas',
-                                SUM(habitaciones_disponibles) as 'habitaciones_disponibles',
-                                SUM(tarifa_promedio) as 'tarifa_promedio',
-                                SUM(TAR_PER) as 'tar_per',
-                                SUM(ventas_netas) as 'ventas_netas',
-                                SUM(porcentaje_ocupacion) as 'porcentaje_ocupacion',
-                                SUM(revpar) as 'revpar'
-                        FROM registros r, establecimientos e
-                        WHERE e.id = r.idEstablecimiento AND e.idUsuario = $idU 
-                            AND MONTH(fecha) = '$request->mes' AND YEAR(fecha) = '$request->anio' ";
-
+            $est = "SUM";
         }elseif($request->estadistico == "Promedio"){
-
-            $consulta = "SELECT  AVG(checkins) as 'checkins',
-                                AVG(checkouts) as 'checkouts',
-                                AVG(pernoctaciones) as 'pernoctaciones',
-                                AVG(nacionales) as 'nacionales',
-                                AVG(extranjeros) as 'extranjeros',
-                                AVG(habitaciones_ocupadas) as 'habitaciones_ocupadas',
-                                AVG(habitaciones_disponibles) as 'habitaciones_disponibles',
-                                AVG(tarifa_promedio) as 'tarifa_promedio',
-                                AVG(TAR_PER) as 'tar_per',
-                                AVG(ventas_netas) as 'ventas_netas',
-                                AVG(porcentaje_ocupacion) as 'porcentaje_ocupacion',
-                                AVG(revpar) as 'revpar'
-                        FROM registros r, establecimientos e
-                        WHERE e.id = r.idEstablecimiento AND e.idUsuario = $idU 
-                            AND MONTH(fecha) = '$request->mes' AND YEAR(fecha) = '$request->anio' ";
-
-
+            $est = "AVG";
         }elseif($request->estadistico == "Max"){
-
-            $consulta = "SELECT  MAX(checkins) as 'checkins',
-                                MAX(checkouts) as 'checkouts',
-                                MAX(pernoctaciones) as 'pernoctaciones',
-                                MAX(nacionales) as 'nacionales',
-                                MAX(extranjeros) as 'extranjeros',
-                                MAX(habitaciones_ocupadas) as 'habitaciones_ocupadas',
-                                MAX(habitaciones_disponibles) as 'habitaciones_disponibles',
-                                MAX(tarifa_promedio) as 'tarifa_promedio',
-                                MAX(TAR_PER) as 'tar_per',
-                                MAX(ventas_netas) as 'ventas_netas',
-                                MAX(porcentaje_ocupacion) as 'porcentaje_ocupacion',
-                                MAX(revpar) as 'revpar'
-                        FROM registros r, establecimientos e
-                        WHERE e.id = r.idEstablecimiento AND e.idUsuario = $idU 
-                            AND MONTH(fecha) = '$request->mes' AND YEAR(fecha) = '$request->anio' ";
-
+            $est = "MAX";
         }elseif($request->estadistico == "Min"){
-
-            $consulta = "SELECT  MIN(checkins) as 'checkins',
-                                MIN(checkouts) as 'checkouts',
-                                MIN(pernoctaciones) as 'pernoctaciones',
-                                MIN(nacionales) as 'nacionales',
-                                MIN(extranjeros) as 'extranjeros',
-                                MIN(habitaciones_ocupadas) as 'habitaciones_ocupadas',
-                                MIN(habitaciones_disponibles) as 'habitaciones_disponibles',
-                                MIN(tarifa_promedio) as 'tarifa_promedio',
-                                MIN(TAR_PER) as 'tar_per',
-                                MIN(ventas_netas) as 'ventas_netas',
-                                MIN(porcentaje_ocupacion) as 'porcentaje_ocupacion',
-                                MIN(revpar) as 'revpar'
-                        FROM registros r, establecimientos e
-                        WHERE e.id = r.idEstablecimiento AND e.idUsuario = $idU 
-                            AND MONTH(fecha) = '$request->mes' AND YEAR(fecha) = '$request->anio' ";
-
+            $est = "MIN";
         }
-        
+
+        $consulta = "SELECT  ROUND($est(checkins), 2) as 'checkins',
+                            ROUND(STD(checkins), 2) as 'desvcheckins',
+                            ROUND($est(checkouts), 2) as 'checkouts',
+                            ROUND($est(pernoctaciones), 2) as 'pernoctaciones',
+                            ROUND($est(nacionales), 2) as 'nacionales',
+                            ROUND($est(extranjeros), 2) as 'extranjeros',
+                            ROUND($est(habitaciones_ocupadas), 2) as 'habitaciones_ocupadas',
+                            ROUND($est(habitaciones_disponibles), 2) as 'habitaciones_disponibles',
+                            ROUND($est(tarifa_promedio), 2) as 'tarifa_promedio',
+                            ROUND($est(TAR_PER), 2) as 'tar_per',
+                            ROUND($est(ventas_netas), 2) as 'ventas_netas',
+                            ROUND($est(porcentaje_ocupacion), 2) as 'porcentaje_ocupacion',
+                            ROUND($est(revpar), 2) as 'revpar'
+                    FROM registros r, establecimientos e
+                    WHERE e.id = r.idEstablecimiento AND e.idUsuario = $idU 
+                        AND MONTH(fecha) = '$request->mes' AND YEAR(fecha) = '$request->anio' ";
+
 
         $datos= DB::select($consulta);
         
+        return response(json_encode($datos), 200)->header('Content-type', 'text/plain');
+    }
+
+    public function desviacion(Request $request){
+        $idU = Auth::user()->id;
+
+        $consulta = "SELECT  ROUND(STD(checkins), 2) as 'checkins',
+                            ROUND(STD(checkouts), 2) as 'checkouts',
+                            ROUND(STD(pernoctaciones), 2) as 'pernoctaciones',
+                            ROUND(STD(nacionales), 2) as 'nacionales',
+                            ROUND(STD(extranjeros), 2) as 'extranjeros',
+                            ROUND(STD(habitaciones_ocupadas), 2) as 'habitaciones_ocupadas',
+                            ROUND(STD(habitaciones_disponibles), 2) as 'habitaciones_disponibles',
+                            ROUND(STD(tarifa_promedio), 2) as 'tarifa_promedio',
+                            ROUND(STD(TAR_PER), 2) as 'tar_per',
+                            ROUND(STD(ventas_netas), 2) as 'ventas_netas',
+                            ROUND(STD(porcentaje_ocupacion), 2) as 'porcentaje_ocupacion',
+                            ROUND(STD(revpar), 2) as 'revpar'
+                    FROM registros r, establecimientos e
+                    WHERE e.id = r.idEstablecimiento AND e.idUsuario = $idU 
+                        AND MONTH(fecha) = '$request->mes' AND YEAR(fecha) = '$request->anio' ";
+
+
+        $datos= DB::select($consulta);
+
         return response(json_encode($datos), 200)->header('Content-type', 'text/plain');
     }
     
