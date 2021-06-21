@@ -51,8 +51,7 @@
                     <div class="col-lg-4 col-md-12 mb-4">
                             <div class="card-sectionDeh  border rounded">
                                     <div class="card-headerDe5  rounded ">
-                                        <div id="containerPie5" ></div>
-                                        
+                                        <div id="containerPie5" ></div> 
                                     </div>
                                     <div class="card-body text-center mb-2" >
                                         @for ($i = 0; $i < 5; $i++)
@@ -109,7 +108,7 @@
                             </section> 
                             
                             <section class="row centrado2">
-                                <div class="col-lg-5">
+                                <div class="col-lg-4 col-md-12 mb-4">
                                     <div class="card-sectionDeh  border rounded">
                                         <div class="card-headerDe1  rounded ">
                                             <div id="containerPie1" ></div>
@@ -844,6 +843,7 @@
                 },
                 series: {
                     dataLabels: {
+                        backgroundColor: 'white',
                         enabled: true,
                         format: '{point.name}: {point.y:.1f}%'
                         
@@ -905,7 +905,10 @@
                 series: {
                     dataLabels: {
                         enabled: true,
-                        format: '{point.name}: {point.y:.1f}%'
+                        format: '{point.name}: {point.y:.1f}%',
+                        style: {
+                            textOutline: false
+                        }
                     }, colors: [
                             'rgb(255,170,0)',
                             'rgb(29,32,39)'
@@ -922,12 +925,16 @@
                     size:'80%',
                     name: "Browsers",
                     colorByPoint: true,
+                  
                     data: [
                         {
+                  
                             name: "Nacionales",
                             y: nacionales4
                         },
+                        
                         {
+                           
                             name: "Extranjeros",
                             y: extranjeros4
                         }
@@ -964,7 +971,10 @@
                     size:'80%',
                     dataLabels: {
                         enabled: true,
-                        format: '{point.name}: {point.y:.1f}%'
+                        format: '{point.name}: {point.y:.1f}%',
+                        style: {
+                            textOutline: false
+                        },
                     }, colors: [
                             'rgb(255,170,0)',
                             'rgb(29,32,39)'
@@ -1024,7 +1034,10 @@
                         size:'80%',
                         dataLabels: {
                         enabled: true,
-                        format: '{point.name}: {point.y:.1f}%'
+                        format: '{point.name}: {point.y:.1f}%',
+                        style: {
+                            textOutline: false
+                        },
                     }, colors: [
                             'rgb(255,170,0)',
                             'rgb(29,32,39)'
@@ -1058,7 +1071,7 @@
         Highcharts.chart('containerPie1', {
             chart: {
                 type: 'pie',
-                backgroundColor: null,
+                backgroundColor: null
             },
             title: {
                 text: ''
@@ -1082,9 +1095,12 @@
             plotOptions: {
                 series: {
                     dataLabels: {
-                        size:'80%',
+                        
                         enabled: true,
-                        format: '{point.name}: {point.y:.1f}%'
+                        format: '{point.name}: {point.y:.1f}%',
+                        style: {
+                            textOutline: false
+                        },
                     }, colors: [
                         'rgb(255,170,0)',
                         'rgb(29,32,39)'
@@ -1099,6 +1115,7 @@
             },
             series: [
                 {
+                    size:'80%',
                     name: "Browsers",
                     colorByPoint: true,
                     data: [

@@ -120,69 +120,69 @@
         </div>
     </div>  
         <!-- Tabla de usuarios-->  
-    <div class="containerTab">  
-        <div class="container principalV">
-            <div class="row">
-                <div class="col-lg-12 text-left">
+    <div class="containerTab">
+        <div class="cardV">
+            <div class="lineaIzquierda">
+                <div class=" container principalV">
                     <div class="row">
-                        <!--tarjeta 1-->
-                        <div class="col-lg-30  col-md-8 mb-4">
-                            <div class="card-section2 border rounded p-3">
-                                <div class="card-header-s rounded pb-4">
-                                    <h5 class="card-header-title text-white pt-3">Lista Usuarios Existentes</h5>
-                                </div>
-                            </div>
+                        <div class="pb-3">
+                            <h5 class="pt-3">LISTA DE USUARIOS EXISTENTES</h5>
                         </div>
                     </div>
                 </div>
+            </div>  
+            <!-- Button trigger modal para crear un usuario -->
+            <!--<button  type="button" class="btn  text-white crearUs"  data-toggle="modal" data-target="#modalAgregar">
+                <img src="{{ asset('imgs/aus1.png')}}">Crear Usuario
+            </button>-->
+            <div class="estiloTablaUs">
+                <button  type="button" class="btn  text-white crearUs"  data-toggle="modal" data-target="#modalAgregar">
+                    <img src="{{ asset('imgs/aus1.png')}}">Crear Usuario
+                </button>
+                <div class="card-body">
+                    <table id="tabUsuario" class="table table-striped " >
+                        <thead>
+                            <tr>
+                                <td>Id</td>
+                                <td>Nombre</td>
+                                <td>Rol</td>
+                                <td>Email</td>
+                                <td>Provincia</td>
+                                <td>Cantón</td>
+                                <td>Eliminar</td>
+                                <td>Editar</td>
+                                </tr>
+                        </thead>
+                        <tbody>
+                                @foreach($usuarios as $usuario)
+                                <tr>
+                                    <td> {{$usuario->id}} </td>
+                                    <td>{{$usuario->name}}</td>
+                                    <td>{{$usuario->rol}}</td>
+                                    <td>{{$usuario->email}}</td>
+                                    <td>{{$usuario->provincia}}</td>
+                                    <td>{{$usuario->canton}}</td>
+                                    <td>
+                                        <button class="btn btn-danger btnEliminar" value="{{ $usuario->id }}" data-toggle="modal" data-target="#modalEliminar" onclick="eliminar(this)">
+                                            <img src="{{ asset('imgs/eliminar.png')}}"></button>
+                                                        
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-primary btnEditar" value="{{ $usuario->id }}"  data-toggle="modal" data-target="#modalEditar" onclick="editar(this)">
+                                            <img src="{{ asset('imgs/ed3.png')}}">
+                                        </button>
+                                        <form action="{{ url('home/gestionUsuarios', ['id'=>$usuario->id ]) }}" method="POST" id="formEli_{{ $usuario->id }}">
+                                            @csrf
+                                                <input type="hidden" name="id" value="{{ $usuario->id }}">
+                                                <input type="hidden" name="_method" value="delete">
+                                        </form>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                    </table>
+                </div>
             </div>
-        </div>     
-        <!-- Button trigger modal para crear un usuario -->
-        <button  type="button" class="btn  text-white crearUs"  data-toggle="modal" data-target="#modalAgregar">
-            <img src="{{ asset('imgs/aus1.png')}}">Crear Usuario
-        </button>
-        <div class="card-body">
-            <table id="tabUsuario" class="table table-striped " >
-                <thead>
-                    <tr>
-                        <td>Id</td>
-                        <td>Nombre</td>
-                        <td>Rol</td>
-                        <td>Email</td>
-                        <td>Provincia</td>
-                        <td>Cantón</td>
-                        <td>Eliminar</td>
-                        <td>Editar</td>
-                        </tr>
-                </thead>
-                <tbody>
-                        @foreach($usuarios as $usuario)
-                        <tr>
-                            <td> {{$usuario->id}} </td>
-                            <td>{{$usuario->name}}</td>
-                            <td>{{$usuario->rol}}</td>
-                            <td>{{$usuario->email}}</td>
-                            <td>{{$usuario->provincia}}</td>
-                            <td>{{$usuario->canton}}</td>
-                            <td>
-                                <button class="btn btn-danger btnEliminar" value="{{ $usuario->id }}" data-toggle="modal" data-target="#modalEliminar" onclick="eliminar(this)">
-                                    <img src="{{ asset('imgs/eliminar.png')}}"></button>
-                                                
-                            </td>
-                            <td>
-                                <button class="btn btn-primary btnEditar" value="{{ $usuario->id }}"  data-toggle="modal" data-target="#modalEditar" onclick="editar(this)">
-                                    <img src="{{ asset('imgs/ed3.png')}}">
-                                </button>
-                                <form action="{{ url('home/gestionUsuarios', ['id'=>$usuario->id ]) }}" method="POST" id="formEli_{{ $usuario->id }}">
-                                    @csrf
-                                        <input type="hidden" name="id" value="{{ $usuario->id }}">
-                                        <input type="hidden" name="_method" value="delete">
-                                </form>
-                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-            </table>
         </div>
     </div>
         <!-- Modal Eliminar Usuarios-->
@@ -222,7 +222,6 @@
                     <div class="modal-body">
                         <input type="hidden" name="id" id="idEdit">
                         <div class="form-group row">
-
                             <input id="nameEditar" type="text" class="form-control @error('name') is-invalid @enderror" name="name" placeholder="Nombre exactamente igual como en los archivos" value="{{ old('name') }}" required autocomplete="name" autofocus>
 
                             @error('name')
@@ -290,7 +289,7 @@
             </div>
         </div>
     </div>
- 
+
 @endsection
 
 

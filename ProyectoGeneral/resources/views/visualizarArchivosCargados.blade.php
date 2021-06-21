@@ -15,66 +15,56 @@
         @endif
     </section>
     <div class="containerTab">
-        
-        <div class="container principalV ">
-            <div class="row">
-                <div class="col-lg-12 text-left">
-                    <div class="row">
-                        <!--tarjeta 1-->
-                        <div class="col-lg-30  col-md-8 mb-4">
-                            <div class="card-section2 border rounded p-3">
-                                <div class="card-header-s rounded pb-4">
-                                    <h5 class="card-header-title text-white pt-3">Lista de Archivos</h5>
-                                </div>
-                            </div>
-                        </div>
+        <div class="lineaIzquierda">
+            <div class="container principalV ">
+                <div class="row">
+                    <div class=" pb-3">
+                        <h5 class=" pt-3">LISTA DE ARCHIVOS</h5>
                     </div>
                 </div>
             </div>
         </div> 
-     
-            
-        <!-- Tabla de Archivos-->        
-        <div class="card-body">
-            <table class="table table-striped tablaAr" id='t_archivos' >
-                <thead>
-                    <tr>
-                        <td>Nombre</td>
-                        <td>Fecha de carga</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach($files as $file)
+        <!-- Tabla de Archivos-->
+        <div class="estiloTabla">  
+            <div class="card-body">
+                <table class="table table-striped tablaAr" id='t_archivos' >
+                    <thead>
                         <tr>
-                            <td>{{$file->nombre}}</td>
-                            <td>{{$file->created_at}}</td>
-                            <td>
-                                <a href="../storage/{{$file->nombre}}" class="btn btn-sm btn-outline-secondary">Descargar</a>
-                            </td>
-                            <td>
-                                <button class="btn btn-sm btn-outline-danger" id="btnEliminar" value="{{ $file->id }}" data-toggle="modal" data-target="#modalEliminar" onclick="eliminar(this)">
-                                    Eliminar
-                                </button>
-                                
-                                <form action="{{ url('home/visualizarArchivosCargados', $file->id ) }}" method="POST" id="formEli_{{ $file->id }}">
-                                    @method('DELETE')
-                                    @csrf
-                                    <input type="hidden" name="id" value="{{ $file->id }}">
-                                    <input type="hidden" name="_method" value="delete">
-                                
-                                </form>
-                                
-                            </td>
-                        
+                            <td>Nombre</td>
+                            <td>Fecha de carga</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
                         </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        </div>
-    
-
+                    </thead>
+                    <tbody>
+                        @foreach($files as $file)
+                            <tr>
+                                <td>{{$file->nombre}}</td>
+                                <td>{{$file->created_at}}</td>
+                                <td>
+                                    <a href="../storage/{{$file->nombre}}" class="btn btn-sm btn-outline-secondary">Descargar</a>
+                                </td>
+                                <td>
+                                    <button class="btn btn-sm btn-outline-danger" id="btnEliminar" value="{{ $file->id }}" data-toggle="modal" data-target="#modalEliminar" onclick="eliminar(this)">
+                                        Eliminar
+                                    </button>
+                                    
+                                    <form action="{{ url('home/visualizarArchivosCargados', $file->id ) }}" method="POST" id="formEli_{{ $file->id }}">
+                                        @method('DELETE')
+                                        @csrf
+                                        <input type="hidden" name="id" value="{{ $file->id }}">
+                                        <input type="hidden" name="_method" value="delete">
+                                    
+                                    </form>
+                                    
+                                </td>
+                            
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>   
         <!-- Modal Eliminar Archivos-->
         <div class="modal fade" id="modalEliminar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">

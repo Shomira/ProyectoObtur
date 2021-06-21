@@ -23,8 +23,7 @@ nav.publico{
         rgb(0, 63, 114), 
         rgb(0, 63, 114));
         border-bottom: 3px solid rgb(234, 171, 0) ;
-}
-     
+} 
 section.containerSlider{
     width: 90%;
     margin: 0 auto;
@@ -47,11 +46,8 @@ section.containerSlider{
 nav.publico .navbar-nav  a.nav-link {
     color: white;
 }
-/*
-a.nav-link:hover{
-    background-color: rgb(0,54, 97);
-}
-*/
+
+
 /* Estilos al Login*/
 section.espacioLogin{
     margin-bottom: 9em;
@@ -115,95 +111,7 @@ section.sitiosLoja article.sitios:hover{
    text-align:center;
 }
 
-/*Grafica Welcome*/
-.titulosPanelGe h5{
- margin-top: 1.5em;
-}
-.titulosPanel h5, .titulosPanel2 h5 {
-    color: #444449;
 
-}
-.titulosPanel2 h5 {
-    margin-bottom: -1em;
-    margin-left: 3em;
-    margin-top:0.2em;
-
-}
-.titulosPanel2 h5.tituloEstadisticos{
-    margin-left: -10em;
-}
-.graficaWelcome{
-    width: 90%;
-    margin: 0 auto;
-    border-radius: 8px;
-        
-}
-.inicio{
-    margin-right: -6em;
-}
-.categoria{
-    margin-left: -12em;
-}
-label.mensajeDoM{
-    margin-left: -9em;
-}
-.mesDia{
-    margin-left: -9em;
-}
-.cardGraficaWelcome{
-    border: none; 
-    background:none
-}
-.selectGraficaAnio{
-    padding: 0% 2%;
-}
-.lineatituloGrafica{
-    margin-top: -1.4em;
-    border-top: 5px solid rgb(255, 251, 6);
-    margin-bottom: 1.8em;
-}
-
-.tituloGrafica{
-    margin: 0 auto;
-    align-items: center;
-    text-align: center;
-    margin-bottom: 1.5em;
-    margin-top: 0.7em;
-}
-.tituloGrafica h2{
-    margin: 1em;
-    margin-top: -0.2em;
-    padding: 1.5em 0.2em 0.2em 1em;
-    text-shadow: 0px 8px 8px rgba(0, 0, 0, 0.25);  
-    border-bottom: 5px solid rgb(49, 58, 66);
-    padding-bottom: 0.6em;
-    
-}
- .graficaColums{
-     margin-left: 2em;
- }
- .graficaColums label:hover{
-    color: rgb(0, 26, 255);
-    font-weight: 1000;
-}
-.graficaColums h5{
-    margin-bottom: 0.5em;
-}
-.graficaColums hr{
-    margin: 0.4em;
-}
-.calloutGM{
-    margin-left: -3rem;
-}
-.graficaDos h5 .graficaDosEstadisticos h5{
-    margin-top: 0.5em;
-}
-.graficaDosAnio{
-    margin-left: -3rem;
-}
-.graficaDos h5{
-padding-left: 8em;
-}
 /*Servicos Home PAGE----------------------------- */
 section.sericiosL, section.datosEstab{
     width: 95%;
@@ -216,9 +124,8 @@ section.datosEstab{
 }
 
 .serviciosL article.servicios,.serviciosL2 article.servicios,
- section.datosEstab article.datEs,
- section.datosEstab article.datEsResultados,
-  section.datosAd article.datAd {
+ section.datosEstab article.datEs,section.datosEstab 
+ article.datEsResultados,section.datosAd article.datAd {
     width: 27%;  
     display:inline-block;
     background: #e9eae8;
@@ -350,18 +257,7 @@ section.serviciosL2 article.servicios:hover{
     text-align: center;
   }
 
-  /*Estilos a las marcas*/
-  
-  .marcasImg img{
-    width: 87%;
-    height: 90%;
-    padding: 1em;
-    padding-top: 2em;
 
-  }
-  .marcas{
-      margin-right: 0em;
-  }
 /*----------------------------------------------------------------------------------*/
 /*-----------------------------Indicadores de Alojamiento----------------------*/
 
@@ -369,11 +265,26 @@ section.serviciosL2 article.servicios:hover{
 
 #containerPie5, #containerPie4,#containerPie3,#containerPie2,#containerPie1{
      padding-bottom: 10em;
+     margin-left: -0.5em; 
+     height: 370px; 
+     min-width: 375px
+}
+
+
+#chartTarifaPromPerson,#chartTarifaPromHabitacion,
+#chartPorcentajeOcupacion, #chartRevpar, #chartEstadiaProm{
+    height: 570px; 
+    min-width: 900px;
 }
 
 
 .rect .highcharts-background{
      background-color: rgb(128, 123, 123);
+}
+.highcharts-series-data text {
+    fill: black;
+   
+  
 }
 .significadoEstadisticas{
     padding-top: 0.4em;
@@ -381,7 +292,6 @@ section.serviciosL2 article.servicios:hover{
     margin-top: 0.2em;
     margin-bottom: 1em;
     font-size:13px;
-
 }
 
 h2.tituloDatos{
@@ -393,8 +303,7 @@ section.menu{
     width: 95%;
     padding: 1.5em 0em;
     margin: 0 auto;
-    /*background: none */
-    
+      
 }
 section.indicadoresDe, section.indicadoresDeHues{
     width: 85%;
@@ -508,11 +417,11 @@ nav.navDatosEs button:hover{
      
     background: #E9ECEF;
 }
+
 .card-headerDe1{
-    height: 240px;
-    margin-top:-40px;
     background: #f6f7fa;
 }
+
 
 .card-sectionDeh, .card-sectionDeh2,.card-sectionDeh1{
     margin-top: 80px;
@@ -605,7 +514,6 @@ nav.navDatosEs button:hover{
     padding-left: 4em;
     padding-bottom: 0.1em;
     color: white;
-
 }
 
 /*contenedores graficas tarifa promedio por habitacion*/
@@ -616,6 +524,104 @@ nav.navDatosEs button:hover{
 .imgTituloDatosEs{
     padding-right:0.4em;
 }
+
+/*---------------------------------------- Graficas Estadisticas------------------*/
+
+
+.titulosPanelGe h5{
+ margin-top: 1.5em;
+}
+.titulosPanel h5, .titulosPanel2 h5 {
+    color: #444449;
+
+}
+.titulosPanel2 h5 {
+    margin-bottom: -1em;
+    margin-left: 3em;
+    margin-top:0.2em;
+
+}
+.titulosPanel2 h5.tituloEstadisticos{
+    margin-left: -10em;
+}
+.graficaWelcome{
+    width: 90%;
+    margin: 0 auto;
+    border-radius: 8px;
+        
+}
+.inicio{
+    margin-right: -6em;
+}
+.categoria{
+    margin-left: -12em;
+}
+label.mensajeDoM{
+    margin-left: -9em;
+}
+.mesDia{
+    margin-left: -9em;
+}
+.cardGraficaWelcome{
+    border: none; 
+    background:none
+}
+.selectGraficaAnio{
+    padding: 0% 2%;
+}
+.lineatituloGrafica{
+    margin-top: -1.4em;
+    border-top: 5px solid rgb(255, 251, 6);
+    margin-bottom: 1.8em;
+}
+
+.tituloGrafica{
+    margin: 0 auto;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 1.5em;
+    margin-top: 0.7em;
+}
+.tituloGrafica h2{
+    margin: 1em;
+    margin-top: -0.2em;
+    padding: 1.5em 0.2em 0.2em 1em;
+    text-shadow: 0px 8px 8px rgba(0, 0, 0, 0.25);  
+    border-bottom: 5px solid rgb(49, 58, 66);
+    padding-bottom: 0.6em;
+    
+}
+ .graficaColums{
+     margin-left: 2em;
+ }
+ .graficaColums label:hover{
+    color: rgb(0, 26, 255);
+    font-weight: 900;
+}
+.graficaColums h5{
+    margin-bottom: 0.5em;
+}
+.graficaColums hr{
+    margin: 0.4em;
+}
+.calloutGM{
+    margin-left: -3rem;
+}
+.graficaDos h5 .graficaDosEstadisticos h5{
+    margin-top: 0.5em;
+}
+.graficaDosAnio{
+    margin-left: -3rem;
+}
+.graficaDos h5{
+padding-left: 8em;
+}
+
+#containerChartCaregorias, #containerChartComparativa{
+    height: 500px; 
+    min-width: 800px;
+}
+/*Fin grafias Estadisticas */
 
 /*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
 
@@ -668,6 +674,32 @@ article.quienesSomosOp p {
 }
 
 /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<Estilos Administrador >>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
+/*.lineaTitulosAdmin{
+    margin-top: -1em;
+    border-top: 3px solid rgb(234, 171, 0);
+    margin-bottom: 1.8em;
+    margin-left: -3.5em;
+}
+*/
+.principalV h5{
+    color: #4e4c4c;
+    
+}
+.principalV .row .rounded{
+    align-content: center;
+}
+.estiloTabla, .estiloTablaUs{
+    background-color: #ffffff;
+    border-radius: 5px;
+    box-shadow: 2px 8px 8px 2px rgba(0, 0, 0, 0.25); 
+}
+
+.lineaIzquierda{
+    border-left: 6px solid rgb(44, 28, 180);
+    border-bottom: 1px solid rgb(44, 28, 180);
+    background-color: rgb(201, 216, 238);
+    margin-bottom: 1.5em;
+}
 /*------------------------------------Home Administrador-----------------------------*/
 .dropdown-item:hover{
     background:
@@ -682,15 +714,7 @@ div.marcasAdmin{
     margin-top: 3px solid rgb(0, 63, 114);
 
 }
-/*
-section.fondo2{
-    width: 95%;
-   background-color: white;
-    background-size: cover;
-    margin:0 auto;
-    padding-bottom: 6em;
-}
-*/
+
 .datAd p{
     margin-left: 1em;
 }
@@ -705,12 +729,7 @@ section.fondo2{
 .datAd section.partsup2{
     background: #004170;
 }
-/*
-nav.navAdmin {
-    width: 100%;
-    padding: 2.2em 2.2em 1.7em 0em;
-}
-*/
+
 nav.navAdmin  a{
     background: linear-gradient(rgb(245, 245, 245), rgb(245, 245, 245) );
     color: #000000;
@@ -744,7 +763,6 @@ section.espacioAdmin{
 }
 
 section.espacioAdmin h2{
- 
     text-shadow: 0px 8px 8px rgba(0, 0, 0, 0.25);    
     align: 0 auto;
 }
@@ -763,15 +781,13 @@ section.espacioAdmin h4{
     color: #491b41;
 }
 /*Gestion usuarios--------------------------------------------------*/
-/*.card-headerUs{
-    margin-top: 1em;
-    background:  rgb(255, 255, 255);
-}*/
+
 .modalHeader{
     color: #ffffff;
 
     background-color: rgb(0, 105, 217);
 }
+
 .close{
     color: #ffffff;
 }
@@ -780,23 +796,20 @@ section.espacioUsuarios{
 }
 
 button.crearUs{
-        margin-bottom: 0.5em;
-        margin-left: 1.5em;
-        background-color: #4c9c2e;
+    margin-bottom: 0.5em;
+    margin-left: 1.5em;
+    background-color: #4c9c2e;
 }
+
+
+/*
 .card-section2, .card-section{
     margin-left: -60px;
     margin-top: 1.6em;
     background:  rgb(255, 255, 255);
 }
+*/
 /*Visualizar Archivos y Gestion usuarios*/
-
-/*.containerTab{
-    width: 90%;
-    margin: 0 auto;
-  
- 
-}*/
 .containerTab thead{
     background:  rgb(214, 198, 176);
        
@@ -806,16 +819,46 @@ button.crearUs{
     background:  rgb(214, 198, 176);
     border-top: 4px solid rgb(111, 59, 24);
 }
-/*Visualizar Archivos Compartido con visualizar Registros, vista de Establecimientos>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
+.visualizarArchivoFiltros{
+    background-color: #ffffff;
+    border-radius: 5px;
+    padding: 2em 1em 0.1em 0em;
+    box-shadow: 2px 6px 6px 2px rgba(0, 0, 0, 0.25); 
+    margin-bottom: 2em;
+
+}
+/*
+
+.card-section2{
+    margin-left: -71px;
+    margin-top: 1.6em;
+    color: #000;
+    border-left: 4px solid rgb(240, 117, 35);
+    border-bottom: 4px solid rgb(197, 104, 42);
+    height: 50%;
+}
+.card-section2 .card-header-s h5{
+    margin-left: 1em;
+    
+}
+*/
+/*Visualizar Archivos Compartido con visualizar Registros, gestionar usuarios
+vista de Establecimientos>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
+/*
 .cardV{
     margin: 0 auto;
 }
-
+*/
 .principalV{
 	margin-top:50px;
-
 }
-/*tarjeta 1*/
+.principalV h5{
+    margin-left: -2em;
+}
+.smsVisualizarRegistros{
+    margin-left: 1.4em;
+}
+/*
 .card-header-s{
     margin-top:-40px;  
     height: 45px;
@@ -826,7 +869,7 @@ button.crearUs{
 .card-header-s h5{
     padding: 10px; 
 }
-
+*/
 
 .table{
     width: 100%; 
@@ -842,8 +885,9 @@ button.crearUs{
     margin-top: 0.5em;
 }
 .section-filtro{
-    margin: 1.2em; 
-    border-bottom: 3px solid black;
+    margin: 1.2em;
+    padding-top: 2em; 
+    /*border-bottom: 3px solid black;*/
 
 }
 .section-registros{
@@ -853,18 +897,21 @@ button.crearUs{
 .section-registros h4{
     margin-top: 2em;
     color: rgb(41, 41, 41);
-    text-shadow: 1px 7px 15px rgb(113, 86, 27);
     border-radius: 8px;
 }
+.section-filtro .row .colFiltros{
+    margin-left: -4em;
+}
 .input-filtros{
+    margin-right: -7.5em;
     border: 0;
     font-size:large;
-    background: linear-gradient(rgb(245, 245, 245), rgb(245, 245, 245) );
+    background: #ffffff;
     color: black;
 }
 .input-filtros1{
     width: 50%;
-    background: linear-gradient(rgb(245, 245, 245), rgb(245, 245, 245) );
+    background: #ffffff;
     border: 0;
     font-size:large;
 }
@@ -876,25 +923,10 @@ button.crearUs{
     color: white;
 }
 /*  Carga Archivos   Administrador-------------------------------------------*/
-/*
-section.espacioCA{
-    width: 78.5%;
-    padding: 3em 5em 2em 3em;
-    margin-left: 2.5em;
-}
-.espacioCA {
-    margin-left: -1em;
-}
-.cardCargaAr{
-    width: 100%;
-    margin-left: 6em;
-    width: 70%;
-  .section-archivos{
-    margin: 1.2em; 
-}
+.contenedorImportacion{
+    margin-top: 2em;
 }
 
-*/
 .btnCargarAr{
     background-color:  #4c9c2e;
     color: white;
@@ -903,7 +935,9 @@ section.espacioCA{
 .btnProbarAr{
     color: white;
 }
-
+.principalV .tituloCargaArchivos{
+    margin-left: 1.2em;
+}
 /* -----------------------------------------------------------------------*/
 
 section.datosAd article.datAd {
@@ -962,24 +996,44 @@ footer article.final article.contactos p{
 footer article.final article.contactos h3{
     padding: 1em 0em;
 }
+  /*Estilos a las marcas*/
+  
+  .marcasImg img{
+    width: 87%;
+    height: 90%;
+    padding: 1em;
+    padding-top: 2em;
 
+  }
+  .marcas{
+      margin-right: 0em;
+  }
 /* Estilos Establecimientos>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>=====================================================*/
+
 /*
-
-.espacioAdminEs {
-    padding: 3em 6em 7em 6em;
-}
-*/
-
 .card-header-title{
     font-weight: bold;
     
 }
-
+*/
+.estiloTablasEs{
+    background-color: #ffffff;
+    border-radius: 5px;
+    padding: 3.5em;
+    width: 100%;
+    box-shadow: 2px 8px 8px 2px rgba(0, 0, 0, 0.25); 
+}
+.estiloTablasEsRegistros{
+    background-color: #ffffff;
+    border-radius: 5px;
+    padding: 1.5em;
+    width: 100%;
+    box-shadow: 2px 8px 8px 2px rgba(0, 0, 0, 0.25); 
+}
 .panelVisualColums label:hover{
     color: rgb(156, 71, 14);
 
-    font-weight: 700;
+    font-weight: 500;
 }
 
 .tituloFiltrosGraficasEs, .panelVisualColums h5{
@@ -989,10 +1043,11 @@ footer article.final article.contactos h3{
 .panelVisualColums h5{
     color: #492820;
 }
-/* Comparativas---------------------------------------------------------------------*/
+/* ------------Comparativas---------------------------------------------------------------------*/
 
 .contenedorEs{
-    margin: 0em 1.5em 0.3em 1.5em;
+
+    margin: 0em 1.2em 0.3em 1.2em;
 }
 
 
@@ -1002,7 +1057,7 @@ background:none;
 
 }
 .cardGrafica h5{
-   margin-left: -5%;
+   margin-left: -2%;
    color: #414142;
 }
 
@@ -1015,7 +1070,9 @@ background:none;
     margin: 0.4em;
 }
 .analisisCiuyCat{
- margin-left: 0.6em;
+ margin-left: 2em;
+ margin-top: 0.5em;
+ margin-bottom: 1.8em;
 
 }
 .analisisCiuyCat  h5, .analisisCiuyCatDias h5{
@@ -1024,12 +1081,27 @@ background:none;
 }
 .analisisCiuyCatDias{
     margin-top: 1.5em;
-    margin-bottom: 1.5em;
+    margin-bottom: 1.2em;
+}
+#containerchart{
+    height: 500px; 
+    min-width: 800px;
+}
+#containerchart2{
+    height: 500px; 
+    min-width: 850px;
+}
+.filtroGraficaDias{
+    margin-top: -1em;
 }
 /*Resumen Mensual ----------------------------------------------*/
+
+
 .filtroGraficaEs{
     margin: -3%;
 }
+
+
 .cardResumenM label{
     width:30%; padding-right: 4.5%; 
 }
@@ -1040,24 +1112,41 @@ background:none;
     margin-bottom: 2em;
 
 }
+#containerGrafica{
+    height: 500px; 
+    min-width: 900px;
+}
+.filtrosResumenMensual{
+    margin-right: -5em;
+}
 /*Analisi de Negocio-------------------------*/
 .filtroAnalisisN{
-    padding-right: 3em; width: 100%; height: 36px; border-color: rgb(83, 82, 85,0.15); border-radius:5px
+    padding-right: 3em; 
+    width: 100%; 
+    height: 36px;
+    border-color: rgb(83, 82, 85,0.15);
+    border-radius:5px
+}
+.cardAnalisisNegocio{
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
 }
 
-/*Analisis de Negocio*/
 .card-header-second{
 	box-shadow:1px 7px 15px #a2a2a2;
-    margin:-25px -20px 0px -10px;
+    margin:-25px -10px 0px -10px;
     height: 50px; 
-    /*background: linear-gradient(-90deg, #ec933fe5 , #e6ad31); */
-    background: #e9eae8;
-    color: #000;
+   /* background: rgb(54, 98, 139);*/
+   background: rgb(92, 33, 38);
+    color: rgb(255, 255, 255);
 }
 
+#containerRevpar, #containerCheckins,
+#containerPorcentajeOcup,#containerCheckouts{
+    height: 400px; 
+    width: 550px
+}
 
-/*Final Dropdown------------------------------------------------*/
-
+/*Iniicio Dropdown------------------------------------------------*/
 
 
 .dropbtn {
@@ -1091,11 +1180,15 @@ background:none;
     border-bottom: 3px solid rgb(0, 63, 114);
   }
   
-  .dropdown-content a:hover {background-color: #f1f1f1}
+  .dropdown-content a:hover {
+      background-color: rgb(0, 63, 114);
+      color: white;
+    }
   
   .dropdown:hover .dropdown-content {
     display: block;
   }
+  /*Final Dropdown------------------------------------------------*/
 
   /*Flecha Final==================================*/
 .scroll-to-top {

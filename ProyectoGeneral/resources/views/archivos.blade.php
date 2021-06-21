@@ -10,60 +10,58 @@
 
 @section('contenido')
     <div class="containerTab ">
-        <div class="container principalV">
-            <div class="row">
-                <div class="col-lg-12 text-left">
+        <div class="cardV">
+            <div class="lineaIzquierda">
+                <div class="container principalV">
                     <div class="row">
                         <!--tarjeta 1-->
-                        <div class="col-lg-30  col-md-8 mb-4">
-                            <div class="card-section2 border rounded p-3">
-                                <div class="card-header-s rounded pb-4">
-                                    <h5 class="card-header-title text-white pt-3">Carga de Archivos a la Base de datos</h5>
-                                </div>
-                            </div>
+                        <div class=" tituloCargaArchivos pb-3">
+                            <h5 class=" text-aling-center text-black pt-3">CARGA DE ARCHIVOS A LA BASE DE DATOS</h5>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="card mt-4 ml-5 mr-5">
-            <div class="card-header">
-                Importación de archivos a la base de datos
-            </div>
-            @if ($errors->any())
-                
-                @foreach ($errors->all() as $error)
-                    <!-- <li>{{ $error }}</li>-->
-                    <script>
-                        var texto = "";
-                        var cadena = '{{$error}}'.split('/')
-                        for (let i = 1; i < cadena.length; i++) {
-
-                            texto += cadena[i]+"\n";
-                            
-                        }
+            <div class="estiloTabla">
+                <div class="card mt-8 ml-0 mr-0">
+                    <div class="card-header">
+                        Importación de archivos a la base de datos
+                    </div>
+                    @if ($errors->any())
                         
-                        swal({
-                            title: cadena[0],
-                            text: texto,
-                            icon: "error",
-                            button: "OK",
-                            });
-                    </script> 
-                @endforeach
-            @endif
+                        @foreach ($errors->all() as $error)
+                            <!-- <li>{{ $error }}</li>-->
+                            <script>
+                                var texto = "";
+                                var cadena = '{{$error}}'.split('/')
+                                for (let i = 1; i < cadena.length; i++) {
 
-            @if($message = Session::get('success'))
-                <script>swal("{!! Session::get('success')!!}",'success')</script>
-            @endif
-            <div class="card-body">
-                <form action="{{ url('import-excel') }}" method="POST" name="importform" enctype="multipart/form-data">
-                    @csrf
-                    <input type="file" name="import_file[]" class="form-control" multiple>
-                    <br>
-                    <button class="btn btnCargarAr" name="opcion" value="1">Cargar archivo</button>
-                    <button class="btn btn-primary  btnProbarAr" name="opcion" value="2">Probar archivo</button>
-                </form>
+                                    texto += cadena[i]+"\n";
+                                    
+                                }
+                                
+                                swal({
+                                    title: cadena[0],
+                                    text: texto,
+                                    icon: "error",
+                                    button: "OK",
+                                    });
+                            </script> 
+                        @endforeach
+                    @endif
+
+                    @if($message = Session::get('success'))
+                        <script>swal("{!! Session::get('success')!!}",'success')</script>
+                    @endif
+                    <div class="card-body">
+                        <form action="{{ url('import-excel') }}" method="POST" name="importform" enctype="multipart/form-data">
+                            @csrf
+                            <input type="file" name="import_file[]" class="form-control" multiple>
+                            <br>
+                            <button class="btn btnCargarAr" name="opcion" value="1">Cargar archivo</button>
+                            <button class="btn btn-primary  btnProbarAr" name="opcion" value="2">Probar archivo</button>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
 

@@ -18,54 +18,49 @@
         <!-- Tabla de Registros-->  
 
     <div class="containerTab" >                    
-        <div class="cardV">
-            <!--panel de Filtros -->
-                <div class="container principalV">
-                    <div class="row">
-                        <div class="col-lg-12 text-left">
-                            <div class="row">
-                                <!--tarjeta 1-->
-                                <div class="col-lg-30  col-md-8 mb-4">
-                                    <div class="card-section border rounded p-3">
-                                        <div class="card-header-s rounded pb-4">
-                                            <h5 class="card-header-title text-white pt-3">Registros</h5>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+        <!--panel de Filtros -->
+        <div class="lineaIzquierda">
+            <div class="container principalV">
+                <div class="row">
+                    <div class="rounded pb-3">
+                        <h5 class=" pt-3">REGISTROS CARGADOS DE LOS ESTABLECIMIENTOS</h5>
                     </div>
                 </div>
-                <p></p>
-                <form action="{{url('home/visualizarArchivos')}}" method="POST" class="visualizarArchivo" >
-                    @csrf                 
-                    <div class="form-row">
-                        <div class="form-group col-md-3">
-                            <label for="inputState">Elige un Establecimiento: </label>
-                            <select id="inputState" class="form-control" name="nombre" required>
-                                <option value="" selected>--Elija un establecimiento--</option>
-                                @foreach($establecimientos as $establecimiento)
-                                    <option value="{{$establecimiento->nombre}}">{{$establecimiento->nombre}}</option>
-                                @endforeach
-                                <option value="Todos">TODOS</option>
-                            </select>
-                        </div>
-                        <div class="form-group col-md-2">
-                            <label>Ver Registros desde:</label>
-                            <input  type="date" name="inicio" value="23/12/2020"  class="form-control" id="validationDefaultUsername"  aria-describedby="inputGroupPrepend2" required>
-                        </div>
-                        <div class="form-group col-md-2">
-                            <label>Ver registros hasta:</label>
-                            <input type="date" name="fin" value="{{ old('fin') }}" class="form-control" id="validationDefaultUsername" aria-describedby="inputGroupPrepend2" required>
-                        </div>
-                        <div class="form-group col-md-2">
-                            <br>
-                        <!-- <button type="submit" class="btn btn-primary" >Consultar</button>-->
-                            <input type="submit"  class="btn btnConsultar" value="Consultar">
-                        </div>
+            </div>
+        </div>
+        <p></p>
+        <div class="visualizarArchivoFiltros">
+            <form action="{{url('home/visualizarArchivos')}}" method="POST" class="visualizarArchivo" >
+                @csrf                 
+                <div class="form-row">
+                    <div class="form-group col-md-3">
+                        <label for="inputState">Elige un Establecimiento: </label>
+                        <select id="inputState" class="form-control" name="nombre" required>
+                            <option value="" selected>--Elija un establecimiento--</option>
+                            @foreach($establecimientos as $establecimiento)
+                                <option value="{{$establecimiento->nombre}}">{{$establecimiento->nombre}}</option>
+                            @endforeach
+                            <option value="Todos">TODOS</option>
+                        </select>
                     </div>
-                </form>
-            
+                    <div class="form-group col-md-2">
+                        <label>Ver Registros desde:</label>
+                        <input  type="date" name="inicio" value="23/12/2020"  class="form-control" id="validationDefaultUsername"  aria-describedby="inputGroupPrepend2" required>
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label>Ver registros hasta:</label>
+                        <input type="date" name="fin" value="{{ old('fin') }}" class="form-control" id="validationDefaultUsername" aria-describedby="inputGroupPrepend2" required>
+                    </div>
+                    <div class="form-group col-md-2">
+                        <br>
+                    <!-- <button type="submit" class="btn btn-primary" >Consultar</button>-->
+                        <input type="submit"  class="btn btnConsultar" value="Consultar">
+                    </div>
+                </div>
+            </form>
+        </div>
+   
+        <div class="estiloTabla">
             <section class="section-filtro">
                 <form>
                     <div class="row">
@@ -78,19 +73,14 @@
                             <input type="text"  class="input-filtros" placeholder="" value="Desde: " disabled>
                             <input type="text"  class="input-filtros1"  placeholder="{{$desde}}" disabled>
                         </div>
-                        <div class="col">
+                        <div class="col colFiltros">
                             <input type="text"  class="input-filtros" placeholder="" value="Hasta: " disabled>
                             <input type="text"  class="input-filtros1"   placeholder="{{$hasta}}" disabled >
                         </div>
                     </div>
                 </form>
-                <section class="linea" ></section>
+            <!--<section class="linea" ></section>-->
             </section>
-        <section class="section-registros">
-      
-
-        </section>
-            
             <div class="card-body" >
                 <table  class="table table-striped" id='tabRegistros'>
                     <thead>
@@ -148,42 +138,13 @@
 
     <script>
 
-       
-        $('#t_establecimientos').DataTable( {
-            responsive:true,
-            autowidth:false,
-            dom: 'Blfrtip',
-            "lengthMenu": [ 5, 10, 20, 30, 50 ],
-            
-            buttons: [
-                    
-                        'excelHtml5',
-                        'csvHtml5',
-                        'pdfHtml5'
-                    ],
-            "language": {
-                    "lengthMenu": "Mostrar _MENU_ registros",
-                    "zeroRecords": "Nada encontrado - disculpa",
-                    "info": "Mostrando la página _PAGE_ de _PAGES_",
-                    "infoEmpty": "Usuario no encontrado",
-                    "infoFiltered": "(filtrado de _MAX_ usuarios totales)",
-                    "search": "Buscar:",
-                    "paginate": {    
-                        "previous" : "Anterior",
-                        "next": "Siguiente"   
-                                },
-                    "buttons":{"copy": "Copiar"}
-            }
-        
-        });
-
 
         
         $('#tabRegistros').DataTable({
             responsive:true,
             autowidth:false,
             dom: 'Blfrtip',
-           
+            "lengthMenu": [ 5, 10, 20, 30, 50 ],
             buttons: [
                 
                         'excelHtml5',

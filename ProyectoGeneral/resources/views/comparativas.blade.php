@@ -6,24 +6,21 @@
         @csrf
     </form>
     
-    <div class="container principalV">
-        <div class="row">
-            <div class="col-lg-12 text-left">
-                <div class="row">
-                    <!--tarjeta 1-->
-                    <div class="col-lg-30  col-md-8 mb-4">
-                        <div class="card-section border rounded p-3">
-                            <div class="card-header-s rounded pb-4">
-                                <h5 class="card-header-title text-white pt-3">GRÁFICA POR MES</h5>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    
+    
+    <div class="lineaIzquierda">
+        <div class=" container principalV">
+            <div class="row">  
+                <div class=" pb-3">
+                    <h5 class="pt-3">GRÁFICA POR MES</h5>
+                </div> 
             </div>
         </div>
-    </div><br>
-    <section class="contenedorEs">
-        <div class="row " >
+    </div>
+
+   
+    <div class="estiloTablasEs">
+        <div class="row filtroGraficaEs" >
             <div class="col-sm-4">
                 <div class="card cardGrafica" >
                     <div class="card-body">
@@ -112,16 +109,10 @@
             <div class="analisisCiuyCat">
                 <h5>
                 <label class="labCiuyCat" >Análisis por: <input type="checkbox" name="lineaCategoria" id="categoria" value="categoria" onchange="generarLinea(this)"> Categoría</label>
-                <label class="labCiuyCat" ><input type="checkbox" name="lineaCanton" id="canton" value="canton" onchange="generarLinea(this)"> Canton</label>
+                <label class="labCiuyCat" ><input type="checkbox" name="lineaCanton" id="canton" value="canton" onchange="generarLinea(this)"> Cantón</label>
                 </h5>
             </div>
-           
-            <div>
-
-            </div>
-
         </div>
-
         <hr>
         <div class="row col-13">
             <div class="form-group col-md-2 panelVisualColums" >
@@ -148,7 +139,7 @@
                 <input type="checkbox" name="TAR_PER" id="TAR_PER" value="Tarifa Prom. Per." onchange="seleccionarFilasMeses(this)">
                 <label for="TAR_PER"> Tarifa Prom. Per.</label><br>
                 <input type="checkbox" name="porcentaje_ocupacion" id="porcentaje_ocupacion" value="Porcent. Ocupación" onchange="seleccionarFilasMeses(this)" checked>
-                <label for="porcentaje_ocupacion"> Porcent. Ocupación</label><br>
+                <label for="porcentaje_ocupacion"> Porcent.Ocupación</label><br>
                 <input type="checkbox" name="revpar" id="revpar" value="Revpar" onchange="seleccionarFilasMeses(this)">
                 <label for="revpar"> REVPAR</label><br>
             
@@ -157,43 +148,37 @@
                 <div id="containerchart" ></div>
             </div>
         </div>
-        <br>
-        <div class="container principalV">
-            <div class="row">
-                <div class="col-lg-12 text-left">
-                    <div class="row">
-                        <!--tarjeta 1-->
-                        <div class="col-lg-30  col-md-8 mb-4">
-                            <div class="card-section border rounded p-3">
-                                <div class="card-header-s rounded pb-4">
-                                    <h5 class="card-header-title text-white pt-3">GRÁFICA POR DÍAS</h5>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+    </div>
+    <br>
+    <div class="lineaIzquierda">
+        <div class=" container principalV">
+            <div class="row">  
+                <div class=" pb-3">
+                    <h5 class="text-black pt-3">GRÁFICA POR DÍAS</h5>
                 </div>
             </div>
         </div>
-        <br>
-        <div class="row tituloFiltrosGraficasEs">
-            <div class="pt-2 ml-2 pr-3" >
+    </div>
+    <div class="estiloTablasEs">
+        <div class="row filtroGraficaDias">
+            <div class="pt-1 ml-2 pr-3" >
                 <label><h5>Fecha inicio:</h5> </label>
             </div>
             <div class="pr-5">
                 <input type="date" name="inicio" class="form-control" id="cambioFechaInicio" value="{{$diaMin}}"> 
             </div>
-            <div class="pt-2 pr-3" >
+            <div class="pt-1 pr-3" >
                 <label><h5>Fecha final:<h5></label>
             </div>
             <div class="pr-3">
                 <input type="date" name="inicio" class="form-control" id="cambioFechaFin" value="{{$diaMax}}">
             </div>
-           
+        
         </div>
         <div class="analisisCiuyCatDias">
             <h5>
                 <label class="labCiuyCat" >Análisis por: <input type="checkbox" name="lineaCategoria" id="categoriaDias" value="categoria" onchange="generarLineaDias(this)"> Categoría</label>
-                <label class="labCiuyCat" ><input type="checkbox" name="lineaCanton" id="cantonDias" value="canton" onchange="generarLineaDias(this)"> Canton</label>
+                <label class="labCiuyCat" ><input type="checkbox" name="lineaCanton" id="cantonDias" value="canton" onchange="generarLineaDias(this)"> Cantón</label>
             </h5>
         </div>
         <hr>
@@ -223,7 +208,7 @@
                     <input type="checkbox" name="TAR_PER2" id="TAR_PER2" value="Tarifa Prom. Per." onchange="seleccionarFilasDias(this)">
                     <label for="TAR_PER2"> Tarifa Prom. Per.</label><br>
                     <input type="checkbox" name="porcentaje_ocupacion2" id="porcentaje_ocupacion2" value="Porcent. Ocupación" onchange="seleccionarFilasDias(this)" checked>
-                    <label for="porcentaje_ocupacion2"> Porcent. Ocupación</label><br>
+                    <label for="porcentaje_ocupacion2"> Porcent.Ocupación</label><br>
                     <input type="checkbox" name="revpar2" id="revpar2" value="revpar" onchange="seleccionarFilasDias(this)">
                     <label for="revpar2"> REVPAR</label><br>
             
@@ -234,7 +219,7 @@
                 <div id="containerchart2" ></div>
             </div>
         </div>
-    </section>
+    </div>
 @endsection
 
 @section('scripts')

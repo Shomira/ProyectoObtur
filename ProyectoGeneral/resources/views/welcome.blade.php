@@ -125,62 +125,52 @@
                 </div>
             </a>
         </section>
+         <!--Resultados de los indicadores de alojamiento-->
         <section class="datosEstab">
-            
-            <a href="{{url('http://127.0.0.1:8000/indicadoresAlojamiento#revpar')}}">
-                <div class="container2">
-                    <article class="datEsResultados">    
-                        <img src="{{ asset('imgs/barra-grafica.png')}}" alt="Avatar" class="image">
-                        <div class="overlay">
-                            <div class="text">...</div>
+            <div class="container2">
+                <article class="datEsResultados">
+                    <div class="">
+                        8956323$
+                    </div>
+                    <div class="">
+                        <p>Lorem ipsum dolor sit amet consectetur, adipisicing establecimiento</p>
+                    </div>
+                </article >
+            </div>
+            <div class="container2">
+                <article class="datEsResultados">
+                    <div class="">
+                        8956323$
+                    </div>
+                    <div class="">
+                        <p>Lorem ipsum dolor sit amet consectetur, adipisicing establecimiento</p>
+                    </div>
+                </article >
+            </div>
+            <div class="container2">
+                <article class="datEsResultados">
+                    <div class="">
+                        8956323$
+                    </div>
+                    <div class="">
+                        <p>Lorem ipsum dolor sit amet consectetur, adipisicing establecimiento</p>
+                    </div>
+                </article >
+            </div>
+    
+            <div class="container2">
+                <article class="datEsResultados">
+                        <div class="">
+                            8956323$
                         </div>
-                        <div class="hoverDe">
-                            <h4>Revpar</h4>
-                        </div> 
-                    </article >
-                </div>
-            </a>
-            <a href="{{url('http://127.0.0.1:8000/indicadoresAlojamiento#tarifaPromedio')}}">
-                <div class="container2">
-                    <article class="datEsResultados">    
-                            <img src="{{ asset('imgs/barra-grafica.png')}}" alt="Avatar" class="image">
-                            <div class="overlay">
-                                <div class="text">...</div>
-                            </div>
-                            <div class="hoverDe">
-                                <h4>Tarifa Promedio</h4>
-                            </div>
-                    </article >
-                </div>
-            </a>
-            <a href="{{url('http://127.0.0.1:8000/indicadoresAlojamiento#porcentajeOcupacion')}}">
-                <div class="container2">
-                    <article class="datEsResultados">    
-                            <img src="{{ asset('imgs/barra-grafica.png')}}"  alt="Avatar" class="image">
-                            <div class="overlay">
-                                <div class="text">...</div>
-                            </div>
-                            <div class="hoverDe">
-                                <h4>Porcentaje Ocupación</h4>
-                            </div>
-                    </article >
-                </div>
-            </a>
-            <a href="{{url('http://127.0.0.1:8000/indicadoresAlojamiento#estadiaPromedio')}}">
-                <div class="container2">
-                    <article class="datEsResultados">    
-                            <img src="{{ asset('imgs/barra-grafica.png')}}"  alt="Avatar" class="image">
-                            <div class="overlay">
-                                <div class="text">...</div>
-                            </div>
-                            <div class="hoverDe">
-                                <h4>Estadia Promedio</h4>
-                            </div>
-                    </article >
-                </div>
-            </a>
-        </section>
+                        <div class="">
+                            <p>Lorem ipsum dolor sit amet consectetur, adipisicing establecimiento</p>
+                        </div>
+                </article >
+            </div>
 
+        </section>
+        <!--Fin Resultado Indicadores Alojamiento-->
         <form action="" method="POST">
             @csrf
         </form>

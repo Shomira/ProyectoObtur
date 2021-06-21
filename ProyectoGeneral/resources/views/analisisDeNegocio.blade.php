@@ -6,84 +6,74 @@
         @csrf
     </form>
 
-    <section class="contenedorEs">
-        <div class="container principalV">
-            <div class="row">
-                <div class="col-lg-12 text-left">
-                    <div class="row">
-                        <!--tarjeta 1-->
-                        <div class="col-lg-30  col-md-8 mb-4">
-                            <div class="card-section border rounded p-3">
-                                <div class="card-header-s rounded pb-4">
-                                    <h5 class="card-header-title text-white pt-3">ANÁLISIS DE NEGOCIO</h5>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+
+    <div class="lineaIzquierda">
+        <div class=" container principalV">
+            <div class="row">  
+                <div class=" pb-3">
+                    <h5 class="text-black pt-3">ANÁLISIS DE NEGOCIO</h5>
                 </div>
             </div>
         </div>
-        <br>
-            
-        <br>
-        <div  class="row tituloFiltrosGraficasEs" >
-            <div>
-                <h5 class="pl-3 pt-2 pr-2">Estadísticos:</h5>
-            </div>
-            <div>
-                <select class="form-select filtroAnalisisN" onchange="cambioEstadistico(this)">
-                    <option value="Promedio">Promedio</option>
-                    <option value="Total" >Total</option>
-                    <option value="Max">Máximo</option>
-                    <option value="Min" >Mínimo</option>
-                </select>
-            </div>
-            <div class="pt-2 pl-4">
-                <h5 >Ver registros desde:</h5>
-            </div>
-            <div>
-                <input type="date" name="inicio" value="{{$diaMin}}" class="form-control" id="cambioFechaInicio"  aria-describedby="inputGroupPrepend2" >
-            </div>
-            <div class="pt-2 pr-2 pl-4">
-                <h5>Ver registros hasta:</h5>
-            </div>  
-            <div>
-                <input type="date" name="fin" value="{{$diaMax}}" class="form-control" id="cambioFechaFin" aria-describedby="inputGroupPrepend2" >
+    </div>
+    <div  class="row tituloFiltrosGraficasEs" >
+        <div>
+            <h5 class="pl-3 pt-2 pr-2">Estadísticos:</h5>
+        </div>
+        <div>
+            <select class="form-select filtroAnalisisN" onchange="cambioEstadistico(this)">
+                <option value="Promedio">Promedio</option>
+                <option value="Total" >Total</option>
+                <option value="Max">Máximo</option>
+                <option value="Min" >Mínimo</option>
+            </select>
+        </div>
+        <div class="pt-2 pl-4">
+            <h5 >Ver registros desde:</h5>
+        </div>
+        <div>
+            <input type="date" name="inicio" value="{{$diaMin}}" class="form-control" id="cambioFechaInicio"  aria-describedby="inputGroupPrepend2" >
+        </div>
+        <div class="pt-2 pr-2 pl-4">
+            <h5>Ver registros hasta:</h5>
+        </div>  
+        <div>
+            <input type="date" name="fin" value="{{$diaMax}}" class="form-control" id="cambioFechaFin" aria-describedby="inputGroupPrepend2" >
+        </div>
+    </div>
+    <hr>
+    
+    <br>
+    <div class="card-group pb-4">
+        <div class="card mr-3 cardAnalisisNegocio">
+            <div class="card-body ">
+                <h5 class="card-header-second text-center pt-2 ">Checkins</h5> <br>
+                <div id="containerCheckins"></div>
             </div>
         </div>
-        <hr>
+        <div class="card ml-3 cardAnalisisNegocio">
+            <div class="card-body">
+                <h5 class="card-header-second text-center pt-2">Checkouts</h5> <br>
+                <div id="containerCheckouts"></div>
+            </div>
+        </div>
+    </div>
+    <div class="card-group b-5">
+        <div class="card mr-3  cardAnalisisNegocio" >
+            <div class="card-body">
+                <h5 class="card-header-second text-center pt-2">Porcentaje Ocupación</h5><br>
+                <div id="containerPorcentajeOcup"></div>
+            </div>
+        </div>
+        <div class="card ml-2 cardAnalisisNegocio">
+            <div class="card-body">
+                <h5 class="card-header-second text-center pt-2">REVPAR</h5> <br>
+                <div id="containerRevpar"  ></div>
+            </div>
+        </div>
+    </div>
         
-        <br>
-        <div class="card-group pb-4">
-            <div class="card mr-3">
-                <div class="card-body ">
-                    <h5 class="card-header-second text-center pt-3 ">Checkins</h5> <br>
-                    <div id="containerCheckins"></div>
-                </div>
-            </div>
-            <div class="card ml-3">
-                <div class="card-body">
-                    <h5 class="card-header-second text-center pt-3">Checkouts</h5> <br>
-                    <div id="containerCheckouts"></div>
-                </div>
-            </div>
-        </div>
-        <div class="card-group b-4">
-            <div class="card mr-3">
-                <div class="card-body">
-                    <h5 class="card-header-second text-center pt-3">Porcentaje Ocupación</h5><br>
-                    <div id="containerPorcentajeOcup"></div>
-                </div>
-            </div>
-            <div class="card mr-3">
-                <div class="card-body">
-                    <h5 class="card-header-second text-center pt-3">REVPAR</h5> <br>
-                    <div id="containerRevpar" ></div>
-                </div>
-            </div>
-        </div>
-        
-    </section>
+
     
 @endsection
 

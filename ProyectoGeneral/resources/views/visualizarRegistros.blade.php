@@ -13,29 +13,18 @@
         @isset ($alerta)
             <script>swal('No existen registros!','Aún no has subido archivos','warning')</script>
         @endisset
-
-        <br>
-            <div class="container principalV">
-                <div class="row">
-                    <div class="col-lg-12 text-left">
-                        <div class="row">
-                            <!--tarjeta 1-->
-                            <div class="col-lg-30  col-md-8 mb-4">
-                                <div class="card-section3 border rounded p-3">
-                                    <div class="card-header-s rounded pb-4">
-                                        <h5 class="card-header-title text-white pt-3">REGISTROS</h5>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+        <div class="lineaIzquierda">
+            <div class=" container principalV">
+                <div class="row">  
+                    <div class=" pb-3">
+                        <h5 class=" pt-3">REGISTROS DEL ESTABLECIMIENTO</h5>
                     </div>
                 </div>
             </div>
+        </div>
         <!--                -->
-    
         <!-- Tabla de Registros-->
-        <div class="container overflow-auto">
-            
+        <div class="estiloTablasEsRegistros">   
             <div class="form-row ">
                 <form action="{{url('home/visualizarRegistros')}}" method="POST" class="visualizarArchivo">
                 
@@ -62,57 +51,51 @@
                     
                 </form>
             </div>
-
-        <!-- Tabla de Registros-->
-        <div class="container overflow-auto">
-            
-            <section class="linea2" ></section>
-            <div class="row justify-content-center overflow-auto">
-                <!---->
-                <div class="card overflow-auto">
-                    <div class="card-header overflow-auto"> {{$mensaje}}</div>
-                    <div class="card-body overflow-auto">
-                        <div class="table-responsive table-striped overflow-auto">
-                            <table class="tablaAr col-12 table-responsive overflow-auto" id='t_registros'>
-                                <thead>
-                                    <tr>
-                                        <th>Id</th>
-                                        <th>Fecha</th>
-                                        <th>Id Establecimiento</th>
-                                        <th>Checkins</th>
-                                        <th>Checkouts</th>
-                                        <th>Pernoctaciones</th>
-                                        <th>Nacionales</th>
-                                        <th>Extranjeros</th>
-                                        <th>Hab. Ocupadas</th>
-                                        <th>Tarifa Prom.</th>
-                                        <th>Ventas Netas</th>
-                                        
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach($registros as $registro)
-                                        <tr>
-                                            <td>{{$registro->id}} </td>
-                                            <td>{{$registro->fecha}}</td>
-                                            <td>{{$registro->idEstablecimiento}}</td>
-                                            <td>{{$registro->checkins}}</td>
-                                            <td>{{$registro->checkouts}}</td>
-                                            <td>{{$registro->pernoctaciones}}</td>
-                                            <td>{{$registro->nacionales}}</td>
-                                            <td>{{$registro->extranjeros}}</td>
-                                            <td>{{$registro->habitaciones_ocupadas}}</td>
-                                            <td>{{$registro->tarifa_promedio}}</td>
-                                            <td>{{$registro->ventas_netas}}</td>
-                                            
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+            <!-- Tabla de Registros-->
+        
+                <div class="smsVisualizarRegistros" >{{$mensaje}}</div>
+                
+                <div class="card-body">
+                    <table class="table tablaAr table-striped" id='t_registros'>
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Fecha</th>
+                                <th>Id Establecimiento</th>
+                                <th>Checkins</th>
+                                <th>Checkouts</th>
+                                <th>Pernoctaciones</th>
+                                <th>Nacionales</th>
+                                <th>Extranjeros</th>
+                                <th>Hab. Ocupadas</th>
+                                <th>Tarifa Prom.</th>
+                                <th>Ventas Netas</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($registros as $registro)
+                                <tr>
+                                    <td>{{$registro->id}} </td>
+                                    <td>{{$registro->fecha}}</td>
+                                    <td>{{$registro->idEstablecimiento}}</td>
+                                    <td>{{$registro->checkins}}</td>
+                                    <td>{{$registro->checkouts}}</td>
+                                    <td>{{$registro->pernoctaciones}}</td>
+                                    <td>{{$registro->nacionales}}</td>
+                                    <td>{{$registro->extranjeros}}</td>
+                                    <td>{{$registro->habitaciones_ocupadas}}</td>
+                                    <td>{{$registro->tarifa_promedio}}</td>
+                                    <td>{{$registro->ventas_netas}}</td>
+                                    
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div>
-            </div>
+                      
+               
+        
         </div>
 
     </section>
@@ -135,7 +118,7 @@
             responsive:true,
             autowidth:false,
             dom: 'Blfrtip',
-            "lengthMenu": [ 5, 10, 20, 30, 50 ],
+           
             
             buttons: [
                     'copyHtml5',
